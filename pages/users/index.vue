@@ -2,9 +2,7 @@
   <AppPage>
     <template #header>Users Page</template>
 
-    <FiltersAppFilter :filter-name="userFilterName" @filter-data="handleFilters"
-      ><LazyUsersUserFilters
-    /></FiltersAppFilter>
+    <FiltersAppFilter @filter-data="handleFilters"><LazyUsersUserFilters /></FiltersAppFilter>
 
     <AppTable
       :loading="pending"

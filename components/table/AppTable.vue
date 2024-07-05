@@ -25,7 +25,12 @@
 
     <AppSkeletonTbody v-if="loading" :columns="columns" :rows="listData?.items" />
     <tbody v-else class="divide-y divide-gray-200 bg-white">
-      <tr v-for="row in listData?.items" :key="`tbody-row-${row.id}`">
+      <tr v-if="!listData?.items.length">
+        <td :colspan="columns.length">
+          <div class="text-center p-4">Nothing found</div>
+        </td>
+      </tr>
+      <tr v-for="row in listData?.items" v-else :key="`tbody-row-${row.id}`">
         <td
           v-for="(column, columnIndex) in columns"
           :key="`tbody-column-${columnIndex}-${column.field}`"
