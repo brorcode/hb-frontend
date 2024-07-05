@@ -1,0 +1,67 @@
+<template>
+  <table class="min-w-full divide-y divide-gray-300">
+    <AppSkeletonThead v-if="loading" :columns="columns" />
+    <thead v-else>
+      <tr>
+        <th
+          v-for="(column, columnIndex) in columns"
+          :key="`thead-column-${columnIndex}-${column.field}`"
+          scope="col"
+          :class="[
+            'px-3 py-4 text-left text-sm font-semibold text-gray-900',
+            columnIndex === 0 ? 'pl-0' : ''
+          ]"
+        >
+          {{ column.header }}
+        </th>
+        <th
+          scope="col"
+          class="relative px-3 py-4 pr-0 text-sm font-semibold text-gray-900 text-right"
+        >
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+    </thead>
+
+    <AppSkeletonTbody v-if="loading" :columns="columns" :rows="listData?.items" />
+    <tbody v-else class="divide-y divide-gray-200 bg-white">
+      <tr v-for="row in listData?.items" :key="`tbody-row-${row.id}`">
+        <td
+          v-for="(column, columnIndex) in columns"
+          :key="`tbody-column-${columnIndex}-${column.field}`"
+          :class="[
+            'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+            columnIndex === 0 ? 'pl-0' : ''
+          ]"
+        >
+          {{ column.body ? column.body(row) : row[column.field] ?? 'N/A' }}
+        </td>
+        <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
+          <a href="#" class="text-indigo-600 hover:text-indigo-900"
+            >Edit<span class="sr-only">, {{ row.id }}</span></a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <AppPagination :is-last-page="listData?.isLastPage" @page-change="handlePageChange" />
+</template>
+
+<script setup lang="ts">
+import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
+import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
+import AppPagination from '~/components/table/AppPagination.vue';
+
+defineProps<{
+  loading: boolean;
+  columns: Column[];
+  listData?: ListData<Row>;
+}>();
+
+const emit = defineEmits(['pageChange']);
+
+const handlePageChange = (page: number) => {
+  emit('pageChange', page);
+};
+</script>

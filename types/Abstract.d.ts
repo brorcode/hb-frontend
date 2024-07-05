@@ -1,0 +1,43 @@
+type BaseRow = {
+  id: number;
+};
+
+type Row<T = object> = BaseRow & T & { [key: string]: any };
+// type Row<T = object> = BaseRow & T;
+
+interface ListData<T> {
+  items: T[];
+  isLastPage: boolean;
+}
+
+interface BaseListResponse<T> {
+  data?: ListData<T>;
+  error?: {
+    code: string;
+    message: string;
+  };
+}
+
+// type BaseListResponse<T> = {
+//   data?: ListData<T>;
+//   error?: {
+//     code: string;
+//     message: string;
+//   };
+// };
+
+type Column = {
+  field: string;
+  header: string;
+  body?: fn;
+};
+
+type Filter = {
+  key: string;
+  value: any;
+  label: string;
+};
+
+type Filters<T = Record<string, any>> = {
+  [P in keyof T]: Filter;
+};

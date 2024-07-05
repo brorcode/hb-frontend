@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": [
+    "@nuxt", "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": true,
+        "tabWidth": 2,
+        "printWidth": 100,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "bracketSameLine": false,
+        "jsxBracketSameLine": false,
+        "endOfLine": "lf",
+        "proseWrap": "preserve"
+      }
+    ]
+  }
+}
