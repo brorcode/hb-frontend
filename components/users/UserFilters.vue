@@ -19,9 +19,9 @@ import { userFiltersInit, userFilterName } from '~/components/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
 
 const filters = useFiltersStore();
-filters.initFilter(userFilterName, userFiltersInit);
+filters.initFilters(userFilterName, userFiltersInit);
 
 const handleUpdate = ({ key, value }: { key: string; value: any }) => {
-  filters.addFilter(userFilterName, key, value);
+  filters.addPreSavedFilter(userFilterName, key, value);
 };
 </script>

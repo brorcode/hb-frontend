@@ -2,7 +2,15 @@
   <AppPage>
     <template #header>Users Page</template>
 
-    <FiltersAppFilter @filter-data="handleFilters"><LazyUsersUserFilters /></FiltersAppFilter>
+    <template #filters>
+      <FiltersAppFilter
+        :init-filters="userFiltersInit"
+        :filter-name="userFilterName"
+        @apply-filters="applyFilters"
+        @clear-filters="clearFilters"
+        ><LazyUsersUserFilters
+      /></FiltersAppFilter>
+    </template>
 
     <AppTable
       :loading="pending"
@@ -16,7 +24,7 @@
 <script setup lang="ts">
 import AppPage from '~/components/AppPage.vue';
 import AppTable from '~/components/table/AppTable.vue';
-import { userColumns, userFilterName } from '~/components/users/UserInit';
+import { userColumns, userFilterName, userFiltersInit } from '~/components/users/UserInit';
 import { useNotificationsStore } from '~/stores/notifications';
 import { useFiltersStore } from '~/stores/filters';
 
@@ -71,8 +79,14 @@ const handlePageChange = async (newPage: number) => {
   list.value = await fetchData();
 };
 
-const handleFilters = async () => {
+const applyFilters = async () => {
   currentPage.value = 1;
+  list.value = await fetchData();
+};
+
+const clearFilters = async () => {
+  currentPage.value = 1;
+  filters.clearFilter(userFilterName, userFiltersInit);
   list.value = await fetchData();
 };
 </script>

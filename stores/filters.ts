@@ -1,21 +1,50 @@
 import { defineStore } from 'pinia';
+import { deepCopy } from '~/utils/deepCopy';
 
 interface FiltersState {
   filters: {
+    [key: string]: Record<string, Filter>;
+  };
+  preSavedFilters: {
     [key: string]: Record<string, Filter>;
   };
 }
 
 export const useFiltersStore = defineStore('filters', {
   state: (): FiltersState => ({
-    filters: {}
+    filters: {},
+    preSavedFilters: {}
   }),
   actions: {
-    initFilter(filterName: string, filters: Filters) {
-      this.filters[filterName] = filters;
+    initFilters(filterName: string, filters: Filters) {
+      if (!this.filters[filterName]) {
+        this.filters[filterName] = deepCopy(filters) as Record<string, Filter>;
+      }
+      if (!this.preSavedFilters[filterName]) {
+        this.preSavedFilters[filterName] = deepCopy(filters) as Record<string, Filter>;
+      }
     },
-    addFilter(filterName: string, key: string, value: any) {
+    clearFilter(filterName: string, filters: Filters) {
+      this.filters[filterName] = deepCopy(filters) as Record<string, Filter>;
+      this.preSavedFilters[filterName] = deepCopy(filters) as Record<string, Filter>;
+    },
+    addPreSavedFilter(filterName: string, key: string, value: any) {
+      this.preSavedFilters[filterName][key].value = value;
+    },
+    removeFilter(filterName: string, key: string, value: string) {
       this.filters[filterName][key].value = value;
+    },
+    clearPreSavedFilters(filterName: string) {
+      this.preSavedFilters[filterName] = deepCopy(this.filters[filterName]) as Record<
+        string,
+        Filter
+      >;
+    },
+    applyPreSavedFilters(filterName: string) {
+      this.filters[filterName] = deepCopy(this.preSavedFilters[filterName]) as Record<
+        string,
+        Filter
+      >;
     },
     getFilterValue(filterName: string, key: string) {
       if (!this.filters[filterName]) {
