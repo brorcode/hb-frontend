@@ -1,6 +1,18 @@
 <template>
-  <AppPage>
-    <template #header>Users Page</template>
+  <AppList>
+    <template #header
+      ><div class="flex justify-between items-center">
+        <div>Users</div>
+        <div class="justify-end">
+          <NuxtLink
+            to="users/create"
+            class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Add User
+          </NuxtLink>
+        </div>
+      </div>
+    </template>
 
     <template #filters>
       <FiltersAppFilter
@@ -18,15 +30,15 @@
       :list-data="list?.data"
       @page-change="handlePageChange"
     />
-  </AppPage>
+  </AppList>
 </template>
 
 <script setup lang="ts">
-import AppPage from '~/components/AppPage.vue';
 import AppTable from '~/components/table/AppTable.vue';
 import { userColumns, userFilterName, userFiltersInit } from '~/components/users/UserInit';
 import { useNotificationsStore } from '~/stores/notifications';
 import { useFiltersStore } from '~/stores/filters';
+import AppList from '~/components/AppList.vue';
 
 const notifications = useNotificationsStore();
 const filters = useFiltersStore();

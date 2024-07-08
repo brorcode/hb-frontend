@@ -20,3 +20,8 @@ type UserFilters = Filters<{
   id: number;
   name: string;
 }>;
+
+type UserForm = Form<{
+  name: string;
+  email: string;
+}>;

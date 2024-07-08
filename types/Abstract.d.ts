@@ -41,3 +41,14 @@ type Filter = {
 type Filters<T = Record<string, any>> = {
   [P in keyof T]: Filter;
 };
+
+type FormField = {
+  key: string;
+  value: any;
+  label: string;
+  errors: string[];
+};
+
+type Form<T = Record<string, any>> = {
+  [P in keyof T]: Overwrite<FormField, { value: T[P] }>;
+};

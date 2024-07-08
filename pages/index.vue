@@ -1,5 +1,5 @@
 <template>
-  <AppPage>
+  <AppList>
     <template #header>Index Page</template>
 
     <table class="min-w-full divide-y divide-gray-300">
@@ -59,11 +59,11 @@
         </tr>
       </tbody>
     </table>
-  </AppPage>
+  </AppList>
 </template>
 
 <script setup lang="ts">
-import AppPage from '~/components/AppPage.vue';
+import AppList from '~/components/AppList.vue';
 
 const people = [
   {

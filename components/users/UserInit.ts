@@ -15,6 +15,11 @@ const userFiltersInit: UserFilters = {
   }
 };
 
+const userFormInit: UserForm = {
+  name: { key: 'name', value: '', label: 'Name', errors: [] },
+  email: { key: 'email', value: '', label: 'Email', errors: [] }
+};
+
 const userColumns: UserColumn[] = [
   {
     field: 'id',
@@ -40,4 +45,4 @@ const userColumns: UserColumn[] = [
   }
 ];
 
-export { userFilterName, userFiltersInit, userColumns };
+export { userFilterName, userFormInit, userFiltersInit, userColumns };

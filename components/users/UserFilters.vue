@@ -9,13 +9,11 @@
     :value="filters.getFilterValue(userFilterName, userFiltersInit.name.key)"
     @update:filter-text-value="handleUpdate"
   />
-  <FilterTextarea />
 </template>
 
 <script setup lang="ts">
-import FilterTextarea from '~/components/filters/FilterTextarea.vue';
 import FilterText from '~/components/filters/FilterText.vue';
-import { userFiltersInit, userFilterName } from '~/components/users/UserInit';
+import { userFilterName, userFiltersInit } from '~/components/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 
