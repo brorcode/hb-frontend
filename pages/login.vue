@@ -63,8 +63,6 @@ const handleSubmit = async () => {
     .then((res) => res.json())
     .catch((err) => err);
 
-  console.log('response', response.value);
-
   // const response = await $fetch('http://localhost:8081/api/v1/login', {
   //   method: 'POST',
   //   headers: {
@@ -74,8 +72,6 @@ const handleSubmit = async () => {
   // });
 
   // error.value = err.value;
-
-  console.log('response', response);
 };
 
 // const handleSubmit = async () => {

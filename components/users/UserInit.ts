@@ -5,12 +5,12 @@ const userFilterName = 'userFilter';
 const userFiltersInit: UserFilters = {
   id: {
     key: 'id',
-    value: '',
+    value: null,
     label: 'ID'
   },
   name: {
     key: 'name',
-    value: '',
+    value: null,
     label: 'Name'
   }
 };
