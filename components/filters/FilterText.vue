@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   filter: Filter;
   value?: string;
 }>();
-const emit = defineEmits(['update:filter-text-value']);
+const emit = defineEmits(['update:modelValue']);
 
 const updateValue = (event: any) => {
-  emit('update:filter-text-value', { key: props.filter.key, value: event.target.value });
+  emit('update:modelValue', event.target.value);
 };
 </script>

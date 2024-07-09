@@ -2,12 +2,12 @@
   <FilterInteger
     :filter="userFiltersInit.id"
     :value="filters.getFilterValue(userFilterName, userFiltersInit.id.key)"
-    @update:filter-text-value="handleUpdate"
+    @update:model-value="handleUpdate(userFiltersInit.id.key, $event)"
   />
   <FilterText
     :filter="userFiltersInit.name"
     :value="filters.getFilterValue(userFilterName, userFiltersInit.name.key)"
-    @update:filter-text-value="handleUpdate"
+    @update:model-value="handleUpdate(userFiltersInit.name.key, $event)"
   />
 </template>
 
@@ -20,7 +20,7 @@ import FilterInteger from '~/components/filters/FilterInteger.vue';
 const filters = useFiltersStore();
 filters.initFilters(userFilterName, userFiltersInit);
 
-const handleUpdate = ({ key, value }: { key: string; value: any }) => {
+const handleUpdate = (key: keyof UserFilters, value: string) => {
   filters.addPreSavedFilter(userFilterName, key, value);
 };
 </script>

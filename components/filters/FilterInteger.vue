@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   filter: Filter;
   value?: number;
 }>();
-const emit = defineEmits(['update:form-text-value']);
+const emit = defineEmits(['update:modelValue']);
 
 const updateValue = (event: any) => {
-  emit('update:form-text-value', { key: props.filter.key, value: event.target.value });
+  emit('update:modelValue', parseInt(event.target.value));
 };
 </script>

@@ -42,9 +42,16 @@
           {{ column.body ? column.body(row) : row[column.field] ?? 'N/A' }}
         </td>
         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
-          <a href="#" class="text-indigo-600 hover:text-indigo-900"
-            >Edit<span class="sr-only">, {{ row.id }}</span></a
-          >
+          <div class="space-x-2">
+            <a href="#" class="text-indigo-600 hover:text-indigo-900"
+              >Edit<span class="sr-only">, {{ row.id }}</span></a
+            >
+            <NuxtLink
+              class="text-indigo-600 hover:text-indigo-900"
+              :to="`/users/${row.id}/${pageMode.VIEW}`"
+              >View</NuxtLink
+            >
+          </div>
         </td>
       </tr>
     </tbody>

@@ -1,14 +1,14 @@
 <template>
   <form>
     <div class="space-y-12">
-      <div class="border-b border-gray-900/10 pb-12">
+      <div :class="[mode !== pageMode.VIEW ? 'border-b border-gray-900/10 pb-12' : 'pb-2']">
         <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <slot />
         </div>
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-end gap-x-6">
+    <div v-if="mode !== 'view'" class="mt-6 flex items-center justify-end gap-x-6">
       <NuxtLink to="/users" type="button" class="text-sm font-semibold leading-6 text-gray-900"
         >Cancel</NuxtLink
       >
@@ -23,5 +23,10 @@
   </form>
 </template>
 <script setup lang="ts">
+import { pageMode, type UpsertMode } from '~/utils/pageMode';
+
+defineProps<{
+  mode?: UpsertMode;
+}>();
 const emit = defineEmits(['handle-form']);
 </script>

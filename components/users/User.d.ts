@@ -6,6 +6,7 @@ type User = {
   updatedAt: string;
 };
 
+type UserGetResponse = BaseGetResponse<User>;
 type UserListResponse = BaseListResponse<User>;
 
 type UserRow = {

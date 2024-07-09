@@ -163,6 +163,7 @@ const clearPreSavedFilters = async () => {
 
 const removeFilter = async (key: string) => {
   filters.removeFilter(props.filterName, key, props.initFilters[key].value);
+  emit('apply-filters');
 };
 
 const applyFilters = async () => {

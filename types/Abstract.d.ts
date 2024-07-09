@@ -18,6 +18,14 @@ interface BaseListResponse<T> {
   };
 }
 
+interface BaseGetResponse<T> {
+  data?: Row<T>;
+  error?: {
+    code: string;
+    message: string;
+  };
+}
+
 // type BaseListResponse<T> = {
 //   data?: ListData<T>;
 //   error?: {
@@ -39,7 +47,8 @@ type Filter = {
 };
 
 type Filters<T = Record<string, any>> = {
-  [P in keyof T]: Filter;
+  // [P in keyof T]: Filter;
+  [P in keyof T]: Overwrite<Filter, { value: T[P] }>;
 };
 
 type FormField = {

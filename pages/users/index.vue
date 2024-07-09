@@ -46,20 +46,12 @@ const filters = useFiltersStore();
 const list = ref<UserListResponse>();
 const pending = ref(false);
 const currentPage = ref(1);
-const limit = ref(2);
+const limit = ref(10);
 
 // GET request
 // const { pending, data } = await useAsyncData<UserListResponse>(() =>
 //   $fetch('http://localhost:8081/api/v1/users/')
 // );
-
-// const data = await $fetch<UserListResponse>('http://localhost:8081/api/v1/users/', {
-//   method: 'POST',
-//   body: {
-//     page: 1,
-//     limit: 10
-//   }
-// }).finally(() => (pending.value = false));
 
 const fetchData = async () => {
   pending.value = true;
