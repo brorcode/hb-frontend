@@ -18,14 +18,6 @@ interface BaseListResponse<T> {
   };
 }
 
-interface BaseGetResponse<T> {
-  data?: Row<T>;
-  error?: {
-    code: string;
-    message: string;
-  };
-}
-
 // type BaseListResponse<T> = {
 //   data?: ListData<T>;
 //   error?: {
@@ -34,6 +26,13 @@ interface BaseGetResponse<T> {
 //   };
 // };
 
+interface BaseGetResponse<T> {
+  data?: { item: T };
+  error?: {
+    code: string;
+    message: string;
+  };
+}
 type Column = {
   field: string;
   header: string;

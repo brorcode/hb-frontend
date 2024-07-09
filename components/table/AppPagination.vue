@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/20/solid';
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{
   isLastPage?: boolean;

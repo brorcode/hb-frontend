@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronLeftIcon } from '@heroicons/vue/20/solid';
+import { ChevronLeftIcon } from '@heroicons/vue/24/solid';
 import AppUpsert from '~/components/AppUpsert.vue';
 import AppForm from '~/components/form/AppForm.vue';
 import { userFormInit } from '~/components/users/UserInit';

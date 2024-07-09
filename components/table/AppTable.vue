@@ -42,20 +42,20 @@
           {{ column.body ? column.body(row) : row[column.field] ?? 'N/A' }}
         </td>
         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
-          <div class="space-x-2">
+          <div class="space-x-2 flex justify-end">
             <NuxtLink
               class="text-indigo-600 hover:text-indigo-900"
               :to="`/users/${row.id}/${pageMode.EDIT}`"
-              >Edit</NuxtLink
-            >
+              ><PencilIcon class="h-5 w-5"
+            /></NuxtLink>
             <NuxtLink
               class="text-indigo-600 hover:text-indigo-900"
               :to="`/users/${row.id}/${pageMode.VIEW}`"
-              >View</NuxtLink
-            >
+              ><EyeIcon class="h-5 w-5"
+            /></NuxtLink>
             <Button class="text-indigo-600 hover:text-indigo-900" @click="deleteItem(row.id)"
-              >Delete</Button
-            >
+              ><TrashIcon class="text-red-600 h-5 w-5"
+            /></Button>
           </div>
         </td>
       </tr>
@@ -66,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { TrashIcon, PencilIcon, EyeIcon } from '@heroicons/vue/24/solid';
 import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
 import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
 import AppPagination from '~/components/table/AppPagination.vue';

@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronLeftIcon } from '@heroicons/vue/20/solid';
+import { ChevronLeftIcon } from '@heroicons/vue/24/solid';
 import { useNotificationsStore } from '~/stores/notifications';
 import FormText from '~/components/form/FormText.vue';
 import AppForm from '~/components/form/AppForm.vue';
@@ -37,11 +37,6 @@ const notifications = useNotificationsStore();
 
 const form = reactive(deepCopy(userFormInit) as UserForm);
 const pending = ref(false);
-
-// GET request
-// const { pending, data } = await useAsyncData<UserListResponse>(() =>
-//   $fetch('http://localhost:8081/api/v1/users/')
-// );
 
 const handleUpdate = (key: keyof UserForm, value: string) => {
   form[key].errors = [];
@@ -67,9 +62,9 @@ const fetchData = async () => {
 onMounted(async () => {
   const user = await fetchData();
 
-  if (user && user.data && user.data.user) {
+  if (user && user.data && user.data.item) {
     Object.entries(form).forEach(([key]) => {
-      form[key as keyof UserForm].value = user?.data?.user[key as keyof UserForm];
+      form[key as keyof UserForm].value = user?.data?.item[key as keyof UserForm];
     });
   }
 });
