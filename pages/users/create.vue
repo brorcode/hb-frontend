@@ -44,9 +44,9 @@ const handleForm = async () => {
     method: 'POST',
     body: Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.value]))
   })
-    .then((res) => {
+    .then(() => {
       notifications.addNotification(true, 'Success', 'User created successfully');
-      return res;
+      navigateTo('/users');
     })
     .catch((e) => {
       let message = 'Something went wrong';

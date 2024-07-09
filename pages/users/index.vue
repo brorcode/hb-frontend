@@ -29,6 +29,7 @@
       :columns="userColumns"
       :list-data="list?.data"
       @page-change="handlePageChange"
+      @delete-item="handleDeleteItem"
     />
   </AppList>
 </template>
@@ -81,6 +82,23 @@ onMounted(async () => {
 const handlePageChange = async (newPage: number) => {
   currentPage.value = newPage;
   list.value = await fetchData();
+};
+
+const handleDeleteItem = async (id: number) => {
+  try {
+    pending.value = true;
+
+    await $fetch(`http://localhost:8081/api/v1/users/${id}`, {
+      method: 'DELETE'
+    });
+
+    notifications.addNotification(true, 'Success', 'User deleted successfully');
+    list.value = await fetchData();
+  } catch {
+    notifications.addNotification(false, 'Error', 'Something went wrong');
+  } finally {
+    pending.value = false;
+  }
 };
 
 const applyFilters = async () => {

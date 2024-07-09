@@ -53,6 +53,9 @@
               :to="`/users/${row.id}/${pageMode.VIEW}`"
               >View</NuxtLink
             >
+            <Button class="text-indigo-600 hover:text-indigo-900" @click="deleteItem(row.id)"
+              >Delete</Button
+            >
           </div>
         </td>
       </tr>
@@ -73,9 +76,13 @@ defineProps<{
   listData?: ListData<Row>;
 }>();
 
-const emit = defineEmits(['pageChange']);
+const emit = defineEmits(['pageChange', 'deleteItem']);
 
 const handlePageChange = (page: number) => {
   emit('pageChange', page);
+};
+
+const deleteItem = (id: number) => {
+  emit('deleteItem', id);
 };
 </script>
