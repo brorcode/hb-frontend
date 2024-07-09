@@ -43,8 +43,10 @@
         </td>
         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
           <div class="space-x-2">
-            <a href="#" class="text-indigo-600 hover:text-indigo-900"
-              >Edit<span class="sr-only">, {{ row.id }}</span></a
+            <NuxtLink
+              class="text-indigo-600 hover:text-indigo-900"
+              :to="`/users/${row.id}/${pageMode.EDIT}`"
+              >Edit</NuxtLink
             >
             <NuxtLink
               class="text-indigo-600 hover:text-indigo-900"

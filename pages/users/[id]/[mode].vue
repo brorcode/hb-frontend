@@ -6,9 +6,17 @@
         <div>User ID: {{ id }}</div>
       </div>
     </template>
-    <AppForm :mode="mode">
-      <FormText :mode="mode" :form-field="form.name" />
-      <FormText :mode="mode" :form-field="form.email" />
+    <AppForm :mode="mode" @handle-form="handleForm">
+      <FormText
+        :mode="mode"
+        :form-field="form.name"
+        @update:model-value="handleUpdate(form.name.key, $event)"
+      />
+      <FormText
+        :mode="mode"
+        :form-field="form.email"
+        @update:model-value="handleUpdate(form.email.key, $event)"
+      />
     </AppForm>
   </AppUpsert>
 </template>
@@ -35,6 +43,11 @@ const pending = ref(false);
 //   $fetch('http://localhost:8081/api/v1/users/')
 // );
 
+const handleUpdate = (key: keyof UserForm, value: string) => {
+  form[key].errors = [];
+  form[key].value = value;
+};
+
 const fetchData = async () => {
   pending.value = true;
 
@@ -60,4 +73,37 @@ onMounted(async () => {
     });
   }
 });
+
+const handleForm = async () => {
+  // clear validation errors
+  Object.entries(form).forEach(([key]) => {
+    form[key as keyof UserForm].errors = [];
+  });
+
+  await $fetch<UserListResponse>(`http://localhost:8081/api/v1/users/${id}`, {
+    method: 'POST',
+    body: Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.value]))
+  })
+    .then((res) => {
+      notifications.addNotification(true, 'Success', 'User updated successfully');
+      return res;
+    })
+    .catch((e) => {
+      let message = 'Something went wrong';
+      if (e.response.status === 422) {
+        // add validation errors
+        Object.entries(e.response._data.data).forEach(([key, value]) => {
+          form[key as keyof UserForm].errors = value as string[];
+        });
+        message = 'Validation error';
+      }
+
+      notifications.addNotification(false, 'Error', message);
+
+      return {};
+    })
+    .finally(() => {
+      // pending.value = false;
+    });
+};
 </script>

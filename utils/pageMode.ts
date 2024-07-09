@@ -1,4 +1,5 @@
 export enum pageMode {
-  VIEW = 'view'
+  VIEW = 'view',
+  EDIT = 'edit'
 }
-export type UpsertMode = 'create' | 'update' | pageMode.VIEW;
+export type UpsertMode = 'create' | pageMode.EDIT | pageMode.VIEW;
