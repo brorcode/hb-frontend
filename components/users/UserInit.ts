@@ -1,6 +1,9 @@
 import { formatDate } from '~/utils/date';
 
+const config = useRuntimeConfig();
+
 const userFilterName = 'userFilter';
+const userApiUrl = `${config.public.apiUrl}/users`;
 
 const userFiltersInit: UserFilters = {
   id: {
@@ -45,4 +48,4 @@ const userColumns: UserColumn[] = [
   }
 ];
 
-export { userFilterName, userFormInit, userFiltersInit, userColumns };
+export { userApiUrl, userFilterName, userFormInit, userFiltersInit, userColumns };

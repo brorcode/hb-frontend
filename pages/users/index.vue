@@ -27,88 +27,50 @@
     <AppTable
       :loading="pending"
       :columns="userColumns"
-      :list-data="list?.data"
+      :list-data="data?.data"
       @page-change="handlePageChange"
-      @delete-item="handleDeleteItem"
+      @delete-item="handleDelete"
     />
   </AppList>
 </template>
 
 <script setup lang="ts">
 import AppTable from '~/components/table/AppTable.vue';
-import { userColumns, userFilterName, userFiltersInit } from '~/components/users/UserInit';
-import { useNotificationsStore } from '~/stores/notifications';
+import {
+  userApiUrl,
+  userColumns,
+  userFilterName,
+  userFiltersInit
+} from '~/components/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
 import AppList from '~/components/AppList.vue';
+import { useApi } from '~/composables/useApi';
 
-const notifications = useNotificationsStore();
 const filters = useFiltersStore();
-
-const list = ref<UserListResponse>();
-const pending = ref(false);
 const currentPage = ref(1);
-const limit = ref(10);
+const { data, pending, fetchListData, handleDeleteItem } = useApi(userApiUrl, userFilterName);
 
-// GET request
-// const { pending, data } = await useAsyncData<UserListResponse>(() =>
-//   $fetch('http://localhost:8081/api/v1/users/')
-// );
-
-const fetchData = async () => {
-  pending.value = true;
-
-  return await $fetch<UserListResponse>('http://localhost:8081/api/v1/users/', {
-    method: 'POST',
-    body: {
-      page: currentPage.value,
-      limit: limit.value,
-      filters: filters.getFilters(userFilterName)
-    }
-  })
-    .catch(() => {
-      notifications.addNotification(false, 'Error', 'Something went wrong');
-
-      return {};
-    })
-    .finally(() => {
-      pending.value = false;
-    });
-};
-
-onMounted(async () => {
-  list.value = await fetchData();
+onMounted(() => {
+  fetchListData(currentPage);
 });
 
-const handlePageChange = async (newPage: number) => {
+const handlePageChange = (newPage: number) => {
   currentPage.value = newPage;
-  list.value = await fetchData();
+  fetchListData(currentPage);
 };
 
-const handleDeleteItem = async (id: number) => {
-  try {
-    pending.value = true;
-
-    await $fetch(`http://localhost:8081/api/v1/users/${id}`, {
-      method: 'DELETE'
-    });
-
-    notifications.addNotification(true, 'Success', 'User deleted successfully');
-    list.value = await fetchData();
-  } catch {
-    notifications.addNotification(false, 'Error', 'Something went wrong');
-  } finally {
-    pending.value = false;
-  }
+const handleDelete = (id: number) => {
+  handleDeleteItem(id, currentPage);
 };
 
-const applyFilters = async () => {
+const applyFilters = () => {
   currentPage.value = 1;
-  list.value = await fetchData();
+  fetchListData(currentPage);
 };
 
-const clearFilters = async () => {
+const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilter(userFilterName, userFiltersInit);
-  list.value = await fetchData();
+  fetchListData(currentPage);
 };
 </script>

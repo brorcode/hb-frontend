@@ -53,9 +53,7 @@
               :to="`/users/${row.id}/${pageMode.VIEW}`"
               ><EyeIcon class="h-5 w-5"
             /></NuxtLink>
-            <Button class="text-indigo-600 hover:text-indigo-900" @click="deleteItem(row.id)"
-              ><TrashIcon class="text-red-600 h-5 w-5"
-            /></Button>
+            <TrashIcon class="text-red-600 h-5 w-5 cursor-pointer" @click="deleteItem(row.id)" />
           </div>
         </td>
       </tr>
