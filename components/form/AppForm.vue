@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="mode !== 'view'" class="mt-6 flex items-center justify-end gap-x-6">
-      <NuxtLink to="/users" type="button" class="text-sm font-semibold leading-6 text-gray-900"
+      <NuxtLink :to="backUrl" type="button" class="text-sm font-semibold leading-6 text-gray-900"
         >Cancel</NuxtLink
       >
       <button
@@ -26,6 +26,7 @@
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
+  backUrl: string;
   mode?: UpsertMode;
 }>();
 const emit = defineEmits(['handle-form']);

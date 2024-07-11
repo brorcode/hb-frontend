@@ -67,7 +67,7 @@ import {
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
   { name: 'Users', href: '/users', icon: UsersIcon },
-  { name: 'About', href: '/about', icon: FolderIcon },
+  { name: 'Categories', href: '/categories', icon: FolderIcon },
   { name: 'Calendar', href: '#', icon: CalendarIcon },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon },
   { name: 'Reports', href: '#', icon: ChartPieIcon }

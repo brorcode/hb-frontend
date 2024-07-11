@@ -33,6 +33,7 @@ export const useFiltersStore = defineStore('filters', {
     },
     removeFilter(filterName: string, key: string, value: string) {
       this.filters[filterName][key].value = value;
+      this.preSavedFilters[filterName][key].value = value;
     },
     clearPreSavedFilters(filterName: string) {
       this.preSavedFilters[filterName] = deepCopy(this.filters[filterName]) as Record<
