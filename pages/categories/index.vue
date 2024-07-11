@@ -20,7 +20,7 @@
         :filter-name="categoryFilterName"
         @apply-filters="applyFilters"
         @clear-filters="clearFilters"
-        ><LazyCategoriesCategoryFilters
+        ><LazyPagesCategoriesCategoryFilters
       /></FiltersAppFilter>
     </template>
 
@@ -45,7 +45,7 @@ import {
   categoryColumns,
   categoryFilterName,
   categoryFiltersInit
-} from '~/components/categories/CategoryInit';
+} from '~/components/pages/categories/CategoryInit';
 
 const filters = useFiltersStore();
 const currentPage = ref(1);

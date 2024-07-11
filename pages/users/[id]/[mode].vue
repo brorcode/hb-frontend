@@ -27,7 +27,7 @@ import { useNotificationsStore } from '~/stores/notifications';
 import FormText from '~/components/form/FormText.vue';
 import AppForm from '~/components/form/AppForm.vue';
 import { deepCopy } from '~/utils/deepCopy';
-import { userFormInit } from '~/components/users/UserInit';
+import { userFormInit } from '~/components/pages/users/UserInit';
 import type { UpsertMode } from '~/utils/pageMode';
 
 const route = useRoute();

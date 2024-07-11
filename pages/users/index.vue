@@ -20,7 +20,7 @@
         :filter-name="userFilterName"
         @apply-filters="applyFilters"
         @clear-filters="clearFilters"
-        ><LazyUsersUserFilters
+        ><LazyPagesUsersUserFilters
       /></FiltersAppFilter>
     </template>
 
@@ -42,7 +42,7 @@ import {
   userColumns,
   userFilterName,
   userFiltersInit
-} from '~/components/users/UserInit';
+} from '~/components/pages/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
 import AppList from '~/components/AppList.vue';
 import { useApi } from '~/composables/useApi';

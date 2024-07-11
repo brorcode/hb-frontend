@@ -23,7 +23,7 @@ import AppForm from '~/components/form/AppForm.vue';
 import FormText from '~/components/form/FormText.vue';
 import { useNotificationsStore } from '~/stores/notifications';
 import { deepCopy } from '~/utils/deepCopy';
-import { categoryFormInit } from '~/components/categories/CategoryInit';
+import { categoryFormInit } from '~/components/pages/categories/CategoryInit';
 import FormTextarea from '~/components/form/FormTextarea.vue';
 
 const notifications = useNotificationsStore();

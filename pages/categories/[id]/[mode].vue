@@ -28,7 +28,7 @@ import FormText from '~/components/form/FormText.vue';
 import AppForm from '~/components/form/AppForm.vue';
 import { deepCopy } from '~/utils/deepCopy';
 import type { UpsertMode } from '~/utils/pageMode';
-import { categoryFormInit } from '~/components/categories/CategoryInit';
+import { categoryFormInit } from '~/components/pages/categories/CategoryInit';
 import FormTextarea from '~/components/form/FormTextarea.vue';
 
 const route = useRoute();

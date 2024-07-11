@@ -20,7 +20,7 @@
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid';
 import AppUpsert from '~/components/AppUpsert.vue';
 import AppForm from '~/components/form/AppForm.vue';
-import { userFormInit } from '~/components/users/UserInit';
+import { userFormInit } from '~/components/pages/users/UserInit';
 import FormText from '~/components/form/FormText.vue';
 import { useNotificationsStore } from '~/stores/notifications';
 import { deepCopy } from '~/utils/deepCopy';

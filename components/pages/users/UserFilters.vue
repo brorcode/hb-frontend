@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import FilterText from '~/components/filters/FilterText.vue';
-import { userFilterName, userFiltersInit } from '~/components/users/UserInit';
+import { userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 
