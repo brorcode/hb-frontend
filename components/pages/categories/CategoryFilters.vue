@@ -1,19 +1,21 @@
 <template>
-  <FilterInteger
-    :filter="categoryFiltersInit.id"
-    :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.id.key)"
-    @update:model-value="handleUpdate(categoryFiltersInit.id.key, $event)"
-  />
-  <FilterText
-    :filter="categoryFiltersInit.name"
-    :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.name.key)"
-    @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
-  />
-  <FilterTextarea
-    :filter="categoryFiltersInit.description"
-    :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.description.key)"
-    @update:model-value="handleUpdate(categoryFiltersInit.description.key, $event)"
-  />
+  <div>
+    <FilterInteger
+      :filter="categoryFiltersInit.id"
+      :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.id.key)"
+      @update:model-value="handleUpdate(categoryFiltersInit.id.key, $event)"
+    />
+    <FilterText
+      :filter="categoryFiltersInit.name"
+      :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.name.key)"
+      @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
+    />
+    <FilterTextarea
+      :filter="categoryFiltersInit.description"
+      :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.description.key)"
+      @update:model-value="handleUpdate(categoryFiltersInit.description.key, $event)"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

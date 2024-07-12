@@ -28,7 +28,7 @@
       url="/categories"
       :loading="pending"
       :columns="categoryColumns"
-      :list-data="data?.data"
+      :list-data="items?.data"
       @page-change="handlePageChange"
       @delete-item="handleDelete"
     />
@@ -49,32 +49,30 @@ import {
 
 const filters = useFiltersStore();
 const currentPage = ref(1);
-const { data, pending, fetchListData, handleDeleteItem } = useApi(
-  categoryApiUrl,
-  categoryFilterName
-);
+const { items, pending, fetchListData, handleDeleteItem } = useApi(categoryApiUrl);
 
 onMounted(() => {
-  fetchListData(currentPage);
+  fetchListData(currentPage, categoryFilterName);
 });
 
 const handlePageChange = (newPage: number) => {
   currentPage.value = newPage;
-  fetchListData(currentPage);
+  fetchListData(currentPage, categoryFilterName);
 };
 
-const handleDelete = (id: number) => {
-  handleDeleteItem(id, currentPage);
+const handleDelete = async (id: number) => {
+  await handleDeleteItem(id);
+  await fetchListData(currentPage, categoryFilterName);
 };
 
 const applyFilters = () => {
   currentPage.value = 1;
-  fetchListData(currentPage);
+  fetchListData(currentPage, categoryFilterName);
 };
 
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilter(categoryFilterName, categoryFiltersInit);
-  fetchListData(currentPage);
+  fetchListData(currentPage, categoryFilterName);
 };
 </script>

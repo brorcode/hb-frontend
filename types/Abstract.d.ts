@@ -5,6 +5,18 @@ type BaseRow = {
 type Row<T = object> = BaseRow & T & { [key: string]: any };
 // type Row<T = object> = BaseRow & T;
 
+interface ErrorDetails {
+  [key: string]: string[];
+}
+
+type NotificationType = 'success' | 'error';
+
+interface Notification {
+  type: NotificationType;
+  title: string;
+  message: string;
+}
+
 interface ListData<T> {
   items: T[];
   isLastPage: boolean;
@@ -15,7 +27,9 @@ interface BaseListResponse<T> {
   error?: {
     code: string;
     message: string;
+    details?: ErrorDetails;
   };
+  notification?: Notification;
 }
 
 // type BaseListResponse<T> = {
@@ -31,8 +45,11 @@ interface BaseGetResponse<T> {
   error?: {
     code: string;
     message: string;
+    details?: ErrorDetails;
   };
+  notification?: Notification;
 }
+
 type Column = {
   field: string;
   header: string;

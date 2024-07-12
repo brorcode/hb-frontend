@@ -28,7 +28,7 @@
       url="/users"
       :loading="pending"
       :columns="userColumns"
-      :list-data="data?.data"
+      :list-data="items?.data"
       @page-change="handlePageChange"
       @delete-item="handleDelete"
     />
@@ -49,29 +49,35 @@ import { useApi } from '~/composables/useApi';
 
 const filters = useFiltersStore();
 const currentPage = ref(1);
-const { data, pending, fetchListData, handleDeleteItem } = useApi(userApiUrl, userFilterName);
+const { items, pending, fetchListData, handleDeleteItem } = useApi(userApiUrl);
 
 onMounted(() => {
-  fetchListData(currentPage);
+  fetchListData(currentPage, userFilterName);
 });
 
 const handlePageChange = (newPage: number) => {
   currentPage.value = newPage;
-  fetchListData(currentPage);
+  fetchListData(currentPage, userFilterName);
 };
 
-const handleDelete = (id: number) => {
-  handleDeleteItem(id, currentPage);
+const handleDelete = async (id: number) => {
+  //todo if handleDeleteItem is not successful we don't need to call fetchListData
+  try {
+    await handleDeleteItem(id);
+    await fetchListData(currentPage, userFilterName);
+  } catch (err) {
+    // TODO: handle error
+  }
 };
 
 const applyFilters = () => {
   currentPage.value = 1;
-  fetchListData(currentPage);
+  fetchListData(currentPage, userFilterName);
 };
 
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilter(userFilterName, userFiltersInit);
-  fetchListData(currentPage);
+  fetchListData(currentPage, userFilterName);
 };
 </script>

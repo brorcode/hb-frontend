@@ -1,14 +1,16 @@
 <template>
-  <FilterInteger
-    :filter="userFiltersInit.id"
-    :value="filters.getFilterValue(userFilterName, userFiltersInit.id.key)"
-    @update:model-value="handleUpdate(userFiltersInit.id.key, $event)"
-  />
-  <FilterText
-    :filter="userFiltersInit.name"
-    :value="filters.getFilterValue(userFilterName, userFiltersInit.name.key)"
-    @update:model-value="handleUpdate(userFiltersInit.name.key, $event)"
-  />
+  <div>
+    <FilterInteger
+      :filter="userFiltersInit.id"
+      :value="filters.getFilterValue(userFilterName, userFiltersInit.id.key)"
+      @update:model-value="handleUpdate(userFiltersInit.id.key, $event)"
+    />
+    <FilterText
+      :filter="userFiltersInit.name"
+      :value="filters.getFilterValue(userFilterName, userFiltersInit.name.key)"
+      @update:model-value="handleUpdate(userFiltersInit.name.key, $event)"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
