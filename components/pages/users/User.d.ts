@@ -6,8 +6,8 @@ type User = {
   updatedAt: string;
 };
 
-type UserGetResponse = BaseGetResponse<User>;
-type UserListResponse = BaseListResponse<User>;
+type UserGetResponse = BaseItemResponse<User>;
+type UserListResponse = BaseItemsResponse<User>;
 
 type UserRow = {
   field: keyof User;

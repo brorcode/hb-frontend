@@ -53,8 +53,19 @@ onMounted(async () => {
   }
 });
 
-const submitForm = () => {
-  // todo it return form we need to update form with new data
-  handleUpdateItem(form, parseInt(id));
+const submitForm = async () => {
+  // todo do we need to clear form from errors before submit if I clear field on handleFieldUpdate
+  // Object.entries(form).forEach(([key]) => {
+  //   form[key as keyof CategoryForm].errors = [];
+  // });
+
+  const body = Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.value]));
+
+  await handleUpdateItem(body, parseInt(id));
+  if (item.value?.error?.code === 'UNPROCESSABLE_ENTITY') {
+    Object.entries(item.value?.error?.details || {}).forEach(([key, value]) => {
+      form[key as keyof CategoryForm].errors = value as string[];
+    });
+  }
 };
 </script>

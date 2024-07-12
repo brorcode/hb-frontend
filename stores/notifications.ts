@@ -17,13 +17,27 @@ export const useNotificationsStore = defineStore('notifications', {
     notifications: []
   }),
   actions: {
-    addNotification(success: boolean, title: string, message: string) {
+    // addNotification(success: boolean, title: string, message: string) {
+    //   const notification: NotificationStore = {
+    //     id: this.notifications.length + 1,
+    //     show: true,
+    //     success,
+    //     title,
+    //     message
+    //   };
+    //   this.notifications.push(notification);
+    //
+    //   setTimeout(() => {
+    //     this.removeNotification(notification.id);
+    //   }, 3000);
+    // },
+    addNotification(n?: Notification) {
       const notification: NotificationStore = {
         id: this.notifications.length + 1,
         show: true,
-        success,
-        title,
-        message
+        success: n?.type === 'success',
+        title: n?.title || n?.type === 'success' ? 'Success' : 'Error',
+        message: n?.message || 'Something went wrong'
       };
       this.notifications.push(notification);
 

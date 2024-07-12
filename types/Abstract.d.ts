@@ -22,7 +22,7 @@ interface ListData<T> {
   isLastPage: boolean;
 }
 
-interface BaseListResponse<T> {
+interface BaseItemsResponse<T> {
   data?: ListData<T>;
   error?: {
     code: string;
@@ -40,7 +40,7 @@ interface BaseListResponse<T> {
 //   };
 // };
 
-interface BaseGetResponse<T> {
+interface BaseItemResponse<T> {
   data?: { item: T };
   error?: {
     code: string;

@@ -6,8 +6,8 @@ type Category = {
   updatedAt: string;
 };
 
-type CategoryGetResponse = BaseGetResponse<Category>;
-type CategoryListResponse = BaseListResponse<Category>;
+type CategoryGetResponse = BaseItemResponse<Category>;
+type CategoryListResponse = BaseItemsResponse<Category>;
 
 type CategoryRow = {
   field: keyof Category;

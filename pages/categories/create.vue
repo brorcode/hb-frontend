@@ -29,7 +29,7 @@ import { categoryApiUrl, categoryFormInit } from '~/components/pages/categories/
 import FormTextarea from '~/components/form/FormTextarea.vue';
 import { useApi } from '~/composables/useApi';
 
-const { handleCreateItem } = useApi(categoryApiUrl);
+const { item, handleCreateItem } = useApi(categoryApiUrl);
 
 const form = reactive(deepCopy(categoryFormInit) as CategoryForm);
 
@@ -38,7 +38,23 @@ const handleFieldUpdate = (key: keyof CategoryForm, value: string) => {
   form[key].value = value;
 };
 
-const submitForm = () => {
-  handleCreateItem(form, 'create', '/categories');
+const submitForm = async () => {
+  // todo do we need to clear form from errors before submit if I clear field on handleFieldUpdate
+  // Object.entries(form).forEach(([key]) => {
+  //   form[key as keyof CategoryForm].errors = [];
+  // });
+
+  const body = Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.value]));
+
+  await handleCreateItem(body);
+  if (item.value?.error?.code === 'UNPROCESSABLE_ENTITY') {
+    Object.entries(item.value?.error?.details || {}).forEach(([key, value]) => {
+      form[key as keyof CategoryForm].errors = value as string[];
+    });
+  }
+
+  if (!item.value?.error) {
+    navigateTo('/categories');
+  }
 };
 </script>
