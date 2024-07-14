@@ -47,6 +47,7 @@ const submitForm = async () => {
   const body = Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.value]));
 
   await handleCreateItem(body);
+  // todo probably better to use another code for validation errors
   if (item.value?.error?.code === 'UNPROCESSABLE_ENTITY') {
     Object.entries(item.value?.error?.details || {}).forEach(([key, value]) => {
       form[key as keyof CategoryForm].errors = value as string[];
