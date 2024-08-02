@@ -1,9 +1,7 @@
 import { formatDate } from '~/utils/date';
 
-const config = useRuntimeConfig();
-
 const categoryFilterName = 'categoryFilter';
-const categoryApiUrl = `${config.public.apiUrl}/categories`;
+const categoryApiUrl = '/api/v1/categorie';
 
 const categoryFiltersInit: CategoryFilters = {
   id: {

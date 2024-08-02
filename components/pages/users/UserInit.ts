@@ -1,9 +1,7 @@
 import { formatDate } from '~/utils/date';
 
-const config = useRuntimeConfig();
-
 const userFilterName = 'userFilter';
-const userApiUrl = `${config.public.apiUrl}/users`;
+const userApiUrl = '/api/v1/users';
 
 const userFiltersInit: UserFilters = {
   id: {

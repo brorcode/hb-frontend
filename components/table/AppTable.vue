@@ -23,14 +23,14 @@
       </tr>
     </thead>
 
-    <AppSkeletonTbody v-if="loading" :columns="columns" :rows="listData?.items" />
+    <AppSkeletonTbody v-if="loading" :columns-count="columns.length" />
     <tbody v-else class="divide-y divide-gray-200 bg-white">
-      <tr v-if="!listData?.items.length">
+      <tr v-if="!listData?.length">
         <td :colspan="columns.length">
           <div class="text-center p-4">Nothing found</div>
         </td>
       </tr>
-      <tr v-for="row in listData?.items" v-else :key="`tbody-row-${row.id}`">
+      <tr v-for="row in listData" v-else :key="`tbody-row-${row.id}`">
         <td
           v-for="(column, columnIndex) in columns"
           :key="`tbody-column-${columnIndex}-${column.field}`"
@@ -60,7 +60,7 @@
     </tbody>
   </table>
 
-  <AppPagination :is-last-page="listData?.isLastPage" @page-change="handlePageChange" />
+  <AppPagination :has-next-page="meta?.hasNextPage" @page-change="handlePageChange" />
 </template>
 
 <script setup lang="ts">
@@ -73,7 +73,8 @@ defineProps<{
   url: string;
   loading: boolean;
   columns: Column[];
-  listData?: ListData<Row>;
+  meta?: ResponseMeta;
+  listData?: Row[];
 }>();
 
 const emit = defineEmits(['pageChange', 'deleteItem']);

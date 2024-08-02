@@ -29,6 +29,7 @@
       :loading="pending"
       :columns="userColumns"
       :list-data="items?.data"
+      :meta="items?.meta"
       @page-change="handlePageChange"
       @delete-item="handleDelete"
     />

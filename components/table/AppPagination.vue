@@ -12,7 +12,7 @@
     </div>
     <div class="-mt-px flex w-0 flex-1 justify-end">
       <button
-        v-if="!isLastPage"
+        v-if="hasNextPage"
         class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         @click="setPage(currentPage + 1)"
       >
@@ -27,7 +27,7 @@
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{
-  isLastPage?: boolean;
+  hasNextPage?: boolean;
 }>();
 
 const emit = defineEmits(['pageChange']);

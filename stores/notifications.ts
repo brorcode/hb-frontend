@@ -31,13 +31,13 @@ export const useNotificationsStore = defineStore('notifications', {
     //     this.removeNotification(notification.id);
     //   }, 3000);
     // },
-    addNotification(n?: Notification) {
+    addNotification(n?: ApiNotification) {
       const notification: NotificationStore = {
         id: this.notifications.length + 1,
         show: true,
         success: n?.type === 'success',
-        title: n?.title || n?.type === 'success' ? 'Success' : 'Error',
-        message: n?.message || 'Something went wrong'
+        title: n?.title || n?.type === 'success' ? 'Удачно' : 'Ошибка',
+        message: n?.message || 'Что-то пошло не так'
       };
       this.notifications.push(notification);
 

@@ -1,9 +1,19 @@
+type HttpMethod = 'GET' | 'POST' | 'DELETE';
+type ApiResponseError = {
+  response: {
+    status: number;
+    _data: {
+      message: string;
+      errors: Record<string, string[]>;
+    };
+  };
+};
+
 type BaseRow = {
   id: number;
 };
 
 type Row<T = object> = BaseRow & T & { [key: string]: any };
-// type Row<T = object> = BaseRow & T;
 
 interface ErrorDetails {
   [key: string]: string[];
@@ -11,11 +21,17 @@ interface ErrorDetails {
 
 type NotificationType = 'success' | 'error';
 
-interface Notification {
+interface ApiNotification {
   type: NotificationType;
   title: string;
   message: string;
 }
+
+type ResponseMeta = {
+  perPage: number;
+  currentPage: number;
+  hasNextPage: boolean;
+};
 
 interface ListData<T> {
   items: T[];
@@ -23,22 +39,16 @@ interface ListData<T> {
 }
 
 interface BaseItemsResponse<T> {
-  data?: ListData<T>;
+  // data?: ListData<T>;
+  data?: T[];
+  meta?: ResponseMeta;
   error?: {
     code: string;
     message: string;
     details?: ErrorDetails;
   };
-  notification?: Notification;
+  notification?: ApiNotification;
 }
-
-// type BaseListResponse<T> = {
-//   data?: ListData<T>;
-//   error?: {
-//     code: string;
-//     message: string;
-//   };
-// };
 
 interface BaseItemResponse<T> {
   data?: { item: T };
@@ -47,7 +57,7 @@ interface BaseItemResponse<T> {
     message: string;
     details?: ErrorDetails;
   };
-  notification?: Notification;
+  notification?: ApiNotification;
 }
 
 type Column = {
@@ -63,7 +73,6 @@ type Filter = {
 };
 
 type Filters<T = Record<string, any>> = {
-  // [P in keyof T]: Filter;
   [P in keyof T]: Overwrite<Filter, { value: T[P] }>;
 };
 

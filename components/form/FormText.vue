@@ -11,7 +11,8 @@
     <div class="mt-2">
       <input
         :id="`form-${formField.key}`"
-        type="text"
+        :type="type ?? 'text'"
+        :autocomplete="type === 'password' ? 'current-password' : 'off'"
         :readonly="mode === pageMode.VIEW"
         :value="formField.value"
         :class="[
@@ -25,7 +26,7 @@
         @input="updateValue"
       />
       <p v-if="formField.errors.length" class="mt-1 text-xs text-red-600">
-        {{ formField.label }} {{ formField.errors[0] }}
+        {{ formField.errors[0] }}
       </p>
     </div>
   </div>
@@ -36,6 +37,7 @@ import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
   formField: FormField;
+  type?: 'text' | 'number' | 'email' | 'password';
   mode?: UpsertMode;
 }>();
 const emit = defineEmits(['update:modelValue']);
