@@ -108,7 +108,7 @@
                   <span
                     class="ml-4 text-sm font-semibold leading-6 text-gray-900"
                     aria-hidden="true"
-                    >Tom Cook</span
+                    >{{ user?.name }}</span
                   >
                   <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                 </span>
@@ -129,8 +129,11 @@
                       :to="item.href"
                       :class="[
                         active ? 'bg-gray-50' : '',
-                        'block px-3 py-1 text-sm leading-6 text-gray-900'
+                        'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
                       ]"
+                      @click.prevent="
+                        typeof item.clickEvent === 'function' ? item.clickEvent() : undefined
+                      "
                       >{{ item.name }}</NuxtLink
                     >
                   </MenuItem>
@@ -165,10 +168,23 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import AppSidebar from '~/components/AppSidebar.vue';
+import { usePersistentState } from '~/composables/usePersistentState';
+
+const config = useRuntimeConfig();
+const { apiFetch } = useApi();
+const [user, setUser] = usePersistentState<User>('user');
 
 const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' }
+  { name: 'Your profile', href: '/categories', clickEvent: null },
+  {
+    name: 'Sign out',
+    href: undefined,
+    clickEvent: async () => {
+      await apiFetch<User>('POST', '/api/v1/logout');
+      setUser(null);
+      navigateTo(config.public.loginUrl, { replace: true });
+    }
+  }
 ];
 
 const sidebarOpen = ref(false);

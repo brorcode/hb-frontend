@@ -1,0 +1,3 @@
+export const UNAUTHENTICATED_STATUSES = new Set([401, 419]);
+export const UNVERIFIED_USER_STATUS = 409;
+export const VALIDATION_ERROR_STATUS = 422;
