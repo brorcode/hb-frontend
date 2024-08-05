@@ -86,3 +86,8 @@ type FormField = {
 type Form<T = Record<string, any>> = {
   [P in keyof T]: Overwrite<FormField, { value: T[P] }>;
 };
+
+type Sorting = {
+  column: string | null;
+  direction: 'ASC' | 'DESC' | null;
+};

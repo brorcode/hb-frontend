@@ -32,6 +32,7 @@
       :meta="items?.meta"
       @page-change="handlePageChange"
       @delete-item="handleDelete"
+      @apply-sorting="applySorting"
     />
   </AppList>
 </template>
@@ -56,9 +57,9 @@ onMounted(() => {
   fetchListData(currentPage, userFilterName);
 });
 
-const handlePageChange = (newPage: number) => {
+const handlePageChange = (newPage: number, sorting: Sorting) => {
   currentPage.value = newPage;
-  fetchListData(currentPage, userFilterName);
+  fetchListData(currentPage, userFilterName, sorting);
 };
 
 const handleDelete = async (id: number) => {
@@ -74,6 +75,11 @@ const handleDelete = async (id: number) => {
 const applyFilters = () => {
   currentPage.value = 1;
   fetchListData(currentPage, userFilterName);
+};
+
+const applySorting = (sorting: Sorting) => {
+  currentPage.value = 1;
+  fetchListData(currentPage, userFilterName, sorting);
 };
 
 const clearFilters = () => {

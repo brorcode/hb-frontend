@@ -48,11 +48,15 @@ export const useApi = (url?: string) => {
     }
   };
 
-  const fetchListData = async (currentPage: Ref<number>, filterName: string) => {
+  const fetchListData = async (currentPage: Ref<number>, filterName: string, sorting?: Sorting) => {
     items.value = await apiFetch<BaseItemsResponse<Row>>('POST', '/api/v1/users', {
       page: currentPage.value,
       limit: limit.value,
-      filters: filters.getFilters(filterName)
+      filters: filters.getFilters(filterName),
+      sorting: sorting ?? {
+        column: null,
+        direction: null
+      }
     });
   };
 

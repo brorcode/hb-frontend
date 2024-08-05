@@ -12,7 +12,27 @@
             columnIndex === 0 ? 'pl-0' : ''
           ]"
         >
-          {{ column.header }}
+          <div class="group inline-flex cursor-pointer" @click="handleSortingChange(column.field)">
+            {{ column.header }}
+            <span
+              :class="[
+                'ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200',
+                sorting.column === column.field ? 'bg-gray-200' : ''
+              ]"
+            >
+              <ChevronUpIcon
+                v-if="sorting.column === column.field && sorting.direction === 'ASC'"
+                class="h-5 w-5"
+                aria-hidden="true"
+              />
+              <ChevronDownIcon
+                v-else-if="sorting.column === column.field && sorting.direction === 'DESC'"
+                class="h-5 w-5"
+                aria-hidden="true"
+              />
+              <ChevronUpDownIcon v-else class="h-5 w-5" aria-hidden="true" />
+            </span>
+          </div>
         </th>
         <th
           scope="col"
@@ -64,10 +84,11 @@
 </template>
 
 <script setup lang="ts">
-import { TrashIcon, PencilIcon, EyeIcon } from '@heroicons/vue/24/solid';
+import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
 import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
 import AppPagination from '~/components/table/AppPagination.vue';
+import { ChevronUpIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 
 defineProps<{
   url: string;
@@ -77,10 +98,35 @@ defineProps<{
   listData?: Row[];
 }>();
 
-const emit = defineEmits(['pageChange', 'deleteItem']);
+const emit = defineEmits(['pageChange', 'applySorting', 'deleteItem']);
+
+const sorting = reactive<Sorting>({
+  column: null,
+  direction: null
+});
+
+const handleSortingChange = (column: string) => {
+  if (sorting.column === column) {
+    if (sorting.direction === 'DESC') {
+      // If the clicked column is already sorted in DESC order, reset the sorting
+      sorting.column = null;
+      sorting.direction = null;
+    } else {
+      // If the clicked column is already sorted in ASC order, toggle the direction
+      sorting.direction = 'DESC';
+    }
+  } else {
+    // If a different column is clicked, reset the sorting
+    sorting.column = column;
+    sorting.direction = 'ASC';
+  }
+
+  // Emit the event with the new sorting parameters
+  emit('applySorting', sorting);
+};
 
 const handlePageChange = (page: number) => {
-  emit('pageChange', page);
+  emit('pageChange', page, sorting);
 };
 
 const deleteItem = (id: number) => {
