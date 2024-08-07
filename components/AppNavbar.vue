@@ -7,7 +7,7 @@
             <NuxtLink
               :to="item.href"
               :class="[
-                $router.currentRoute.value.path === item.href
+                $route.path.includes(item.href)
                   ? 'bg-gray-800 text-white'
                   : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
@@ -26,7 +26,7 @@
             <NuxtLink
               :to="team.href"
               :class="[
-                $router.currentRoute.value.path === team.href
+                $route.path.includes(team.href)
                   ? 'bg-gray-800 text-white'
                   : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
@@ -65,7 +65,7 @@ import {
 } from '@heroicons/vue/24/outline';
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon },
+  { name: 'Dashboard', href: '#', icon: HomeIcon },
   { name: 'Users', href: '/users', icon: UsersIcon },
   { name: 'Categories', href: '/categories', icon: FolderIcon },
   { name: 'Calendar', href: '#', icon: CalendarIcon },

@@ -25,4 +25,5 @@ type UserFilters = Filters<{
 type UserForm = Form<{
   name: string;
   email: string;
+  password: string;
 }>;

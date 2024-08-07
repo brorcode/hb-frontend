@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.API_URL,
       homeUrl: '/users',
-      loginUrl: 'api/v1/login'
+      loginUrl: '/api/v1/login',
+      logoutUrl: '/api/v1/logout'
     }
   },
 

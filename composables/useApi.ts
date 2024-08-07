@@ -28,6 +28,17 @@ export const useApi = (url?: string) => {
         },
         credentials: 'include',
         baseURL: config.public.apiUrl,
+        onResponse: ({ response }) => {
+          // if successful response
+          if (response.status >= 200 && response.status < 300) {
+            if (response._data?.message) {
+              notifications.addNotification({
+                type: 'success',
+                message: response._data.message
+              } as ApiNotification);
+            }
+          }
+        },
         onResponseError: ({ response }) => {
           // todo if manually refresh page some flash page shows and next redirect
           // it should not show backend page at all without auth user
@@ -48,8 +59,13 @@ export const useApi = (url?: string) => {
     }
   };
 
-  const fetchListData = async (currentPage: Ref<number>, filterName: string, sorting?: Sorting) => {
-    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', '/api/v1/users', {
+  const fetchListData = async (
+    endpoint: string,
+    currentPage: Ref<number>,
+    filterName: string,
+    sorting?: Sorting
+  ) => {
+    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, {
       page: currentPage.value,
       limit: limit.value,
       filters: filters.getFilters(filterName),
@@ -60,19 +76,18 @@ export const useApi = (url?: string) => {
     });
   };
 
-  const fetchItem = async (id: number) => {
-    item.value = await apiFetch<BaseItemResponse<Row>>('GET', `${url}/${id}`);
+  const fetchItem = async (endpoint: string, id: number) => {
+    item.value = await apiFetch<BaseItemResponse<Row>>('GET', `${endpoint}/${id}/edit`);
   };
 
-  const handleDeleteItem = async (id: number) => {
-    item.value = await apiFetch<BaseItemResponse<Row>>('DELETE', `${url}/${id}`);
-    notifications.addNotification(item.value?.notification);
+  const handleDeleteItem = async (endpoint: string, id: number) => {
+    await apiFetch('DELETE', `${endpoint}/${id}`);
   };
 
-  const handleCreateItem = async (body: { [p: string]: any }) => {
-    item.value = await apiFetch<BaseItemResponse<Row>>('POST', `${url}/create`, body);
-    notifications.addNotification(item.value?.notification);
-  };
+  // const handleCreateItem = async (endpoint: string, body: { [p: string]: any }) => {
+  //   item.value = await apiFetch<BaseItemResponse<Row>>('POST', `${endpoint}/create`, body);
+  //   notifications.addNotification(item.value?.notification);
+  // };
 
   const handleUpdateItem = async (body: { [p: string]: any }, id: number) => {
     item.value = await apiFetch<BaseItemResponse<Row>>('POST', `${url}/${id}`, body);
@@ -85,7 +100,7 @@ export const useApi = (url?: string) => {
     pending,
     fetchListData,
     fetchItem,
-    handleCreateItem,
+    // handleCreateItem,
     handleUpdateItem,
     handleDeleteItem,
     apiFetch

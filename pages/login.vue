@@ -24,13 +24,9 @@
         <button
           type="submit"
           :disabled="pending"
-          class="inline-flex justify-center w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm disabled:bg-indigo-300 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="inline-flex justify-center w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm disabled:bg-indigo-300 disabled:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          <svg
-            v-if="pending"
-            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-            viewBox="0 0 24 24"
-          >
+          <svg v-if="pending" class="animate-spin mr-3 h-5 w-5 text-white" viewBox="0 0 24 24">
             <circle
               class="opacity-25"
               cx="12"

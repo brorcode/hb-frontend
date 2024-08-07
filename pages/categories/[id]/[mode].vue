@@ -6,7 +6,7 @@
         <div>Category ID: {{ id }}</div>
       </div>
     </template>
-    <AppForm back-url="/categories" :mode="mode" @submit-form="submitForm">
+    <AppForm back-url="/categories" :pending="pending" :mode="mode" @submit-form="submitForm">
       <FormText
         :mode="mode"
         :form-field="form.name"
@@ -34,7 +34,7 @@ import { useApi } from '~/composables/useApi';
 const route = useRoute();
 const { id, mode } = route.params as { id: string; mode: UpsertMode };
 
-const { item, fetchItem, handleUpdateItem } = useApi(categoryApiUrl);
+const { item, fetchItem, handleUpdateItem, pending } = useApi(categoryApiUrl);
 
 const form = reactive(deepCopy(categoryFormInit) as CategoryForm);
 
@@ -44,7 +44,7 @@ const handleFieldUpdate = (key: keyof CategoryForm, value: string) => {
 };
 
 onMounted(async () => {
-  await fetchItem(parseInt(id));
+  await fetchItem(categoryApiUrl, parseInt(id));
 
   if (item.value?.data?.item) {
     Object.entries(form).forEach(([key]) => {

@@ -18,7 +18,8 @@ const userFiltersInit: UserFilters = {
 
 const userFormInit: UserForm = {
   name: { key: 'name', value: '', label: 'Name', errors: [] },
-  email: { key: 'email', value: '', label: 'Email', errors: [] }
+  email: { key: 'email', value: '', label: 'Email', errors: [] },
+  password: { key: 'password', value: '', label: 'Password', errors: [] }
 };
 
 const userColumns: UserColumn[] = [

@@ -31,6 +31,8 @@ import FilterTextarea from '~/components/filters/FilterTextarea.vue';
 const filters = useFiltersStore();
 filters.initFilters(categoryFilterName, categoryFiltersInit);
 
+// todo it needs to refactor and send update filter as event to parent component.
+// in this case it doesn't need to have preSavedFilter status at all
 const handleUpdate = (key: keyof CategoryFilters, value: string) => {
   filters.addPreSavedFilter(categoryFilterName, key, value);
 };

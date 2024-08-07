@@ -1,4 +1,4 @@
-type HttpMethod = 'GET' | 'POST' | 'DELETE';
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 type ApiResponseError = {
   response: {
     status: number;
@@ -51,7 +51,7 @@ interface BaseItemsResponse<T> {
 }
 
 interface BaseItemResponse<T> {
-  data?: { item: T };
+  data?: T;
   error?: {
     code: string;
     message: string;

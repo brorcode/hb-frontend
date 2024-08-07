@@ -1,7 +1,7 @@
 import { formatDate } from '~/utils/date';
 
 const categoryFilterName = 'categoryFilter';
-const categoryApiUrl = '/api/v1/categorie';
+const categoryApiUrl = '/api/v1/categories';
 
 const categoryFiltersInit: CategoryFilters = {
   id: {
@@ -37,17 +37,19 @@ const categoryColumns: CategoryColumn[] = [
   },
   {
     field: 'description',
-    header: 'Description'
+    header: 'Description',
+    body: (row: CategoryRow) =>
+      row.description.length > 50 ? row.description.slice(0, 50) + '...' : row.description
   },
   {
     field: 'createdAt',
     header: 'Created At',
-    body: (row: UserRow) => formatDate(row.createdAt)
+    body: (row: CategoryRow) => formatDate(row.createdAt)
   },
   {
     field: 'updatedAt',
     header: 'Updated At',
-    body: (row: UserRow) => formatDate(row.updatedAt)
+    body: (row: CategoryRow) => formatDate(row.updatedAt)
   }
 ];
 
