@@ -63,6 +63,7 @@ interface BaseItemResponse<T> {
 type Column = {
   field: string;
   header: string;
+  sortable?: boolean;
   body?: fn;
 };
 

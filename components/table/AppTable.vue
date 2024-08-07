@@ -15,6 +15,7 @@
           <div class="group inline-flex cursor-pointer" @click="handleSortingChange(column.field)">
             {{ column.header }}
             <span
+              v-if="column.sortable ?? true"
               :class="[
                 'ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200',
                 sorting.column === column.field ? 'bg-gray-200' : ''
@@ -59,7 +60,7 @@
             columnIndex === 0 ? 'pl-0' : ''
           ]"
         >
-          {{ column.body ? column.body(row) : row[column.field] ?? 'N/A' }}
+          {{ column.body ? column.body(row) : (row[column.field] ?? 'N/A') }}
         </td>
         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
           <div class="space-x-2 flex justify-end">
@@ -107,18 +108,18 @@ const sorting = reactive<Sorting>({
 
 const handleSortingChange = (column: string) => {
   if (sorting.column === column) {
-    if (sorting.direction === 'DESC') {
+    if (sorting.direction === 'ASC') {
       // If the clicked column is already sorted in DESC order, reset the sorting
       sorting.column = null;
       sorting.direction = null;
     } else {
       // If the clicked column is already sorted in ASC order, toggle the direction
-      sorting.direction = 'DESC';
+      sorting.direction = 'ASC';
     }
   } else {
     // If a different column is clicked, reset the sorting
     sorting.column = column;
-    sorting.direction = 'ASC';
+    sorting.direction = 'DESC';
   }
 
   // Emit the event with the new sorting parameters

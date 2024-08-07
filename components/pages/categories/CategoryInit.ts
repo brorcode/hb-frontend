@@ -38,6 +38,7 @@ const categoryColumns: CategoryColumn[] = [
   {
     field: 'description',
     header: 'Description',
+    sortable: false,
     body: (row: CategoryRow) =>
       row.description.length > 50 ? row.description.slice(0, 50) + '...' : row.description
   },

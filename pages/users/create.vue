@@ -22,7 +22,7 @@ import UserForm from '~/components/pages/users/UserForm.vue';
 const { form, pending, handleFieldUpdate, submit } = useForm<UserForm>(userFormInit);
 
 const submitForm = async () => {
-  await submit(`${userApiUrl}/create`, 'POST', () => {
+  await submit(`${userApiUrl}/store`, 'POST', () => {
     navigateTo('/users');
   });
 };
