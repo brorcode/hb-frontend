@@ -7,6 +7,7 @@
     />
     <FormText
       :mode="mode"
+      type="email"
       :form-field="form.email"
       @update:model-value="handleFieldUpdate(form.email.key, $event)"
     />
