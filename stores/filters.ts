@@ -56,7 +56,7 @@ export const useFiltersStore = defineStore('filters', {
     },
     getFilters(filterName: string) {
       if (!this.filters[filterName]) {
-        return {};
+        return null;
       }
 
       // Filter out the filters where the value is an empty string or null

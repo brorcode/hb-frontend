@@ -65,15 +65,21 @@ export const useApi = (url?: string) => {
     filterName: string,
     sorting?: Sorting
   ) => {
-    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, {
+    const body: any = {
       page: currentPage.value,
-      limit: limit.value,
-      filters: filters.getFilters(filterName),
-      sorting: sorting ?? {
-        column: null,
-        direction: null
-      }
-    });
+      limit: limit.value
+    };
+
+    if (sorting && sorting.column && sorting.direction) {
+      body.sorting = sorting;
+    }
+
+    const filtersData = filters.getFilters(filterName);
+    if (filtersData) {
+      body.filters = filtersData;
+    }
+
+    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
   };
 
   const fetchItem = async (endpoint: string, id: number) => {
