@@ -5,7 +5,7 @@ import { useCookie } from '#app';
 import { usePersistentState } from '~/composables/usePersistentState';
 import { UNAUTHENTICATED_STATUSES } from '~/constants/statusCodes';
 
-export const useApi = (url?: string) => {
+export const useApi = () => {
   const config = useRuntimeConfig();
   const notifications = useNotificationsStore();
   const [, setUser] = usePersistentState<User>('user');
@@ -82,22 +82,8 @@ export const useApi = (url?: string) => {
     items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
   };
 
-  const fetchItem = async (endpoint: string, id: number) => {
-    item.value = await apiFetch<BaseItemResponse<Row>>('GET', `${endpoint}/${id}/edit`);
-  };
-
   const handleDeleteItem = async (endpoint: string, id: number) => {
     await apiFetch('DELETE', `${endpoint}/${id}`);
-  };
-
-  // const handleCreateItem = async (endpoint: string, body: { [p: string]: any }) => {
-  //   item.value = await apiFetch<BaseItemResponse<Row>>('POST', `${endpoint}/create`, body);
-  //   notifications.addNotification(item.value?.notification);
-  // };
-
-  const handleUpdateItem = async (body: { [p: string]: any }, id: number) => {
-    item.value = await apiFetch<BaseItemResponse<Row>>('POST', `${url}/${id}`, body);
-    notifications.addNotification(item.value?.notification);
   };
 
   return {
@@ -105,9 +91,6 @@ export const useApi = (url?: string) => {
     item,
     pending,
     fetchListData,
-    fetchItem,
-    // handleCreateItem,
-    handleUpdateItem,
     handleDeleteItem,
     apiFetch
   };
