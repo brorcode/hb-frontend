@@ -21,7 +21,7 @@
         @apply-filters="applyFilters"
         @clear-filters="clearFilters"
       >
-        <slot name="filters"></slot>
+        <component :is="filtersComponent" />
       </FiltersAppFilter>
     </AppCard>
 
@@ -43,6 +43,7 @@
 import AppTable from '~/components/table/AppTable.vue';
 import { useFiltersStore } from '~/stores/filters';
 import { useApi } from '~/composables/useApi';
+import type { Component } from 'vue';
 
 const props = defineProps<{
   title: string;
@@ -52,6 +53,7 @@ const props = defineProps<{
   columns: Column[];
   filterName: string;
   initFilters: Filters;
+  filtersComponent: Component;
 }>();
 
 const filters = useFiltersStore();

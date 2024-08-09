@@ -23,7 +23,7 @@ type CategoryFilters = Filters<{
   description: string;
 }>;
 
-type CategoryForm = Form<{
+type CategoryFormType = Form<{
   name: string;
   description: string;
 }>;

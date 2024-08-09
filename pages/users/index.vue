@@ -6,11 +6,9 @@
     :api-url="userApiUrl"
     :columns="userColumns"
     :filter-name="userFilterName"
+    :filters-component="LazyPagesUsersUserFilters"
     :init-filters="userFiltersInit"
   >
-    <template #filters>
-      <LazyPagesUsersUserFilters />
-    </template>
   </AppList>
 </template>
 
@@ -21,4 +19,5 @@ import {
   userFilterName,
   userFiltersInit
 } from '~/components/pages/users/UserInit';
+import { LazyPagesUsersUserFilters } from '#components';
 </script>

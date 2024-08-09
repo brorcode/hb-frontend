@@ -6,11 +6,9 @@
     :api-url="categoryApiUrl"
     :columns="categoryColumns"
     :filter-name="categoryFilterName"
+    :filters-component="LazyPagesCategoriesCategoryFilters"
     :init-filters="categoryFiltersInit"
   >
-    <template #filters>
-      <LazyPagesCategoriesCategoryFilters />
-    </template>
   </AppList>
 </template>
 
@@ -21,4 +19,5 @@ import {
   categoryFilterName,
   categoryFiltersInit
 } from '~/components/pages/categories/CategoryInit';
+import { LazyPagesCategoriesCategoryFilters } from '#components';
 </script>
