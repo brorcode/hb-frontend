@@ -21,7 +21,7 @@ const categoryFiltersInit: CategoryFilters = {
   }
 };
 
-const categoryFormInit: CategoryFormType = {
+const categoryFormInit: CategoryForm = {
   name: { key: 'name', value: '', label: 'Name', errors: [] },
   description: { key: 'description', value: '', label: 'Description', errors: [] }
 };

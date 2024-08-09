@@ -19,8 +19,8 @@ import FormText from '~/components/form/FormText.vue';
 import type { UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
-  form: CategoryFormType;
+  form: CategoryForm;
   mode?: UpsertMode;
-  handleFieldUpdate: (key: keyof CategoryFormType, value: any) => void;
+  handleFieldUpdate: (key: keyof CategoryForm, value: any) => void;
 }>();
 </script>
