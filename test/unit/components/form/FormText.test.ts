@@ -61,12 +61,11 @@ describe('FormText', () => {
   it('should disable input when mode is view', async () => {
     const component = await mountSuspended(FormText, {
       props: {
-        type: 'email',
         formField: {
-          key: 'email',
+          key: 'text',
           value: '',
-          label: 'Email label',
-          errors: ['Email is required']
+          label: 'Text label',
+          errors: []
         },
         mode: pageMode.VIEW
       }

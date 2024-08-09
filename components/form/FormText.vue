@@ -12,7 +12,6 @@
       <input
         :id="`form-${formField.key}`"
         :type="type ?? 'text'"
-        :autocomplete="type === 'password' ? 'current-password' : 'off'"
         :readonly="mode === pageMode.VIEW"
         :value="formField.value"
         :class="[
