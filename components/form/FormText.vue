@@ -18,7 +18,7 @@
         :class="[
           formField.errors.length
             ? 'bg-red-50 placeholder:text-red-400 text-red-900 ring-red-300 focus:ring-red-600 ring-inset focus:ring-2 focus:ring-inset'
-            : mode === 'view'
+            : mode === pageMode.VIEW
               ? 'cursor-default bg-gray-100 text-gray-500 ring-gray-300 focus:ring-gray-300 placeholder:text-gray-400'
               : 'text-gray-900 placeholder:text-gray-400 ring-gray-300 focus:ring-indigo-600 ring-inset focus:ring-2 focus:ring-inset',
           'block w-full rounded-md border-0 py-1.5 shadow-sm sm:text-sm sm:leading-6 ring-1'

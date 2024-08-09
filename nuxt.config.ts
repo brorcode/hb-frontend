@@ -21,6 +21,6 @@ export default defineNuxtConfig({
   },
 
   ssr: false,
-  modules: ['@nuxtjs/eslint-module', '@pinia/nuxt'],
+  modules: ['@nuxtjs/eslint-module', '@pinia/nuxt', '@nuxt/test-utils/module'],
   compatibilityDate: '2024-08-09'
 });
