@@ -34,7 +34,7 @@ describe('FormText', () => {
     });
 
     const input = component.find('input');
-    input.setValue('test@example.com');
+    await input.setValue('test@example.com');
 
     expect(component.emitted('update:modelValue')).toBeTruthy();
     expect((component.emitted('update:modelValue') as Array<[string]>)[0]).toEqual([
