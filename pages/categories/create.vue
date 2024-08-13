@@ -4,7 +4,7 @@
     :form-component="CategoryForm"
     :form-init="categoryFormInit"
     :api-url="categoryApiUrl"
-    :path="`/categories`"
+    path="/categories"
   />
 </template>
 

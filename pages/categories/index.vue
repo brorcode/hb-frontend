@@ -2,11 +2,11 @@
   <AppList
     title="Categories"
     title-singular="Category"
-    url="/categories"
+    path="/categories"
     :api-url="categoryApiUrl"
     :columns="categoryColumns"
     :filter-name="categoryFilterName"
-    :filters-component="LazyPagesCategoriesCategoryFilters"
+    :filters-component="CategoryFilters"
     :init-filters="categoryFiltersInit"
   >
   </AppList>
@@ -19,5 +19,5 @@ import {
   categoryFilterName,
   categoryFiltersInit
 } from '~/components/pages/categories/CategoryInit';
-import { LazyPagesCategoriesCategoryFilters } from '#components';
+import CategoryFilters from '~/components/pages/categories/CategoryFilters.vue';
 </script>

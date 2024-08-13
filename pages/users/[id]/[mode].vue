@@ -4,7 +4,7 @@
     :form-component="UserForm"
     :form-init="userFormInit"
     :api-url="userApiUrl"
-    :path="`/users`"
+    path="/users"
   />
 </template>
 

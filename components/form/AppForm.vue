@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <div v-if="mode !== 'view'" class="mt-6 flex items-center justify-end gap-x-6">
+    <div v-if="mode !== pageMode.VIEW" class="mt-6 flex items-center justify-end gap-x-6">
       <svg v-if="pending" class="animate-spin h-5 w-5 text-black" viewBox="0 0 24 24">
         <circle
           class="opacity-5"

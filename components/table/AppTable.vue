@@ -66,12 +66,12 @@
           <div class="space-x-2 flex justify-end">
             <NuxtLink
               class="text-indigo-600 hover:text-indigo-900"
-              :to="`${url}/${row.id}/${pageMode.EDIT}`"
+              :to="`${path}/${row.id}/${pageMode.EDIT}`"
               ><PencilIcon class="h-5 w-5"
             /></NuxtLink>
             <NuxtLink
               class="text-indigo-600 hover:text-indigo-900"
-              :to="`${url}/${row.id}/${pageMode.VIEW}`"
+              :to="`${path}/${row.id}/${pageMode.VIEW}`"
               ><EyeIcon class="h-5 w-5"
             /></NuxtLink>
             <TrashIcon class="text-red-600 h-5 w-5 cursor-pointer" @click="deleteItem(row.id)" />
@@ -92,7 +92,7 @@ import AppPagination from '~/components/table/AppPagination.vue';
 import { ChevronUpIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 
 defineProps<{
-  url: string;
+  path: string;
   loading: boolean;
   columns: Column[];
   meta?: ResponseMeta;

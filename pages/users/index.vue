@@ -2,11 +2,11 @@
   <AppList
     title="Users"
     title-singular="User"
-    url="/users"
+    path="/users"
     :api-url="userApiUrl"
     :columns="userColumns"
     :filter-name="userFilterName"
-    :filters-component="LazyPagesUsersUserFilters"
+    :filters-component="UserFilters"
     :init-filters="userFiltersInit"
   >
   </AppList>
@@ -19,5 +19,5 @@ import {
   userFilterName,
   userFiltersInit
 } from '~/components/pages/users/UserInit';
-import { LazyPagesUsersUserFilters } from '#components';
+import UserFilters from '~/components/pages/users/UserFilters.vue';
 </script>

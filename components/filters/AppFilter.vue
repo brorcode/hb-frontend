@@ -66,6 +66,7 @@
                       Cancel
                     </button>
                     <button
+                      data-testid="apply-filter-button"
                       type="submit"
                       class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       @click.prevent="applyFilters"
@@ -92,6 +93,7 @@
       >
         {{ filter.label }}: {{ filter.value }}
         <button
+          :data-testid="`remove-filter-${filter.key}-button`"
           type="button"
           class="inline-flex items-center p-1 ms-2 text-sm text-indigo-400 bg-transparent rounded-sm hover:bg-indigo-200 hover:text-indigo-900"
           data-dismiss-target="#badge-dismiss-default"
@@ -120,6 +122,7 @@
     <div class="flex flex-1 justify-end h-fit">
       <div class="flex space-x-3">
         <button
+          data-testid="filter-button"
           type="button"
           class="rounded bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           @click="open = true"
@@ -128,6 +131,7 @@
         </button>
 
         <button
+          data-testid="clear-filter-button"
           type="button"
           class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           @click="() => emit('clear-filters')"

@@ -24,7 +24,7 @@ export const useFiltersStore = defineStore('filters', {
         this.preSavedFilters[filterName] = deepCopy(filters) as Record<string, Filter>;
       }
     },
-    clearFilter(filterName: string, filters: Filters) {
+    clearFilters(filterName: string, filters: Filters) {
       this.filters[filterName] = deepCopy(filters) as Record<string, Filter>;
       this.preSavedFilters[filterName] = deepCopy(filters) as Record<string, Filter>;
     },
@@ -56,7 +56,7 @@ export const useFiltersStore = defineStore('filters', {
     },
     getFilters(filterName: string) {
       if (!this.filters[filterName]) {
-        return null;
+        return {};
       }
 
       // Filter out the filters where the value is an empty string or null
