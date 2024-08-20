@@ -29,6 +29,7 @@
 
       <button
         type="submit"
+        data-testid="form-submit-button"
         :disabled="pending"
         class="rounded-md bg-indigo-600 disabled:bg-indigo-300 disabled:cursor-not-allowed px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         @click.prevent="emit('submit-form')"

@@ -23,6 +23,7 @@
       <div class="mt-10">
         <button
           type="submit"
+          data-testid="form-submit-button"
           :disabled="pending"
           class="inline-flex justify-center w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm disabled:bg-indigo-300 disabled:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
@@ -67,9 +68,12 @@ const pending = ref(false);
 const handleSubmit = async () => {
   pending.value = true;
   await apiFetch('GET', '/sanctum/csrf-cookie');
-  await submit(config.public.loginUrl, 'POST', (response) => {
+  await submit(config.public.apiLoginUrl, 'POST', (response) => {
+    console.log(555);
     setUser(response);
+    console.log(666);
     navigateTo(config.public.homeUrl, { replace: true });
+    console.log(777);
   });
   pending.value = false;
 };

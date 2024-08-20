@@ -180,9 +180,9 @@ const userNavigation = [
     name: 'Sign out',
     href: undefined,
     clickEvent: async () => {
-      await apiFetch<User>('POST', config.public.logoutUrl);
+      await apiFetch<User>('POST', config.public.apiLogoutUrl);
       setUser(null);
-      navigateTo(config.public.loginUrl, { replace: true });
+      navigateTo(config.public.apiLoginUrl, { replace: true });
     }
   }
 ];

@@ -11,6 +11,7 @@
     <div class="mt-2">
       <input
         :id="`form-${formField.key}`"
+        :data-testid="`form-${formField.key}`"
         :type="type ?? 'text'"
         :readonly="mode === pageMode.VIEW"
         :value="formField.value"

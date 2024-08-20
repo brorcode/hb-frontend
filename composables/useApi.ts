@@ -44,7 +44,7 @@ export const useApi = () => {
           // it should not show backend page at all without auth user
           if (UNAUTHENTICATED_STATUSES.has(response.status)) {
             setUser(null);
-            navigateTo(config.public.loginUrl, { replace: true });
+            navigateTo(config.public.apiLoginUrl, { replace: true });
           }
         }
       });
