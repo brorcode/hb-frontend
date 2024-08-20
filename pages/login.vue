@@ -69,11 +69,8 @@ const handleSubmit = async () => {
   pending.value = true;
   await apiFetch('GET', '/sanctum/csrf-cookie');
   await submit(config.public.apiLoginUrl, 'POST', (response) => {
-    console.log(555);
     setUser(response);
-    console.log(666);
     navigateTo(config.public.homeUrl, { replace: true });
-    console.log(777);
   });
   pending.value = false;
 };
