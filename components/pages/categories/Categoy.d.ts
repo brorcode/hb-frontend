@@ -1,7 +1,6 @@
 type Category = {
   id: number;
   name: string;
-  description: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -20,10 +19,8 @@ type CategoryColumn = {
 type CategoryFilters = Filters<{
   id: number;
   name: string;
-  description: string;
 }>;
 
 type CategoryForm = Form<{
   name: string;
-  description: string;
 }>;

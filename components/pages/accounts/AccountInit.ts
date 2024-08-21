@@ -1,9 +1,9 @@
 import { formatDate } from '~/utils/date';
 
-const categoryFilterName = 'categoryFilter';
-const categoryApiUrl = '/api/v1/categories';
+const accountFilterName = 'accountFilter';
+const accountApiUrl = '/api/v1/accounts';
 
-const categoryFiltersInit: CategoryFilters = {
+const accountFiltersInit: AccountFilters = {
   id: {
     key: 'id',
     value: null,
@@ -16,11 +16,11 @@ const categoryFiltersInit: CategoryFilters = {
   }
 };
 
-const categoryFormInit: CategoryForm = {
+const accountFormInit: AccountForm = {
   name: { key: 'name', value: '', label: 'Name', errors: [] }
 };
 
-const categoryColumns: CategoryColumn[] = [
+const accountColumns: AccountColumn[] = [
   {
     field: 'id',
     header: 'ID'
@@ -32,19 +32,13 @@ const categoryColumns: CategoryColumn[] = [
   {
     field: 'createdAt',
     header: 'Created At',
-    body: (row: CategoryRow) => formatDate(row.createdAt)
+    body: (row: AccountRow) => formatDate(row.createdAt)
   },
   {
     field: 'updatedAt',
     header: 'Updated At',
-    body: (row: CategoryRow) => formatDate(row.updatedAt)
+    body: (row: AccountRow) => formatDate(row.updatedAt)
   }
 ];
 
-export {
-  categoryApiUrl,
-  categoryFilterName,
-  categoryFormInit,
-  categoryFiltersInit,
-  categoryColumns
-};
+export { accountApiUrl, accountFilterName, accountFormInit, accountFiltersInit, accountColumns };
