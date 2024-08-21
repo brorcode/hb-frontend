@@ -1,14 +1,14 @@
 <template>
   <div>
     <FilterInteger
-      :filter="categoryFiltersInit.id"
-      :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.id.key)"
-      @update:model-value="handleUpdate(categoryFiltersInit.id.key, $event)"
+      :filter="accountFiltersInit.id"
+      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.id.key)"
+      @update:model-value="handleUpdate(accountFiltersInit.id.key, $event)"
     />
     <FilterText
-      :filter="categoryFiltersInit.name"
-      :value="filters.getFilterValue(categoryFilterName, categoryFiltersInit.name.key)"
-      @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
+      :filter="accountFiltersInit.name"
+      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.name.key)"
+      @update:model-value="handleUpdate(accountFiltersInit.name.key, $event)"
     />
   </div>
 </template>
@@ -17,17 +17,14 @@
 import FilterText from '~/components/filters/FilterText.vue';
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
-import {
-  categoryFilterName,
-  categoryFiltersInit
-} from '~/components/pages/categories/CategoryInit';
+import { accountFilterName, accountFiltersInit } from '~/components/pages/accounts/AccountInit';
 
 const filters = useFiltersStore();
-filters.initFilters(categoryFilterName, categoryFiltersInit);
+filters.initFilters(accountFilterName, accountFiltersInit);
 
 // todo it needs to refactor and send update filter as event to parent component.
 // in this case it doesn't need to have preSavedFilter status at all
-const handleUpdate = (key: keyof CategoryFilters, value: string) => {
-  filters.addPreSavedFilter(categoryFilterName, key, value);
+const handleUpdate = (key: keyof AccountFilters, value: string) => {
+  filters.addPreSavedFilter(accountFilterName, key, value);
 };
 </script>
