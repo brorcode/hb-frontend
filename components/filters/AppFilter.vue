@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-100" @close="open = false">
+    <Dialog class="relative z-50" @close="open = false">
       <TransitionChild
         as="template"
         enter="ease-in-out duration-500"
@@ -51,7 +51,7 @@
                     </div>
                     <div class="flex flex-1 flex-col justify-between">
                       <div class="divide-y divide-gray-200 px-4 sm:px-6">
-                        <form class="space-y-6 pb-5 pt-6">
+                        <form class="pb-5 pt-6">
                           <slot />
                         </form>
                       </div>

@@ -82,6 +82,10 @@ export const useApi = () => {
     items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
   };
 
+  const fetchData = async (endpoint: string, body: Record<string, any>) => {
+    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
+  };
+
   const handleDeleteItem = async (endpoint: string, id: number) => {
     await apiFetch('DELETE', `${endpoint}/${id}`);
   };
@@ -91,6 +95,7 @@ export const useApi = () => {
     item,
     pending,
     fetchListData,
+    fetchData,
     handleDeleteItem,
     apiFetch
   };

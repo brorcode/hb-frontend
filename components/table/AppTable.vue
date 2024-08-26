@@ -12,7 +12,10 @@
             columnIndex === 0 ? 'pl-0' : ''
           ]"
         >
-          <div class="group inline-flex cursor-pointer" @click="handleSortingChange(column.field)">
+          <div
+            :class="['group inline-flex', (column.sortable ?? true) ? 'cursor-pointer' : '']"
+            @click="handleSortingChange(column)"
+          >
             {{ column.header }}
             <span
               v-if="column.sortable ?? true"
@@ -106,8 +109,13 @@ const sorting = reactive<Sorting>({
   direction: null
 });
 
-const handleSortingChange = (column: string) => {
-  if (sorting.column === column) {
+const handleSortingChange = (column: Column) => {
+  if (column.sortable === false) {
+    return;
+  }
+
+  const field = column.field;
+  if (sorting.column === field) {
     if (sorting.direction === 'ASC') {
       // If the clicked column is already sorted in DESC order, reset the sorting
       sorting.column = null;
@@ -118,7 +126,7 @@ const handleSortingChange = (column: string) => {
     }
   } else {
     // If a different column is clicked, reset the sorting
-    sorting.column = column;
+    sorting.column = field;
     sorting.direction = 'DESC';
   }
 

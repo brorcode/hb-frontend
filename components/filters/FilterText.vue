@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-4">
     <label
       :for="`filter-${filter.key}`"
       class="block text-sm font-medium leading-6 text-gray-900"
