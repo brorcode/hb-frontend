@@ -91,7 +91,7 @@
         :key="`badge-filter-${filter.key}`"
         class="inline-flex items-center px-2 py-1 mr-2 mb-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded"
       >
-        {{ filter.label }}: {{ filter.value }}
+        {{ displayFilter(filter) }}
         <button
           :data-testid="`remove-filter-${filter.key}-button`"
           type="button"
@@ -159,6 +159,30 @@ const filters = useFiltersStore();
 const emit = defineEmits(['apply-filters', 'clear-filters']);
 
 const open = ref(false);
+
+function displayFilter(filter: Filter) {
+  let value = '';
+
+  if (Array.isArray(filter.value) && filter.value.length > 0) {
+    value = filter.value
+      .map((item) => {
+        if (item instanceof Date) {
+          return formatDate(item);
+        }
+        // Multiselect has id and name
+        return item?.name ?? '???';
+      })
+      .join(', ');
+
+    return `${filter.label}: ${value}`;
+  }
+
+  if (filter.value instanceof Date) {
+    return `${filter.label}: ${formatDate(filter.value)}`;
+  }
+
+  return `${filter.label}: ${filter.value}`;
+}
 
 const clearPreSavedFilters = async () => {
   filters.clearPreSavedFilters(props.filterName);

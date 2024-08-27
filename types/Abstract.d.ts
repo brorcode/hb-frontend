@@ -67,6 +67,12 @@ type Column = {
   body?: fn;
 };
 
+type MultiSelect = MultiSelectOption[];
+type MultiSelectOption = {
+  id: number;
+  name: string;
+};
+
 type Filter = {
   key: string;
   value: any;

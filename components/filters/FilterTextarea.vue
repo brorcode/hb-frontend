@@ -1,10 +1,8 @@
 <template>
   <div class="mb-4">
-    <label
-      :for="`filter-${filter.key}`"
-      class="block text-sm font-medium leading-6 text-gray-900"
-      >{{ filter.label }}</label
-    >
+    <label :for="`filter-${filter.key}`" class="block text-sm font-medium leading-6 text-gray-900">
+      {{ filter.label }}
+    </label>
     <div class="mt-2">
       <textarea
         :id="`filter-${filter.key}`"

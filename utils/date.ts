@@ -1,4 +1,4 @@
-export const formatDate = (date: string) => {
+export const formatDate = (date: string, withTime: boolean = false) => {
   // Convert the string to a Date object
   const dateObj = new Date(date);
 
@@ -10,6 +10,11 @@ export const formatDate = (date: string) => {
   const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
   const seconds = String(dateObj.getUTCSeconds()).padStart(2, '0');
 
-  // Format the date and time according to the desired format
-  return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+  if (withTime) {
+    // Format the date and time according to the desired format
+    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+  }
+
+  // Format the date to the desired format
+  return `${day}-${month}-${year}`;
 };

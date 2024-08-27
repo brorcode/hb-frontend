@@ -12,7 +12,22 @@ const transactionFiltersInit: TransactionFilters = {
   amount: {
     key: 'amount',
     value: null,
-    label: 'amount'
+    label: 'Amount'
+  },
+  categories: {
+    key: 'categories',
+    value: [],
+    label: 'Categories'
+  },
+  createdAtAfter: {
+    key: 'createdAtAfter',
+    value: null,
+    label: 'Date After'
+  },
+  createdAtBefore: {
+    key: 'createdAtBefore',
+    value: null,
+    label: 'Date Before'
   }
 };
 
@@ -27,7 +42,13 @@ const transactionColumns: TransactionColumn[] = [
   },
   {
     field: 'amount',
-    header: 'Amount'
+    header: 'Amount',
+    body: (row: TransactionRow) => `${row.amount} ₽`
+  },
+  {
+    field: 'category',
+    header: 'Category',
+    sortable: false
   },
   {
     field: 'createdAt',

@@ -1,7 +1,22 @@
+@import '@vuepic/vue-datepicker/dist/main.css';
+@import "@vueform/multiselect/themes/default.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .z-100 {
     z-index: 100;
+}
+
+/*vue-datepicker*/
+.dp__theme_light {
+    --dp-primary-color: #4c51bf; /* This is the hex value for indigo-600 in Tailwind */
+}
+:root {
+    --dp-font-family: inherit;
+    --dp-font-size: 0.875rem;;
+}
+.dp__input {
+    line-height: 1.375rem;
 }
