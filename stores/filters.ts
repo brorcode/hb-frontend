@@ -62,8 +62,7 @@ export const useFiltersStore = defineStore('filters', {
       // Filter out the filters where the value is an empty string or null or empty array
       return Object.fromEntries(
         Object.entries(this.filters[filterName]).filter(
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          ([_, filter]) =>
+          ([, filter]) =>
             filter.value !== '' &&
             filter.value !== null &&
             !(Array.isArray(filter.value) && filter.value.length === 0)

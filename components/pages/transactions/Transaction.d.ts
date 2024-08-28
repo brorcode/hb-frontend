@@ -1,9 +1,10 @@
 type Transaction = {
   id: number;
   amount: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
+  category: RelationOption;
+  account: RelationOption;
+  created_at: string;
+  updated_at: string;
 };
 
 type TransactionGetResponse = BaseItemResponse<Transaction>;
@@ -21,10 +22,13 @@ type TransactionFilters = Filters<{
   id: number;
   amount: string;
   categories: MultiSelect;
-  createdAtAfter: Date;
-  createdAtBefore: Date;
+  accounts: MultiSelect;
+  created_at_after: Date;
+  created_at_before: Date;
 }>;
 
 type TransactionForm = Form<{
   amount: string;
+  category_id: number;
+  account_id: number;
 }>;

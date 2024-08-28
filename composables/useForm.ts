@@ -52,6 +52,14 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
 
   const updateForm = (data: Row) => {
     Object.entries(form).forEach(([key]) => {
+      const relationKey = form[key].relation_key;
+
+      if (relationKey !== undefined) {
+        form[key].relation_value = data[relationKey];
+        form[key].value = data[relationKey].id;
+        return;
+      }
+
       form[key].value = data[key];
     });
   };

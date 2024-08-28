@@ -11,25 +11,32 @@
       @update:model-value="handleUpdate(transactionFiltersInit.amount.key, $event)"
     />
     <FilterMultiselectSelect
+      :api-url="dictionaryCategoriesApiUrl"
       :filter="transactionFiltersInit.categories"
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.categories.key)"
       @update:model-value="handleUpdate(transactionFiltersInit.categories.key, $event)"
     />
-    <FilterDate
-      :filter="transactionFiltersInit.createdAtAfter"
-      :value="
-        filters.getFilterValue(transactionFilterName, transactionFiltersInit.createdAtAfter.key)
-      "
-      :max-date="filters.preSavedFilters[transactionFilterName]?.createdAtBefore?.value"
-      @update:model-value="handleUpdate(transactionFiltersInit.createdAtAfter.key, $event)"
+    <FilterMultiselectSelect
+      :api-url="dictionaryAccountsApiUrl"
+      :filter="transactionFiltersInit.accounts"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.accounts.key)"
+      @update:model-value="handleUpdate(transactionFiltersInit.accounts.key, $event)"
     />
     <FilterDate
-      :filter="transactionFiltersInit.createdAtBefore"
+      :filter="transactionFiltersInit.created_at_after"
       :value="
-        filters.getFilterValue(transactionFilterName, transactionFiltersInit.createdAtBefore.key)
+        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_after.key)
       "
-      :min-date="filters.preSavedFilters[transactionFilterName]?.createdAtAfter?.value"
-      @update:model-value="handleUpdate(transactionFiltersInit.createdAtBefore.key, $event)"
+      :max-date="filters.preSavedFilters[transactionFilterName]?.created_at_before?.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.created_at_after.key, $event)"
+    />
+    <FilterDate
+      :filter="transactionFiltersInit.created_at_before"
+      :value="
+        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_before.key)
+      "
+      :min-date="filters.preSavedFilters[transactionFilterName]?.created_at_after?.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.created_at_before.key, $event)"
     />
   </div>
 </template>
@@ -44,6 +51,7 @@ import {
 } from '~/components/pages/transactions/TransactionInit';
 import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
+import { dictionaryAccountsApiUrl, dictionaryCategoriesApiUrl } from '~/utils/dictionary';
 
 const filters = useFiltersStore();
 filters.initFilters(transactionFilterName, transactionFiltersInit);

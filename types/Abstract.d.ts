@@ -67,8 +67,8 @@ type Column = {
   body?: fn;
 };
 
-type MultiSelect = MultiSelectOption[];
-type MultiSelectOption = {
+type MultiSelect = RelationOption[];
+type RelationOption = {
   id: number;
   name: string;
 };
@@ -86,6 +86,8 @@ type Filters<T = Record<string, any>> = {
 type FormField = {
   key: string;
   value: any;
+  relation_key?: string;
+  relation_value?: RelationOption;
   label: string;
   errors: string[];
 };

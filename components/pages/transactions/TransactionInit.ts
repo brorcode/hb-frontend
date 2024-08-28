@@ -19,20 +19,41 @@ const transactionFiltersInit: TransactionFilters = {
     value: [],
     label: 'Categories'
   },
-  createdAtAfter: {
-    key: 'createdAtAfter',
+  accounts: {
+    key: 'accounts',
+    value: [],
+    label: 'Accounts'
+  },
+  created_at_after: {
+    key: 'created_at_after',
     value: null,
     label: 'Date After'
   },
-  createdAtBefore: {
-    key: 'createdAtBefore',
+  created_at_before: {
+    key: 'created_at_before',
     value: null,
     label: 'Date Before'
   }
 };
 
 const transactionFormInit: TransactionForm = {
-  amount: { key: 'amount', value: '', label: 'Amount', errors: [] }
+  amount: { key: 'amount', value: '', label: 'Amount', errors: [] },
+  category_id: {
+    key: 'category_id',
+    value: '',
+    relation_key: 'category',
+    relation_value: null,
+    label: 'Category',
+    errors: []
+  },
+  account_id: {
+    key: 'account_id',
+    value: '',
+    relation_key: 'account',
+    relation_value: null,
+    label: 'Account',
+    errors: []
+  }
 };
 
 const transactionColumns: TransactionColumn[] = [
@@ -48,17 +69,24 @@ const transactionColumns: TransactionColumn[] = [
   {
     field: 'category',
     header: 'Category',
-    sortable: false
+    sortable: false,
+    body: (row: TransactionRow) => row.category.name
   },
   {
-    field: 'createdAt',
+    field: 'account',
+    header: 'Account',
+    sortable: false,
+    body: (row: TransactionRow) => row.account.name
+  },
+  {
+    field: 'created_at',
     header: 'Created At',
-    body: (row: TransactionRow) => formatDate(row.createdAt)
+    body: (row: TransactionRow) => formatDate(row.created_at)
   },
   {
-    field: 'updatedAt',
+    field: 'updated_at',
     header: 'Updated At',
-    body: (row: TransactionRow) => formatDate(row.updatedAt)
+    body: (row: TransactionRow) => formatDate(row.updated_at)
   }
 ];
 
