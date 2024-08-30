@@ -10,8 +10,8 @@
     >
     <div class="mt-2">
       <Multiselect
-        :id="`filter-${formField.key}`"
-        :data-testid="`filter-${formField.key}`"
+        :id="`form-${formField.key}`"
+        :data-testid="`form-${formField.key}`"
         value-prop="id"
         label="name"
         :value="formField.relation_value"

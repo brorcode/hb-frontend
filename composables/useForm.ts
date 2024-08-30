@@ -5,7 +5,7 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
   const { apiFetch, pending } = useApi();
   const form = reactive(deepCopy(initialForm) as T);
 
-  const handleFieldUpdate = (key: keyof Form, value: string) => {
+  const handleFieldUpdate = (key: keyof Form, value: any) => {
     form[key].errors = [];
     form[key].value = value;
   };
@@ -20,7 +20,13 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
 
       const body = Object.fromEntries(
         Object.entries(form)
-          .filter(([, value]) => value.value) // filter out falsy values
+          .filter(([, value]) => {
+            if (typeof value.value === 'boolean') {
+              return true;
+            }
+            // filter out falsy values
+            return value.value !== undefined && value.value !== null && value.value !== '';
+          })
           .map(([key, value]) => [key, value.value])
       );
 

@@ -53,6 +53,17 @@ const transactionFormInit: TransactionForm = {
     relation_value: null,
     label: 'Account',
     errors: []
+  },
+  created_at: { key: 'created_at', value: null, label: 'Date', errors: [] },
+  is_debit: { key: 'is_debit', value: true, label: 'Расход?', errors: [] },
+  is_transfer: { key: 'is_transfer', value: false, label: 'Перевод?', errors: [] },
+  account_to: {
+    key: 'account_to',
+    value: '',
+    relation_key: 'account',
+    relation_value: null,
+    label: 'Account To',
+    errors: []
   }
 };
 
@@ -64,7 +75,12 @@ const transactionColumns: TransactionColumn[] = [
   {
     field: 'amount',
     header: 'Amount',
-    body: (row: TransactionRow) => `${row.amount} ₽`
+    body: (row: TransactionRow) => {
+      let amount = Number(row.amount);
+      amount = row.is_debit ? amount * -1 : amount;
+
+      return `${amount} ₽`;
+    }
   },
   {
     field: 'category',

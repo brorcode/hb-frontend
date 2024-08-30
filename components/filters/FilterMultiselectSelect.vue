@@ -6,7 +6,7 @@
     <div class="mt-2">
       <Multiselect
         :id="`filter-${filter.key}`"
-        v-model="selected"
+        :value="value"
         :data-testid="`filter-${filter.key}`"
         value-prop="id"
         label="name"
@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import Multiselect from '@vueform/multiselect';
 import { useApi } from '~/composables/useApi';
 import '@vueform/multiselect/themes/default.css';
@@ -42,12 +41,6 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue']);
 
 const { items, pending, fetchData } = useApi();
-
-const selected = ref([]);
-
-onMounted(() => {
-  selected.value = props.value;
-});
 
 const fetchItems = async (query: string) => {
   await fetchData(props.apiUrl, { q: query });

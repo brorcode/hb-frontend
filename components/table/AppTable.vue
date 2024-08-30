@@ -92,7 +92,8 @@ import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
 import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
 import AppPagination from '~/components/table/AppPagination.vue';
-import { ChevronUpIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
+import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid';
+import { defaultSorting } from '~/utils/constants';
 
 defineProps<{
   path: string;
@@ -104,10 +105,7 @@ defineProps<{
 
 const emit = defineEmits(['pageChange', 'applySorting', 'deleteItem']);
 
-const sorting = reactive<Sorting>({
-  column: null,
-  direction: null
-});
+const sorting = reactive<Sorting>(defaultSorting);
 
 const handleSortingChange = (column: Column) => {
   if (column.sortable === false) {

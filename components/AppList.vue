@@ -45,6 +45,7 @@ import { useFiltersStore } from '~/stores/filters';
 import { useApi } from '~/composables/useApi';
 import type { Component } from 'vue';
 import AppFilter from '~/components/filters/AppFilter.vue';
+import { defaultSorting } from '~/utils/constants';
 
 const props = defineProps<{
   title: string;
@@ -62,7 +63,7 @@ const currentPage = ref(1);
 const { items, pending, fetchListData, handleDeleteItem } = useApi();
 
 onMounted(() => {
-  fetchListData(props.apiUrl, currentPage, props.filterName);
+  fetchListData(props.apiUrl, currentPage, props.filterName, defaultSorting);
 });
 
 const handlePageChange = (newPage: number, sorting: Sorting) => {
@@ -92,6 +93,6 @@ const applySorting = (sorting: Sorting) => {
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilters(props.filterName, props.initFilters);
-  fetchListData(props.apiUrl, currentPage, props.filterName);
+  fetchListData(props.apiUrl, currentPage, props.filterName, defaultSorting);
 };
 </script>

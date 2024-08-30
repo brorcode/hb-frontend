@@ -31,4 +31,8 @@ type TransactionForm = Form<{
   amount: string;
   category_id: number;
   account_id: number;
+  created_at: Date;
+  is_debit: boolean;
+  is_transfer: boolean;
+  account_to: number;
 }>;
