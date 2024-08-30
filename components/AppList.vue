@@ -3,12 +3,11 @@
     <AppCard>
       <div class="flex justify-between items-center">
         <div>{{ title }}</div>
-        <div class="justify-end">
+        <div class="flex justify-end">
           <NuxtLink
-            :to="`${path}/create`"
-            class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="rounded bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
           >
-            Add {{ titleSingular }}
+            Import Transactions TODO
           </NuxtLink>
         </div>
       </div>
@@ -28,11 +27,13 @@
     <AppCard>
       <AppTable
         :path="path"
+        :title-singular="titleSingular"
         :loading="pending"
         :columns="columns"
         :per-page="perPage"
         :list-data="items?.data"
         :meta="items?.meta"
+        :table-actions="tableActions"
         @page-change="handlePageChange"
         @per-page-change="handlePerPageChange"
         @delete-item="handleDelete"
@@ -58,6 +59,7 @@ const props = defineProps<{
   filterName: string;
   initFilters: Filters;
   filtersComponent: Component;
+  tableActions?: TableAction[];
 }>();
 
 const filters = useFiltersStore();
@@ -85,6 +87,7 @@ const handleDelete = async (id: number) => {
     await fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
   } catch (err) {
     // TODO: handle error
+    console.log(err);
   }
 };
 

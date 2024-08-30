@@ -100,3 +100,10 @@ type Sorting = {
   column: string | null;
   direction: 'ASC' | 'DESC' | null;
 };
+
+type TableAction = {
+  action: (selectedItems: number[]) => void;
+  icon: Component;
+  title: string;
+  color?: string;
+};

@@ -8,6 +8,7 @@
     :filter-name="transactionFilterName"
     :filters-component="TransactionFilters"
     :init-filters="transactionFiltersInit"
+    :table-actions="transactionActions"
   >
   </AppList>
 </template>
@@ -20,4 +21,5 @@ import {
   transactionFiltersInit
 } from '~/components/pages/transactions/TransactionInit';
 import TransactionFilters from '~/components/pages/transactions/TransactionFilters.vue';
+import { transactionActions } from '~/components/pages/transactions/TransactionActions';
 </script>

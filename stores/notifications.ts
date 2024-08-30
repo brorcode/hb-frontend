@@ -17,20 +17,6 @@ export const useNotificationsStore = defineStore('notifications', {
     notifications: []
   }),
   actions: {
-    // addNotification(success: boolean, title: string, message: string) {
-    //   const notification: NotificationStore = {
-    //     id: this.notifications.length + 1,
-    //     show: true,
-    //     success,
-    //     title,
-    //     message
-    //   };
-    //   this.notifications.push(notification);
-    //
-    //   setTimeout(() => {
-    //     this.removeNotification(notification.id);
-    //   }, 3000);
-    // },
     addNotification(n?: ApiNotification) {
       const notification: NotificationStore = {
         id: this.notifications.length + 1,

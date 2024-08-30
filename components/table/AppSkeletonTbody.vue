@@ -1,6 +1,6 @@
 <template>
   <tbody class="divide-y divide-gray-200 bg-white animate-pulse">
-    <tr v-for="rowIndex in 10" :key="`skeleton-tbody-row-${rowIndex}`">
+    <tr v-for="rowIndex in rowsCount" :key="`skeleton-tbody-row-${rowIndex}`">
       <td
         v-for="columnIndex in columnsCount"
         :key="`skeleton-tbody-column-${columnIndex}`"
@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 defineProps<{
+  rowsCount: number;
   columnsCount: number;
 }>();
 </script>
