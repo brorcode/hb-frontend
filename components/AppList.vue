@@ -30,9 +30,11 @@
         :path="path"
         :loading="pending"
         :columns="columns"
+        :per-page="perPage"
         :list-data="items?.data"
         :meta="items?.meta"
         @page-change="handlePageChange"
+        @per-page-change="handlePerPageChange"
         @delete-item="handleDelete"
         @apply-sorting="applySorting"
       />
@@ -60,21 +62,27 @@ const props = defineProps<{
 
 const filters = useFiltersStore();
 const currentPage = ref(1);
+const perPage = ref(10);
 const { items, pending, fetchListData, handleDeleteItem } = useApi();
 
 onMounted(() => {
-  fetchListData(props.apiUrl, currentPage, props.filterName, defaultSorting);
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
 });
 
 const handlePageChange = (newPage: number, sorting: Sorting) => {
   currentPage.value = newPage;
-  fetchListData(props.apiUrl, currentPage, props.filterName, sorting);
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, sorting);
+};
+
+const handlePerPageChange = (newPerPage: number) => {
+  perPage.value = newPerPage;
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
 };
 
 const handleDelete = async (id: number) => {
   try {
     await handleDeleteItem(props.apiUrl, id);
-    await fetchListData(props.apiUrl, currentPage, props.filterName);
+    await fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
   } catch (err) {
     // TODO: handle error
   }
@@ -82,17 +90,17 @@ const handleDelete = async (id: number) => {
 
 const applyFilters = () => {
   currentPage.value = 1;
-  fetchListData(props.apiUrl, currentPage, props.filterName);
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
 };
 
 const applySorting = (sorting: Sorting) => {
   currentPage.value = 1;
-  fetchListData(props.apiUrl, currentPage, props.filterName, sorting);
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, sorting);
 };
 
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilters(props.filterName, props.initFilters);
-  fetchListData(props.apiUrl, currentPage, props.filterName, defaultSorting);
+  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
 };
 </script>

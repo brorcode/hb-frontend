@@ -77,14 +77,22 @@
               :to="`${path}/${row.id}/${pageMode.VIEW}`"
               ><EyeIcon class="h-5 w-5"
             /></NuxtLink>
-            <TrashIcon class="text-red-600 h-5 w-5 cursor-pointer" @click="deleteItem(row.id)" />
+            <TrashIcon
+              class="text-red-600 h-5 w-5 cursor-pointer"
+              @click="$emit('deleteItem', row.id)"
+            />
           </div>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <AppPagination :has-next-page="meta?.hasNextPage" @page-change="handlePageChange" />
+  <AppPagination
+    :per-page="perPage"
+    :has-next-page="meta?.hasNextPage"
+    @page-change="$emit('pageChange', $event, sorting)"
+    @per-page-change="$emit('perPageChange', $event)"
+  />
 </template>
 
 <script setup lang="ts">
@@ -99,11 +107,12 @@ defineProps<{
   path: string;
   loading: boolean;
   columns: Column[];
+  perPage: number;
   meta?: ResponseMeta;
   listData?: Row[];
 }>();
 
-const emit = defineEmits(['pageChange', 'applySorting', 'deleteItem']);
+const emit = defineEmits(['pageChange', 'perPageChange', 'applySorting', 'deleteItem']);
 
 const sorting = reactive<Sorting>(defaultSorting);
 
@@ -130,13 +139,5 @@ const handleSortingChange = (column: Column) => {
 
   // Emit the event with the new sorting parameters
   emit('applySorting', sorting);
-};
-
-const handlePageChange = (page: number) => {
-  emit('pageChange', page, sorting);
-};
-
-const deleteItem = (id: number) => {
-  emit('deleteItem', id);
 };
 </script>

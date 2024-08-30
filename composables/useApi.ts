@@ -13,7 +13,6 @@ export const useApi = () => {
   const pending = ref(false);
   const items = ref<BaseItemsResponse<Row> | null>(null);
   const item = ref<BaseItemResponse<Row> | null>(null);
-  const limit = ref(10);
 
   const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, any>) => {
     pending.value = true;
@@ -62,12 +61,13 @@ export const useApi = () => {
   const fetchListData = async (
     endpoint: string,
     currentPage: Ref<number>,
+    perPage: Ref<number>,
     filterName: string,
     sorting?: Sorting
   ) => {
     const body: any = {
       page: currentPage.value,
-      limit: limit.value
+      limit: perPage.value
     };
 
     if (sorting && sorting.column && sorting.direction) {
