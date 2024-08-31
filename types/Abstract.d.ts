@@ -33,13 +33,7 @@ type ResponseMeta = {
   hasNextPage: boolean;
 };
 
-interface ListData<T> {
-  items: T[];
-  isLastPage: boolean;
-}
-
 interface BaseItemsResponse<T> {
-  // data?: ListData<T>;
   data?: T[];
   meta?: ResponseMeta;
   error?: {
@@ -105,5 +99,5 @@ type TableAction = {
   action: (selectedItems: number[]) => void;
   icon: Component;
   title: string;
-  color?: string;
+  color?: 'red';
 };

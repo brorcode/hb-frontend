@@ -1,7 +1,13 @@
 <template>
   <div class="relative">
     <div class="flex items-center justify-between pt-4 pb-4">
-      <TableActions :table-actions="tableActions" :selected-rows="selectedRows" />
+      <div class="flex">
+        <TableActions
+          v-if="tableActions"
+          :table-actions="tableActions"
+          :selected-rows="selectedRows"
+        />
+      </div>
       <div class="flex justify-end">
         <NuxtLink
           :to="`${path}/create`"

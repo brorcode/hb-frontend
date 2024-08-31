@@ -1,6 +1,6 @@
 <template>
   <Menu as="div" class="relative inline-block text-left">
-    <div v-if="tableActions && selectedRows?.length > 0">
+    <div v-if="selectedRows?.length > 0">
       <MenuButton
         class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
       >
@@ -30,15 +30,15 @@
               href="#"
               :class="[
                 active
-                  ? `bg-${action.color ?? 'gray'}-100 text-${action.color ?? 'gray'}-900`
-                  : `text-${action.color ?? 'gray'}-700`,
+                  ? colorTextVariants[action.color ?? 'gray']
+                  : colorActiveTextVariants[action.color ?? 'gray'],
                 'group flex items-center px-4 py-2 text-sm'
               ]"
               @click="action.action(selectedRows)"
             >
               <component
                 :is="action.icon"
-                :class="`mr-3 h-5 w-5 text-${action.color ?? 'gray'}-400 group-hover:text-${action.color ?? 'gray'}-500`"
+                :class="`mr-3 h-5 w-5 ${colorIconVariants[action.color ?? 'gray']}`"
                 aria-hidden="true"
               />
               {{ action.title }}
@@ -58,4 +58,19 @@ defineProps<{
   selectedRows: number[];
   tableActions?: TableAction[];
 }>();
+
+const colorTextVariants = {
+  gray: 'bg-gray-100 text-gray-900',
+  red: 'bg-red-100 text-red-900'
+};
+
+const colorActiveTextVariants = {
+  gray: 'text-gray-700',
+  red: 'text-red-700'
+};
+
+const colorIconVariants = {
+  gray: 'text-gray-400 group-hover:text-gray-500',
+  red: 'text-red-400 group-hover:text-red-500'
+};
 </script>
