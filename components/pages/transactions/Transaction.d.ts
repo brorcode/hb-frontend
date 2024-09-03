@@ -1,6 +1,8 @@
 type Transaction = {
   id: number;
   amount: string;
+  is_debit: boolean;
+  is_transfer: boolean;
   category: RelationOption;
   account: RelationOption;
   created_at: string;
@@ -10,29 +12,27 @@ type Transaction = {
 type TransactionGetResponse = BaseItemResponse<Transaction>;
 type TransactionListResponse = BaseItemsResponse<Transaction>;
 
-type TransactionRow = {
-  field: keyof Transaction;
-} & Row;
+type TransactionRow = Row<Transaction>;
 
 type TransactionColumn = {
   field: keyof Transaction;
 } & Column;
 
 type TransactionFilters = Filters<{
-  id: number;
+  id: number | null;
   amount: string;
   categories: MultiSelect;
   accounts: MultiSelect;
-  created_at_after: Date;
-  created_at_before: Date;
+  created_at_after: Date | null;
+  created_at_before: Date | null;
 }>;
 
 type TransactionForm = Form<{
-  amount: string;
-  category_id: number;
-  account_id: number;
-  created_at: Date;
+  amount: number | null;
+  category_id: number | null;
+  account_id: number | null;
+  created_at: Date | null;
   is_debit: boolean;
   is_transfer: boolean;
-  account_to: number;
+  account_to: number | null;
 }>;

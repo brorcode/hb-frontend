@@ -6,8 +6,22 @@ export default defineNuxtConfig({
       apiUrl: process.env.API_URL,
       homeUrl: '/users',
       apiLoginUrl: 'api/v1/login',
-      apiLogoutUrl: 'api/v1/logout'
-    }
+      apiLogoutUrl: 'api/v1/logout',
+    },
+  },
+
+  typescript: {
+    typeCheck: true,
+  },
+
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: {
+        indent: 2,
+        semi: true,
+      },
+    },
   },
 
   devtools: { enabled: true },
@@ -16,11 +30,11 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {}
-    }
+      autoprefixer: {},
+    },
   },
 
   ssr: false,
-  modules: ['@nuxtjs/eslint-module', '@pinia/nuxt', '@nuxt/test-utils/module'],
-  compatibilityDate: '2024-08-09'
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxt/test-utils/module'],
+  compatibilityDate: '2024-08-09',
 });

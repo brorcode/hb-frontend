@@ -1,11 +1,12 @@
+import { reactive } from 'vue';
 import { deepCopy } from '~/utils/deepCopy';
 import { VALIDATION_ERROR_STATUS } from '~/constants/statusCodes';
 
-export function useForm<T extends Record<string, any>>(initialForm: T) {
+export function useForm<T, R = Row>(initialForm: Form<T>) {
   const { apiFetch, pending } = useApi();
-  const form = reactive(deepCopy(initialForm) as T);
+  const form = reactive(deepCopy(initialForm) as Form<T>) as Form<T>;
 
-  const handleFieldUpdate = (key: keyof Form, value: any) => {
+  const handleFieldUpdate = (key: keyof Form<T>, value: T[keyof T]) => {
     form[key].errors = [];
     form[key].value = value;
   };
@@ -13,7 +14,7 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
   const submit = async (
     endpoint: string,
     method: HttpMethod,
-    onSuccess?: (response: any) => void
+    onSuccess?: (response: BaseItemResponse<R>) => void,
   ) => {
     try {
       clearErrors();
@@ -21,23 +22,30 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
       const body = Object.fromEntries(
         Object.entries(form)
           .filter(([, value]) => {
-            if (typeof value.value === 'boolean') {
+            const field = value as FormField<T>;
+
+            if (typeof field.value === 'boolean') {
               return true;
             }
             // filter out falsy values
-            return value.value !== undefined && value.value !== null && value.value !== '';
+            return field.value !== undefined && field.value !== null && field.value !== '';
           })
-          .map(([key, value]) => [key, value.value])
+          .map(([key, value]) => {
+            const field = value as FormField<T>;
+
+            return [key, field.value];
+          }),
       );
 
-      const response = await apiFetch<T>(method, endpoint, body);
+      const response = await apiFetch<BaseItemResponse<Row>>(method, endpoint, body);
       if (response.data) {
         updateForm(response.data);
       }
       if (onSuccess) {
-        onSuccess(response);
+        onSuccess(response as BaseItemResponse<R>);
       }
-    } catch (error) {
+    }
+    catch (error) {
       handleError(error as ApiResponseError);
     }
   };
@@ -51,22 +59,24 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
   };
 
   const clearErrors = () => {
-    Object.values(form).forEach((field) => {
+    Object.values(form).forEach((item) => {
+      const field = item as FormField<T>;
       field.errors = [];
     });
   };
 
   const updateForm = (data: Row) => {
     Object.entries(form).forEach(([key]) => {
-      const relationKey = form[key].relation_key;
+      const formKey = key as keyof T;
+      const relationKey = form[formKey].relation_key;
 
       if (relationKey !== undefined) {
-        form[key].relation_value = data[relationKey];
-        form[key].value = data[relationKey].id;
+        form[formKey].relation_value = data[relationKey];
+        form[formKey].value = data[relationKey].id;
         return;
       }
 
-      form[key].value = data[key];
+      form[formKey].value = data[key];
     });
   };
 
@@ -80,8 +90,8 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
   const updateFormErrors = (errors: Record<string, string[]>) => {
     // Update errors based on the new errors object
     Object.entries(errors).forEach(([key, value]) => {
-      if (form[key as keyof UserForm]) {
-        form[key as keyof UserForm].errors = value;
+      if (form[key as keyof Form<T>]) {
+        form[key as keyof Form<T>].errors = value;
       }
     });
   };
@@ -91,6 +101,6 @@ export function useForm<T extends Record<string, any>>(initialForm: T) {
     pending,
     handleFieldUpdate,
     submit,
-    fetchItem
+    fetchItem,
   };
 }

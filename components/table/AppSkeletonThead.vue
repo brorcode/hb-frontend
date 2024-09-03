@@ -7,9 +7,12 @@
         scope="col"
         :class="['px-3 py-4', columnIndex === 0 ? 'pl-0' : '']"
       >
-        <div class="h-2 bg-slate-200 rounded"></div>
+        <div class="h-2 bg-slate-200 rounded" />
       </th>
-      <th scope="col" class="py-3.5 pl-3">
+      <th
+        scope="col"
+        class="py-3.5 pl-3"
+      >
         <span class="sr-only">Edit</span>
       </th>
     </tr>

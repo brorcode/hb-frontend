@@ -8,8 +8,7 @@
     :filter-name="accountFilterName"
     :filters-component="AccountFilters"
     :init-filters="accountFiltersInit"
-  >
-  </AppList>
+  />
 </template>
 
 <script setup lang="ts">
@@ -17,7 +16,7 @@ import {
   accountApiUrl,
   accountColumns,
   accountFilterName,
-  accountFiltersInit
+  accountFiltersInit,
 } from '~/components/pages/accounts/AccountInit';
 import AccountFilters from '~/components/pages/accounts/AccountFilters.vue';
 </script>

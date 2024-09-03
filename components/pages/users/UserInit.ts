@@ -7,44 +7,44 @@ const userFiltersInit: UserFilters = {
   id: {
     key: 'id',
     value: null,
-    label: 'ID'
+    label: 'ID',
   },
   name: {
     key: 'name',
-    value: null,
-    label: 'Name'
-  }
+    value: '',
+    label: 'Name',
+  },
 };
 
 const userFormInit: UserForm = {
   name: { key: 'name', value: '', label: 'Name', errors: [] },
   email: { key: 'email', value: '', label: 'Email', errors: [] },
-  password: { key: 'password', value: '', label: 'Password', errors: [] }
+  password: { key: 'password', value: '', label: 'Password', errors: [] },
 };
 
 const userColumns: UserColumn[] = [
   {
     field: 'id',
-    header: 'ID'
+    header: 'ID',
   },
   {
     field: 'name',
-    header: 'Name'
+    header: 'Name',
   },
   {
     field: 'email',
-    header: 'Email'
+    header: 'Email',
   },
   {
     field: 'createdAt',
     header: 'Created At',
-    body: (row: UserRow) => formatDate(row.createdAt)
+    body: (row: UserRow) => formatDate(row.createdAt),
   },
   {
     field: 'updatedAt',
     header: 'Updated At',
-    body: (row: UserRow) => formatDate(row.updatedAt)
-  }
+    body: (row: UserRow) => formatDate(row.updatedAt),
+  },
 ];
 
 export { userApiUrl, userFilterName, userFormInit, userFiltersInit, userColumns };

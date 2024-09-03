@@ -16,8 +16,8 @@ test.describe('Login Page', () => {
         message: 'Заполните форму правильно.',
         errors: {
           email: ['Поле email обязательно.'],
-          password: ['Поле пароль обязательно.']
-        }
+          password: ['Поле пароль обязательно.'],
+        },
       };
       await route.fulfill({ json, status: 422 });
     });
@@ -41,8 +41,8 @@ test.describe('Login Page', () => {
         name: 'XSRF-TOKEN',
         value: 'some_token',
         path: '/',
-        domain: '127.0.0.1'
-      }
+        domain: '127.0.0.1',
+      },
     ]);
 
     // Mock the API call before navigating
@@ -51,8 +51,10 @@ test.describe('Login Page', () => {
     });
     await page.route('*/**/api/v1/login', async (route) => {
       const json = {
-        name: 'Test',
-        email: 'test@test.test'
+        data: {
+          name: 'Test',
+          email: 'test@test.test',
+        },
       };
       await route.fulfill({ json });
     });
@@ -65,14 +67,14 @@ test.describe('Login Page', () => {
             name: 'Test User',
             email: 'test@test.test',
             createdAt: '2024-08-07T09:47:05.000000Z',
-            updatedAt: '2024-08-08T09:47:05.000000Z'
-          }
+            updatedAt: '2024-08-08T09:47:05.000000Z',
+          },
         ],
         meta: {
           perPage: 10,
           currentPage: 1,
-          hasNextPage: false
-        }
+          hasNextPage: false,
+        },
       };
       await route.fulfill({ json });
     });
@@ -86,7 +88,7 @@ test.describe('Login Page', () => {
 
     await expect(page).toHaveURL('/users');
     await expect(page.getByText('test@test.test')).toBeVisible();
-    await expect(page.getByText('07-08-2024 09:47:05')).toBeVisible();
-    await expect(page.getByText('08-08-2024 09:47:05')).toBeVisible();
+    await expect(page.getByText('07-08-2024')).toBeVisible();
+    await expect(page.getByText('08-08-2024')).toBeVisible();
   });
 });

@@ -1,20 +1,19 @@
 <template>
   <div class="sm:col-span-2">
     <label
-      :for="`form-${formField.key}`"
+      :for="`form-${fieldKey}`"
       :class="[
-        formField.errors.length ? 'text-red-800' : 'text-gray-900',
-        'block text-sm font-medium leading-6'
+        errors.length ? 'text-red-800' : 'text-gray-900',
+        'block text-sm font-medium leading-6',
       ]"
-      >{{ formField.label }}</label
-    >
+    >{{ label }}</label>
     <div class="mt-2">
       <Multiselect
-        :id="`form-${formField.key}`"
-        :data-testid="`form-${formField.key}`"
+        :id="`form-${fieldKey}`"
+        :data-testid="`form-${fieldKey}`"
         value-prop="id"
         label="name"
-        :value="formField.relation_value"
+        :value="relationValue"
         mode="single"
         placeholder="Поиск..."
         :filter-results="false"
@@ -26,11 +25,14 @@
         :object="true"
         :options="fetchItems"
         :loading="pending"
-        :class="[formField.errors.length ? 'multiselect-error' : '']"
+        :class="[errors.length ? 'multiselect-error' : '']"
         @change="updateValue"
       />
-      <p v-if="formField.errors.length" class="mt-1 text-xs text-red-600">
-        {{ formField.errors[0] }}
+      <p
+        v-if="errors.length"
+        class="mt-1 text-xs text-red-600"
+      >
+        {{ errors[0] }}
       </p>
     </div>
   </div>
@@ -43,7 +45,10 @@ import '@vueform/multiselect/themes/default.css';
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 const props = defineProps<{
-  formField: FormField;
+  label: string;
+  fieldKey: string;
+  relationValue?: RelationOption | null;
+  errors: string[];
   mode?: UpsertMode;
   apiUrl: string;
 }>();

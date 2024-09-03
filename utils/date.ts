@@ -1,6 +1,6 @@
-export const formatDate = (date: string, withTime: boolean = false) => {
+export const formatDate = (date: string | Date, withTime: boolean = false) => {
   // Convert the string to a Date object
-  const dateObj = new Date(date);
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
 
   // Extract the day, month, year, hours, minutes, and seconds
   const day = String(dateObj.getUTCDate()).padStart(2, '0');

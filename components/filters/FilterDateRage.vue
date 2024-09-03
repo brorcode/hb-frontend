@@ -1,15 +1,18 @@
 <template>
   <div class="mb-4">
-    <label :for="`filter-${filter.key}`" class="block text-sm font-medium leading-6 text-gray-900">
-      {{ filter.label }}
+    <label
+      :for="`filter-${filterKey}`"
+      class="block text-sm font-medium leading-6 text-gray-900"
+    >
+      {{ label }}
     </label>
     <div class="mt-2">
       <VueDatePicker
-        :id="`filter-${filter.key}`"
+        :id="`filter-${filterKey}`"
         v-model="dateRange"
-        :data-testid="`filter-${filter.key}`"
+        :data-testid="`filter-${filterKey}`"
         format="dd-MM-yyyy"
-        range
+        :range="true"
         :enable-time-picker="false"
         @update:model-value="updateValue"
       />
@@ -22,13 +25,14 @@ import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 
 const props = defineProps<{
-  filter: Filter;
+  label: string;
+  filterKey: string;
   value?: [Date, Date];
 }>();
 
 const emit = defineEmits(['update:modelValue']);
 
-const dateRange = ref(null);
+const dateRange = ref<[Date, Date]>();
 
 onMounted(() => {
   dateRange.value = props.value;

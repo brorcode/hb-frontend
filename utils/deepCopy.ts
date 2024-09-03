@@ -8,7 +8,7 @@ export const deepCopy = (obj: unknown): unknown => {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => deepCopy(item));
+    return obj.map(item => deepCopy(item));
   }
 
   const copy: { [key: string]: unknown } = {};

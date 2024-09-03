@@ -1,10 +1,10 @@
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import AppList from '~/components/AppList.vue';
 import { describe, expect, it, vi, afterEach } from 'vitest';
+import { fireEvent, screen } from '@testing-library/vue';
+import AppList from '~/components/AppList.vue';
 import { useFiltersStore } from '~/stores/filters';
 import { userColumns, userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
 import UserFilters from '~/components/pages/users/UserFilters.vue';
-import { fireEvent, screen } from '@testing-library/vue';
 import AppFilter from '~/components/filters/AppFilter.vue';
 
 mockNuxtImport('useApi', () => {
@@ -17,24 +17,24 @@ mockNuxtImport('useApi', () => {
           name: 'test1',
           email: 'test@email1.com',
           createdAt: '2024-08-08T09:47:05.000000Z',
-          updatedAt: '2024-08-08T09:47:05.000000Z'
+          updatedAt: '2024-08-08T09:47:05.000000Z',
         },
         {
           id: 2,
           name: 'test2',
           email: 'test@email2.com',
           createdAt: '2024-08-08T09:47:05.000000Z',
-          updatedAt: '2024-08-08T09:47:05.000000Z'
-        }
+          updatedAt: '2024-08-08T09:47:05.000000Z',
+        },
       ],
       meta: {
         perPage: 10,
         currentPage: 1,
-        hasNextPage: false
-      }
+        hasNextPage: false,
+      },
     },
     fetchListData: vi.fn(),
-    apiFetch: vi.fn()
+    apiFetch: vi.fn(),
   });
 });
 
@@ -49,7 +49,7 @@ describe('AppList', () => {
     const filters = useFiltersStore();
     filters.initFilters(userFilterName, userFiltersInit);
     filters.addPreSavedFilter(userFilterName, 'id', 1);
-    filters.addPreSavedFilter(userFilterName, 'name', 'test filter value');
+    filters.addPreSavedFilter(userFilterName, 'name', 'test filter value' as InputValue);
     filters.applyPreSavedFilters(userFilterName);
 
     const component = await mountSuspended(AppList, {
@@ -61,13 +61,13 @@ describe('AppList', () => {
         columns: userColumns,
         filterName: userFilterName,
         initFilters: userFiltersInit,
-        filtersComponent: UserFilters
-      }
+        filtersComponent: UserFilters,
+      },
     });
 
     expect(filters.getFilters(userFilterName)).toEqual({
       id: { key: 'id', value: 1, label: 'ID' },
-      name: { key: 'name', value: 'test filter value', label: 'Name' }
+      name: { key: 'name', value: 'test filter value', label: 'Name' },
     });
     expect(component.html()).toContain('ID: 1');
     expect(component.html()).toContain('Name: test filter value');
@@ -89,7 +89,7 @@ describe('AppList', () => {
     const filters = useFiltersStore();
     filters.initFilters(userFilterName, userFiltersInit);
     filters.addPreSavedFilter(userFilterName, 'id', 1);
-    filters.addPreSavedFilter(userFilterName, 'name', 'test filter value');
+    filters.addPreSavedFilter(userFilterName, 'name', 'test filter value' as InputValue);
     filters.applyPreSavedFilters(userFilterName);
 
     const component = await mountSuspended(AppList, {
@@ -101,13 +101,13 @@ describe('AppList', () => {
         columns: userColumns,
         filterName: userFilterName,
         initFilters: userFiltersInit,
-        filtersComponent: UserFilters
-      }
+        filtersComponent: UserFilters,
+      },
     });
 
     expect(filters.getFilters(userFilterName)).toEqual({
       id: { key: 'id', value: 1, label: 'ID' },
-      name: { key: 'name', value: 'test filter value', label: 'Name' }
+      name: { key: 'name', value: 'test filter value', label: 'Name' },
     });
     expect(component.html()).toContain('ID: 1');
     expect(component.html()).toContain('Name: test filter value');
@@ -118,14 +118,14 @@ describe('AppList', () => {
     const appFilters = component.findComponent(AppFilter);
     expect(appFilters.emitted('apply-filters')).toBeTruthy();
     expect(filters.getFilters(userFilterName)).toEqual({
-      name: { key: 'name', value: 'test filter value', label: 'Name' }
+      name: { key: 'name', value: 'test filter value', label: 'Name' },
     });
     expect(component.html()).not.toContain('ID: 1');
     expect(component.html()).toContain('Name: test filter value');
 
     // remove Name filter
     const removeNameFilterButton = component.find(
-      'button[data-testid="remove-filter-name-button"]'
+      'button[data-testid="remove-filter-name-button"]',
     );
     await removeNameFilterButton.trigger('click');
     expect(appFilters.emitted('apply-filters')).toBeTruthy();
@@ -147,8 +147,8 @@ describe('AppList', () => {
         columns: userColumns,
         filterName: userFilterName,
         initFilters: userFiltersInit,
-        filtersComponent: UserFilters
-      }
+        filtersComponent: UserFilters,
+      },
     });
 
     expect(filters.preSavedFilters[userFilterName]).toBeUndefined();
@@ -163,7 +163,7 @@ describe('AppList', () => {
 
     expect(filters.preSavedFilters[userFilterName]).toEqual({
       id: { key: 'id', value: 123, label: 'ID' },
-      name: { key: 'name', value: null, label: 'Name' }
+      name: { key: 'name', value: '', label: 'Name' },
     });
     expect(filters.getFilters(userFilterName)).toEqual({});
 
@@ -173,10 +173,10 @@ describe('AppList', () => {
 
     expect(filters.preSavedFilters[userFilterName]).toEqual({
       id: { key: 'id', value: 123, label: 'ID' },
-      name: { key: 'name', value: null, label: 'Name' }
+      name: { key: 'name', value: '', label: 'Name' },
     });
     expect(filters.getFilters(userFilterName)).toEqual({
-      id: { key: 'id', value: 123, label: 'ID' }
+      id: { key: 'id', value: 123, label: 'ID' },
     });
   });
 });

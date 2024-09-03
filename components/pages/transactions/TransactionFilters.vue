@@ -1,64 +1,67 @@
 <template>
   <div>
     <FilterInteger
-      :filter="transactionFiltersInit.id"
-      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.id.key)"
+      :label="transactionFiltersInit.id.label"
+      :filter-key="transactionFiltersInit.id.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.id.key) as typeof transactionFiltersInit.id.value"
       @update:model-value="handleUpdate(transactionFiltersInit.id.key, $event)"
     />
-    <FilterText
-      :filter="transactionFiltersInit.amount"
-      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.amount.key)"
+    <FilterMoney
+      :label="transactionFiltersInit.amount.label"
+      :filter-key="transactionFiltersInit.amount.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.amount.key) as typeof transactionFiltersInit.amount.value"
       @update:model-value="handleUpdate(transactionFiltersInit.amount.key, $event)"
     />
     <FilterMultiselectSelect
       :api-url="dictionaryCategoriesApiUrl"
-      :filter="transactionFiltersInit.categories"
-      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.categories.key)"
+      :label="transactionFiltersInit.categories.label"
+      :filter-key="transactionFiltersInit.categories.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.categories.key) as typeof transactionFiltersInit.categories.value"
       @update:model-value="handleUpdate(transactionFiltersInit.categories.key, $event)"
     />
     <FilterMultiselectSelect
       :api-url="dictionaryAccountsApiUrl"
-      :filter="transactionFiltersInit.accounts"
-      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.accounts.key)"
+      :label="transactionFiltersInit.accounts.label"
+      :filter-key="transactionFiltersInit.accounts.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.accounts.key) as typeof transactionFiltersInit.accounts.value"
       @update:model-value="handleUpdate(transactionFiltersInit.accounts.key, $event)"
     />
     <FilterDate
-      :filter="transactionFiltersInit.created_at_after"
+      :label="transactionFiltersInit.created_at_after.label"
+      :filter-key="transactionFiltersInit.created_at_after.key"
       :value="
-        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_after.key)
+        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_after.key) as typeof transactionFiltersInit.created_at_after.value
       "
-      :max-date="filters.preSavedFilters[transactionFilterName]?.created_at_before?.value"
+      :max-date="filters.preSavedFilters[transactionFilterName]?.created_at_before?.value as typeof transactionFiltersInit.created_at_before.value"
       @update:model-value="handleUpdate(transactionFiltersInit.created_at_after.key, $event)"
     />
     <FilterDate
-      :filter="transactionFiltersInit.created_at_before"
+      :label="transactionFiltersInit.created_at_before.label"
+      :filter-key="transactionFiltersInit.created_at_before.key"
       :value="
-        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_before.key)
+        filters.getFilterValue(transactionFilterName, transactionFiltersInit.created_at_before.key) as typeof transactionFiltersInit.created_at_before.value
       "
-      :min-date="filters.preSavedFilters[transactionFilterName]?.created_at_after?.value"
+      :min-date="filters.preSavedFilters[transactionFilterName]?.created_at_after?.value as typeof transactionFiltersInit.created_at_after.value"
       @update:model-value="handleUpdate(transactionFiltersInit.created_at_before.key, $event)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import FilterText from '~/components/filters/FilterText.vue';
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
-import {
-  transactionFilterName,
-  transactionFiltersInit
-} from '~/components/pages/transactions/TransactionInit';
+import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
 import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
 import { dictionaryAccountsApiUrl, dictionaryCategoriesApiUrl } from '~/utils/dictionary';
+import FilterMoney from '~/components/filters/FilterMoney.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(transactionFilterName, transactionFiltersInit);
 
 // todo it needs to refactor and send update filter as event to parent component.
 // in this case it doesn't need to have preSavedFilter status at all
-const handleUpdate = (key: keyof TransactionFilters, value: any) => {
+const handleUpdate = (key: keyof TransactionFilters, value: InputValue) => {
   filters.addPreSavedFilter(transactionFilterName, key, value);
 };
 </script>

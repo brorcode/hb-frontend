@@ -31,7 +31,7 @@
         :loading="pending"
         :columns="columns"
         :per-page="perPage"
-        :list-data="items?.data"
+        :list-data="items?.data ?? []"
         :meta="items?.meta"
         :table-actions="tableActions"
         @page-change="handlePageChange"
@@ -42,11 +42,12 @@
     </AppCard>
   </div>
 </template>
+
 <script setup lang="ts">
+import type { Component } from 'vue';
 import AppTable from '~/components/table/AppTable.vue';
 import { useFiltersStore } from '~/stores/filters';
 import { useApi } from '~/composables/useApi';
-import type { Component } from 'vue';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import { defaultSorting } from '~/utils/constants';
 
@@ -57,7 +58,7 @@ const props = defineProps<{
   apiUrl: string;
   columns: Column[];
   filterName: string;
-  initFilters: Filters;
+  initFilters: Filters<unknown>;
   filtersComponent: Component;
   tableActions?: TableAction[];
 }>();
@@ -85,7 +86,8 @@ const handleDelete = async (id: number) => {
   try {
     await handleDeleteItem(props.apiUrl, id);
     await fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
-  } catch (err) {
+  }
+  catch (err) {
     // TODO: handle error
     console.log(err);
   }

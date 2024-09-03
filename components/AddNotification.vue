@@ -13,7 +13,7 @@
         <div
           :class="[
             notification.success ? 'bg-green-50' : 'bg-red-50',
-            'pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5'
+            'pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5',
           ]"
         >
           <div class="p-4">
@@ -24,13 +24,17 @@
                   class="h-6 w-6 text-green-600"
                   aria-hidden="true"
                 />
-                <XCircleIcon v-else class="h-6 w-6 text-red-600" aria-hidden="true" />
+                <XCircleIcon
+                  v-else
+                  class="h-6 w-6 text-red-600"
+                  aria-hidden="true"
+                />
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
                 <p
                   :class="[
                     notification.success ? 'text-green-800' : 'text-red-800',
-                    'text-sm font-medium'
+                    'text-sm font-medium',
                   ]"
                 >
                   {{ notification.title }}
@@ -38,7 +42,7 @@
                 <p
                   :class="[
                     notification.success ? 'text-green-600' : 'text-red-600',
-                    'text-sm font-text-sm'
+                    'text-sm font-text-sm',
                   ]"
                 >
                   {{ notification.message }}
@@ -51,12 +55,15 @@
                     notification.success
                       ? 'text-green-600 hover:text-green-800'
                       : 'text-red-600 hover:text-red-800',
-                    'inline-flex rounded-md focus:outline-none'
+                    'inline-flex rounded-md focus:outline-none',
                   ]"
                   @click="store.removeNotification(notification.id)"
                 >
                   <span class="sr-only">Close</span>
-                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                  <XMarkIcon
+                    class="h-5 w-5"
+                    aria-hidden="true"
+                  />
                 </button>
               </div>
             </div>

@@ -1,20 +1,29 @@
 <template>
   <FormGrid>
     <FormText
+      :label="form.name.label"
+      :field-key="form.name.key"
+      :errors="form.name.errors"
+      :value="form.name.value"
       :mode="mode"
-      :form-field="form.name"
       @update:model-value="handleFieldUpdate(form.name.key, $event)"
     />
     <FormText
       :mode="mode"
+      :label="form.email.label"
+      :field-key="form.email.key"
+      :errors="form.email.errors"
+      :value="form.email.value"
       type="email"
-      :form-field="form.email"
       @update:model-value="handleFieldUpdate(form.email.key, $event)"
     />
     <FormText
       :mode="mode"
+      :label="form.password.label"
+      :field-key="form.password.key"
+      :errors="form.password.errors"
+      :value="form.password.value"
       type="password"
-      :form-field="form.password"
       @update:model-value="handleFieldUpdate(form.password.key, $event)"
     />
   </FormGrid>
@@ -28,6 +37,6 @@ import type { UpsertMode } from '~/utils/pageMode';
 defineProps<{
   form: UserForm;
   mode?: UpsertMode;
-  handleFieldUpdate: (key: keyof UserForm, value: any) => void;
+  handleFieldUpdate: (key: keyof UserForm, value: InputValue) => void;
 }>();
 </script>

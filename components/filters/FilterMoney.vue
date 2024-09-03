@@ -7,12 +7,15 @@
       {{ label }}
     </label>
     <div class="mt-2">
-      <textarea
+      <input
         :id="`filter-${filterKey}`"
+        type="number"
+        step="0.01"
+        min="0.01"
         :value="value"
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         @input="updateValue"
-      />
+      >
     </div>
   </div>
 </template>
@@ -21,12 +24,12 @@
 defineProps<{
   label: string;
   filterKey: string;
-  value: string | null;
+  value: number | null;
 }>();
 const emit = defineEmits(['update:modelValue']);
 
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:modelValue', target.value);
+  emit('update:modelValue', parseFloat(target.value));
 };
 </script>

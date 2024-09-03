@@ -4,12 +4,12 @@ export const transactionActions: TableAction[] = [
   {
     action: (selectedItems: number[]) => console.log('addTag', selectedItems),
     icon: SquaresPlusIcon,
-    title: 'Добавить тег'
+    title: 'Добавить тег',
   },
   {
     action: (selectedItems: number[]) => console.log('delete', selectedItems),
     icon: TrashIcon,
     title: 'Удалить',
-    color: 'red'
-  }
+    color: 'red',
+  },
 ];

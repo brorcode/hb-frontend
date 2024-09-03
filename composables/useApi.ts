@@ -1,9 +1,16 @@
+import type { Ref } from 'vue';
 import { useFiltersStore } from '~/stores/filters';
 import { useNotificationsStore } from '~/stores/notifications';
-import type { Ref } from 'vue';
 import { useCookie } from '#app';
 import { usePersistentState } from '~/composables/usePersistentState';
 import { UNAUTHENTICATED_STATUSES } from '~/constants/statusCodes';
+
+type ListDataRequestBody = {
+  page: number;
+  limit: number;
+  sorting?: Sorting;
+  filters?: { [p: string]: Filter<Record<string, InputValue>, string> };
+};
 
 export const useApi = () => {
   const config = useRuntimeConfig();
@@ -14,7 +21,7 @@ export const useApi = () => {
   const items = ref<BaseItemsResponse<Row> | null>(null);
   const item = ref<BaseItemResponse<Row> | null>(null);
 
-  const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, any>) => {
+  const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, unknown>) => {
     pending.value = true;
 
     try {
@@ -22,8 +29,8 @@ export const useApi = () => {
         method,
         body: body,
         headers: {
-          Accept: 'application/json',
-          'X-XSRF-TOKEN': useCookie('XSRF-TOKEN').value || ''
+          'Accept': 'application/json',
+          'X-XSRF-TOKEN': useCookie('XSRF-TOKEN').value || '',
         },
         credentials: 'include',
         baseURL: config.public.apiUrl,
@@ -33,7 +40,7 @@ export const useApi = () => {
             if (response._data?.message) {
               notifications.addNotification({
                 type: 'success',
-                message: response._data.message
+                message: response._data.message,
               } as ApiNotification);
             }
           }
@@ -45,15 +52,17 @@ export const useApi = () => {
             setUser(null);
             navigateTo(config.public.apiLoginUrl, { replace: true });
           }
-        }
+        },
       });
-    } catch (e) {
+    }
+    catch (e) {
       const error = e as ApiResponseError;
       notifications.addNotification({
-        message: error.response?._data.message
+        message: error.response?._data.message,
       } as ApiNotification);
       throw e;
-    } finally {
+    }
+    finally {
       pending.value = false;
     }
   };
@@ -63,11 +72,11 @@ export const useApi = () => {
     currentPage: Ref<number>,
     perPage: Ref<number>,
     filterName: string,
-    sorting?: Sorting
+    sorting?: Sorting,
   ) => {
-    const body: any = {
+    const body: ListDataRequestBody = {
       page: currentPage.value,
-      limit: perPage.value
+      limit: perPage.value,
     };
 
     if (sorting && sorting.column && sorting.direction) {
@@ -82,7 +91,7 @@ export const useApi = () => {
     items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
   };
 
-  const fetchData = async (endpoint: string, body: Record<string, any>) => {
+  const fetchData = async (endpoint: string, body: Record<string, unknown>) => {
     items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
   };
 
@@ -97,6 +106,6 @@ export const useApi = () => {
     fetchListData,
     fetchData,
     handleDeleteItem,
-    apiFetch
+    apiFetch,
   };
 };

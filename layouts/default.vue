@@ -1,7 +1,13 @@
 <template>
   <div>
-    <TransitionRoot as="template" :show="sidebarOpen">
-      <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
+    <TransitionRoot
+      as="template"
+      :show="sidebarOpen"
+    >
+      <Dialog
+        class="relative z-50 lg:hidden"
+        @close="sidebarOpen = false"
+      >
         <TransitionChild
           as="template"
           enter="transition-opacity ease-linear duration-300"
@@ -35,9 +41,16 @@
                 leave-to="opacity-0"
               >
                 <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-                  <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
+                  <button
+                    type="button"
+                    class="-m-2.5 p-2.5"
+                    @click="sidebarOpen = false"
+                  >
                     <span class="sr-only">Close sidebar</span>
-                    <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                    <XMarkIcon
+                      class="h-6 w-6 text-white"
+                      aria-hidden="true"
+                    />
                   </button>
                 </div>
               </TransitionChild>
@@ -65,15 +78,28 @@
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
-          <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+          <Bars3Icon
+            class="h-6 w-6"
+            aria-hidden="true"
+          />
         </button>
 
         <!-- Separator -->
-        <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
+        <div
+          class="h-6 w-px bg-gray-900/10 lg:hidden"
+          aria-hidden="true"
+        />
 
         <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <form class="relative flex flex-1" action="#" method="GET">
-            <label for="search-field" class="sr-only">Search</label>
+          <form
+            class="relative flex flex-1"
+            action="#"
+            method="GET"
+          >
+            <label
+              for="search-field"
+              class="sr-only"
+            >Search</label>
             <MagnifyingGlassIcon
               class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
               aria-hidden="true"
@@ -84,33 +110,50 @@
               placeholder="Search..."
               type="search"
               name="search"
-            />
+            >
           </form>
           <div class="flex items-center gap-x-4 lg:gap-x-6">
-            <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+            <button
+              type="button"
+              class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
+            >
               <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
+              <BellIcon
+                class="h-6 w-6"
+                aria-hidden="true"
+              />
             </button>
 
             <!-- Separator -->
-            <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true" />
+            <div
+              class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+              aria-hidden="true"
+            />
 
             <!-- Profile dropdown -->
-            <Menu as="div" class="relative">
-              <MenuButton id="user-menu" class="-m-1.5 flex items-center p-1.5">
+            <Menu
+              as="div"
+              class="relative"
+            >
+              <MenuButton
+                id="user-menu"
+                class="-m-1.5 flex items-center p-1.5"
+              >
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full bg-gray-50"
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   alt=""
-                />
+                >
                 <span class="hidden lg:flex lg:items-center">
                   <span
                     class="ml-4 text-sm font-semibold leading-6 text-gray-900"
                     aria-hidden="true"
-                    >{{ user?.name }}</span
-                  >
-                  <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  >{{ user?.name }}</span>
+                  <ChevronDownIcon
+                    class="ml-2 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </span>
               </MenuButton>
               <transition
@@ -124,18 +167,21 @@
                 <MenuItems
                   class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
                 >
-                  <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                  <MenuItem
+                    v-for="item in userNavigation"
+                    :key="item.name"
+                    v-slot="{ active }"
+                  >
                     <NuxtLink
                       :to="item.href"
                       :class="[
                         active ? 'bg-gray-50' : '',
-                        'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
+                        'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer',
                       ]"
                       @click.prevent="
                         typeof item.clickEvent === 'function' ? item.clickEvent() : undefined
                       "
-                      >{{ item.name }}</NuxtLink
-                    >
+                    >{{ item.name }}</NuxtLink>
                   </MenuItem>
                 </MenuItems>
               </transition>
@@ -163,7 +209,7 @@ import {
   MenuItem,
   MenuItems,
   TransitionChild,
-  TransitionRoot
+  TransitionRoot,
 } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
@@ -183,8 +229,8 @@ const userNavigation = [
       await apiFetch<User>('POST', config.public.apiLogoutUrl);
       setUser(null);
       navigateTo(config.public.apiLoginUrl, { replace: true });
-    }
-  }
+    },
+  },
 ];
 
 const sidebarOpen = ref(false);

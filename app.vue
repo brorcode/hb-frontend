@@ -8,6 +8,7 @@
     <AddNotification />
   </div>
 </template>
+
 <script setup lang="ts">
 import AddNotification from '~/components/AddNotification.vue';
 </script>

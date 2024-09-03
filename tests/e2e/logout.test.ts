@@ -22,14 +22,14 @@ test.describe('Logout Page', () => {
             name: 'Test User',
             email: 'test@test.test',
             createdAt: '2024-08-07T09:47:05.000000Z',
-            updatedAt: '2024-08-08T09:47:05.000000Z'
-          }
+            updatedAt: '2024-08-08T09:47:05.000000Z',
+          },
         ],
         meta: {
           perPage: 10,
           currentPage: 1,
-          hasNextPage: false
-        }
+          hasNextPage: false,
+        },
       };
       await route.fulfill({ json });
     });
@@ -39,8 +39,8 @@ test.describe('Logout Page', () => {
         name: 'XSRF-TOKEN',
         value: 'some_token',
         path: '/',
-        domain: '127.0.0.1'
-      }
+        domain: '127.0.0.1',
+      },
     ]);
 
     // Mock the API call before navigating

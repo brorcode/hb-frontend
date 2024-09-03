@@ -9,8 +9,7 @@
     :filters-component="TransactionFilters"
     :init-filters="transactionFiltersInit"
     :table-actions="transactionActions"
-  >
-  </AppList>
+  />
 </template>
 
 <script setup lang="ts">
@@ -18,7 +17,7 @@ import {
   transactionApiUrl,
   transactionColumns,
   transactionFilterName,
-  transactionFiltersInit
+  transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
 import TransactionFilters from '~/components/pages/transactions/TransactionFilters.vue';
 import { transactionActions } from '~/components/pages/transactions/TransactionActions';

@@ -6,7 +6,10 @@
         class="inline-flex items-center border-t-2 border-transparent pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         @click="changePage(currentPage - 1)"
       >
-        <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <ArrowLongLeftIcon
+          class="mr-3 h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
         Previous
       </button>
     </div>
@@ -14,7 +17,7 @@
       <Multiselect
         v-model="perPage"
         :classes="{
-          singleLabel: 'w-full text-center'
+          singleLabel: 'w-full text-center',
         }"
         :can-clear="false"
         :options="[10, 20, 50, 100]"
@@ -29,7 +32,10 @@
         @click="changePage(currentPage + 1)"
       >
         Next
-        <ArrowLongRightIcon class="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <ArrowLongRightIcon
+          class="ml-3 h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
       </button>
     </div>
   </nav>

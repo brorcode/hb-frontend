@@ -9,11 +9,7 @@ type ApiResponseError = {
   };
 };
 
-type BaseRow = {
-  id: number;
-};
-
-type Row<T = object> = BaseRow & T & { [key: string]: any };
+type Row<T = object> = T & { [key: string]: typeof T[keyof T] };
 
 interface ErrorDetails {
   [key: string]: string[];
@@ -67,27 +63,25 @@ type RelationOption = {
   name: string;
 };
 
-type Filter = {
-  key: string;
-  value: any;
+type Filter<T = Record<string, InputValue>, K extends keyof T = keyof T> = {
+  key: keyof T;
+  value: T[K];
   label: string;
 };
-
-type Filters<T = Record<string, any>> = {
-  [P in keyof T]: Overwrite<Filter, { value: T[P] }>;
+type Filters<T = Record<string, InputValue>> = {
+  [K in keyof T]: Filter<T, K>;
 };
 
-type FormField = {
-  key: string;
-  value: any;
+type FormField<T = Record<string, InputValue>, K extends keyof T = keyof T> = {
+  key: keyof T;
+  value: T[K];
   relation_key?: string;
-  relation_value?: RelationOption;
+  relation_value?: RelationOption | null;
   label: string;
   errors: string[];
 };
-
-type Form<T = Record<string, any>> = {
-  [P in keyof T]: Overwrite<FormField, { value: T[P] }>;
+type Form<T = Record<string, InputValue>> = {
+  [K in keyof T]: FormField<T, K>;
 };
 
 type Sorting = {
@@ -101,3 +95,21 @@ type TableAction = {
   title: string;
   color?: 'red';
 };
+
+type InputText = string;
+type InputNumber = number;
+type InputCheckbox = boolean;
+type InputDate = Date;
+type InputDateRange = [Date, Date];
+type InputSelect = RelationOption;
+type InputMultiSelect = RelationOption[];
+
+type InputValue =
+  InputText |
+  InputNumber |
+  InputCheckbox |
+  InputDate |
+  InputDateRange |
+  InputSelect |
+  InputMultiSelect |
+  null;

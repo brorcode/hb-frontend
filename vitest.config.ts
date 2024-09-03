@@ -5,11 +5,11 @@ export default defineVitestConfig({
     environment: 'nuxt',
     globals: true,
     coverage: {
-      reporter: ['text']
+      reporter: ['text'],
     },
     include: [
       '**/tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-      '**/tests/integration/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'
-    ]
-  }
+      '**/tests/integration/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
+    ],
+  },
 });

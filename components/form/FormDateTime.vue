@@ -1,27 +1,29 @@
 <template>
   <div class="sm:col-span-2">
     <label
-      :for="`form-${formField.key}`"
+      :for="`form-${fieldKey}`"
       :class="[
-        formField.errors.length ? 'text-red-800' : 'text-gray-900',
-        'block text-sm font-medium leading-6'
+        errors.length ? 'text-red-800' : 'text-gray-900',
+        'block text-sm font-medium leading-6',
       ]"
-      >{{ formField.label }}</label
-    >
+    >{{ label }}</label>
     <div class="mt-2">
       <VueDatePicker
-        :id="`form-${formField.key}`"
-        :model-value="formField.value"
-        :data-testid="`form-${formField.key}`"
+        :id="`form-${fieldKey}`"
+        :model-value="value"
+        :data-testid="`form-${fieldKey}`"
         format="dd-MM-yyyy HH:mm:ss"
-        enable-time-picker
-        time-picker-inline
+        :enable-time-picker="true"
+        :time-picker-inline="true"
         :disabled="mode === pageMode.VIEW"
-        :class="[formField.errors.length ? 'datepicker-error' : '']"
+        :class="[errors.length ? 'datepicker-error' : '']"
         @update:model-value="updateValue"
       />
-      <p v-if="formField.errors.length" class="mt-1 text-xs text-red-600">
-        {{ formField.errors[0] }}
+      <p
+        v-if="errors.length"
+        class="mt-1 text-xs text-red-600"
+      >
+        {{ errors[0] }}
       </p>
     </div>
   </div>
@@ -32,7 +34,10 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
-  formField: FormField;
+  label: string;
+  fieldKey: string;
+  value: Date | null;
+  errors: string[];
   mode?: UpsertMode;
 }>();
 

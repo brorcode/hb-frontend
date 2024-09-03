@@ -1,11 +1,17 @@
 <template>
-  <Menu as="div" class="relative inline-block text-left">
+  <Menu
+    as="div"
+    class="relative inline-block text-left"
+  >
     <div v-if="selectedRows?.length > 0">
       <MenuButton
         class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
       >
         Selected: {{ selectedRows?.length }}
-        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <ChevronDownIcon
+          class="-mr-1 h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
       </MenuButton>
     </div>
 
@@ -32,7 +38,7 @@
                 active
                   ? colorTextVariants[action.color ?? 'gray']
                   : colorActiveTextVariants[action.color ?? 'gray'],
-                'group flex items-center px-4 py-2 text-sm'
+                'group flex items-center px-4 py-2 text-sm',
               ]"
               @click="action.action(selectedRows)"
             >
@@ -61,16 +67,16 @@ defineProps<{
 
 const colorTextVariants = {
   gray: 'bg-gray-100 text-gray-900',
-  red: 'bg-red-100 text-red-900'
+  red: 'bg-red-100 text-red-900',
 };
 
 const colorActiveTextVariants = {
   gray: 'text-gray-700',
-  red: 'text-red-700'
+  red: 'text-red-700',
 };
 
 const colorIconVariants = {
   gray: 'text-gray-400 group-hover:text-gray-500',
-  red: 'text-red-400 group-hover:text-red-500'
+  red: 'text-red-400 group-hover:text-red-500',
 };
 </script>

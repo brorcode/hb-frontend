@@ -8,16 +8,14 @@ type Category = {
 type CategoryGetResponse = BaseItemResponse<Category>;
 type CategoryListResponse = BaseItemsResponse<Category>;
 
-type CategoryRow = {
-  field: keyof Category;
-} & Row;
+type CategoryRow = Row<Category>;
 
 type CategoryColumn = {
   field: keyof Category;
 } & Column;
 
 type CategoryFilters = Filters<{
-  id: number;
+  id: number | null;
   name: string;
 }>;
 

@@ -1,6 +1,12 @@
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-50" @close="open = false">
+  <TransitionRoot
+    as="template"
+    :show="open"
+  >
+    <Dialog
+      class="relative z-50"
+      @close="open = false"
+    >
       <TransitionChild
         as="template"
         enter="ease-in-out duration-500"
@@ -30,9 +36,9 @@
                   <div class="h-0 flex-1 overflow-y-auto">
                     <div class="bg-indigo-700 px-4 py-6 sm:px-6">
                       <div class="flex items-center justify-between">
-                        <DialogTitle class="text-base font-semibold leading-6 text-white"
-                          >Filters</DialogTitle
-                        >
+                        <DialogTitle class="text-base font-semibold leading-6 text-white">
+                          Filters
+                        </DialogTitle>
                         <div class="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -41,12 +47,17 @@
                           >
                             <span class="absolute -inset-2.5" />
                             <span class="sr-only">Close panel</span>
-                            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                            <XMarkIcon
+                              class="h-6 w-6"
+                              aria-hidden="true"
+                            />
                           </button>
                         </div>
                       </div>
                       <div class="mt-1">
-                        <p class="text-sm text-indigo-300">Filter items</p>
+                        <p class="text-sm text-indigo-300">
+                          Filter items
+                        </p>
                       </div>
                     </div>
                     <div class="flex flex-1 flex-col justify-between">

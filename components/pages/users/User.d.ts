@@ -9,16 +9,14 @@ type User = {
 type UserGetResponse = BaseItemResponse<User>;
 type UserListResponse = BaseItemsResponse<User>;
 
-type UserRow = {
-  field: keyof User;
-} & Row;
+type UserRow = Row<User>;
 
 type UserColumn = {
   field: keyof User;
 } & Column;
 
 type UserFilters = Filters<{
-  id: number;
+  id: number | null;
   name: string;
 }>;
 

@@ -12,6 +12,6 @@
 import TransactionForm from '~/components/pages/transactions/TransactionForm.vue';
 import {
   transactionApiUrl,
-  transactionFormInit
+  transactionFormInit,
 } from '~/components/pages/transactions/TransactionInit';
 </script>

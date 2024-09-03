@@ -7,38 +7,38 @@ const categoryFiltersInit: CategoryFilters = {
   id: {
     key: 'id',
     value: null,
-    label: 'ID'
+    label: 'ID',
   },
   name: {
     key: 'name',
-    value: null,
-    label: 'Name'
-  }
+    value: '',
+    label: 'Name',
+  },
 };
 
 const categoryFormInit: CategoryForm = {
-  name: { key: 'name', value: '', label: 'Name', errors: [] }
+  name: { key: 'name', value: '', label: 'Name', errors: [] },
 };
 
 const categoryColumns: CategoryColumn[] = [
   {
     field: 'id',
-    header: 'ID'
+    header: 'ID',
   },
   {
     field: 'name',
-    header: 'Name'
+    header: 'Name',
   },
   {
     field: 'createdAt',
     header: 'Created At',
-    body: (row: CategoryRow) => formatDate(row.createdAt)
+    body: (row: CategoryRow) => formatDate(row.createdAt),
   },
   {
     field: 'updatedAt',
     header: 'Updated At',
-    body: (row: CategoryRow) => formatDate(row.updatedAt)
-  }
+    body: (row: CategoryRow) => formatDate(row.updatedAt),
+  },
 ];
 
 export {
@@ -46,5 +46,5 @@ export {
   categoryFilterName,
   categoryFormInit,
   categoryFiltersInit,
-  categoryColumns
+  categoryColumns,
 };

@@ -1,13 +1,13 @@
 <template>
   <div class="mb-4">
     <div class="block text-sm font-medium leading-6 text-gray-900">
-      {{ filter.label }}
+      {{ label }}
     </div>
     <div class="mt-2">
       <Multiselect
-        :id="`filter-${filter.key}`"
+        :id="`filter-${filterKey}`"
         :value="value"
-        :data-testid="`filter-${filter.key}`"
+        :data-testid="`filter-${filterKey}`"
         value-prop="id"
         label="name"
         mode="tags"
@@ -33,7 +33,8 @@ import { useApi } from '~/composables/useApi';
 import '@vueform/multiselect/themes/default.css';
 
 const props = defineProps<{
-  filter: Filter;
+  label: string;
+  filterKey: string;
   value: number[];
   apiUrl: string;
 }>();

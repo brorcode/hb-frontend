@@ -8,7 +8,7 @@ export default defineConfig<ConfigOptions>({
   reporter: 'dot',
   use: {
     nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url))
-    }
-  }
+      rootDir: fileURLToPath(new URL('.', import.meta.url)),
+    },
+  },
 });

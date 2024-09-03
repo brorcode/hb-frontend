@@ -1,21 +1,20 @@
 <template>
   <div class="sm:col-span-2">
     <label
-      :for="`form-${formField.key}`"
+      :for="`form-${fieldKey}`"
       :class="[
-        formField.errors.length ? 'text-red-800' : 'text-gray-900',
-        'block text-sm font-medium leading-6'
+        errors.length ? 'text-red-800' : 'text-gray-900',
+        'block text-sm font-medium leading-6',
       ]"
-      >{{ formField.label }}</label
-    >
+    >{{ label }}</label>
     <div class="mt-2">
       <Switch
-        :id="`form-${formField.key}`"
+        :id="`form-${fieldKey}`"
         v-model="enabled"
-        :data-testid="`form-${formField.key}`"
+        :data-testid="`form-${fieldKey}`"
         :class="[
           enabled ? 'bg-indigo-600' : 'bg-gray-200',
-          'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2'
+          'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2',
         ]"
         @update:model-value="updateValue"
       >
@@ -24,12 +23,15 @@
           aria-hidden="true"
           :class="[
             enabled ? 'translate-x-5' : 'translate-x-0',
-            'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
+            'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
           ]"
         />
       </Switch>
-      <p v-if="formField.errors.length" class="mt-1 text-xs text-red-600">
-        {{ formField.errors[0] }}
+      <p
+        v-if="errors.length"
+        class="mt-1 text-xs text-red-600"
+      >
+        {{ errors[0] }}
       </p>
     </div>
   </div>
@@ -40,17 +42,20 @@ import { Switch } from '@headlessui/vue';
 import type { UpsertMode } from '~/utils/pageMode';
 
 const props = defineProps<{
-  formField: FormField;
+  label: string;
+  fieldKey: string;
+  value: boolean;
+  errors: string[];
   mode?: UpsertMode;
 }>();
 
-const enabled = ref(props.formField.value);
+const enabled = ref(props.value);
 
 watch(
-  () => props.formField.value,
+  () => props.value,
   (newValue) => {
     enabled.value = newValue;
-  }
+  },
 );
 
 const emit = defineEmits(['update:modelValue']);

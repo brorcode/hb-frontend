@@ -7,70 +7,70 @@ const transactionFiltersInit: TransactionFilters = {
   id: {
     key: 'id',
     value: null,
-    label: 'ID'
+    label: 'ID',
   },
   amount: {
     key: 'amount',
-    value: null,
-    label: 'Amount'
+    value: '',
+    label: 'Amount',
   },
   categories: {
     key: 'categories',
     value: [],
-    label: 'Categories'
+    label: 'Categories',
   },
   accounts: {
     key: 'accounts',
     value: [],
-    label: 'Accounts'
+    label: 'Accounts',
   },
   created_at_after: {
     key: 'created_at_after',
     value: null,
-    label: 'Date After'
+    label: 'Date After',
   },
   created_at_before: {
     key: 'created_at_before',
     value: null,
-    label: 'Date Before'
-  }
+    label: 'Date Before',
+  },
 };
 
 const transactionFormInit: TransactionForm = {
-  amount: { key: 'amount', value: '', label: 'Amount', errors: [] },
+  amount: { key: 'amount', value: null, label: 'Amount', errors: [] },
   category_id: {
     key: 'category_id',
-    value: '',
+    value: null,
     relation_key: 'category',
     relation_value: null,
     label: 'Category',
-    errors: []
+    errors: [],
   },
   account_id: {
     key: 'account_id',
-    value: '',
+    value: null,
     relation_key: 'account',
     relation_value: null,
     label: 'Account',
-    errors: []
+    errors: [],
   },
   created_at: { key: 'created_at', value: null, label: 'Date', errors: [] },
   is_debit: { key: 'is_debit', value: true, label: 'Расход?', errors: [] },
   is_transfer: { key: 'is_transfer', value: false, label: 'Перевод?', errors: [] },
   account_to: {
     key: 'account_to',
-    value: '',
+    value: null,
     relation_key: 'account',
     relation_value: null,
     label: 'Account To',
-    errors: []
-  }
+    errors: [],
+  },
 };
 
 const transactionColumns: TransactionColumn[] = [
   {
     field: 'id',
-    header: 'ID'
+    header: 'ID',
   },
   {
     field: 'amount',
@@ -80,30 +80,30 @@ const transactionColumns: TransactionColumn[] = [
       amount = row.is_debit ? amount * -1 : amount;
 
       return `${amount} ₽`;
-    }
+    },
   },
   {
     field: 'category',
     header: 'Category',
     sortable: false,
-    body: (row: TransactionRow) => row.category.name
+    body: (row: TransactionRow) => row.category.name,
   },
   {
     field: 'account',
     header: 'Account',
     sortable: false,
-    body: (row: TransactionRow) => row.account.name
+    body: (row: TransactionRow) => row.account.name,
   },
   {
     field: 'created_at',
     header: 'Created At',
-    body: (row: TransactionRow) => formatDate(row.created_at)
+    body: (row: TransactionRow) => formatDate(row.created_at),
   },
   {
     field: 'updated_at',
     header: 'Updated At',
-    body: (row: TransactionRow) => formatDate(row.updated_at)
-  }
+    body: (row: TransactionRow) => formatDate(row.updated_at),
+  },
 ];
 
 export {
@@ -111,5 +111,5 @@ export {
   transactionFilterName,
   transactionFormInit,
   transactionFiltersInit,
-  transactionColumns
+  transactionColumns,
 };

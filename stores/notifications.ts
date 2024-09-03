@@ -14,7 +14,7 @@ interface NotificationsState {
 
 export const useNotificationsStore = defineStore('notifications', {
   state: (): NotificationsState => ({
-    notifications: []
+    notifications: [],
   }),
   actions: {
     addNotification(n?: ApiNotification) {
@@ -23,7 +23,7 @@ export const useNotificationsStore = defineStore('notifications', {
         show: true,
         success: n?.type === 'success',
         title: n?.title || n?.type === 'success' ? 'Удачно' : 'Ошибка',
-        message: n?.message || 'Что-то пошло не так'
+        message: n?.message || 'Что-то пошло не так',
       };
       this.notifications.push(notification);
 
@@ -32,10 +32,10 @@ export const useNotificationsStore = defineStore('notifications', {
       }, 3000);
     },
     removeNotification(id: number) {
-      const index = this.notifications.findIndex((n) => n.id === id);
+      const index = this.notifications.findIndex(n => n.id === id);
       if (index !== -1) {
         this.notifications.splice(index, 1);
       }
-    }
-  }
+    },
+  },
 });

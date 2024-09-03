@@ -13,10 +13,10 @@ interface FiltersState {
 export const useFiltersStore = defineStore('filters', {
   state: (): FiltersState => ({
     filters: {},
-    preSavedFilters: {}
+    preSavedFilters: {},
   }),
   actions: {
-    initFilters(filterName: string, filters: Filters) {
+    initFilters(filterName: string, filters: Filters<unknown>) {
       if (!this.filters[filterName]) {
         this.filters[filterName] = deepCopy(filters) as Record<string, Filter>;
       }
@@ -28,10 +28,10 @@ export const useFiltersStore = defineStore('filters', {
       this.filters[filterName] = deepCopy(filters) as Record<string, Filter>;
       this.preSavedFilters[filterName] = deepCopy(filters) as Record<string, Filter>;
     },
-    addPreSavedFilter(filterName: string, key: string, value: any) {
+    addPreSavedFilter(filterName: string, key: string, value: InputValue) {
       this.preSavedFilters[filterName][key].value = value;
     },
-    removeFilter(filterName: string, key: string, value: string) {
+    removeFilter(filterName: string, key: string, value: InputValue) {
       this.filters[filterName][key].value = value;
       this.preSavedFilters[filterName][key].value = value;
     },
@@ -63,11 +63,11 @@ export const useFiltersStore = defineStore('filters', {
       return Object.fromEntries(
         Object.entries(this.filters[filterName]).filter(
           ([, filter]) =>
-            filter.value !== '' &&
-            filter.value !== null &&
-            !(Array.isArray(filter.value) && filter.value.length === 0)
-        )
+            filter.value !== ''
+            && filter.value !== null
+            && !(Array.isArray(filter.value) && filter.value.length === 0),
+        ),
       );
-    }
-  }
+    },
+  },
 });

@@ -8,19 +8,23 @@ type Account = {
 type AccountGetResponse = BaseItemResponse<Account>;
 type AccountListResponse = BaseItemsResponse<Account>;
 
-type AccountRow = {
-  field: keyof Account;
-} & Row;
+// type AccountRow = {
+//   field: keyof Account;
+// } & Row;
+
+type AccountRow = Row<Account>;
 
 type AccountColumn = {
   field: keyof Account;
 } & Column;
 
-type AccountFilters = Filters<{
-  id: number;
+type AccountFilterFields = {
+  id: number | null;
   name: string;
-}>;
+};
+type AccountFilters = Filters<AccountFilterFields>;
 
-type AccountForm = Form<{
+type AccountFormFields = {
   name: string;
-}>;
+};
+type AccountForm = Form<AccountFormFields>;
