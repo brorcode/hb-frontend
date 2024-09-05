@@ -5,6 +5,7 @@ import { useApi } from '~/composables/useApi';
 
 export const transactionActions = (): TableAction[] => {
   const modal = useModalStore();
+  const list = useListStore();
   const tagId = ref();
   const errors = ref<string[]>([]);
 
@@ -45,6 +46,7 @@ export const transactionActions = (): TableAction[] => {
 
             if (!errors.value.length) {
               modal.hideModal();
+              list.needRefresh(true);
             }
           },
           actionText: 'Добавить',

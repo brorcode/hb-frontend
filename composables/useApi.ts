@@ -1,4 +1,3 @@
-import type { Ref } from 'vue';
 import { useFiltersStore } from '~/stores/filters';
 import { useNotificationsStore } from '~/stores/notifications';
 import { useCookie } from '#app';
@@ -15,6 +14,7 @@ type ListDataRequestBody = {
 export const useApi = () => {
   const config = useRuntimeConfig();
   const notifications = useNotificationsStore();
+  const list = useListStore();
   const [, setUser] = usePersistentState<User>('user');
   const filters = useFiltersStore();
   const pending = ref(false);
@@ -69,14 +69,14 @@ export const useApi = () => {
 
   const fetchListData = async (
     endpoint: string,
-    currentPage: Ref<number>,
-    perPage: Ref<number>,
+    currentPage: number,
+    perPage: number,
     filterName: string,
     sorting?: Sorting,
   ) => {
     const body: ListDataRequestBody = {
-      page: currentPage.value,
-      limit: perPage.value,
+      page: currentPage,
+      limit: perPage,
     };
 
     if (sorting && sorting.column && sorting.direction) {
@@ -88,7 +88,10 @@ export const useApi = () => {
       body.filters = filtersData;
     }
 
-    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
+    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body).finally(() => {
+      list.needResetSelectedRows(true);
+      list.needRefresh(false);
+    });
   };
 
   const fetchData = async (endpoint: string, body: Record<string, unknown>) => {

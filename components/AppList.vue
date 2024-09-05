@@ -46,7 +46,6 @@
 <script setup lang="ts">
 import type { Component } from 'vue';
 import AppTable from '~/components/table/AppTable.vue';
-import { useFiltersStore } from '~/stores/filters';
 import { useApi } from '~/composables/useApi';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import { defaultSorting } from '~/utils/constants';
@@ -64,29 +63,38 @@ const props = defineProps<{
   tableActions?: TableAction[];
 }>();
 
+const config = useRuntimeConfig();
 const filters = useFiltersStore();
+const list = useListStore();
 const currentPage = ref(1);
-const perPage = ref(10);
+const perPage = ref(config.public.perPage);
+const sorting = reactive<Sorting>(defaultSorting);
 const { items, pending, fetchListData, handleDeleteItem } = useApi();
 
 onMounted(() => {
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
+  fetchListData(props.apiUrl, currentPage.value, perPage.value, props.filterName, defaultSorting);
 });
 
-const handlePageChange = (newPage: number, sorting: Sorting) => {
+watch(() => list.refresh, refresh => refresh && refreshList());
+
+const refreshList = () => {
+  fetchListData(props.apiUrl, currentPage.value, perPage.value, props.filterName, sorting);
+};
+
+const handlePageChange = (newPage: number) => {
   currentPage.value = newPage;
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, sorting);
+  refreshList();
 };
 
 const handlePerPageChange = (newPerPage: number) => {
   perPage.value = newPerPage;
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
+  refreshList();
 };
 
 const handleDelete = async (id: number) => {
   try {
     await handleDeleteItem(props.apiUrl, id);
-    await fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
+    refreshList();
   }
   catch (err) {
     // TODO: handle error
@@ -96,17 +104,19 @@ const handleDelete = async (id: number) => {
 
 const applyFilters = () => {
   currentPage.value = 1;
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName);
+  refreshList();
 };
 
-const applySorting = (sorting: Sorting) => {
+const applySorting = (values: Sorting) => {
   currentPage.value = 1;
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, sorting);
+  sorting.column = values.column;
+  sorting.direction = values.direction;
+  refreshList();
 };
 
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilters(props.filterName, props.initFilters);
-  fetchListData(props.apiUrl, currentPage, perPage, props.filterName, defaultSorting);
+  refreshList();
 };
 </script>

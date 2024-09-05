@@ -42,10 +42,7 @@
               v-for="(column, columnIndex) in columns"
               :key="`thead-column-${columnIndex}-${column.field}`"
               scope="col"
-              :class="[
-                'px-3 py-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap',
-                columnIndex === 0 ? 'pl-0' : '',
-              ]"
+              class="px-3 py-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap"
             >
               <div
                 :class="['group inline-flex', (column.sortable ?? true) ? 'cursor-pointer' : '']"
@@ -79,7 +76,7 @@
             </th>
             <th
               scope="col"
-              class="relative px-3 py-4 pr-0 text-sm font-semibold text-gray-900 text-right"
+              class="relative px-3 py-4 text-sm font-semibold text-gray-900 text-right"
             >
               <span class="sr-only">Edit</span>
             </th>
@@ -126,14 +123,11 @@
             <td
               v-for="(column, columnIndex) in columns"
               :key="`tbody-column-${columnIndex}-${column.field}`"
-              :class="[
-                'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
-                columnIndex === 0 ? 'pl-0' : '',
-              ]"
+              class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
             >
               {{ column.body ? column.body(row) : (row[column.field] ?? 'N/A') }}
             </td>
-            <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
+            <td class="relative whitespace-nowrap px-3 py-4 text-right text-sm font-medium">
               <div class="space-x-2 flex justify-end">
                 <NuxtLink
                   class="text-indigo-600 hover:text-indigo-900"
@@ -184,9 +178,13 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(['pageChange', 'perPageChange', 'applySorting', 'deleteItem']);
+const list = useListStore();
 
 const sorting = reactive<Sorting>(defaultSorting);
 const selectedRows = ref<number[]>([]);
+
+watch(() => list.resetSelectedRows, reset => reset && clearSelectedRows());
+
 const indeterminate = computed(
   () => selectedRows.value.length > 0 && selectedRows.value.length < props.listData.length,
 );
@@ -220,7 +218,7 @@ const handleSortingChange = (column: Column) => {
 };
 
 const handlePageChange = (page: number) => {
-  emit('pageChange', page, sorting);
+  emit('pageChange', page);
   clearSelectedRows();
 };
 
@@ -234,11 +232,13 @@ const deleteItem = (id: number) => {
   clearSelectedRows();
 };
 
-const clearSelectedRows = () => (selectedRows.value = []);
+const clearSelectedRows = () => {
+  selectedRows.value = [];
+  list.needResetSelectedRows(false);
+};
 
 const handleAllRowsClick = (event: Event) => {
   const target = event.target as HTMLInputElement;
-
   selectedRows.value = target.checked ? props.listData.map(row => row.id) : [];
 };
 </script>
