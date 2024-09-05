@@ -36,8 +36,7 @@ export const transactionActions = (): TableAction[] => {
           action: async () => {
             modal.pending = true;
             errors.value = [];
-            const response = await handleListAction('/api/v1/tags/attach', {
-              tag_id: tagId.value,
+            const response = await handleListAction(`/api/v1/tags/${tagId.value}/transactions/attach`, {
               selected_items: selectedItems,
             }).finally(() => modal.pending = false);
 
