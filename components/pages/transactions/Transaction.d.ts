@@ -20,7 +20,7 @@ type TransactionColumn = {
 
 type TransactionFilters = Filters<{
   id: number | null;
-  amount: string;
+  amount: number | null;
   categories: MultiSelect;
   accounts: MultiSelect;
   created_at_after: Date | null;

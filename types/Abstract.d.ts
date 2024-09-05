@@ -4,6 +4,7 @@ type ApiResponseError = {
     status: number;
     _data: {
       message: string;
+      // todo errors we send not always??? it needs to check API responses to have one style for all
       errors: Record<string, string[]>;
     };
   };
@@ -29,6 +30,7 @@ type ResponseMeta = {
   hasNextPage: boolean;
 };
 
+// TODO check if error sends from server
 interface BaseItemsResponse<T> {
   data?: T[];
   meta?: ResponseMeta;
@@ -40,6 +42,7 @@ interface BaseItemsResponse<T> {
   notification?: ApiNotification;
 }
 
+// TODO check if error sends from server
 interface BaseItemResponse<T> {
   data?: T;
   error?: {

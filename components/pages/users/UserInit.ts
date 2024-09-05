@@ -36,14 +36,14 @@ const userColumns: UserColumn[] = [
     header: 'Email',
   },
   {
-    field: 'createdAt',
+    field: 'created_at',
     header: 'Created At',
-    body: (row: UserRow) => formatDate(row.createdAt),
+    body: (row: UserRow) => formatDate(row.created_at),
   },
   {
-    field: 'updatedAt',
+    field: 'updated_at',
     header: 'Updated At',
-    body: (row: UserRow) => formatDate(row.updatedAt),
+    body: (row: UserRow) => formatDate(row.updated_at),
   },
 ];
 

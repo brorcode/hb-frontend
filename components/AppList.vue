@@ -50,6 +50,7 @@ import { useFiltersStore } from '~/stores/filters';
 import { useApi } from '~/composables/useApi';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import { defaultSorting } from '~/utils/constants';
+import AppCard from '~/components/AppCard.vue';
 
 const props = defineProps<{
   title: string;

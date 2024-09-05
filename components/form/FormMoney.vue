@@ -50,6 +50,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:modelValue', parseFloat(target.value));
+  const result = parseInt(target.value);
+  emit('update:modelValue', !isNaN(result) ? result : null);
 };
 </script>

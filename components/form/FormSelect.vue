@@ -1,6 +1,7 @@
 <template>
   <div class="sm:col-span-2">
     <label
+      v-if="label"
       :for="`form-${fieldKey}`"
       :class="[
         errors.length ? 'text-red-800' : 'text-gray-900',
@@ -20,7 +21,7 @@
         :min-chars="1"
         :resolve-on-load="true"
         :delay="300"
-        :disabled="mode === pageMode.VIEW"
+        :disabled="mode === pageMode.VIEW || disabled"
         :searchable="true"
         :object="true"
         :options="fetchItems"
@@ -45,11 +46,12 @@ import '@vueform/multiselect/themes/default.css';
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 const props = defineProps<{
-  label: string;
+  label?: string;
   fieldKey: string;
   relationValue?: RelationOption | null;
   errors: string[];
   mode?: UpsertMode;
+  disabled?: boolean;
   apiUrl: string;
 }>();
 

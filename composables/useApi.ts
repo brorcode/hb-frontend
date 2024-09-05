@@ -99,6 +99,15 @@ export const useApi = () => {
     await apiFetch('DELETE', `${endpoint}/${id}`);
   };
 
+  const handleListAction = async (endpoint: string, body: Record<string, unknown>) => {
+    try {
+      return await apiFetch('POST', endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
+  };
+
   return {
     items,
     item,
@@ -107,5 +116,6 @@ export const useApi = () => {
     fetchData,
     handleDeleteItem,
     apiFetch,
+    handleListAction,
   };
 };

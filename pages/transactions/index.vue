@@ -8,7 +8,7 @@
     :filter-name="transactionFilterName"
     :filters-component="TransactionFilters"
     :init-filters="transactionFiltersInit"
-    :table-actions="transactionActions"
+    :table-actions="transactionActions()"
   />
 </template>
 

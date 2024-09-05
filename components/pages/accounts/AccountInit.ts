@@ -30,14 +30,14 @@ const accountColumns: AccountColumn[] = [
     header: 'Name',
   },
   {
-    field: 'createdAt',
+    field: 'created_at',
     header: 'Created At',
-    body: (row: AccountRow) => formatDate(row.createdAt),
+    body: (row: AccountRow) => formatDate(row.created_at),
   },
   {
-    field: 'updatedAt',
+    field: 'updated_at',
     header: 'Updated At',
-    body: (row: AccountRow) => formatDate(row.updatedAt),
+    body: (row: AccountRow) => formatDate(row.updated_at),
   },
 ];
 

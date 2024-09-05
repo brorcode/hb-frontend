@@ -1,8 +1,8 @@
 type Category = {
   id: number;
   name: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 };
 
 type CategoryGetResponse = BaseItemResponse<Category>;

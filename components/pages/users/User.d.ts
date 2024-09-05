@@ -2,8 +2,8 @@ type User = {
   id: number;
   name: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 };
 
 type UserGetResponse = BaseItemResponse<User>;

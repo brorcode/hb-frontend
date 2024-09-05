@@ -20,6 +20,7 @@
           :value="form.email.value"
           :errors="form.email.errors"
           type="email"
+          autocomplete="username"
           @update:model-value="handleFieldUpdate(form.email.key, $event)"
         />
         <FormText
@@ -28,6 +29,7 @@
           :value="form.password.value"
           :errors="form.password.errors"
           type="password"
+          autocomplete="current-password"
           @update:model-value="handleFieldUpdate(form.password.key, $event)"
         />
       </div>

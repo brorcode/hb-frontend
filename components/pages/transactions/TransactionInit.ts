@@ -11,7 +11,7 @@ const transactionFiltersInit: TransactionFilters = {
   },
   amount: {
     key: 'amount',
-    value: '',
+    value: null,
     label: 'Amount',
   },
   categories: {

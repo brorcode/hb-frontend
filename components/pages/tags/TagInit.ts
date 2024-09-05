@@ -1,9 +1,9 @@
 import { formatDate } from '~/utils/date';
 
-const categoryFilterName = 'categoryFilter';
-const categoryApiUrl = '/api/v1/categories';
+const tagFilterName = 'tagFilter';
+const tagApiUrl = '/api/v1/tags';
 
-const categoryFiltersInit: CategoryFilters = {
+const tagFiltersInit: TagFilters = {
   id: {
     key: 'id',
     value: null,
@@ -16,11 +16,11 @@ const categoryFiltersInit: CategoryFilters = {
   },
 };
 
-const categoryFormInit: CategoryForm = {
+const tagFormInit: TagForm = {
   name: { key: 'name', value: '', label: 'Name', errors: [] },
 };
 
-const categoryColumns: CategoryColumn[] = [
+const tagColumns: TagColumn[] = [
   {
     field: 'id',
     header: 'ID',
@@ -32,19 +32,13 @@ const categoryColumns: CategoryColumn[] = [
   {
     field: 'created_at',
     header: 'Created At',
-    body: (row: CategoryRow) => formatDate(row.created_at),
+    body: (row: TagRow) => formatDate(row.created_at),
   },
   {
     field: 'updated_at',
     header: 'Updated At',
-    body: (row: CategoryRow) => formatDate(row.updated_at),
+    body: (row: TagRow) => formatDate(row.updated_at),
   },
 ];
 
-export {
-  categoryApiUrl,
-  categoryFilterName,
-  categoryFormInit,
-  categoryFiltersInit,
-  categoryColumns,
-};
+export { tagApiUrl, tagFilterName, tagFormInit, tagFiltersInit, tagColumns };

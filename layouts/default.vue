@@ -228,7 +228,7 @@ const userNavigation = [
     clickEvent: async () => {
       await apiFetch<User>('POST', config.public.apiLogoutUrl);
       setUser(null);
-      navigateTo(config.public.apiLoginUrl, { replace: true });
+      navigateTo('/login', { replace: true });
     },
   },
 ];

@@ -14,6 +14,7 @@
         :type="type ?? 'text'"
         :readonly="mode === pageMode.VIEW"
         :value="value"
+        :autocomplete="autocomplete"
         :class="[
           errors.length
             ? 'bg-red-50 placeholder:text-red-400 text-red-900 ring-red-300 focus:ring-red-600 ring-inset focus:ring-2 focus:ring-inset'
@@ -42,6 +43,7 @@ defineProps<{
   fieldKey: string;
   value: string;
   errors: string[];
+  autocomplete?: string;
   type?: 'text' | 'number' | 'email' | 'password';
   mode?: UpsertMode;
 }>();

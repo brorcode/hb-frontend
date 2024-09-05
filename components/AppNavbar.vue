@@ -93,6 +93,7 @@ const navigation = [
   { name: 'Categories', href: '/categories', icon: FolderIcon },
   { name: 'Accounts', href: '/accounts', icon: FolderIcon },
   { name: 'Транзакции', href: '/transactions', icon: FolderIcon },
+  { name: 'Tags', href: '/tags', icon: FolderIcon },
   { name: 'Calendar', href: '#', icon: CalendarIcon },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon },
   { name: 'Reports', href: '#', icon: ChartPieIcon },

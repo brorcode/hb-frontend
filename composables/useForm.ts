@@ -75,8 +75,9 @@ export function useForm<T, R = Row>(initialForm: Form<T>) {
         form[formKey].value = data[relationKey].id;
         return;
       }
-
-      form[formKey].value = data[key];
+      if (data[key] !== undefined) {
+        form[formKey].value = data[key];
+      }
     });
   };
 
