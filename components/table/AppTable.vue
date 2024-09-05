@@ -18,139 +18,141 @@
       </div>
     </div>
 
-    <table class="min-w-full divide-y divide-gray-300">
-      <AppSkeletonThead
-        v-if="loading"
-        :columns="columns"
-      />
-      <thead v-else>
-        <tr>
-          <th
-            v-if="tableActions"
-            scope="col"
-            class="relative px-7 sm:w-12 sm:px-6"
-          >
-            <input
-              type="checkbox"
-              class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              :checked="indeterminate || selectedRows.length === listData.length"
-              @change="handleAllRowsClick"
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-300">
+        <AppSkeletonThead
+          v-if="loading"
+          :columns="columns"
+        />
+        <thead v-else>
+          <tr>
+            <th
+              v-if="tableActions"
+              scope="col"
+              class="relative px-7 sm:w-12 sm:px-6"
             >
-          </th>
-          <th
-            v-for="(column, columnIndex) in columns"
-            :key="`thead-column-${columnIndex}-${column.field}`"
-            scope="col"
-            :class="[
-              'px-3 py-4 text-left text-sm font-semibold text-gray-900',
-              columnIndex === 0 ? 'pl-0' : '',
-            ]"
-          >
-            <div
-              :class="['group inline-flex', (column.sortable ?? true) ? 'cursor-pointer' : '']"
-              @click="handleSortingChange(column)"
-            >
-              {{ column.header }}
-              <span
-                v-if="column.sortable ?? true"
-                :class="[
-                  'ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200',
-                  sorting.column === column.field ? 'bg-gray-200' : '',
-                ]"
+              <input
+                type="checkbox"
+                class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                :checked="indeterminate || selectedRows.length === listData.length"
+                @change="handleAllRowsClick"
               >
-                <ChevronUpIcon
-                  v-if="sorting.column === column.field && sorting.direction === 'ASC'"
-                  class="h-5 w-5"
-                  aria-hidden="true"
-                />
-                <ChevronDownIcon
-                  v-else-if="sorting.column === column.field && sorting.direction === 'DESC'"
-                  class="h-5 w-5"
-                  aria-hidden="true"
-                />
-                <ChevronUpDownIcon
-                  v-else
-                  class="h-5 w-5"
-                  aria-hidden="true"
-                />
-              </span>
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="relative px-3 py-4 pr-0 text-sm font-semibold text-gray-900 text-right"
-          >
-            <span class="sr-only">Edit</span>
-          </th>
-        </tr>
-      </thead>
-
-      <AppSkeletonTbody
-        v-if="loading"
-        :columns-count="columns.length"
-        :rows-count="perPage"
-      />
-      <tbody
-        v-else
-        class="divide-y divide-gray-200 bg-white"
-      >
-        <tr v-if="!listData.length">
-          <td :colspan="columns.length">
-            <div class="text-center p-4">
-              Nothing found
-            </div>
-          </td>
-        </tr>
-        <tr
-          v-for="row in listData"
-          v-else
-          :key="`tbody-row-${row.id}`"
-          :class="[selectedRows.includes(row.id) && 'bg-gray-50']"
-        >
-          <td
-            v-if="tableActions"
-            class="relative px-7 sm:w-12 sm:px-6"
-          >
-            <div
-              v-if="selectedRows.includes(row.id)"
-              class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
-            />
-            <input
-              v-model="selectedRows"
-              type="checkbox"
-              class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              :value="row.id"
+            </th>
+            <th
+              v-for="(column, columnIndex) in columns"
+              :key="`thead-column-${columnIndex}-${column.field}`"
+              scope="col"
+              :class="[
+                'px-3 py-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap',
+                columnIndex === 0 ? 'pl-0' : '',
+              ]"
             >
-          </td>
-          <td
-            v-for="(column, columnIndex) in columns"
-            :key="`tbody-column-${columnIndex}-${column.field}`"
-            :class="[
-              'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
-              columnIndex === 0 ? 'pl-0' : '',
-            ]"
+              <div
+                :class="['group inline-flex', (column.sortable ?? true) ? 'cursor-pointer' : '']"
+                @click="handleSortingChange(column)"
+              >
+                {{ column.header }}
+                <span
+                  v-if="column.sortable ?? true"
+                  :class="[
+                    'ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200',
+                    sorting.column === column.field ? 'bg-gray-200' : '',
+                  ]"
+                >
+                  <ChevronUpIcon
+                    v-if="sorting.column === column.field && sorting.direction === 'ASC'"
+                    class="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                  <ChevronDownIcon
+                    v-else-if="sorting.column === column.field && sorting.direction === 'DESC'"
+                    class="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                  <ChevronUpDownIcon
+                    v-else
+                    class="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
+            </th>
+            <th
+              scope="col"
+              class="relative px-3 py-4 pr-0 text-sm font-semibold text-gray-900 text-right"
+            >
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+
+        <AppSkeletonTbody
+          v-if="loading"
+          :columns-count="columns.length"
+          :rows-count="perPage"
+        />
+        <tbody
+          v-else
+          class="divide-y divide-gray-200 bg-white"
+        >
+          <tr v-if="!listData.length">
+            <td :colspan="columns.length">
+              <div class="text-center p-4">
+                Nothing found
+              </div>
+            </td>
+          </tr>
+          <tr
+            v-for="row in listData"
+            v-else
+            :key="`tbody-row-${row.id}`"
+            :class="[selectedRows.includes(row.id) && 'bg-gray-50']"
           >
-            {{ column.body ? column.body(row) : (row[column.field] ?? 'N/A') }}
-          </td>
-          <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
-            <div class="space-x-2 flex justify-end">
-              <NuxtLink
-                class="text-indigo-600 hover:text-indigo-900"
-                :to="`${path}/${row.id}/${pageMode.EDIT}`"
-              ><PencilIcon class="h-5 w-5" /></NuxtLink>
-              <NuxtLink
-                class="text-indigo-600 hover:text-indigo-900"
-                :to="`${path}/${row.id}/${pageMode.VIEW}`"
-              ><EyeIcon class="h-5 w-5" /></NuxtLink>
-              <TrashIcon
-                class="text-red-600 h-5 w-5 cursor-pointer"
-                @click="() => deleteItem(row.id)"
+            <td
+              v-if="tableActions"
+              class="relative px-7 sm:w-12 sm:px-6"
+            >
+              <div
+                v-if="selectedRows.includes(row.id)"
+                class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
               />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <input
+                v-model="selectedRows"
+                type="checkbox"
+                class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                :value="row.id"
+              >
+            </td>
+            <td
+              v-for="(column, columnIndex) in columns"
+              :key="`tbody-column-${columnIndex}-${column.field}`"
+              :class="[
+                'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+                columnIndex === 0 ? 'pl-0' : '',
+              ]"
+            >
+              {{ column.body ? column.body(row) : (row[column.field] ?? 'N/A') }}
+            </td>
+            <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
+              <div class="space-x-2 flex justify-end">
+                <NuxtLink
+                  class="text-indigo-600 hover:text-indigo-900"
+                  :to="`${path}/${row.id}/${pageMode.EDIT}`"
+                ><PencilIcon class="h-5 w-5" /></NuxtLink>
+                <NuxtLink
+                  class="text-indigo-600 hover:text-indigo-900"
+                  :to="`${path}/${row.id}/${pageMode.VIEW}`"
+                ><EyeIcon class="h-5 w-5" /></NuxtLink>
+                <TrashIcon
+                  class="text-red-600 h-5 w-5 cursor-pointer"
+                  @click="() => deleteItem(row.id)"
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <AppPagination
       :per-page="perPage"

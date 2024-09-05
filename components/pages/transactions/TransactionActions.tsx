@@ -41,7 +41,11 @@ export const transactionActions = (): TableAction[] => {
             }).finally(() => modal.pending = false);
 
             const error = response as ApiResponseError;
-            errors.value = error.response._data.errors['tag_id'] ?? [];
+            errors.value = error?.response?._data?.errors['tag_id'] ?? [];
+
+            if (!errors.value.length) {
+              modal.hideModal();
+            }
           },
           actionText: 'Добавить',
           extraComponent: extraTagActionComponent,

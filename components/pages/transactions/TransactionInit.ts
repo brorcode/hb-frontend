@@ -95,6 +95,12 @@ const transactionColumns: TransactionColumn[] = [
     body: (row: TransactionRow) => row.account.name,
   },
   {
+    field: 'tags',
+    header: 'Tags',
+    sortable: false,
+    body: (row: TransactionRow) => row.tags.join(', '),
+  },
+  {
     field: 'created_at',
     header: 'Created At',
     body: (row: TransactionRow) => formatDate(row.created_at),

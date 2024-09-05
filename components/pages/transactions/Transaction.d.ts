@@ -5,6 +5,7 @@ type Transaction = {
   is_transfer: boolean;
   category: RelationOption;
   account: RelationOption;
+  tags: string[];
   created_at: string;
   updated_at: string;
 };
