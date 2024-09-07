@@ -1,5 +1,11 @@
 import { defineStore } from 'pinia';
 
+export type ApiNotification = {
+  type?: 'success' | 'error';
+  title?: string;
+  message?: string;
+};
+
 interface NotificationStore {
   id: number;
   show: boolean;

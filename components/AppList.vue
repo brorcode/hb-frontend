@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-5">
-    <AppCard>
+    <AppCard v-if="!isRelation">
       <div class="flex justify-between items-center">
         <div>{{ title }}</div>
         <div class="flex justify-end">
@@ -13,7 +13,7 @@
       </div>
     </AppCard>
 
-    <AppCard>
+    <AppCard v-if="!isRelation">
       <AppFilter
         :init-filters="initFilters"
         :filter-name="filterName"
@@ -61,6 +61,7 @@ const props = defineProps<{
   initFilters: Filters<unknown>;
   filtersComponent: Component;
   tableActions?: TableAction[];
+  isRelation?: boolean;
 }>();
 
 const config = useRuntimeConfig();

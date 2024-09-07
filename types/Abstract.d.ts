@@ -12,45 +12,24 @@ type ApiResponseError = {
 
 type Row<T = object> = T & { [key: string]: typeof T[keyof T] };
 
-interface ErrorDetails {
-  [key: string]: string[];
-}
-
-type NotificationType = 'success' | 'error';
-
-interface ApiNotification {
-  type: NotificationType;
-  title: string;
-  message: string;
-}
-
 type ResponseMeta = {
   perPage: number;
   currentPage: number;
   hasNextPage: boolean;
 };
 
-// TODO check if error sends from server
-interface BaseItemsResponse<T> {
-  data?: T[];
-  meta?: ResponseMeta;
-  error?: {
-    code: string;
-    message: string;
-    details?: ErrorDetails;
-  };
-  notification?: ApiNotification;
+interface BaseResponse {
+  message?: string;
+  errors?: Record<string, string[]>;
 }
 
-// TODO check if error sends from server
-interface BaseItemResponse<T> {
+interface BaseItemsResponse<T> extends BaseResponse {
+  data?: T[];
+  meta?: ResponseMeta;
+}
+
+interface BaseItemResponse<T> extends BaseResponse {
   data?: T;
-  error?: {
-    code: string;
-    message: string;
-    details?: ErrorDetails;
-  };
-  notification?: ApiNotification;
 }
 
 type Column = {

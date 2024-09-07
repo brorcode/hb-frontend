@@ -1,8 +1,11 @@
 import { useCookie } from '#app';
+import { useNotificationsStore } from '~/stores/notifications';
+import { usePersistentState } from '~/composables/usePersistentState';
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
   const [user] = usePersistentState<User>('user');
   const xsrf = useCookie('XSRF-TOKEN');
+  const notifications = useNotificationsStore();
 
   const excludedRoutes = ['/', '/login']; // Define routes to exclude
   if (excludedRoutes.includes(to.path)) {
@@ -10,6 +13,10 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   if (!user.value || !xsrf.value) {
+    notifications.addNotification({
+      message: 'Ваша сессия истекла. Пожалуйста, войдите снова.',
+    });
+
     return navigateTo('/login', { replace: true });
   }
 });

@@ -48,15 +48,27 @@
                 </button>
               </div>
               <div>
-                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                <div
+                  :class="[
+                    'mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100',
+                    colorIconBgVariants[modal.type ?? 'info'],
+                  ]"
+                >
                   <ArrowPathIcon
                     v-if="modal.pending"
-                    class="h-6 w-6 text-green-600 animate-spin"
+                    :class="[
+                      'h-6 w-6 animate-spin',
+                      colorIconVariants[modal.type ?? 'info'],
+                    ]"
                     aria-hidden="true"
                   />
-                  <CheckIcon
+                  <component
+                    :is="modal.icon"
                     v-else
-                    class="h-6 w-6 text-green-600"
+                    :class="[
+                      'h-6 w-6',
+                      colorIconVariants[modal.type ?? 'info'],
+                    ]"
                     aria-hidden="true"
                   />
                 </div>
@@ -85,7 +97,10 @@
                 <button
                   :disabled="modal.pending"
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2 disabled:bg-indigo-300 disabled:cursor-not-allowed"
+                  :class="[
+                    'inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:col-start-2 disabled:cursor-not-allowed',
+                    colorButtonVariants[modal.type ?? 'info'],
+                  ]"
                   @click="modal.action"
                 >
                   {{ modal.actionText }}
@@ -110,8 +125,27 @@
 
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
-import { ArrowPathIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { ArrowPathIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import type { ModalType } from '~/stores/modal';
 import { useModalStore } from '~/stores/modal';
 
 const modal = useModalStore();
+
+const colorIconBgVariants: Record<ModalType, string> = {
+  info: 'bg-indigo-100',
+  danger: 'bg-red-100',
+  warning: 'bg-yellow-100',
+};
+
+const colorIconVariants: Record<ModalType, string> = {
+  info: 'text-indigo-600',
+  danger: 'text-red-600',
+  warning: 'text-yellow-600',
+};
+
+const colorButtonVariants: Record<ModalType, string> = {
+  info: 'bg-indigo-600 hover:bg-indigo-500 focus-visible:outline-indigo-600 disabled:bg-indigo-300',
+  danger: 'bg-red-600 hover:bg-red-500 focus-visible:outline-red-600 disabled:bg-red-300',
+  warning: 'bg-yellow-600 hover:bg-yellow-500 focus-visible:outline-yellow-600 disabled:bg-yellow-300',
+};
 </script>

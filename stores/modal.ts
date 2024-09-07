@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia';
+import { CheckIcon } from '@heroicons/vue/24/outline';
+
+export type ModalType = 'info' | 'danger' | 'warning';
 
 interface Modal {
   title: string;
@@ -8,6 +11,8 @@ interface Modal {
   pending?: boolean;
   actionText: string;
   extraComponent?: Component;
+  icon: Component;
+  type?: ModalType;
 }
 
 export const useModalStore = defineStore('modal', {
@@ -17,6 +22,8 @@ export const useModalStore = defineStore('modal', {
     open: false,
     action: () => {},
     actionText: '',
+    icon: CheckIcon,
+    type: 'info',
   }),
   actions: {
     showModal(modal: Modal) {
@@ -26,6 +33,8 @@ export const useModalStore = defineStore('modal', {
       this.pending = modal.pending;
       this.actionText = modal.actionText;
       this.extraComponent = modal.extraComponent;
+      this.icon = modal.icon;
+      this.type = modal.type;
       this.open = true;
     },
     hideModal() {

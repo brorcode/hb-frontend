@@ -24,6 +24,7 @@ export const transactionActions = (): TableAction[] => {
   };
 
   const handleFieldUpdate = (value: number) => {
+    errors.value = [];
     tagId.value = value;
   };
 
@@ -35,7 +36,6 @@ export const transactionActions = (): TableAction[] => {
           text: 'Выберите тег, который необходимо добавить.',
           action: async () => {
             modal.pending = true;
-            errors.value = [];
             const response = await handleListAction(`/api/v1/tags/${tagId.value}/transactions/attach`, {
               selected_items: selectedItems,
             }).finally(() => modal.pending = false);
@@ -49,6 +49,7 @@ export const transactionActions = (): TableAction[] => {
             }
           },
           actionText: 'Добавить',
+          icon: SquaresPlusIcon,
           extraComponent: extraTagActionComponent,
         });
       },
@@ -56,7 +57,25 @@ export const transactionActions = (): TableAction[] => {
       title: 'Добавить тег',
     },
     {
-      action: (selectedItems: number[]) => console.log('delete', selectedItems),
+      action: (selectedItems: number[]) => {
+        modal.showModal({
+          title: 'Удалить транзакции',
+          text: 'Выберите собираетесь удалить выбранные транзакции. Вы уверены, что хотите продолжить?',
+          action: async () => {
+            modal.pending = true;
+            errors.value = [];
+            await handleListAction(`/api/v1/transactions/destroy-many`, {
+              selected_items: selectedItems,
+            }, 'DELETE').finally(() => modal.pending = false);
+
+            modal.hideModal();
+            list.needRefresh(true);
+          },
+          icon: TrashIcon,
+          type: 'danger',
+          actionText: 'Удалить',
+        });
+      },
       icon: TrashIcon,
       title: 'Удалить',
       color: 'red',

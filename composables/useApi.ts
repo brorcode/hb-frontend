@@ -1,3 +1,4 @@
+import type { FetchResponse } from 'ofetch';
 import { useFiltersStore } from '~/stores/filters';
 import { useNotificationsStore } from '~/stores/notifications';
 import { useCookie } from '#app';
@@ -34,33 +35,36 @@ export const useApi = () => {
         },
         credentials: 'include',
         baseURL: config.public.apiUrl,
-        onResponse: ({ response }) => {
+        onResponse: ({ response }: { response: FetchResponse<BaseResponse> }) => {
           // if successful response
           if (response.status >= 200 && response.status < 300) {
             if (response._data?.message) {
               notifications.addNotification({
                 type: 'success',
                 message: response._data.message,
-              } as ApiNotification);
+              });
             }
           }
         },
-        onResponseError: ({ response }) => {
-          // todo if manually refresh page some flash page shows and next redirect
-          // it should not show backend page at all without auth user
+        onResponseError: ({ response }: { response: FetchResponse<BaseResponse> }) => {
+          notifications.addNotification({
+            message: response._data?.message,
+          });
+
           if (UNAUTHENTICATED_STATUSES.has(response.status)) {
             setUser(null);
-            navigateTo(config.public.apiLoginUrl, { replace: true });
+            navigateTo(config.public.loginUrl, { replace: true });
           }
+
+          // @todo if not found???
+          // if (response.status === NOT_FOUND_STATUS) {
+          // showError({
+          //   statusCode: 404,
+          //   statusMessage: 'Page Not Found',
+          // });
+          // }
         },
       });
-    }
-    catch (e) {
-      const error = e as ApiResponseError;
-      notifications.addNotification({
-        message: error.response?._data.message,
-      } as ApiNotification);
-      throw e;
     }
     finally {
       pending.value = false;
@@ -102,9 +106,9 @@ export const useApi = () => {
     await apiFetch('DELETE', `${endpoint}/${id}`);
   };
 
-  const handleListAction = async (endpoint: string, body: Record<string, unknown>) => {
+  const handleListAction = async (endpoint: string, body: Record<string, unknown>, method: HttpMethod = 'POST') => {
     try {
-      return await apiFetch('POST', endpoint, body);
+      return await apiFetch(method, endpoint, body);
     }
     catch (e) {
       return e;

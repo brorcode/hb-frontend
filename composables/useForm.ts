@@ -51,10 +51,15 @@ export function useForm<T, R = Row>(initialForm: Form<T>) {
   };
 
   const fetchItem = async (endpoint: string, id: number) => {
-    const response = await apiFetch<BaseItemResponse<Row>>('GET', `${endpoint}/${id}`);
+    try {
+      const response = await apiFetch<BaseItemResponse<Row>>('GET', `${endpoint}/${id}`);
 
-    if (response.data) {
-      updateForm(response.data);
+      if (response.data) {
+        updateForm(response.data);
+      }
+    }
+    catch (e) {
+      return e;
     }
   };
 

@@ -15,6 +15,7 @@
       :errors="form.email.errors"
       :value="form.email.value"
       type="email"
+      autocomplete="username"
       @update:model-value="handleFieldUpdate(form.email.key, $event)"
     />
     <FormText
@@ -24,6 +25,7 @@
       :errors="form.password.errors"
       :value="form.password.value"
       type="password"
+      autocomplete="new-password"
       @update:model-value="handleFieldUpdate(form.password.key, $event)"
     />
   </FormGrid>

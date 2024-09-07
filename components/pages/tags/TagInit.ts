@@ -30,6 +30,11 @@ const tagColumns: TagColumn[] = [
     header: 'Name',
   },
   {
+    field: 'amount',
+    header: 'Amount',
+    body: (row: TagRow) => `${row.amount} ₽`,
+  },
+  {
     field: 'created_at',
     header: 'Created At',
     body: (row: TagRow) => formatDate(row.created_at),
