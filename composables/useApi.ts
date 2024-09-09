@@ -103,7 +103,13 @@ export const useApi = () => {
   };
 
   const handleDeleteItem = async (endpoint: string, id: number) => {
-    await apiFetch('DELETE', `${endpoint}/${id}`);
+    try {
+      await apiFetch('DELETE', `${endpoint}/${id}`);
+      list.needRefresh(true);
+    }
+    catch (e) {
+      return e;
+    }
   };
 
   const handleListAction = async (endpoint: string, body: Record<string, unknown>, method: HttpMethod = 'POST') => {

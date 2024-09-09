@@ -94,14 +94,7 @@ const handlePerPageChange = (newPerPage: number) => {
 };
 
 const handleDelete = async (id: number) => {
-  try {
-    await handleDeleteItem(props.apiUrl, id);
-    refreshList();
-  }
-  catch (err) {
-    // TODO: handle error
-    console.log(err);
-  }
+  await handleDeleteItem(props.apiUrl, id);
 };
 
 const applyFilters = () => {
