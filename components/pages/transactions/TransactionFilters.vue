@@ -26,6 +26,13 @@
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.accounts.key) as typeof transactionFiltersInit.accounts.value"
       @update:model-value="handleUpdate(transactionFiltersInit.accounts.key, $event)"
     />
+    <FilterMultiselectSelect
+      :api-url="dictionaryTagsApiUrl"
+      :label="transactionFiltersInit.tags.label"
+      :filter-key="transactionFiltersInit.tags.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.tags.key) as typeof transactionFiltersInit.tags.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.tags.key, $event)"
+    />
     <FilterDate
       :label="transactionFiltersInit.created_at_after.label"
       :filter-key="transactionFiltersInit.created_at_after.key"

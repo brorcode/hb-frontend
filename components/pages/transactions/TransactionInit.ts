@@ -24,6 +24,11 @@ const transactionFiltersInit: TransactionFilters = {
     value: [],
     label: 'Accounts',
   },
+  tags: {
+    key: 'tags',
+    value: [],
+    label: 'Tags',
+  },
   created_at_after: {
     key: 'created_at_after',
     value: null,

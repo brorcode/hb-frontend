@@ -6,6 +6,7 @@
       :form-init="tagFormInit"
       :api-url="tagApiUrl"
       path="/tags"
+      has-relation
     />
 
     <AppList
@@ -14,11 +15,10 @@
       path="/transactions"
       :api-url="transactionApiUrl"
       :columns="transactionColumns"
-      :filter-name="transactionFilterName"
-      :filters-component="TransactionFilters"
+      :filter-name="filterName"
       :init-filters="transactionFiltersInit"
-      :table-actions="transactionActions()"
-      :is-relation="true"
+      :table-actions="tagTransactionsRelationActions()"
+      is-relation
     />
   </div>
 </template>
@@ -29,8 +29,16 @@ import { tagApiUrl, tagFormInit } from '~/components/pages/tags/TagInit';
 import {
   transactionApiUrl,
   transactionColumns,
-  transactionFilterName, transactionFiltersInit,
+  transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
-import TransactionFilters from '~/components/pages/transactions/TransactionFilters.vue';
-import { transactionActions } from '~/components/pages/transactions/TransactionActions';
+import { tagTransactionsRelationActions } from '~/components/pages/tags/TagTransactionsRelationActions';
+import { useFiltersStore } from '~/stores/filters';
+
+const filters = useFiltersStore();
+const route = useRoute();
+const filterName = 'tagTransactionsFilter';
+const { id } = route.params as { id: string };
+
+filters.initFilters(filterName, transactionFiltersInit);
+filters.setFilterValue(filterName, 'tags', [{ id: parseInt(id), name: '' }]);
 </script>

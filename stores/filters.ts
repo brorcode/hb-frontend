@@ -47,6 +47,9 @@ export const useFiltersStore = defineStore('filters', {
         Filter
       >;
     },
+    setFilterValue(filterName: string, key: string, value: InputValue) {
+      this.filters[filterName][key].value = value;
+    },
     getFilterValue(filterName: string, key: string) {
       if (!this.filters[filterName]) {
         return null;

@@ -5,15 +5,16 @@
         <div>{{ title }}</div>
         <div class="flex justify-end">
           <NuxtLink
-            class="rounded bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
+            :to="`${path}/create`"
+            class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Import Transactions TODO
+            Add {{ titleSingular }}
           </NuxtLink>
         </div>
       </div>
     </AppCard>
 
-    <AppCard v-if="!isRelation">
+    <AppCard v-if="filtersComponent">
       <AppFilter
         :init-filters="initFilters"
         :filter-name="filterName"
@@ -27,13 +28,13 @@
     <AppCard>
       <AppTable
         :path="path"
-        :title-singular="titleSingular"
         :loading="pending"
         :columns="columns"
         :per-page="perPage"
         :list-data="items?.data ?? []"
         :meta="items?.meta"
         :table-actions="tableActions"
+        :is-relation="isRelation"
         @page-change="handlePageChange"
         @per-page-change="handlePerPageChange"
         @delete-item="handleDelete"
@@ -59,7 +60,7 @@ const props = defineProps<{
   columns: Column[];
   filterName: string;
   initFilters: Filters<unknown>;
-  filtersComponent: Component;
+  filtersComponent?: Component;
   tableActions?: TableAction[];
   isRelation?: boolean;
 }>();

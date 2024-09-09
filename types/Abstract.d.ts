@@ -75,7 +75,7 @@ type TableAction = {
   action: (selectedItems: number[]) => void;
   icon: Component;
   title: string;
-  color?: 'red';
+  type?: 'info' | 'warning' | 'danger';
 };
 
 type InputText = string;

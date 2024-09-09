@@ -36,7 +36,7 @@ import { pageMode, type UpsertMode } from '~/utils/pageMode';
 defineProps<{
   label: string;
   fieldKey: string;
-  value: Date | null;
+  value: Date | string | null;
   errors: string[];
   mode?: UpsertMode;
 }>();

@@ -9,12 +9,7 @@
         />
       </div>
       <div class="flex justify-end">
-        <NuxtLink
-          :to="`${path}/create`"
-          class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Add {{ titleSingular }}
-        </NuxtLink>
+        // todo
       </div>
     </div>
 
@@ -34,7 +29,7 @@
               <input
                 type="checkbox"
                 class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                :checked="indeterminate || selectedRows.length === listData.length"
+                :checked="indeterminate || (listData.length > 0 && selectedRows.length === listData.length)"
                 @change="handleAllRowsClick"
               >
             </th>
@@ -93,7 +88,7 @@
           class="divide-y divide-gray-200 bg-white"
         >
           <tr v-if="!listData.length">
-            <td :colspan="columns.length">
+            <td :colspan="columns.length + (tableActions ? 2 : 1)">
               <div class="text-center p-4">
                 Nothing found
               </div>
@@ -138,6 +133,7 @@
                   :to="`${path}/${row.id}/${pageMode.VIEW}`"
                 ><EyeIcon class="h-5 w-5" /></NuxtLink>
                 <TrashIcon
+                  v-if="!isRelation"
                   class="text-red-600 h-5 w-5 cursor-pointer"
                   @click="() => deleteItem(row.id)"
                 />
@@ -168,16 +164,17 @@ import TableActions from '~/components/table/TableActions.vue';
 
 const props = defineProps<{
   path: string;
-  titleSingular: string;
   loading: boolean;
   columns: Column[];
   perPage: number;
   listData: Row[];
   meta?: ResponseMeta;
   tableActions?: TableAction[];
+  isRelation?: boolean;
 }>();
 
 const emit = defineEmits(['pageChange', 'perPageChange', 'applySorting', 'deleteItem']);
+const modal = useModalStore();
 const list = useListStore();
 
 const sorting = reactive<Sorting>(defaultSorting);
@@ -228,8 +225,17 @@ const handlePerPageChange = (newPerPage: number) => {
 };
 
 const deleteItem = (id: number) => {
-  emit('deleteItem', id);
-  clearSelectedRows();
+  modal.showModal({
+    title: 'Удалить',
+    text: 'Вы уверены, что хотите продолжить?',
+    action: async () => {
+      emit('deleteItem', id);
+      modal.hideModal();
+    },
+    icon: TrashIcon,
+    type: 'danger',
+    actionText: 'Удалить',
+  });
 };
 
 const clearSelectedRows = () => {

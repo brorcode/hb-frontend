@@ -60,8 +60,10 @@ const props = defineProps<{
   formInit: Form<unknown>;
   apiUrl: string;
   path: string;
+  hasRelation?: boolean;
 }>();
 
+const list = useListStore();
 const route = useRoute();
 const { id, mode } = route.params as { id: string; mode: UpsertMode };
 
@@ -78,6 +80,10 @@ onMounted(async () => {
 const submitForm = async () => {
   if (id) {
     await submit(`${props.apiUrl}/${id}`, 'PUT');
+    if (props.hasRelation) {
+      list.needRefresh(true);
+    }
+
     return;
   }
 

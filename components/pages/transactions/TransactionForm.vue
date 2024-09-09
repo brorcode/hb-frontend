@@ -61,7 +61,7 @@
     </div>
 
     <FormSelect
-      v-if="!mode && form.is_transfer.value"
+      v-if="!mode && form.is_debit.value && form.is_transfer.value"
       :label="form.account_to.label"
       :field-key="form.account_to.key"
       :errors="form.account_to.errors"

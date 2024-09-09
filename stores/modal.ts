@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { CheckIcon } from '@heroicons/vue/24/outline';
 
-export type ModalType = 'info' | 'danger' | 'warning';
+export type ModalType = 'info' | 'warning' | 'danger';
 
 interface Modal {
   title: string;

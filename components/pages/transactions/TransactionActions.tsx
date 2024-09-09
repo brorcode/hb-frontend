@@ -78,7 +78,7 @@ export const transactionActions = (): TableAction[] => {
       },
       icon: TrashIcon,
       title: 'Удалить',
-      color: 'red',
+      type: 'danger',
     },
   ];
 };

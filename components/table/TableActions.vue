@@ -36,15 +36,15 @@
               href="#"
               :class="[
                 active
-                  ? colorTextVariants[action.color ?? 'gray']
-                  : colorActiveTextVariants[action.color ?? 'gray'],
+                  ? colorActiveTextVariants[action.type ?? 'info']
+                  : colorTextVariants[action.type ?? 'info'],
                 'group flex items-center px-4 py-2 text-sm',
               ]"
               @click="action.action(selectedRows)"
             >
               <component
                 :is="action.icon"
-                :class="`mr-3 h-5 w-5 ${colorIconVariants[action.color ?? 'gray']}`"
+                :class="`mr-3 h-5 w-5 ${colorIconVariants[action.type ?? 'info']}`"
                 aria-hidden="true"
               />
               {{ action.title }}
@@ -65,18 +65,21 @@ defineProps<{
   tableActions?: TableAction[];
 }>();
 
-const colorTextVariants = {
-  gray: 'bg-gray-100 text-gray-900',
-  red: 'bg-red-100 text-red-900',
+const colorActiveTextVariants = {
+  info: 'bg-gray-100 text-gray-900',
+  warning: 'bg-yellow-100 text-yellow-900',
+  danger: 'bg-red-100 text-red-900',
 };
 
-const colorActiveTextVariants = {
-  gray: 'text-gray-700',
-  red: 'text-red-700',
+const colorTextVariants = {
+  info: 'text-gray-700',
+  warning: 'text-yellow-700',
+  danger: 'text-red-700',
 };
 
 const colorIconVariants = {
-  gray: 'text-gray-400 group-hover:text-gray-500',
-  red: 'text-red-400 group-hover:text-red-500',
+  info: 'text-gray-400 group-hover:text-gray-500',
+  warning: 'text-yellow-400 group-hover:text-yellow-500',
+  danger: 'text-red-400 group-hover:text-red-500',
 };
 </script>
