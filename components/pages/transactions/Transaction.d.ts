@@ -1,6 +1,6 @@
 type Transaction = {
   id: number;
-  amount: string;
+  amount: number;
   is_debit: boolean;
   is_transfer: boolean;
   category: RelationOption;

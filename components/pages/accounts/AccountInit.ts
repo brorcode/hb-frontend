@@ -1,4 +1,5 @@
 import { formatDate } from '~/utils/date';
+import { toCurrency } from '~/utils/money';
 
 const accountFilterName = 'accountFilter';
 const accountApiUrl = '/api/v1/accounts';
@@ -12,12 +13,12 @@ const accountFiltersInit: AccountFilters = {
   name: {
     key: 'name',
     value: '',
-    label: 'Name',
+    label: 'Название',
   },
 };
 
 const accountFormInit: AccountForm = {
-  name: { key: 'name', value: '', label: 'Name', errors: [] },
+  name: { key: 'name', value: '', label: 'Название', errors: [] },
 };
 
 const accountColumns: AccountColumn[] = [
@@ -27,22 +28,17 @@ const accountColumns: AccountColumn[] = [
   },
   {
     field: 'name',
-    header: 'Name',
+    header: 'Название',
   },
   {
     field: 'amount',
-    header: 'Amount',
-    body: (row: AccountRow) => `${row.amount} ₽`,
+    header: 'Баланс',
+    body: (row: AccountRow) => toCurrency(row.amount),
   },
   {
     field: 'created_at',
-    header: 'Created At',
+    header: 'Дата',
     body: (row: AccountRow) => formatDate(row.created_at),
-  },
-  {
-    field: 'updated_at',
-    header: 'Updated At',
-    body: (row: AccountRow) => formatDate(row.updated_at),
   },
 ];
 

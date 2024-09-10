@@ -3,14 +3,14 @@
     <AppCard>
       <div class="flex justify-between items-center">
         <div class="flex space-x-3 items-center">
-          <NuxtLink :to="path">
+          <button @click.prevent="goBack(path)">
             <ChevronLeftIcon
               class="h-5 w-5"
               aria-hidden="true"
             />
-          </NuxtLink>
+          </button>
           <div v-if="!id">
-            Create {{ title }}
+            Довавить {{ title }}
           </div>
           <div v-else>
             {{ title }} ID: {{ id }}
@@ -24,7 +24,7 @@
             :to="`${path}/${id}/edit`"
             class="rounded bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
           >
-            Edit
+            Редактировать
           </NuxtLink>
         </div>
       </div>
@@ -88,7 +88,7 @@ const submitForm = async () => {
   }
 
   await submit(`${props.apiUrl}/store`, 'POST', () => {
-    navigateTo(props.path);
+    goBack(props.path);
   });
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <AppList
-    title="Transactions"
-    title-singular="Transaction"
+    title="Транзакции"
+    title-singular="Транзакцию"
     path="/transactions"
     :api-url="transactionApiUrl"
     :columns="transactionColumns"

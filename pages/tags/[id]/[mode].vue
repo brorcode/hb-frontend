@@ -6,7 +6,7 @@
       :form-init="tagFormInit"
       :api-url="tagApiUrl"
       path="/tags"
-      has-relation
+      :has-relation="true"
     />
 
     <AppList
@@ -18,7 +18,7 @@
       :filter-name="filterName"
       :init-filters="transactionFiltersInit"
       :table-actions="tagTransactionsRelationActions()"
-      is-relation
+      :is-relation="true"
     />
   </div>
 </template>

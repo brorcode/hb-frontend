@@ -30,11 +30,12 @@
         />
       </svg>
 
-      <NuxtLink
-        :to="backUrl"
-        type="button"
+      <button
         class="text-sm font-semibold leading-6 text-gray-900"
-      >Cancel</NuxtLink>
+        @click.prevent="goBack(backUrl)"
+      >
+        Назад
+      </button>
 
       <button
         type="submit"
@@ -43,7 +44,7 @@
         class="rounded-md bg-indigo-600 disabled:bg-indigo-300 disabled:cursor-not-allowed px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         @click.prevent="emit('submit-form')"
       >
-        Save
+        Сохранить
       </button>
     </div>
   </form>

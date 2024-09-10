@@ -10,7 +10,7 @@
           class="mr-3 h-5 w-5 text-gray-400"
           aria-hidden="true"
         />
-        Previous
+        Назад
       </button>
     </div>
     <div class="w-16">
@@ -31,7 +31,7 @@
         class="inline-flex items-center border-t-2 border-transparent pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         @click="changePage(currentPage + 1)"
       >
-        Next
+        Дальше
         <ArrowLongRightIcon
           class="ml-3 h-5 w-5 text-gray-400"
           aria-hidden="true"

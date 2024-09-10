@@ -1,6 +1,6 @@
 <template>
   <AppUpsert
-    title="Transaction"
+    title="Транзакцию"
     :form-component="TransactionForm"
     :form-init="transactionFormInit"
     :api-url="transactionApiUrl"

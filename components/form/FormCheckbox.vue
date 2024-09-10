@@ -10,11 +10,13 @@
     <div class="mt-2">
       <Switch
         :id="`form-${fieldKey}`"
-        v-model="enabled"
+        v-model="isOn"
         :data-testid="`form-${fieldKey}`"
+        :disabled="mode === pageMode.VIEW"
         :class="[
-          enabled ? 'bg-indigo-600' : 'bg-gray-200',
-          'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2',
+          isOn ? 'bg-indigo-600' : 'bg-gray-200',
+          'relative inline-flex h-6 w-11 flex-shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2',
+          mode === pageMode.VIEW ? 'opacity-70 cursor-default' : 'cursor-pointer',
         ]"
         @update:model-value="updateValue"
       >
@@ -22,7 +24,7 @@
         <span
           aria-hidden="true"
           :class="[
-            enabled ? 'translate-x-5' : 'translate-x-0',
+            isOn ? 'translate-x-5' : 'translate-x-0',
             'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
           ]"
         />
@@ -39,7 +41,7 @@
 
 <script setup lang="ts">
 import { Switch } from '@headlessui/vue';
-import type { UpsertMode } from '~/utils/pageMode';
+import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 const props = defineProps<{
   label: string;
@@ -49,12 +51,12 @@ const props = defineProps<{
   mode?: UpsertMode;
 }>();
 
-const enabled = ref(props.value);
+const isOn = ref(props.value);
 
 watch(
   () => props.value,
   (newValue) => {
-    enabled.value = newValue;
+    isOn.value = newValue;
   },
 );
 

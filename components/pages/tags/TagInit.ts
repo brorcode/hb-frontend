@@ -1,4 +1,5 @@
 import { formatDate } from '~/utils/date';
+import { toCurrency } from '~/utils/money';
 
 const tagFilterName = 'tagFilter';
 const tagApiUrl = '/api/v1/tags';
@@ -32,7 +33,7 @@ const tagColumns: TagColumn[] = [
   {
     field: 'amount',
     header: 'Amount',
-    body: (row: TagRow) => `${row.amount} ₽`,
+    body: (row: TagRow) => toCurrency(row.amount),
   },
   {
     field: 'created_at',

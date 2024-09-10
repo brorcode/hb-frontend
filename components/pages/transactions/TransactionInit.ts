@@ -1,4 +1,5 @@
 import { formatDate } from '~/utils/date';
+import { toCurrency } from '~/utils/money';
 
 const transactionFilterName = 'transactionFilter';
 const transactionApiUrl = '/api/v1/transactions';
@@ -42,13 +43,13 @@ const transactionFiltersInit: TransactionFilters = {
 };
 
 const transactionFormInit: TransactionForm = {
-  amount: { key: 'amount', value: null, label: 'Amount', errors: [] },
+  amount: { key: 'amount', value: null, label: 'Сумма', errors: [] },
   category_id: {
     key: 'category_id',
     value: null,
     relation_key: 'category',
     relation_value: null,
-    label: 'Category',
+    label: 'Категория',
     errors: [],
   },
   account_id: {
@@ -56,10 +57,10 @@ const transactionFormInit: TransactionForm = {
     value: null,
     relation_key: 'account',
     relation_value: null,
-    label: 'Account',
+    label: 'Аккаунт',
     errors: [],
   },
-  created_at: { key: 'created_at', value: null, label: 'Date', errors: [] },
+  created_at: { key: 'created_at', value: null, label: 'Дата', errors: [] },
   is_debit: { key: 'is_debit', value: true, label: 'Расход?', errors: [] },
   is_transfer: { key: 'is_transfer', value: false, label: 'Перевод?', errors: [] },
   account_to: {
@@ -79,41 +80,31 @@ const transactionColumns: TransactionColumn[] = [
   },
   {
     field: 'amount',
-    header: 'Amount',
-    body: (row: TransactionRow) => {
-      let amount = Number(row.amount);
-      amount = row.is_debit ? amount * -1 : amount;
-
-      return `${amount} ₽`;
-    },
+    header: 'Сумма',
+    body: (row: TransactionRow) => toCurrency(row.amount),
   },
   {
     field: 'category',
-    header: 'Category',
+    header: 'Категория',
     sortable: false,
     body: (row: TransactionRow) => row.category.name,
   },
   {
     field: 'account',
-    header: 'Account',
+    header: 'Аккаунт',
     sortable: false,
     body: (row: TransactionRow) => row.account.name,
   },
   {
     field: 'tags',
-    header: 'Tags',
+    header: 'Тэги',
     sortable: false,
     body: (row: TransactionRow) => row.tags.join(', '),
   },
   {
     field: 'created_at',
-    header: 'Created At',
+    header: 'Дата',
     body: (row: TransactionRow) => formatDate(row.created_at),
-  },
-  {
-    field: 'updated_at',
-    header: 'Updated At',
-    body: (row: TransactionRow) => formatDate(row.updated_at),
   },
 ];
 

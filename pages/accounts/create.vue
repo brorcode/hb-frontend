@@ -1,6 +1,6 @@
 <template>
   <AppUpsert
-    title="Account"
+    title="Аккаунт"
     :form-component="AccountForm"
     :form-init="accountFormInit"
     :api-url="accountApiUrl"
