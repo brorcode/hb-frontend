@@ -22,7 +22,7 @@ export const useApi = () => {
   const items = ref<BaseItemsResponse<Row> | null>(null);
   const item = ref<BaseItemResponse<Row> | null>(null);
 
-  const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, unknown>) => {
+  const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, unknown> | FormData) => {
     pending.value = true;
 
     try {
@@ -121,6 +121,15 @@ export const useApi = () => {
     }
   };
 
+  const handleRowsImport = async (endpoint: string, body: FormData, method: HttpMethod = 'POST') => {
+    try {
+      return await apiFetch(method, endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
+  };
+
   return {
     items,
     item,
@@ -130,5 +139,6 @@ export const useApi = () => {
     handleDeleteItem,
     apiFetch,
     handleListAction,
+    handleRowsImport,
   };
 };

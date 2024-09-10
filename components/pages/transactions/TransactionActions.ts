@@ -11,22 +11,22 @@ export const transactionActions = (): TableAction[] => {
 
   const { handleListAction } = useApi();
 
-  const extraTagActionComponent = () => {
-    return (
-      <FormSelect
-        apiUrl={dictionaryTagsApiUrl}
-        fieldKey="tag_id"
-        errors={errors.value}
-        disabled={modal.pending}
-        onUpdate:modelValue={handleFieldUpdate}
-      />
-    );
-  };
-
   const handleFieldUpdate = (value: number) => {
     errors.value = [];
     tagId.value = value;
   };
+
+  const extraTagActionComponent = markRaw(defineComponent({
+    setup() {
+      return () => h(FormSelect, {
+        'apiUrl': dictionaryTagsApiUrl,
+        'fieldKey': 'tag_id',
+        'errors': errors.value,
+        'disabled': modal.pending,
+        'onUpdate:modelValue': handleFieldUpdate,
+      });
+    },
+  }));
 
   return [
     {

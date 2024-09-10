@@ -20,7 +20,7 @@
       </TransitionChild>
 
       <div class="fixed inset-0 50 w-screen overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
           <TransitionChild
             as="template"
             enter="ease-out duration-300"
@@ -72,21 +72,21 @@
                     aria-hidden="true"
                   />
                 </div>
-                <div class="mt-3 text-center sm:mt-5">
+                <div class="mt-3 sm:mt-5">
                   <DialogTitle
                     as="h3"
-                    class="text-base font-semibold leading-6 text-gray-900"
+                    class="text-center text-base font-semibold leading-6 text-gray-900"
                   >
                     {{ modal.title }}
                   </DialogTitle>
                   <div class="mt-2">
-                    <p class="text-sm text-gray-500">
+                    <p class="text-center text-sm text-gray-500">
                       {{ modal.text }}
                     </p>
 
                     <div
                       v-if="modal.extraComponent"
-                      class="mt-4 text-left"
+                      class="mt-4"
                     >
                       <component :is="modal.extraComponent" />
                     </div>

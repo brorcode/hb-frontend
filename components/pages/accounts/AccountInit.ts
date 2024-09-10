@@ -30,6 +30,11 @@ const accountColumns: AccountColumn[] = [
     header: 'Name',
   },
   {
+    field: 'amount',
+    header: 'Amount',
+    body: (row: AccountRow) => `${row.amount} ₽`,
+  },
+  {
     field: 'created_at',
     header: 'Created At',
     body: (row: AccountRow) => formatDate(row.created_at),

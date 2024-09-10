@@ -4,12 +4,7 @@
       <div class="flex justify-between items-center">
         <div>{{ title }}</div>
         <div class="flex justify-end">
-          <NuxtLink
-            :to="`${path}/create`"
-            class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add {{ titleSingular }}
-          </NuxtLink>
+          <TransactionImport />
         </div>
       </div>
     </AppCard>
@@ -29,6 +24,7 @@
       <AppTable
         :path="path"
         :loading="pending"
+        :title-singular="titleSingular"
         :columns="columns"
         :per-page="perPage"
         :list-data="items?.data ?? []"
@@ -51,6 +47,7 @@ import { useApi } from '~/composables/useApi';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import { defaultSorting } from '~/utils/constants';
 import AppCard from '~/components/AppCard.vue';
+import TransactionImport from '~/components/pages/transactions/TransactionImport.vue';
 
 const props = defineProps<{
   title: string;
