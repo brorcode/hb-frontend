@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-5">
     <AppUpsert
-      title="Tag"
+      title="Тэг"
       :form-component="TagForm"
       :form-init="tagFormInit"
       :api-url="tagApiUrl"
@@ -10,8 +10,8 @@
     />
 
     <AppList
-      title="Transactions"
-      title-singular="Transaction"
+      title="Транзикции"
+      title-singular="Транзакцию"
       path="/transactions"
       :api-url="transactionApiUrl"
       :columns="transactionColumns"

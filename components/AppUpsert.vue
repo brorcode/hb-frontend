@@ -65,20 +65,20 @@ const props = defineProps<{
 
 const list = useListStore();
 const route = useRoute();
-const { id, mode } = route.params as { id: string; mode: UpsertMode };
+const { id, mode } = route.params as { id?: string; mode?: UpsertMode };
 
 const { form, pending, handleFieldUpdate, fetchItem, submit } = useForm(
   props.formInit,
 );
 
 onMounted(async () => {
-  if (id) {
+  if (id && mode) {
     await fetchItem(props.apiUrl, parseInt(id));
   }
 });
 
 const submitForm = async () => {
-  if (id) {
+  if (id && !mode) {
     await submit(`${props.apiUrl}/${id}`, 'PUT');
     if (props.hasRelation) {
       list.needRefresh(true);

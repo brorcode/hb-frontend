@@ -1,7 +1,7 @@
 <template>
   <AppList
-    title="Categories"
-    title-singular="Category"
+    title="Категории"
+    title-singular="Категорию"
     path="/categories"
     :api-url="categoryApiUrl"
     :columns="categoryColumns"

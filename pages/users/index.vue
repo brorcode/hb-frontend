@@ -1,7 +1,7 @@
 <template>
   <AppList
-    title="Users"
-    title-singular="User"
+    title="Пользователи"
+    title-singular="Пользователя"
     path="/users"
     :api-url="userApiUrl"
     :columns="userColumns"

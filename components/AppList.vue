@@ -24,6 +24,7 @@
       <AppTable
         :path="path"
         :loading="pending"
+        :title="title"
         :title-singular="titleSingular"
         :columns="columns"
         :per-page="perPage"

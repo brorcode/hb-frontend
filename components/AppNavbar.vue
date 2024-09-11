@@ -85,15 +85,18 @@ import {
   FolderIcon,
   HomeIcon,
   UsersIcon,
+  CreditCardIcon,
+  BanknotesIcon,
+  TagIcon,
 } from '@heroicons/vue/24/outline';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon },
   { name: 'Users', href: '/users', icon: UsersIcon },
-  { name: 'Categories', href: '/categories', icon: FolderIcon },
-  { name: 'Аккаунты', href: '/accounts', icon: FolderIcon },
-  { name: 'Транзакции', href: '/transactions', icon: FolderIcon },
-  { name: 'Тэги', href: '/tags', icon: FolderIcon },
+  { name: 'Категории', href: '/categories', icon: FolderIcon },
+  { name: 'Аккаунты', href: '/accounts', icon: CreditCardIcon },
+  { name: 'Транзакции', href: '/transactions', icon: BanknotesIcon },
+  { name: 'Тэги', href: '/tags', icon: TagIcon },
   { name: 'Calendar', href: '#', icon: CalendarIcon },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon },
   { name: 'Reports', href: '#', icon: ChartPieIcon },

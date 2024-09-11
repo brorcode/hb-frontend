@@ -1,7 +1,7 @@
 <template>
   <AppList
-    title="Tags"
-    title-singular="Tag"
+    title="Тэги"
+    title-singular="Тэг"
     path="/tags"
     :api-url="tagApiUrl"
     :columns="tagColumns"

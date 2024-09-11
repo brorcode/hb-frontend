@@ -12,14 +12,14 @@ const userFiltersInit: UserFilters = {
   name: {
     key: 'name',
     value: '',
-    label: 'Name',
+    label: 'Имя',
   },
 };
 
 const userFormInit: UserForm = {
-  name: { key: 'name', value: '', label: 'Name', errors: [] },
+  name: { key: 'name', value: '', label: 'Имя', errors: [] },
   email: { key: 'email', value: '', label: 'Email', errors: [] },
-  password: { key: 'password', value: '', label: 'Password', errors: [] },
+  password: { key: 'password', value: '', label: 'Пароль', errors: [] },
 };
 
 const userColumns: UserColumn[] = [
@@ -29,7 +29,7 @@ const userColumns: UserColumn[] = [
   },
   {
     field: 'name',
-    header: 'Name',
+    header: 'Имя',
   },
   {
     field: 'email',
@@ -37,13 +37,8 @@ const userColumns: UserColumn[] = [
   },
   {
     field: 'created_at',
-    header: 'Created At',
+    header: 'Дата',
     body: (row: UserRow) => formatDate(row.created_at),
-  },
-  {
-    field: 'updated_at',
-    header: 'Updated At',
-    body: (row: UserRow) => formatDate(row.updated_at),
   },
 ];
 

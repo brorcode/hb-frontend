@@ -13,12 +13,12 @@ const tagFiltersInit: TagFilters = {
   name: {
     key: 'name',
     value: '',
-    label: 'Name',
+    label: 'Название',
   },
 };
 
 const tagFormInit: TagForm = {
-  name: { key: 'name', value: '', label: 'Name', errors: [] },
+  name: { key: 'name', value: '', label: 'Название', errors: [] },
 };
 
 const tagColumns: TagColumn[] = [
@@ -32,18 +32,13 @@ const tagColumns: TagColumn[] = [
   },
   {
     field: 'amount',
-    header: 'Amount',
+    header: 'Сумма',
     body: (row: TagRow) => toCurrency(row.amount),
   },
   {
     field: 'created_at',
-    header: 'Created At',
+    header: 'Дата',
     body: (row: TagRow) => formatDate(row.created_at),
-  },
-  {
-    field: 'updated_at',
-    header: 'Updated At',
-    body: (row: TagRow) => formatDate(row.updated_at),
   },
 ];
 

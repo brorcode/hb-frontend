@@ -1,6 +1,6 @@
 <template>
   <AppUpsert
-    title="Category"
+    title="Категория"
     :form-component="CategoryForm"
     :form-init="categoryFormInit"
     :api-url="categoryApiUrl"

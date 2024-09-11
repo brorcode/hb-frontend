@@ -12,12 +12,12 @@ const categoryFiltersInit: CategoryFilters = {
   name: {
     key: 'name',
     value: '',
-    label: 'Name',
+    label: 'Название',
   },
 };
 
 const categoryFormInit: CategoryForm = {
-  name: { key: 'name', value: '', label: 'Name', errors: [] },
+  name: { key: 'name', value: '', label: 'Название', errors: [] },
 };
 
 const categoryColumns: CategoryColumn[] = [
@@ -27,17 +27,12 @@ const categoryColumns: CategoryColumn[] = [
   },
   {
     field: 'name',
-    header: 'Name',
+    header: 'Название',
   },
   {
     field: 'created_at',
-    header: 'Created At',
+    header: 'Дата',
     body: (row: CategoryRow) => formatDate(row.created_at),
-  },
-  {
-    field: 'updated_at',
-    header: 'Updated At',
-    body: (row: CategoryRow) => formatDate(row.updated_at),
   },
 ];
 

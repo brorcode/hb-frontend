@@ -10,11 +10,15 @@
       </div>
       <div class="flex justify-end">
         <NuxtLink
+          v-if="!isRelation"
           :to="`${path}/create`"
           class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Добавить {{ titleSingular }}
         </NuxtLink>
+        <div v-else>
+          {{ title }}
+        </div>
       </div>
     </div>
 
@@ -169,6 +173,7 @@ import TableActions from '~/components/table/TableActions.vue';
 
 const props = defineProps<{
   path: string;
+  title: string;
   titleSingular: string;
   loading: boolean;
   columns: Column[];

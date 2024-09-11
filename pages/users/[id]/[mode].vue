@@ -1,6 +1,6 @@
 <template>
   <AppUpsert
-    title="User"
+    title="Пользователь"
     :form-component="UserForm"
     :form-init="userFormInit"
     :api-url="userApiUrl"
