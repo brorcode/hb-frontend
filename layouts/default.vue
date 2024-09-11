@@ -221,9 +221,9 @@ const { apiFetch } = useApi();
 const [user, setUser] = usePersistentState<User>('user');
 
 const userNavigation = [
-  { name: 'Your profile', href: '/categories', clickEvent: null },
+  { name: 'Профайл', href: '#', clickEvent: null },
   {
-    name: 'Sign out',
+    name: 'Выйти',
     href: undefined,
     clickEvent: async () => {
       await apiFetch<User>('POST', config.public.apiLogoutUrl);
