@@ -126,6 +126,7 @@ const pointers = reactive<CategoryPointers>({
 const hasUnsavedChanges = ref(false);
 
 const refreshList = async () => {
+  errors.value = null;
   const response = await apiFetch<CategoryPointers>('GET', categoryPointerApiUrl);
   pointers.child = response.child;
   pointers.parent = response.parent;
