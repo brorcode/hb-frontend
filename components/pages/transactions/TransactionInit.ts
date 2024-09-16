@@ -97,7 +97,7 @@ const transactionColumns: TransactionColumn[] = [
   },
   {
     field: 'tags',
-    header: 'Тэги',
+    header: 'Теги',
     sortable: false,
     body: (row: TransactionRow) => row.tags.join(', '),
   },

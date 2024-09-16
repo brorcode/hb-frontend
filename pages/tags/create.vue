@@ -1,6 +1,6 @@
 <template>
   <AppUpsert
-    title="Тэг"
+    title="Тег"
     :form-component="TagForm"
     :form-init="tagFormInit"
     :api-url="tagApiUrl"

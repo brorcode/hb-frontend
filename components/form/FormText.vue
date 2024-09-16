@@ -1,13 +1,14 @@
 <template>
   <div class="sm:col-span-2">
     <label
+      v-if="label"
       :for="`form-${fieldKey}`"
       :class="[
         errors.length ? 'text-red-800' : 'text-gray-900',
         'block text-sm font-medium leading-6',
       ]"
     >{{ label }}</label>
-    <div class="mt-2">
+    <div :class="[label ? 'mt-2' : 'mt-0']">
       <input
         :id="`form-${fieldKey}`"
         :data-testid="`form-${fieldKey}`"
@@ -15,6 +16,7 @@
         :readonly="mode === pageMode.VIEW"
         :value="value"
         :autocomplete="autocomplete"
+        :placeholder="placeholder"
         :class="[
           errors.length
             ? 'bg-red-50 placeholder:text-red-400 text-red-900 ring-red-300 focus:ring-red-600 ring-inset focus:ring-2 focus:ring-inset'
@@ -39,10 +41,11 @@
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
-  label: string;
+  label?: string;
   fieldKey: string;
   value: string;
   errors: string[];
+  placeholder?: string;
   autocomplete?: string;
   type?: 'text' | 'number' | 'email' | 'password';
   mode?: UpsertMode;

@@ -18,9 +18,11 @@ type ResponseMeta = {
   hasNextPage: boolean;
 };
 
+type ResponseErrors = Record<string, string[]>;
+
 interface BaseResponse {
   message?: string;
-  errors?: Record<string, string[]>;
+  errors?: ResponseErrors;
 }
 
 interface BaseItemsResponse<T> extends BaseResponse {
