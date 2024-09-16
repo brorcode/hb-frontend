@@ -187,6 +187,7 @@ const savePointers = async () => {
     const response = await apiFetch<CategoryPointers>('POST', `${categoryPointerApiUrl}/save`, pointers);
     pointers.child = response.child;
     pointers.parent = response.parent;
+    hasUnsavedChanges.value = false;
   }
   catch (e) {
     const response = e as ApiResponseError;
