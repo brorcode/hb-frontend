@@ -13,32 +13,32 @@ const transactionFiltersInit: TransactionFilters = {
   amount: {
     key: 'amount',
     value: null,
-    label: 'Amount',
+    label: 'Сумма',
   },
   categories: {
     key: 'categories',
     value: [],
-    label: 'Categories',
+    label: 'Категории',
   },
   accounts: {
     key: 'accounts',
     value: [],
-    label: 'Accounts',
+    label: 'Аккаунты',
   },
   tags: {
     key: 'tags',
     value: [],
-    label: 'Tags',
+    label: 'Теги',
   },
   created_at_after: {
     key: 'created_at_after',
     value: null,
-    label: 'Date After',
+    label: 'Дата после',
   },
   created_at_before: {
     key: 'created_at_before',
     value: null,
-    label: 'Date Before',
+    label: 'Дата до',
   },
 };
 

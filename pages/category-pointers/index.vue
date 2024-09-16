@@ -127,10 +127,16 @@ const hasUnsavedChanges = ref(false);
 
 const refreshList = async () => {
   errors.value = null;
-  const response = await apiFetch<CategoryPointers>('GET', categoryPointerApiUrl);
-  pointers.child = response.child;
-  pointers.parent = response.parent;
-  hasUnsavedChanges.value = false;
+  try {
+    const response = await apiFetch<CategoryPointers>('GET', categoryPointerApiUrl);
+    pointers.child = response.child;
+    pointers.parent = response.parent;
+    hasUnsavedChanges.value = false;
+  }
+  catch (e) {
+    const response = e as ApiResponseError;
+    console.log('sdfsdfsdfsdfsdfsdf222', response);
+  }
 };
 
 onMounted(async () => {
