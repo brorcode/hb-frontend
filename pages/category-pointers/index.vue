@@ -134,8 +134,7 @@ const refreshList = async () => {
     hasUnsavedChanges.value = false;
   }
   catch (e) {
-    const response = e as ApiResponseError;
-    console.log('sdfsdfsdfsdfsdfsdf222', response);
+    return e;
   }
 };
 

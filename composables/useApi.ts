@@ -66,6 +66,13 @@ export const useApi = () => {
         },
       });
     }
+    catch (e) {
+      notifications.addNotification({
+        message: 'Что-то пошло не так',
+      });
+
+      throw e;
+    }
     finally {
       pending.value = false;
     }
@@ -92,14 +99,24 @@ export const useApi = () => {
       body.filters = filtersData;
     }
 
-    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body).finally(() => {
-      list.needResetSelectedRows(true);
-      list.needRefresh(false);
-    });
+    try {
+      items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body).finally(() => {
+        list.needResetSelectedRows(true);
+        list.needRefresh(false);
+      });
+    }
+    catch (e) {
+      return e;
+    }
   };
 
   const fetchData = async (endpoint: string, body: Record<string, unknown>) => {
-    items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
+    try {
+      items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
   };
 
   const handleDeleteItem = async (endpoint: string, id: number) => {
