@@ -9,15 +9,15 @@
       :has-relation="true"
     />
 
-    <AppList
+    <AppListRelation
       title="Транзакции"
       title-singular="Транзакцию"
       path="/transactions"
       :api-url="transactionApiUrl"
       :columns="transactionColumns"
-      :filter-name="filterName"
+      filter-key="accounts"
+      filter-name="accountTransactionsFilter"
       :init-filters="transactionFiltersInit"
-      :is-relation="true"
     />
   </div>
 </template>
@@ -30,13 +30,4 @@ import {
   transactionColumns,
   transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
-import { useFiltersStore } from '~/stores/filters';
-
-const filters = useFiltersStore();
-const route = useRoute();
-const filterName = 'accountTransactionsFilter';
-const { id } = route.params as { id: string };
-
-filters.initFilters(filterName, transactionFiltersInit);
-filters.setFilterValue(filterName, 'accounts', [{ id: parseInt(id), name: '' }]);
 </script>

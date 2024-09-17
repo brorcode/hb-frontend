@@ -66,13 +66,6 @@ export const useApi = () => {
         },
       });
     }
-    catch (e) {
-      notifications.addNotification({
-        message: 'Что-то пошло не так',
-      });
-
-      throw e;
-    }
     finally {
       pending.value = false;
     }
