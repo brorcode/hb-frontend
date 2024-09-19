@@ -221,7 +221,7 @@ const { apiFetch } = useApi();
 const [user, setUser] = usePersistentState<User>('user');
 
 const userNavigation = [
-  { name: 'Профайл', href: `/users`, clickEvent: null },
+  { name: 'Профайл', href: `/profile`, clickEvent: null },
   {
     name: 'Выйти',
     href: undefined,

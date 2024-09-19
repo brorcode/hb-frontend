@@ -7,6 +7,7 @@
     :columns="columns"
     :filter-name="filterName"
     :init-filters="initFilters"
+    :table-actions="tableActions"
     :is-relation="true"
   />
 </template>
@@ -23,6 +24,7 @@ const props = defineProps<{
   filterKey: string;
   filterName: string;
   initFilters: Filters<unknown>;
+  tableActions?: TableAction[];
 }>();
 
 const filters = useFiltersStore();

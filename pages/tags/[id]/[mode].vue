@@ -18,6 +18,7 @@
       filter-key="tags"
       filter-name="tagTransactionsFilter"
       :init-filters="transactionFiltersInit"
+      :table-actions="tagTransactionsRelationActions()"
     />
   </div>
 </template>
@@ -30,4 +31,5 @@ import {
   transactionColumns,
   transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
+import { tagTransactionsRelationActions } from '~/components/pages/tags/TagTransactionsRelationActions';
 </script>

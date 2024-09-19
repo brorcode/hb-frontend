@@ -2,6 +2,7 @@ import { formatDate } from '~/utils/date';
 
 const userFilterName = 'userFilter';
 const userApiUrl = '/api/v1/users';
+const userProfileApiUrl = '/api/v1/profile';
 
 const userFiltersInit: UserFilters = {
   id: {
@@ -34,6 +35,9 @@ const userColumns: UserColumn[] = [
   {
     field: 'email',
     header: 'Email',
+    body: (row: UserRow) => {
+      return row.email;
+    },
   },
   {
     field: 'created_at',
@@ -42,4 +46,4 @@ const userColumns: UserColumn[] = [
   },
 ];
 
-export { userApiUrl, userFilterName, userFormInit, userFiltersInit, userColumns };
+export { userApiUrl, userProfileApiUrl, userFilterName, userFormInit, userFiltersInit, userColumns };

@@ -7,8 +7,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const xsrf = useCookie('XSRF-TOKEN');
   const notifications = useNotificationsStore();
 
-  const excludedRoutes = ['/', '/login']; // Define routes to exclude
-  if (excludedRoutes.includes(to.path)) {
+  const excludedRouteNames = ['index', 'login', 'register', 'verify-email-id-hash']; // Define routes to exclude
+  if (excludedRouteNames.includes(to.name as string)) {
     return; // Skip middleware for these routes
   }
 

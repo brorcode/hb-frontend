@@ -1,14 +1,15 @@
 import { reactive } from 'vue';
 import { deepCopy } from '~/utils/deepCopy';
 import { VALIDATION_ERROR_STATUS } from '~/constants/statusCodes';
+import { userProfileApiUrl } from '~/components/pages/users/UserInit';
 
 export function useForm<T, R = Row>(initialForm: Form<T>) {
   const { apiFetch, pending } = useApi();
   const form = reactive(deepCopy(initialForm) as Form<T>) as Form<T>;
 
-  const handleFieldUpdate = (key: keyof Form<T>, value: T[keyof T]) => {
+  const handleFieldUpdate = (key: keyof Form<T>, value: InputValue) => {
     form[key].errors = [];
-    form[key].value = value;
+    form[key].value = value as T[keyof T];
   };
 
   const submit = async (
@@ -102,11 +103,25 @@ export function useForm<T, R = Row>(initialForm: Form<T>) {
     });
   };
 
+  const fetchUser = async () => {
+    try {
+      const response = await apiFetch<UserGetResponse>('GET', userProfileApiUrl);
+
+      if (response.data) {
+        updateForm(response.data);
+      }
+    }
+    catch (e) {
+      return e;
+    }
+  };
+
   return {
     form,
     pending,
     handleFieldUpdate,
     submit,
     fetchItem,
+    fetchUser,
   };
 }

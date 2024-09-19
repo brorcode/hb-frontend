@@ -2,8 +2,8 @@ type User = {
   id: number;
   name: string;
   email: string;
+  has_verified_email: boolean;
   created_at: string;
-  updated_at: string;
 };
 
 type UserGetResponse = BaseItemResponse<User>;
@@ -20,8 +20,10 @@ type UserFilters = Filters<{
   name: string;
 }>;
 
-type UserForm = Form<{
+type UserFormFields = {
   name: string;
   email: string;
   password: string;
-}>;
+};
+
+type UserForm = Form<UserFormFields>;

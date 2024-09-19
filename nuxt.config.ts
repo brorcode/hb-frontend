@@ -7,6 +7,8 @@ export default defineNuxtConfig({
       homeUrl: '/users',
       loginUrl: '/login',
       perPage: 10,
+      apiRegisterUrl: 'api/v1/register',
+      apiVerifyEmailUrl: 'api/v1/profile/email/verification',
       apiLoginUrl: 'api/v1/login',
       apiLogoutUrl: 'api/v1/logout',
     },
