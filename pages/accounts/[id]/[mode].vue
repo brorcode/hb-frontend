@@ -7,6 +7,7 @@
       :api-url="accountApiUrl"
       path="/accounts"
       :has-relation="true"
+      :relation-resource="{ key: 'account_id', resource: 'transactions' }"
     />
 
     <AppListRelation

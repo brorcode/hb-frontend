@@ -7,6 +7,7 @@
       :api-url="categoryApiUrl"
       path="/categories"
       :has-relation="true"
+      :relation-resource="{ key: 'category_id', resource: 'transactions' }"
     />
 
     <AppListRelation

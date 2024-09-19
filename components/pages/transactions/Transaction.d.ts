@@ -29,7 +29,7 @@ type TransactionFilters = Filters<{
   created_at_before: Date | null;
 }>;
 
-type TransactionForm = Form<{
+type TransactionFormFields = {
   amount: number | null;
   category_id: number | null;
   account_id: number | null;
@@ -37,4 +37,6 @@ type TransactionForm = Form<{
   is_debit: boolean;
   is_transfer: boolean;
   account_to: number | null;
-}>;
+};
+
+type TransactionForm = Form<TransactionFormFields>;

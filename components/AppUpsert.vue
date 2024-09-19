@@ -53,6 +53,7 @@ import type { Component } from 'vue';
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid';
 import AppForm from '~/components/form/AppForm.vue';
 import type { UpsertMode } from '~/utils/pageMode';
+import { type RelationResource, useResourceRelation } from '~/composables/useResourceRelation';
 
 const props = defineProps<{
   title: string;
@@ -61,19 +62,33 @@ const props = defineProps<{
   apiUrl: string;
   path: string;
   hasRelation?: boolean;
+  relationResource?: RelationResource;
 }>();
 
 const list = useListStore();
 const route = useRoute();
 const { id, mode } = route.params as { id?: string; mode?: UpsertMode };
+const { initRelation, clearRelation } = useResourceRelation(props.formInit);
 
-const { form, pending, handleFieldUpdate, fetchItem, submit } = useForm(
-  props.formInit,
-);
+const { form, pending, handleFieldUpdate, fetchItem, submit } = useForm(props.formInit);
 
 onMounted(async () => {
+  // when component is being mounted it needs to clear relation
+  clearRelation();
+
   if (id && mode) {
     await fetchItem(props.apiUrl, parseInt(id));
+
+    // when a resource is being edited/viewed and has relation it needs to store it in the persistent state
+    if (props.hasRelation && props.relationResource) {
+      const _form = form as Form;
+      initRelation(
+        props.relationResource.key,
+        props.relationResource.resource,
+        parseInt(id),
+        _form.name.value as string,
+      );
+    }
   }
 });
 
