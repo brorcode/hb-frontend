@@ -1,7 +1,7 @@
 <template>
   <div class="border border-gray-200 rounded-md p-5">
     <FormText
-      :field-key="`pointer_${pointerIndex}_${pointer.id}`"
+      :field-key="`pointer_${prefix}_${pointerIndex}`"
       :value="pointer.name"
       :errors="[]"
       @update:model-value="emit('updatePointerName', $event)"
@@ -47,7 +47,7 @@
       <div class="flex justify-between items-end">
         <div class="flex space-x-2">
           <FormText
-            :field-key="`pointer_tag_${pointerIndex}_${pointer.id}`"
+            :field-key="`pointer_tag_${prefix}_${pointerIndex}`"
             placeholder="Новый тег"
             :value="tagName"
             :errors="[]"
@@ -84,6 +84,7 @@ import FormText from '~/components/form/FormText.vue';
 
 defineProps<{
   pointer: CategoryPointer;
+  prefix: string;
   pointerIndex: number;
   pending: boolean;
 }>();
