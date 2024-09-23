@@ -15,5 +15,12 @@
 </template>
 
 <script setup lang="ts">
+import { userFormInit } from '~/components/pages/users/UserInit';
+
 const config = useRuntimeConfig();
+const { fetchUser } = useForm<UserFormFields, User>(userFormInit);
+
+onMounted(async () => {
+  await fetchUser();
+});
 </script>

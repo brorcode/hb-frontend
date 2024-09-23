@@ -65,7 +65,8 @@
 
           <CategoryPointerItem
             v-for="(pointer, index) in pointers.parent"
-            :key="pointer.id"
+            :key="`parent_${index}`"
+            prefix="parent"
             :pointer-index="index"
             :pointer="pointer"
             :pending="pending"
@@ -97,7 +98,8 @@
 
           <CategoryPointerItem
             v-for="(pointer, index) in pointers.child"
-            :key="pointer.id"
+            :key="`child_${index}`"
+            prefix="child"
             :pointer-index="index"
             :pointer="pointer"
             :pending="pending"
@@ -168,7 +170,6 @@ const addTag = (pointer: CategoryPointer, tagName: string) => {
 
 const getEmptyPointer = (isParent: boolean): CategoryPointer[] => {
   return [{
-    id: pointers.parent.length + pointers.child.length + 1,
     name: '',
     is_parent: isParent,
     tags_array: [],
