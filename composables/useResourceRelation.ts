@@ -13,7 +13,7 @@ type RelationState = {
 
 export function useResourceRelation<T>(initialForm: Form<T> | null) {
   const [relation, setRelation] = usePersistentState<RelationState>('relation');
-  const form = reactive(deepCopy(initialForm) as Form<T>) as Form<T>;
+  const form = reactive(deepCopy(initialForm ?? {}) as Form<T>) as Form<T>;
 
   const initRelation = (key: string, resource: string, value: number, name: string) => {
     setRelation({

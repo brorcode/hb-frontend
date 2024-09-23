@@ -41,7 +41,8 @@ export const transactionActions = (): TableAction[] => {
             }).finally(() => modal.pending = false);
 
             const error = response as ApiResponseError;
-            errors.value = error?.response?._data?.errors['tag_id'] ?? [];
+            const tagErrors = error?.response?._data?.errors || {};
+            errors.value = tagErrors['tag_id'] || [];
 
             if (!errors.value.length) {
               modal.hideModal();

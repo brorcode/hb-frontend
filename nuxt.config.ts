@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     // apiSecret: '', // can be overridden by NUXT_API_SECRET environment variable
     public: {
       apiUrl: process.env.API_URL,
-      homeUrl: '/users',
+      homeUrl: '/profile',
       loginUrl: '/login',
       perPage: 10,
       apiRegisterUrl: 'api/v1/register',

@@ -1,0 +1,41 @@
+type RoutePermissions = {
+  [key: string]: Permission;
+};
+
+export enum Permission {
+  USERS_VIEW = 'users view',
+  TRANSACTIONS_VIEW = 'transactions view',
+  CATEGORIES_VIEW = 'categories view',
+  ACCOUNTS_VIEW = 'accounts view',
+  TAGS_VIEW = 'tags view',
+  CATEGORY_POINTERS_VIEW = 'category pointers view',
+  PROFILE_VIEW = 'profile view',
+  PROFILE_EDIT = 'profile edit',
+}
+
+export const routePermissions: RoutePermissions = {
+  'users': Permission.USERS_VIEW,
+  'users-id-mode': Permission.USERS_VIEW,
+  'users-create': Permission.USERS_VIEW,
+
+  'transactions': Permission.TRANSACTIONS_VIEW,
+  'transactions-id-mode': Permission.TRANSACTIONS_VIEW,
+  'transactions-create': Permission.TRANSACTIONS_VIEW,
+
+  'categories': Permission.CATEGORIES_VIEW,
+  'categories-id-mode': Permission.CATEGORIES_VIEW,
+  'categories-create': Permission.CATEGORIES_VIEW,
+
+  'accounts': Permission.ACCOUNTS_VIEW,
+  'accounts-id-mode': Permission.ACCOUNTS_VIEW,
+  'accounts-create': Permission.ACCOUNTS_VIEW,
+
+  'tags': Permission.TAGS_VIEW,
+  'tags-id-mode': Permission.TAGS_VIEW,
+  'tags-create': Permission.TAGS_VIEW,
+
+  'category-pointers': Permission.CATEGORY_POINTERS_VIEW,
+
+  'profile': Permission.PROFILE_VIEW,
+  'verify-email-id-hash': Permission.PROFILE_EDIT,
+};

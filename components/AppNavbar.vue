@@ -78,29 +78,63 @@
 
 <script setup lang="ts">
 import {
-  CalendarIcon,
-  ChartPieIcon,
+  BanknotesIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
+  CreditCardIcon,
   FolderIcon,
   HomeIcon,
-  UsersIcon,
-  CreditCardIcon,
-  BanknotesIcon,
   TagIcon,
+  UsersIcon,
 } from '@heroicons/vue/24/outline';
+import { Permission } from '~/config/routePermissions';
+
+const [user] = usePersistentState<User>('user');
+const userPermissions = user.value?.permissions ?? [];
+
+const generateNavigationItems = (permission: Permission, href: string, icon: Component, name: string) => {
+  return userPermissions.includes(permission)
+    ? [{ name, href, icon }]
+    : [];
+};
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon },
-  { name: 'Users', href: '/users', icon: UsersIcon },
-  { name: 'Категории', href: '/categories', icon: FolderIcon },
-  { name: 'Аккаунты', href: '/accounts', icon: CreditCardIcon },
-  { name: 'Транзакции', href: '/transactions', icon: BanknotesIcon },
-  { name: 'Теги', href: '/tags', icon: TagIcon },
-  { name: 'Указатели Категорий', href: '/category-pointers', icon: TagIcon },
-  { name: 'Calendar', href: '#', icon: CalendarIcon },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon },
-  { name: 'Reports', href: '#', icon: ChartPieIcon },
+  ...generateNavigationItems(
+    Permission.USERS_VIEW,
+    '/users',
+    UsersIcon,
+    'Users',
+  ),
+  ...generateNavigationItems(
+    Permission.CATEGORIES_VIEW,
+    '/categories',
+    FolderIcon,
+    'Категории',
+  ),
+  ...generateNavigationItems(
+    Permission.ACCOUNTS_VIEW,
+    '/accounts',
+    CreditCardIcon,
+    'Аккаунты',
+  ),
+  ...generateNavigationItems(
+    Permission.TRANSACTIONS_VIEW,
+    '/transactions',
+    BanknotesIcon,
+    'Транзакции',
+  ),
+  ...generateNavigationItems(
+    Permission.TAGS_VIEW,
+    '/tags',
+    TagIcon,
+    'Теги',
+  ),
+  ...generateNavigationItems(
+    Permission.CATEGORY_POINTERS_VIEW,
+    '/category-pointers',
+    TagIcon,
+    'Указатели Категорий',
+  ),
 ];
 
 const teams = [

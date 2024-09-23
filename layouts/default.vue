@@ -172,16 +172,15 @@
                     :key="item.name"
                     v-slot="{ active }"
                   >
-                    <NuxtLink
-                      :to="item.href"
+                    <div
                       :class="[
                         active ? 'bg-gray-50' : '',
                         'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer',
                       ]"
-                      @click.prevent="
-                        typeof item.clickEvent === 'function' ? item.clickEvent() : undefined
-                      "
-                    >{{ item.name }}</NuxtLink>
+                      @click="handleClick(item)"
+                    >
+                      {{ item.name }}
+                    </div>
                   </MenuItem>
                 </MenuItems>
               </transition>
@@ -232,6 +231,16 @@ const userNavigation = [
     },
   },
 ];
+
+const handleClick = async (item: { name: string; href?: string; clickEvent?: (() => Promise<void>) | null }) => {
+  sidebarOpen.value = false;
+  if (item.clickEvent) {
+    await item.clickEvent();
+    return;
+  }
+
+  navigateTo(item.href);
+};
 
 const sidebarOpen = ref(false);
 </script>

@@ -1,6 +1,7 @@
 import { useCookie } from '#app';
 import { useNotificationsStore } from '~/stores/notifications';
 import { usePersistentState } from '~/composables/usePersistentState';
+import { routePermissions } from '~/config/routePermissions';
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const [user] = usePersistentState<User>('user');
@@ -19,4 +20,20 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     return navigateTo('/login', { replace: true });
   }
+
+  // Check if the route requires specific roles
+  if (!hasPermission(user.value, to.name as string)) {
+    return navigateTo('/forbidden');
+  }
 });
+
+const hasPermission = (user: User, routeName: string) => {
+  const userPermissions = user ? user.permissions : [];
+  const requiredPermission = routePermissions[routeName];
+
+  if (!requiredPermission) {
+    return true;
+  }
+
+  return userPermissions.includes(requiredPermission);
+};

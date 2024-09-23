@@ -3,6 +3,7 @@ type User = {
   name: string;
   email: string;
   has_verified_email: boolean;
+  permissions: string[];
   created_at: string;
 };
 
