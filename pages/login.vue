@@ -17,6 +17,16 @@
           Зарегистрироваться
         </NuxtLink>
       </p>
+
+      <p class="mt-2 text-lg leading-8 text-gray-600">
+        Забыли пароль?
+        <NuxtLink
+          class="text-indigo-500 hover:text-indigo-700"
+          to="/forgot-password"
+        >
+          Сбросить пароль
+        </NuxtLink>
+      </p>
     </div>
 
     <form

@@ -65,6 +65,6 @@ const submitForm = async () => {
 };
 
 const confirmEmail = async () => {
-  await submit(config.public.apiVerifyEmailUrl, 'POST');
+  await submit(config.public.apiSendEmailToVerifyEmailUrl, 'POST');
 };
 </script>

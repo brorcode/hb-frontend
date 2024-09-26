@@ -2,10 +2,10 @@
   <div>
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        Регистрация
+        Новый пароль
       </h2>
       <p class="mt-2 text-lg leading-8 text-gray-600">
-        Создайте учетную запись.
+        Придумайте новый пароль.
       </p>
 
       <p class="mt-2 text-lg leading-8 text-gray-600">
@@ -17,16 +17,6 @@
           Вход
         </NuxtLink>
       </p>
-
-      <p class="mt-2 text-lg leading-8 text-gray-600">
-        Забыли пароль?
-        <NuxtLink
-          class="text-indigo-500 hover:text-indigo-700"
-          to="/forgot-password"
-        >
-          Сбросить пароль
-        </NuxtLink>
-      </p>
     </div>
 
     <form
@@ -35,17 +25,11 @@
     >
       <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         <FormText
-          :label="form.name.label"
-          :field-key="form.name.key"
-          :value="form.name.value"
-          :errors="form.name.errors"
-          @update:model-value="handleFieldUpdate(form.name.key, $event)"
-        />
-        <FormText
           :label="form.email.label"
           :field-key="form.email.key"
           :value="form.email.value"
           :errors="form.email.errors"
+          :mode="pageMode.VIEW"
           type="email"
           autocomplete="username"
           @update:model-value="handleFieldUpdate(form.email.key, $event)"
@@ -95,7 +79,7 @@
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          {{ pending ? 'Подождите...' : 'Создать' }}
+          {{ pending ? 'Подождите...' : 'Сохранить' }}
         </button>
       </div>
     </form>
@@ -103,26 +87,30 @@
 </template>
 
 <script setup lang="ts">
-import { registerFormInit } from '~/components/pages/auth/AuthInit';
-import { usePersistentState } from '~/composables/usePersistentState';
+import { newPasswordFormInit } from '~/components/pages/auth/AuthInit';
 
 definePageMeta({
   layout: 'guest',
   middleware: ['guest'],
 });
 
+const { fullPath, query: { email, token } } = useRoute();
+
 const config = useRuntimeConfig();
 const { apiFetch } = useApi();
-const [, setUser] = usePersistentState<User>('user');
-const { form, handleFieldUpdate, submit } = useForm<RegisterFormFields, User>(registerFormInit);
+const { form, handleFieldUpdate, submit } = useForm<NewPasswordFormFields, User>(newPasswordFormInit);
 const pending = ref(false);
+
+onMounted(async () => {
+  handleFieldUpdate(form.email.key, email as string);
+  handleFieldUpdate(form.token.key, token as string);
+});
 
 const handleSubmit = async () => {
   pending.value = true;
   await apiFetch('GET', '/sanctum/csrf-cookie');
-  await submit(config.public.apiRegisterUrl, 'POST', (response: LoginResponse) => {
-    setUser(response?.data ?? null);
-    navigateTo(config.public.homeUrl, { replace: true });
+  await submit(fullPath, 'POST', () => {
+    navigateTo(config.public.loginUrl, { replace: true });
   });
   pending.value = false;
 };

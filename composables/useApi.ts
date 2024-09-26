@@ -112,6 +112,16 @@ export const useApi = () => {
     }
   };
 
+  const getData = async (endpoint: string) => {
+    try {
+      return await apiFetch<BaseItemResponse<Row>>('GET', endpoint)
+        .then(({ data }) => data);
+    }
+    catch (e) {
+      return e;
+    }
+  };
+
   const handleDeleteItem = async (endpoint: string, id: number) => {
     try {
       await apiFetch('DELETE', `${endpoint}/${id}`);
@@ -150,5 +160,6 @@ export const useApi = () => {
     apiFetch,
     handleListAction,
     handleRowsImport,
+    getData,
   };
 };

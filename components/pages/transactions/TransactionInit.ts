@@ -61,7 +61,7 @@ const transactionFormInit: TransactionForm = {
     errors: [],
   },
   created_at: { key: 'created_at', value: null, label: 'Дата', errors: [] },
-  is_debit: { key: 'is_debit', value: true, label: 'Расход?', errors: [] },
+  is_debit: { key: 'is_debit', value: false, label: 'Доход?', errors: [] },
   is_transfer: { key: 'is_transfer', value: false, label: 'Перевод?', errors: [] },
   account_to: {
     key: 'account_to',
