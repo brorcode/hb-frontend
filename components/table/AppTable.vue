@@ -178,13 +178,14 @@ const props = defineProps<{
   meta?: ResponseMeta;
   tableActions?: TableAction[];
   isRelation?: boolean;
+  defaultSort?: Sorting;
 }>();
 
 const emit = defineEmits(['pageChange', 'perPageChange', 'applySorting', 'deleteItem']);
 const modal = useModalStore();
 const list = useListStore();
 
-const sorting = reactive<Sorting>(defaultSorting);
+const sorting = reactive<Sorting>(props.defaultSort ?? defaultSorting);
 const selectedRows = ref<number[]>([]);
 
 watch(() => list.resetSelectedRows, reset => reset && clearSelectedRows());

@@ -107,7 +107,7 @@ const navigation = [
   ),
   ...generateNavigationItems(
     Permission.CATEGORIES_VIEW,
-    '/categories',
+    '/categories/',
     FolderIcon,
     'Категории',
   ),

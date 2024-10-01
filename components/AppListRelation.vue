@@ -21,16 +21,18 @@ const props = defineProps<{
   path: string;
   apiUrl: string;
   columns: Column[];
-  filterKey: string;
+  filterKey?: string;
   filterName: string;
   initFilters: Filters<unknown>;
   tableActions?: TableAction[];
 }>();
 
-const filters = useFiltersStore();
-const route = useRoute();
-const { id } = route.params as { id: string };
+if (props.filterKey) {
+  const filters = useFiltersStore();
+  const route = useRoute();
+  const { id } = route.params as { id: string };
 
-filters.initFilters(props.filterName, props.initFilters);
-filters.setFilterValue(props.filterName, props.filterKey, [{ id: parseInt(id), name: '' }]);
+  filters.initFilters(props.filterName, props.initFilters);
+  filters.setFilterValue(props.filterName, props.filterKey, [{ id: parseInt(id), name: '' }]);
+}
 </script>

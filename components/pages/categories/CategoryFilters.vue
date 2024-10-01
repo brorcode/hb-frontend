@@ -19,10 +19,7 @@
 import FilterText from '~/components/filters/FilterText.vue';
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
-import {
-  categoryFilterName,
-  categoryFiltersInit,
-} from '~/components/pages/categories/CategoryInit';
+import { categoryFilterName, categoryFiltersInit } from '~/components/pages/categories/CategoryInit';
 
 const filters = useFiltersStore();
 filters.initFilters(categoryFilterName, categoryFiltersInit);

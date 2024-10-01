@@ -1,16 +1,18 @@
 <template>
   <div class="space-y-5">
     <AppUpsert
-      title="Категория"
-      :form-component="CategoryForm"
+      title="Дочернаяя Категория"
+      :form-component="CategoryChildForm"
       :form-init="categoryFormInit"
       :api-url="categoryApiUrl"
-      path="/categories"
+      path="/categories/child"
+      back-path="/categories"
       :has-relation="true"
       :relation-resource="{ key: 'category_id', resource: 'transactions' }"
     />
 
     <AppListRelation
+      key="transactions-relation"
       title="Транзакции"
       title-singular="Транзакцию"
       path="/transactions"
@@ -24,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import CategoryForm from '~/components/pages/categories/CategoryForm.vue';
+import CategoryChildForm from '~/components/pages/categories/CategoryChildForm.vue';
 import { categoryApiUrl, categoryFormInit } from '~/components/pages/categories/CategoryInit';
 import {
   transactionApiUrl,

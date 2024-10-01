@@ -32,6 +32,7 @@
         :meta="items?.meta"
         :table-actions="tableActions"
         :is-relation="isRelation"
+        :default-sort="defaultSort"
         @page-change="handlePageChange"
         @per-page-change="handlePerPageChange"
         @delete-item="handleDelete"
@@ -62,6 +63,7 @@ const props = defineProps<{
   filtersComponent?: Component;
   tableActions?: TableAction[];
   isRelation?: boolean;
+  defaultSort?: Sorting;
 }>();
 
 const config = useRuntimeConfig();
@@ -69,12 +71,12 @@ const filters = useFiltersStore();
 const list = useListStore();
 const currentPage = ref(1);
 const perPage = ref(config.public.perPage);
-const sorting = reactive<Sorting>(defaultSorting);
+const sorting = reactive<Sorting>(props.defaultSort ?? defaultSorting);
 const { items, pending, fetchListData, handleDeleteItem } = useApi();
 const { clearRelation } = useResourceRelation(null);
 
 onMounted(() => {
-  fetchListData(props.apiUrl, currentPage.value, perPage.value, props.filterName, defaultSorting);
+  fetchListData(props.apiUrl, currentPage.value, perPage.value, props.filterName, props.defaultSort ?? defaultSorting);
 
   // when component is being mounted it needs to clear relation if current list is not a relation
   if (!props.isRelation) {

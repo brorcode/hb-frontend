@@ -1,6 +1,15 @@
+type CategoryTransactionStats = {
+  count: number;
+  amount: number;
+};
+
 type Category = {
   id: number;
   name: string;
+  parent_category: RelationOption;
+  transactions_debit: CategoryTransactionStats;
+  transactions_credit: CategoryTransactionStats;
+  transactions_transfer: CategoryTransactionStats;
   created_at: string;
   updated_at: string;
 };
@@ -19,6 +28,10 @@ type CategoryFilters = Filters<{
   name: string;
 }>;
 
-type CategoryForm = Form<{
+type CategoryFormFields = {
   name: string;
-}>;
+  parent_id: number | null;
+  is_child: boolean;
+};
+
+type CategoryForm = Form<CategoryFormFields>;

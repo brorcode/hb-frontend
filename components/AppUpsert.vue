@@ -3,7 +3,7 @@
     <AppCard>
       <div class="flex justify-between items-center">
         <div class="flex space-x-3 items-center">
-          <button @click.prevent="goBack(path)">
+          <button @click.prevent="goBack(backPath ? backPath : path)">
             <ChevronLeftIcon
               class="h-5 w-5"
               aria-hidden="true"
@@ -32,7 +32,7 @@
 
     <AppCard>
       <AppForm
-        :back-url="path"
+        :back-url="backPath ? backPath : path"
         :pending="pending"
         :mode="mode"
         @submit-form="submitForm"
@@ -61,6 +61,7 @@ const props = defineProps<{
   formInit: Form<unknown>;
   apiUrl: string;
   path: string;
+  backPath?: string;
   hasRelation?: boolean;
   relationResource?: RelationResource;
 }>();
@@ -93,7 +94,7 @@ onMounted(async () => {
 });
 
 const submitForm = async () => {
-  if (id && !mode) {
+  if (id && mode) {
     await submit(`${props.apiUrl}/${id}`, 'PUT');
     if (props.hasRelation) {
       list.needRefresh(true);
@@ -103,7 +104,7 @@ const submitForm = async () => {
   }
 
   await submit(`${props.apiUrl}/store`, 'POST', () => {
-    goBack(props.path);
+    goBack(props.backPath ? props.backPath : props.path);
   });
 };
 </script>
