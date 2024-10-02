@@ -13,7 +13,7 @@
       @update:model-value="handleUpdate(transactionFiltersInit.amount.key, $event)"
     />
     <FilterMultiselectSelect
-      :api-url="dictionaryCategoriesApiUrl"
+      :api-url="dictionaryCategoriesChildApiUrl"
       :label="transactionFiltersInit.categories.label"
       :filter-key="transactionFiltersInit.categories.key"
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.categories.key) as typeof transactionFiltersInit.categories.value"
@@ -60,7 +60,7 @@ import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
 import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
-import { dictionaryAccountsApiUrl, dictionaryCategoriesApiUrl } from '~/utils/dictionary';
+import { dictionaryAccountsApiUrl, dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
 import FilterMoney from '~/components/filters/FilterMoney.vue';
 
 const filters = useFiltersStore();

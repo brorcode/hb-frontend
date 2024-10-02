@@ -14,7 +14,7 @@
       :field-key="form.category_id.key"
       :errors="form.category_id.errors"
       :relation-value="form.category_id.relation_value"
-      :api-url="dictionaryCategoriesApiUrl"
+      :api-url="dictionaryCategoriesChildApiUrl"
       :mode="mode"
       @update:model-value="handleFieldUpdate(form.category_id.key, $event)"
     />
@@ -77,7 +77,7 @@
 import { defineProps } from 'vue';
 import FormSelect from '~/components/form/FormSelect.vue';
 import type { UpsertMode } from '~/utils/pageMode';
-import { dictionaryCategoriesApiUrl } from '~/utils/dictionary';
+import { dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
 import FormMoney from '~/components/form/FormMoney.vue';
 
 defineProps<{
