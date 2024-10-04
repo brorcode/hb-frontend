@@ -71,7 +71,7 @@ const filters = useFiltersStore();
 const list = useListStore();
 const currentPage = ref(1);
 const perPage = ref(config.public.perPage);
-const sorting = reactive<Sorting>(props.defaultSort ?? defaultSorting);
+const sorting = reactive<Sorting>(props.defaultSort ?? deepCopy(defaultSorting) as Sorting);
 const { items, pending, fetchListData, handleDeleteItem } = useApi();
 const { clearRelation } = useResourceRelation(null);
 

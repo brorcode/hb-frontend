@@ -9,8 +9,6 @@ export enum Permission {
   ACCOUNTS_VIEW = 'accounts view',
   TAGS_VIEW = 'tags view',
   CATEGORY_POINTERS_VIEW = 'category pointers view',
-  PROFILE_VIEW = 'profile view',
-  PROFILE_EDIT = 'profile edit',
   // DASHBOARD_VIEW = 'dashboard view',
 }
 
@@ -37,7 +35,5 @@ export const routePermissions: RoutePermissions = {
 
   'category-pointers': Permission.CATEGORY_POINTERS_VIEW,
 
-  'profile': Permission.PROFILE_VIEW,
-  'verify-email-id-hash': Permission.PROFILE_EDIT,
   // 'dashboard': Permission.DASHBOARD_VIEW,
 };

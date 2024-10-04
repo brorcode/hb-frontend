@@ -33,6 +33,7 @@ const accountColumns: AccountColumn[] = [
   {
     field: 'amount',
     header: 'Баланс',
+    sortable: false,
     body: (row: AccountRow) => toCurrency(row.amount),
   },
   {

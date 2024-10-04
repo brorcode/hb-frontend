@@ -185,7 +185,7 @@ const emit = defineEmits(['pageChange', 'perPageChange', 'applySorting', 'delete
 const modal = useModalStore();
 const list = useListStore();
 
-const sorting = reactive<Sorting>(props.defaultSort ?? defaultSorting);
+const sorting = reactive<Sorting>(props.defaultSort ?? deepCopy(defaultSorting) as Sorting);
 const selectedRows = ref<number[]>([]);
 
 watch(() => list.resetSelectedRows, reset => reset && clearSelectedRows());

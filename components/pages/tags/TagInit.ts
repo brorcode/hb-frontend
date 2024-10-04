@@ -33,6 +33,7 @@ const tagColumns: TagColumn[] = [
   {
     field: 'amount',
     header: 'Сумма',
+    sortable: false,
     body: (row: TagRow) => toCurrency(row.amount),
   },
   {
