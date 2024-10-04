@@ -15,21 +15,19 @@
             <button
               :disabled="pending"
               data-testid="save-category-pointers-button"
-              class="inline-flex justify-center rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
+              class="inline-flex justify-center rounded-md bg-yellow-600 disabled:bg-yellow-300 disabled:cursor-not-allowed px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
               @click.prevent="refreshList"
             >
               Отменить
             </button>
           </div>
 
-          <button
-            :disabled="pending"
+          <AppActionButton
+            :pending="pending"
+            text="Сохранить"
             data-testid="save-category-pointers-button"
-            class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click.prevent="savePointers"
-          >
-            Сохранить
-          </button>
+          />
         </div>
       </div>
     </AppCard>
@@ -118,6 +116,7 @@
 import { useApi } from '~/composables/useApi';
 import { categoryPointerApiUrl } from '~/components/pages/category-pointers/CategoryPointerInit';
 import CategoryPointerItem from '~/components/pages/category-pointers/CategoryPointerItem.vue';
+import AppActionButton from '~/components/AppActionButton.vue';
 
 const { pending, apiFetch } = useApi();
 const errors = ref<ResponseErrors | null>(null);
