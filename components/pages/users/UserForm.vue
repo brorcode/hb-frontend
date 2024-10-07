@@ -18,6 +18,7 @@
       autocomplete="username"
       @update:model-value="handleFieldUpdate(form.email.key, $event)"
     />
+    <div class="sm:col-span-2" />
     <FormText
       :mode="mode"
       :label="form.password.label"
@@ -27,6 +28,15 @@
       type="password"
       autocomplete="new-password"
       @update:model-value="handleFieldUpdate(form.password.key, $event)"
+    />
+    <FormText
+      :label="form.password_confirmation.label"
+      :field-key="form.password_confirmation.key"
+      :value="form.password_confirmation.value"
+      :errors="form.password_confirmation.errors"
+      type="password"
+      autocomplete="new-password"
+      @update:model-value="handleFieldUpdate(form.password_confirmation.key, $event)"
     />
   </FormGrid>
 </template>

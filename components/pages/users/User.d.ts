@@ -25,6 +25,7 @@ type UserFormFields = {
   name: string;
   email: string;
   password: string;
+  password_confirmation: string;
 };
 
 type UserForm = Form<UserFormFields>;
