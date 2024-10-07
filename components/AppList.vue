@@ -31,7 +31,6 @@
         :list-data="items?.data ?? []"
         :meta="items?.meta"
         :table-actions="tableActions"
-        :is-relation="isRelation"
         :default-sort="defaultSort"
         @page-change="handlePageChange"
         @per-page-change="handlePerPageChange"

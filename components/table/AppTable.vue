@@ -138,7 +138,6 @@
                   :to="`${path}/${row.id}/${pageMode.VIEW}`"
                 ><EyeIcon class="h-5 w-5" /></NuxtLink>
                 <TrashIcon
-                  v-if="!isRelation"
                   class="text-red-600 h-5 w-5 cursor-pointer"
                   @click="() => deleteItem(row.id)"
                 />
@@ -177,7 +176,6 @@ const props = defineProps<{
   listData: Row[];
   meta?: ResponseMeta;
   tableActions?: TableAction[];
-  isRelation?: boolean;
   defaultSort?: Sorting;
 }>();
 
