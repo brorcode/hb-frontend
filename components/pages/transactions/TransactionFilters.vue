@@ -6,6 +6,14 @@
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.id.key) as typeof transactionFiltersInit.id.value"
       @update:model-value="handleUpdate(transactionFiltersInit.id.key, $event)"
     />
+    <FilterSelect
+      :api-url="dictionaryTransactionTypesApiUrl"
+      :label="transactionFiltersInit.type_id.label"
+      :filter-key="transactionFiltersInit.type_id.key"
+      :searchable="false"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.type_id.key) as typeof transactionFiltersInit.type_id.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.type_id.key, $event)"
+    />
     <FilterMoney
       :label="transactionFiltersInit.amount.label"
       :filter-key="transactionFiltersInit.amount.key"
@@ -60,8 +68,13 @@ import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
 import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
-import { dictionaryAccountsApiUrl, dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
+import {
+  dictionaryAccountsApiUrl,
+  dictionaryCategoriesChildApiUrl,
+  dictionaryTransactionTypesApiUrl,
+} from '~/utils/dictionary';
 import FilterMoney from '~/components/filters/FilterMoney.vue';
+import FilterSelect from '~/components/filters/FilterSelect.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(transactionFilterName, transactionFiltersInit);
