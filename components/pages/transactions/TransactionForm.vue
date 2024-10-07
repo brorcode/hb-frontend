@@ -19,6 +19,8 @@
       @update:model-value="handleFieldUpdate(form.category_id.key, $event)"
     />
 
+    <div class="sm:col-span-2" />
+
     <FormSelect
       :label="form.account_id.label"
       :field-key="form.account_id.key"
@@ -28,6 +30,18 @@
       :mode="mode"
       @update:model-value="handleFieldUpdate(form.account_id.key, $event)"
     />
+
+    <FormSelect
+      :label="form.loan_id.label"
+      :field-key="form.loan_id.key"
+      :errors="form.loan_id.errors"
+      :relation-value="form.loan_id.relation_value"
+      :api-url="dictionaryLoansApiUrl"
+      :mode="mode"
+      @update:model-value="handleFieldUpdate(form.loan_id.key, $event)"
+    />
+
+    <div class="sm:col-span-2" />
 
     <FormDateTime
       :label="form.created_at.label"

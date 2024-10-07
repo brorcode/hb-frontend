@@ -41,6 +41,13 @@
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.tags.key) as typeof transactionFiltersInit.tags.value"
       @update:model-value="handleUpdate(transactionFiltersInit.tags.key, $event)"
     />
+    <FilterMultiselectSelect
+      :api-url="dictionaryLoansApiUrl"
+      :label="transactionFiltersInit.loans.label"
+      :filter-key="transactionFiltersInit.loans.key"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.loans.key) as typeof transactionFiltersInit.loans.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.loans.key, $event)"
+    />
     <FilterDate
       :label="transactionFiltersInit.created_at_after.label"
       :filter-key="transactionFiltersInit.created_at_after.key"

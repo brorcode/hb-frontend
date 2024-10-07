@@ -25,6 +25,7 @@ type TransactionFilters = Filters<{
   type_id: number | null;
   categories: MultiSelect;
   accounts: MultiSelect;
+  loans: MultiSelect;
   tags: MultiSelect;
   created_at_after: Date | null;
   created_at_before: Date | null;
@@ -34,6 +35,7 @@ type TransactionFormFields = {
   amount: number | null;
   category_id: number | null;
   account_id: number | null;
+  loan_id: number | null;
   created_at: Date | string | null;
   is_debit: boolean;
   is_transfer: boolean;

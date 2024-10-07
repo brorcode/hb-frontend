@@ -30,6 +30,11 @@ const transactionFiltersInit: TransactionFilters = {
     value: [],
     label: 'Аккаунты',
   },
+  loans: {
+    key: 'loans',
+    value: [],
+    label: 'Долги',
+  },
   tags: {
     key: 'tags',
     value: [],
@@ -65,6 +70,14 @@ const transactionFormInit: TransactionForm = {
     label: 'Аккаунт',
     errors: [],
   },
+  loan_id: {
+    key: 'loan_id',
+    value: null,
+    relation_key: 'loan',
+    relation_value: null,
+    label: 'Долг',
+    errors: [],
+  },
   created_at: { key: 'created_at', value: null, label: 'Дата', errors: [] },
   is_debit: { key: 'is_debit', value: false, label: 'Доход?', errors: [] },
   is_transfer: { key: 'is_transfer', value: false, label: 'Перевод?', errors: [] },
@@ -73,7 +86,7 @@ const transactionFormInit: TransactionForm = {
     value: null,
     relation_key: 'account',
     relation_value: null,
-    label: 'Account To',
+    label: 'На Аккаунт',
     errors: [],
   },
 };

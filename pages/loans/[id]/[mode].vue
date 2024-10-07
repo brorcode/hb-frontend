@@ -10,16 +10,16 @@
       :relation-resource="{ key: 'loan_id', resource: 'transactions' }"
     />
 
-    <!--    <AppListRelation -->
-    <!--      title="Транзакции" -->
-    <!--      title-singular="Транзакцию" -->
-    <!--      path="/transactions" -->
-    <!--      :api-url="transactionApiUrl" -->
-    <!--      :columns="transactionColumns" -->
-    <!--      filter-key="loans" -->
-    <!--      filter-name="loanTransactionsFilter" -->
-    <!--      :init-filters="transactionFiltersInit" -->
-    <!--    /> -->
+    <AppListRelation
+      title="Транзакции"
+      title-singular="Транзакцию"
+      path="/transactions"
+      :api-url="transactionApiUrl"
+      :columns="transactionColumns"
+      filter-key="loans"
+      filter-name="loanTransactionsFilter"
+      :init-filters="transactionFiltersInit"
+    />
   </div>
 </template>
 

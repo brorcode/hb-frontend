@@ -76,13 +76,13 @@ export function useForm<T, R = Row>(initialForm: Form<T>) {
       const formKey = key as keyof T;
       const relationKey = form[formKey].relation_key;
 
-      if (relationKey !== undefined) {
-        form[formKey].relation_value = data[relationKey];
-        form[formKey].value = data[relationKey].id;
-        return;
-      }
       if (data[key] !== undefined) {
         form[formKey].value = data[key];
+      }
+
+      if (relationKey !== undefined && data[relationKey]) {
+        form[formKey].relation_value = data[relationKey];
+        form[formKey].value = data[relationKey].id;
       }
     });
   };
