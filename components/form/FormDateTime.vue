@@ -12,9 +12,9 @@
         :id="`form-${fieldKey}`"
         :model-value="value"
         :data-testid="`form-${fieldKey}`"
-        format="dd-MM-yyyy HH:mm:ss"
-        :enable-time-picker="true"
-        :time-picker-inline="true"
+        :format="enableTimePicker ? 'dd-MM-yyyy HH:mm:ss' : 'dd-MM-yyyy'"
+        :enable-time-picker="enableTimePicker"
+        :time-picker-inline="enableTimePicker"
         :disabled="mode === pageMode.VIEW"
         :class="[errors.length ? 'datepicker-error' : '']"
         @update:model-value="updateValue"
@@ -33,13 +33,16 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
-defineProps<{
+withDefaults(defineProps<{
   label: string;
   fieldKey: string;
   value: Date | string | null;
   errors: string[];
   mode?: UpsertMode;
-}>();
+  enableTimePicker?: boolean;
+}>(), {
+  enableTimePicker: true,
+});
 
 const emit = defineEmits(['update:modelValue']);
 

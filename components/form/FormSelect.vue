@@ -16,13 +16,13 @@
         label="name"
         :value="relationValue"
         mode="single"
-        placeholder="Поиск..."
+        :placeholder="searchable ? 'Поиск...' : ''"
         :filter-results="false"
         :min-chars="1"
         :resolve-on-load="true"
         :delay="300"
         :disabled="mode === pageMode.VIEW || disabled"
-        :searchable="true"
+        :searchable="searchable"
         :object="true"
         :options="fetchItems"
         :loading="pending"
@@ -45,7 +45,7 @@ import { useApi } from '~/composables/useApi';
 import '@vueform/multiselect/themes/default.css';
 import { pageMode, type UpsertMode } from '~/utils/pageMode';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   label?: string;
   fieldKey: string;
   relationValue?: RelationOption | null;
@@ -53,7 +53,10 @@ const props = defineProps<{
   mode?: UpsertMode;
   disabled?: boolean;
   apiUrl: string;
-}>();
+  searchable?: boolean;
+}>(), {
+  searchable: true,
+});
 
 const emit = defineEmits(['update:modelValue']);
 

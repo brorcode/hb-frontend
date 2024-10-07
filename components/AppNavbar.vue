@@ -135,6 +135,12 @@ const navigation = [
     TagIcon,
     'Указатели Категорий',
   ),
+  ...generateNavigationItems(
+    Permission.LOANS_VIEW,
+    '/loans',
+    TagIcon,
+    'Долги',
+  ),
 ];
 
 const teams = [
