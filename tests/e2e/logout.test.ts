@@ -14,21 +14,14 @@ test.describe('Logout Page', () => {
     // Create a new page in the context
     const page = await context.newPage();
 
-    await page.route('*/**/api/v1/users', async (route) => {
+    await page.route('*/**/api/v1/profile', async (route) => {
       const json = {
-        data: [
-          {
-            id: 1,
-            name: 'Test User',
-            email: 'test@test.test',
-            createdAt: '2024-08-07T09:47:05.000000Z',
-            updatedAt: '2024-08-08T09:47:05.000000Z',
-          },
-        ],
-        meta: {
-          perPage: 10,
-          currentPage: 1,
-          hasNextPage: false,
+        data: {
+          id: 1,
+          name: 'Test User',
+          email: 'test@test.test',
+          created_at: '2024-08-07T09:47:05.000000Z',
+          updated_at: '2024-08-08T09:47:05.000000Z',
         },
       };
       await route.fulfill({ json });
@@ -48,10 +41,10 @@ test.describe('Logout Page', () => {
       await route.fulfill({ status: 204 });
     });
 
-    await page.goto('/users');
+    await page.goto('/profile');
 
     await page.getByRole('button', { name: 'Open user menu' }).click();
-    await page.getByRole('menuitem', { name: 'Sign out' }).click();
+    await page.getByRole('menuitem', { name: 'Выйти' }).click();
 
     await expect(page).toHaveURL('/login');
   });

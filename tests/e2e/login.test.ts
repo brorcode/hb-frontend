@@ -3,7 +3,7 @@ import { expect, test } from '@nuxt/test-utils/playwright';
 test.describe('Login Page', () => {
   test('contains title', async ({ page }) => {
     await page.goto('/login');
-    await expect(page.getByRole('heading')).toHaveText('Contact sales');
+    await expect(page.getByRole('heading')).toHaveText('Вход');
   });
 
   test('displays validation error on empty fields', async ({ page }) => {
@@ -59,21 +59,14 @@ test.describe('Login Page', () => {
       await route.fulfill({ json });
     });
 
-    await page.route('*/**/api/v1/users', async (route) => {
+    await page.route('*/**/api/v1/profile', async (route) => {
       const json = {
-        data: [
-          {
-            id: 1,
-            name: 'Test User',
-            email: 'test@test.test',
-            createdAt: '2024-08-07T09:47:05.000000Z',
-            updatedAt: '2024-08-08T09:47:05.000000Z',
-          },
-        ],
-        meta: {
-          perPage: 10,
-          currentPage: 1,
-          hasNextPage: false,
+        data: {
+          id: 1,
+          name: 'Test User',
+          email: 'test@test.test',
+          created_at: '2024-08-07T09:47:05.000000Z',
+          updated_at: '2024-08-08T09:47:05.000000Z',
         },
       };
       await route.fulfill({ json });
@@ -86,9 +79,13 @@ test.describe('Login Page', () => {
 
     await page.getByTestId('form-submit-button').click();
 
-    await expect(page).toHaveURL('/users');
-    await expect(page.getByText('test@test.test')).toBeVisible();
-    await expect(page.getByText('07-08-2024')).toBeVisible();
-    await expect(page.getByText('08-08-2024')).toBeVisible();
+    await expect(page).toHaveURL('/profile');
+
+    const nameValue = await page.getByTestId('form-name').inputValue();
+    const emailValue = await page.getByTestId('form-email').inputValue();
+
+    expect(nameValue).toEqual('Test User');
+    expect(emailValue).toEqual('test@test.test');
+    await expect(page.getByText('Ваша электронная почта не подтверждена.')).toBeVisible();
   });
 });

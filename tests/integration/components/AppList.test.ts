@@ -16,15 +16,15 @@ mockNuxtImport('useApi', () => {
           id: 1,
           name: 'test1',
           email: 'test@email1.com',
-          createdAt: '2024-08-08T09:47:05.000000Z',
-          updatedAt: '2024-08-08T09:47:05.000000Z',
+          created_at: '2024-08-08T09:47:05.000000Z',
+          updated_at: '2024-08-08T09:47:05.000000Z',
         },
         {
           id: 2,
           name: 'test2',
           email: 'test@email2.com',
-          createdAt: '2024-08-08T09:47:05.000000Z',
-          updatedAt: '2024-08-08T09:47:05.000000Z',
+          created_at: '2024-08-08T09:47:05.000000Z',
+          updated_at: '2024-08-08T09:47:05.000000Z',
         },
       ],
       meta: {
@@ -67,10 +67,10 @@ describe('AppList', () => {
 
     expect(filters.getFilters(userFilterName)).toEqual({
       id: { key: 'id', value: 1, label: 'ID' },
-      name: { key: 'name', value: 'test filter value', label: 'Name' },
+      name: { key: 'name', value: 'test filter value', label: 'Имя' },
     });
     expect(component.html()).toContain('ID: 1');
-    expect(component.html()).toContain('Name: test filter value');
+    expect(component.html()).toContain('Имя: test filter value');
 
     const clearFiltersButton = component.find('button[data-testid="clear-filter-button"]');
     await clearFiltersButton.trigger('click');
@@ -81,7 +81,7 @@ describe('AppList', () => {
 
     expect(filters.getFilters(userFilterName)).toEqual({});
     expect(component.html()).not.toContain('ID: 1');
-    expect(component.html()).not.toContain('Name: test filter value');
+    expect(component.html()).not.toContain('Имя: test filter value');
   });
 
   it('can clear applied filters one by one', async () => {
@@ -107,10 +107,10 @@ describe('AppList', () => {
 
     expect(filters.getFilters(userFilterName)).toEqual({
       id: { key: 'id', value: 1, label: 'ID' },
-      name: { key: 'name', value: 'test filter value', label: 'Name' },
+      name: { key: 'name', value: 'test filter value', label: 'Имя' },
     });
     expect(component.html()).toContain('ID: 1');
-    expect(component.html()).toContain('Name: test filter value');
+    expect(component.html()).toContain('Имя: test filter value');
 
     // remove ID filter
     const removeIdFilterButton = component.find('button[data-testid="remove-filter-id-button"]');
@@ -118,10 +118,10 @@ describe('AppList', () => {
     const appFilters = component.findComponent(AppFilter);
     expect(appFilters.emitted('apply-filters')).toBeTruthy();
     expect(filters.getFilters(userFilterName)).toEqual({
-      name: { key: 'name', value: 'test filter value', label: 'Name' },
+      name: { key: 'name', value: 'test filter value', label: 'Имя' },
     });
     expect(component.html()).not.toContain('ID: 1');
-    expect(component.html()).toContain('Name: test filter value');
+    expect(component.html()).toContain('Имя: test filter value');
 
     // remove Name filter
     const removeNameFilterButton = component.find(
@@ -132,7 +132,7 @@ describe('AppList', () => {
     expect(filters.getFilters(userFilterName)).toEqual({});
 
     expect(component.html()).not.toContain('ID: 1');
-    expect(component.html()).not.toContain('Name: test filter value');
+    expect(component.html()).not.toContain('Имя: test filter value');
   });
 
   it('can apply filters', async () => {
@@ -163,7 +163,7 @@ describe('AppList', () => {
 
     expect(filters.preSavedFilters[userFilterName]).toEqual({
       id: { key: 'id', value: 123, label: 'ID' },
-      name: { key: 'name', value: '', label: 'Name' },
+      name: { key: 'name', value: '', label: 'Имя' },
     });
     expect(filters.getFilters(userFilterName)).toEqual({});
 
@@ -173,7 +173,7 @@ describe('AppList', () => {
 
     expect(filters.preSavedFilters[userFilterName]).toEqual({
       id: { key: 'id', value: 123, label: 'ID' },
-      name: { key: 'name', value: '', label: 'Name' },
+      name: { key: 'name', value: '', label: 'Имя' },
     });
     expect(filters.getFilters(userFilterName)).toEqual({
       id: { key: 'id', value: 123, label: 'ID' },
