@@ -94,50 +94,50 @@
       />
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:gap-6 2xl:gap-7.5">
-      <AppCard>
-        <h4 class="text-title-md font-bold text-black">
-          Накопления
-        </h4>
-        <div
-          v-for="item in totalByMonths?.data"
-          :key="`totla_${item.id}`"
-          class="flex justify-between"
-        >
-          <div class="flex justify-between gap-1 w-7/12 text-sm font-medium">
-            <span>{{ item.month }}</span>
-            <span
-              :class="[
-                item.down ? 'text-red-600' : 'text-green-600',
-                'flex items-center gap-1 text-sm font-medium text-meta-3',
-              ]"
-            >
-              {{ item.percentage }}%
-              <ArrowDownIcon
-                v-if="item.down"
-                class="h-4 w-4"
-              />
-              <ArrowUpIcon
-                v-else
-                class="h-4 w-4"
-              />
-            </span>
-          </div>
-          <div class="text-sm font-medium text-meta-3">
-            {{ toCurrency(item.total) }}
-          </div>
+    <!--    <div class="grid grid-cols-1 gap-4 md:gap-6 2xl:gap-7.5"> -->
+    <!--      <AppCard> -->
+    <!--        <h4 class="text-title-md font-bold text-black"> -->
+    <!--          Накопления -->
+    <!--        </h4> -->
+    <!--        <div -->
+    <!--          v-for="item in totalByMonths?.data" -->
+    <!--          :key="`totla_${item.id}`" -->
+    <!--          class="flex justify-between" -->
+    <!--        > -->
+    <!--          <div class="flex justify-between gap-1 w-7/12 text-sm font-medium"> -->
+    <!--            <span>{{ item.month }}</span> -->
+    <!--            <span -->
+    <!--              :class="[ -->
+    <!--                item.down ? 'text-red-600' : 'text-green-600', -->
+    <!--                'flex items-center gap-1 text-sm font-medium text-meta-3', -->
+    <!--              ]" -->
+    <!--            > -->
+    <!--              {{ item.percentage }}% -->
+    <!--              <ArrowDownIcon -->
+    <!--                v-if="item.down" -->
+    <!--                class="h-4 w-4" -->
+    <!--              /> -->
+    <!--              <ArrowUpIcon -->
+    <!--                v-else -->
+    <!--                class="h-4 w-4" -->
+    <!--              /> -->
+    <!--            </span> -->
+    <!--          </div> -->
+    <!--          <div class="text-sm font-medium text-meta-3"> -->
+    <!--            {{ toCurrency(item.total) }} -->
+    <!--          </div> -->
 
-          <div class="text-sm font-medium text-meta-3">
-            {{ toCurrency(item.balance ?? 0) }}
-          </div>
-        </div>
-      </AppCard>
-    </div>
+    <!--          <div class="text-sm font-medium text-meta-3"> -->
+    <!--            {{ toCurrency(item.balance ?? 0) }} -->
+    <!--          </div> -->
+    <!--        </div> -->
+    <!--      </AppCard> -->
+    <!--    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/vue/20/solid';
+// import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/vue/20/solid';
 import Multiselect from '@vueform/multiselect';
 import { useApi } from '~/composables/useApi';
 import { toCurrency } from '~/utils/money';
