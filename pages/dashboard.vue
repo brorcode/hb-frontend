@@ -2,20 +2,16 @@
   <div class="space-y-4 md:space-y-6 2xl:space-y-7.5">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
       <AppCard>
-        <div class="flex items-end justify-between">
-          <div>
-            <h4 class="text-title-md font-bold text-black">
-              Баланс
-            </h4>
-            <span class="text-sm font-medium">{{ toCurrency(balance) }}</span>
-          </div>
-        </div>
+        <h4 class="text-title-md font-bold text-black">
+          Баланс
+        </h4>
+        <span class="text-sm font-medium">{{ toCurrency(balance) }}</span>
       </AppCard>
 
       <AppCard>
-        <div class="block text-sm font-medium leading-6 text-gray-900">
+        <h4 class="text-title-md mb-2 font-bold text-black">
           Период
-        </div>
+        </h4>
         <Multiselect
           v-model="months"
           mode="single"
@@ -38,14 +34,10 @@
       </AppCard>
 
       <AppCard>
-        <div class="flex items-end justify-between">
-          <div>
-            <h4 class="text-title-md font-bold text-black">
-              Накопления
-            </h4>
-            <span class="text-sm font-medium">{{ profit }}</span>
-          </div>
-        </div>
+        <h4 class="text-title-md font-bold text-black">
+          Накопления
+        </h4>
+        <span class="text-sm font-medium">{{ profit }}</span>
       </AppCard>
     </div>
 
@@ -164,8 +156,12 @@ const loadData = async () => {
 };
 
 const profit = computed(() => {
-  const firstTotal = totalByMonths.value?.data[0].balance ?? 0;
-  const lastTotal = totalByMonths.value?.data[totalByMonths.value?.data.length - 1].balance ?? 0;
+  const firstTotal = totalByMonths.value?.data[0]?.balance ?? 0;
+  const lastTotal = totalByMonths.value?.data[totalByMonths.value?.data.length - 1]?.balance ?? 0;
+
+  if (firstTotal === 0 && lastTotal === 0) {
+    return 'Нет данных за выбранный период';
+  }
 
   return toCurrency(firstTotal - lastTotal);
 });
