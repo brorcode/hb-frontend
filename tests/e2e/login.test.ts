@@ -35,7 +35,7 @@ test.describe('Login Page', () => {
     await expect(page.getByText('Поле пароль обязательно.')).toBeVisible();
   });
 
-  test('redirects to users on successful login', async ({ page }) => {
+  test('redirects to users after successful login', async ({ page }) => {
     await page.context().addCookies([
       {
         name: 'XSRF-TOKEN',
@@ -59,19 +59,6 @@ test.describe('Login Page', () => {
       await route.fulfill({ json });
     });
 
-    await page.route('*/**/api/v1/profile', async (route) => {
-      const json = {
-        data: {
-          id: 1,
-          name: 'Test User',
-          email: 'test@test.test',
-          created_at: '2024-08-07T09:47:05.000000Z',
-          updated_at: '2024-08-08T09:47:05.000000Z',
-        },
-      };
-      await route.fulfill({ json });
-    });
-
     await page.goto('/login');
 
     await page.getByTestId('form-email').fill('test@test.test');
@@ -79,13 +66,10 @@ test.describe('Login Page', () => {
 
     await page.getByTestId('form-submit-button').click();
 
-    await expect(page).toHaveURL('/profile');
+    await expect(page).toHaveURL('/dashboard');
 
-    const nameValue = await page.getByTestId('form-name').inputValue();
-    const emailValue = await page.getByTestId('form-email').inputValue();
-
-    expect(nameValue).toEqual('Test User');
-    expect(emailValue).toEqual('test@test.test');
-    await expect(page.getByText('Ваша электронная почта не подтверждена.')).toBeVisible();
+    await expect(page.getByText('Баланс')).toBeVisible();
+    await expect(page.getByText('Доходы')).toBeVisible();
+    await expect(page.getByText('Расходы')).toBeVisible();
   });
 });
