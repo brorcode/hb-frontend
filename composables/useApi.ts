@@ -112,9 +112,9 @@ export const useApi = () => {
     }
   };
 
-  const getData = async (endpoint: string) => {
+  const getData = async (endpoint: string, method: HttpMethod = 'GET', body?: Record<string, unknown>) => {
     try {
-      return await apiFetch<BaseItemResponse<Row>>('GET', endpoint)
+      return await apiFetch<BaseItemResponse<Row>>(method, endpoint, body)
         .then(({ data }) => data);
     }
     catch (e) {
