@@ -1,8 +1,14 @@
 <template>
   <AppCard>
-    <h4 class="text-title-md mb-1 font-bold text-black">
-      {{ title }}
-    </h4>
+    <div class="flex justify-between">
+      <h4 class="text-title-md mb-1 font-bold text-black">
+        {{ title }}
+      </h4>
+
+      <div class="text-sm font-bold text-meta-3">
+        {{ toCurrency(total) }}
+      </div>
+    </div>
     <div
       v-if="data?.length === 0"
       class="text-sm font-medium"
@@ -50,6 +56,7 @@ import { toCurrency } from '~/utils/money';
 defineProps<{
   data: DashboardStatItem[] | null;
   title: string;
+  total: number;
   itemKey: string;
 }>();
 </script>

@@ -37,7 +37,7 @@
         <h4 class="text-title-md font-bold text-black">
           Накопления
         </h4>
-        <span class="text-sm font-medium">{{ profit }}</span>
+        <span class="text-sm font-medium">{{ toCurrency(totalByMonths?.total ?? 0) }}</span>
       </AppCard>
     </div>
 
@@ -48,7 +48,7 @@
           :data="[
             {
               name: 'Доходы',
-              color: '#4F46E5',
+              color: '#16A34A',
               data: debitByMonths?.chart?.data ?? [],
             },
             {
@@ -58,7 +58,7 @@
             },
             {
               name: 'Баланс',
-              color: '#16A34A',
+              color: '#4F46E5',
               data: totalByMonths?.chart?.data ?? [],
             },
           ]"
@@ -70,19 +70,62 @@
       <DashboardStat
         :data="debitByMonths?.data ?? []"
         title="Доходы"
+        :total="debitByMonths?.total ?? 0"
         item-key="debit"
       />
 
       <DashboardStat
         :data="creditByMonths?.data ?? []"
         title="Расходы"
+        :total="creditByMonths?.total ?? 0"
         item-key="credit"
       />
 
       <DashboardStat
         :data="totalByMonths?.data ?? []"
         title="Накопления"
+        :total="totalByMonths?.total ?? 0"
         item-key="total"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
+      <AppCard>
+        <h4 class="text-title-md mb-2 font-bold text-black">
+          Количество категорий
+        </h4>
+        <Multiselect
+          v-model="categoryCount"
+          mode="single"
+          value-prop="value"
+          label="name"
+          :can-clear="false"
+          :can-deselect="false"
+          :options="[
+            { value: 5, name: 5 },
+            { value: 10, name: 10 },
+            { value: 20, name: 20 },
+            { value: 30, name: 30 },
+            { value: 40, name: 40 },
+            { value: 50, name: 50 },
+            { value: 0, name: 'Все' },
+          ]"
+          @change="(newValue: number) => loadCategories(newValue)"
+        />
+      </AppCard>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+      <DashboardCategories
+        :data="debitByCategories ?? []"
+        title="Категории Доходов"
+        item-key="debit-categories"
+      />
+
+      <DashboardCategories
+        :data="creditByCategories ?? []"
+        title="Категории Расходов"
+        item-key="credit-categories"
       />
     </div>
 
@@ -135,8 +178,10 @@ import { useApi } from '~/composables/useApi';
 import { toCurrency } from '~/utils/money';
 import DashboardStat from '~/components/pages/dashboard/DashboardStat.vue';
 import ChartLine from '~/components/charts/ChartLine.vue';
+import DashboardCategories from '~/components/pages/dashboard/DashboardCategories.vue';
 
 const months = ref<number | null>(12);
+const categoryCount = ref<number>(20);
 
 const { getData } = useApi();
 const balance = ref(0);
@@ -144,25 +189,24 @@ const debitByMonths = ref<DashboardStats | null>(null);
 const creditByMonths = ref<DashboardStats | null>(null);
 const totalByMonths = ref<DashboardStats | null>(null);
 
+const creditByCategories = ref<DashboardCategory[]>([]);
+const debitByCategories = ref<DashboardCategory[]>([]);
+
 onMounted(async () => {
   await loadData();
 });
 
 const loadData = async () => {
   balance.value = await getData('/api/v1/dashboard/balance') as number;
-  debitByMonths.value = await getData('/api/v1/dashboard/debit-by-month', 'POST', { months: months.value }) as DashboardStats;
-  creditByMonths.value = await getData('/api/v1/dashboard/credit-by-month', 'POST', { months: months.value }) as DashboardStats;
-  totalByMonths.value = await getData('/api/v1/dashboard/total-by-month', 'POST', { months: months.value }) as DashboardStats;
+  debitByMonths.value = await getData('/api/v1/dashboard/debit-by-months', 'POST', { months: months.value }) as DashboardStats;
+  creditByMonths.value = await getData('/api/v1/dashboard/credit-by-months', 'POST', { months: months.value }) as DashboardStats;
+  totalByMonths.value = await getData('/api/v1/dashboard/total-by-months', 'POST', { months: months.value }) as DashboardStats;
+
+  await loadCategories();
 };
 
-const profit = computed(() => {
-  const firstTotal = totalByMonths.value?.data[0]?.balance ?? 0;
-  const lastTotal = totalByMonths.value?.data[totalByMonths.value?.data.length - 1]?.balance ?? 0;
-
-  if (firstTotal === 0 && lastTotal === 0) {
-    return 'Нет данных за выбранный период';
-  }
-
-  return toCurrency(firstTotal - lastTotal);
-});
+const loadCategories = async (count = categoryCount.value) => {
+  creditByCategories.value = await getData('/api/v1/dashboard/credit-by-categories', 'POST', { months: months.value, category_count: count }) as DashboardCategory[];
+  debitByCategories.value = await getData('/api/v1/dashboard/debit-by-categories', 'POST', { months: months.value, category_count: count }) as DashboardCategory[];
+};
 </script>
