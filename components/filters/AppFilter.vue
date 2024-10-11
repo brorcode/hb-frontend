@@ -192,6 +192,10 @@ function displayFilter(filter: Filter) {
     return `${filter.label}: ${formatDate(filter.value)}`;
   }
 
+  if (typeof filter.value === 'object' && filter.value !== null && 'name' in filter.value) {
+    return `${filter.label}: ${filter.value.name}`;
+  }
+
   return `${filter.label}: ${filter.value}`;
 }
 

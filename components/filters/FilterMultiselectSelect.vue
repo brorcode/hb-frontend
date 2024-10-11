@@ -35,7 +35,7 @@ import '@vueform/multiselect/themes/default.css';
 const props = defineProps<{
   label: string;
   filterKey: string;
-  value: number[];
+  value: InputMultiSelect;
   apiUrl: string;
 }>();
 

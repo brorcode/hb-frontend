@@ -8,9 +8,12 @@
         :id="`filter-${filterKey}`"
         :value="value"
         :data-testid="`filter-${filterKey}`"
+        value-prop="id"
+        label="name"
         mode="single"
         :resolve-on-load="true"
         :options="fetchItems"
+        :object="true"
         :loading="pending"
         @change="updateValue"
       />
@@ -26,7 +29,7 @@ import '@vueform/multiselect/themes/default.css';
 const props = defineProps<{
   label: string;
   filterKey: string;
-  value: number | null;
+  value: InputSelect | null;
   apiUrl: string;
 }>();
 
@@ -34,13 +37,13 @@ const emit = defineEmits(['update:modelValue']);
 
 const { items, pending, fetchData } = useApi();
 
-const fetchItems = async (query: string) => {
-  await fetchData(props.apiUrl, { q: query });
+const fetchItems = async () => {
+  await fetchData(props.apiUrl, {});
 
   return items.value;
 };
 
-const updateValue = (value: string) => {
-  emit('update:modelValue', parseInt(value));
+const updateValue = (value: MultiSelect[]) => {
+  emit('update:modelValue', value);
 };
 </script>

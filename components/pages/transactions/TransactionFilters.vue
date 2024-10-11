@@ -8,11 +8,11 @@
     />
     <FilterSelect
       :api-url="dictionaryTransactionTypesApiUrl"
-      :label="transactionFiltersInit.type_id.label"
-      :filter-key="transactionFiltersInit.type_id.key"
+      :label="transactionFiltersInit.type.label"
+      :filter-key="transactionFiltersInit.type.key"
       :searchable="false"
-      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.type_id.key) as typeof transactionFiltersInit.type_id.value"
-      @update:model-value="handleUpdate(transactionFiltersInit.type_id.key, $event)"
+      :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.type.key) as typeof transactionFiltersInit.type.value"
+      @update:model-value="handleUpdate(transactionFiltersInit.type.key, $event)"
     />
     <FilterMoney
       :label="transactionFiltersInit.amount.label"

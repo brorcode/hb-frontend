@@ -21,7 +21,13 @@
       class="flex justify-between"
     >
       <div class="flex justify-between gap-1 w-[65%] text-sm font-medium">
-        <span>{{ item.month }}</span>
+        <div
+          class="flex space-x-1 items-center cursor-pointer"
+          @click="$emit('showTransactions', item.month)"
+        >
+          <span class="hover:underline">{{ item.month }}</span>
+          <ArrowTopRightOnSquareIcon class="h-4 w-4 text-indigo-600" />
+        </div>
         <span
           v-if="item.percentage !== 0"
           :class="[
@@ -51,6 +57,7 @@
 
 <script setup lang="ts">
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/20/solid';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid';
 import { toCurrency } from '~/utils/money';
 
 defineProps<{
@@ -59,4 +66,6 @@ defineProps<{
   total: number;
   itemKey: string;
 }>();
+
+defineEmits(['showTransactions']);
 </script>

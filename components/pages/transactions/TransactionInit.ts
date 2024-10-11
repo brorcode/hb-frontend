@@ -15,8 +15,8 @@ const transactionFiltersInit: TransactionFilters = {
     value: null,
     label: 'Сумма',
   },
-  type_id: {
-    key: 'type_id',
+  type: {
+    key: 'type',
     value: null,
     label: 'Тип',
   },

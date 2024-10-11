@@ -22,7 +22,7 @@ type TransactionColumn = {
 type TransactionFilters = Filters<{
   id: number | null;
   amount: number | null;
-  type_id: number | null;
+  type: RelationOption | null;
   categories: MultiSelect;
   accounts: MultiSelect;
   loans: MultiSelect;

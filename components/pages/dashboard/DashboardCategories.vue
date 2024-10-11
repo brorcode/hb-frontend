@@ -15,7 +15,13 @@
       class="flex justify-between"
     >
       <div class="flex justify-between gap-1 w-[65%] text-sm font-medium">
-        <span>{{ item.title }}</span>
+        <div
+          class="flex space-x-1 items-center cursor-pointer"
+          @click="$emit('showTransactions', { id: item.id, name: item.title })"
+        >
+          <span class="hover:underline">{{ item.title }}</span>
+          <ArrowTopRightOnSquareIcon class="h-4 w-4 text-indigo-600" />
+        </div>
       </div>
       <div class="text-sm font-medium text-meta-3">
         {{ toCurrency(item.total) }}
@@ -25,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid';
 import { toCurrency } from '~/utils/money';
 
 defineProps<{
@@ -32,4 +39,6 @@ defineProps<{
   title: string;
   itemKey: string;
 }>();
+
+defineEmits(['showTransactions']);
 </script>

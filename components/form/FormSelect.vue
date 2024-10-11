@@ -48,7 +48,7 @@ import { pageMode, type UpsertMode } from '~/utils/pageMode';
 const props = withDefaults(defineProps<{
   label?: string;
   fieldKey: string;
-  relationValue?: RelationOption | null;
+  relationValue?: InputSelect | null;
   errors: string[];
   mode?: UpsertMode;
   disabled?: boolean;
@@ -68,7 +68,7 @@ const fetchItems = async (query: string) => {
   return items.value;
 };
 
-const updateValue = (value: RelationOption) => {
+const updateValue = (value: InputSelect) => {
   emit('update:modelValue', value?.id ?? '');
 };
 </script>
