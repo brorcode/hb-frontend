@@ -6,7 +6,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.API_URL,
       homeUrl: '/dashboard',
       loginUrl: '/login',
-      perPage: 10,
+      perPage: 50,
       apiRegisterUrl: 'api/v1/register',
       apiForgotPasswordUrl: 'api/v1/forgot-password',
       apiNewPasswordUrl: 'api/v1/forgot-password',

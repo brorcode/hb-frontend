@@ -8,6 +8,10 @@
     :filter-name="accountFilterName"
     :filters-component="AccountFilters"
     :init-filters="accountFiltersInit"
+    :default-sort="{
+      column: 'name',
+      direction: 'ASC',
+    }"
   />
 </template>
 

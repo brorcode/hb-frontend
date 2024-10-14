@@ -125,7 +125,7 @@
               :key="`tbody-column-${columnIndex}-${column.field}`"
               class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
             >
-              {{ column.body ? column.body(row) : (row[column.field] ?? 'N/A') }}
+              <component :is="handleBody(column, row)" />
             </td>
             <td class="relative whitespace-nowrap px-3 py-4 text-right text-sm font-medium">
               <div class="space-x-2 flex justify-end">
@@ -160,6 +160,7 @@
 <script setup lang="ts">
 import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid';
+import { isVNode } from 'vue';
 import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
 import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
 import AppPagination from '~/components/table/AppPagination.vue';
@@ -252,5 +253,19 @@ const clearSelectedRows = () => {
 const handleAllRowsClick = (event: Event) => {
   const target = event.target as HTMLInputElement;
   selectedRows.value = target.checked ? props.listData.map(row => row.id) : [];
+};
+
+const handleBody = (column: Column, row: Row) => {
+  if (column.body) {
+    const body = column.body(row);
+
+    if (isVNode(body)) {
+      return body;
+    }
+
+    return h('span', { innerHTML: column.body(row) });
+  }
+
+  return h('span', { innerHTML: row[column.field] ?? 'N/A' });
 };
 </script>

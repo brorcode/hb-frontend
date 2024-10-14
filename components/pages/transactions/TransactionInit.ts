@@ -1,5 +1,7 @@
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid';
 import { formatDate } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
+import { NuxtLink } from '#components';
 
 const transactionFilterName = 'transactionFilter';
 const transactionApiUrl = '/api/v1/transactions';
@@ -105,7 +107,22 @@ const transactionColumns: TransactionColumn[] = [
     field: 'category',
     header: 'Категория',
     sortable: false,
-    body: (row: TransactionRow) => row.category.name,
+    body: (row: TransactionRow) => {
+      const route = useRoute();
+
+      if (route.name === 'categories-child-id-mode') {
+        return row.category.name;
+      }
+
+      return h(NuxtLink, {
+        to: `/categories/child/${row.category.id}/view`,
+      }, () => [
+        h('div', { class: 'flex space-x-1 items-center cursor-pointer' }, [
+          h('span', { class: 'hover:underline' }, row.category.name),
+          h(ArrowTopRightOnSquareIcon, { class: 'h-4 w-4 text-indigo-600' }),
+        ]),
+      ]);
+    },
   },
   {
     field: 'account',
