@@ -192,7 +192,7 @@ const transactionTypes = ref<RelationOption[]>([]);
 const months = ref<number>(12);
 const categoryCount = ref<number>(20);
 
-const { getData, fetchData, apiFetch } = useApi();
+const { getData, apiFetch } = useApi();
 const balance = ref(0);
 const debitByMonths = ref<DashboardStats | null>(null);
 const creditByMonths = ref<DashboardStats | null>(null);
@@ -206,8 +206,12 @@ filters.initFilters(transactionFilterName, transactionFiltersInit);
 
 onMounted(async () => {
   await loadData();
-  await fetchData(dictionaryTransactionTypesApiUrl, {});
-  transactionTypes.value = await apiFetch('POST', dictionaryTransactionTypesApiUrl);
+  try {
+    transactionTypes.value = await apiFetch('POST', dictionaryTransactionTypesApiUrl);
+  }
+  catch (e) {
+    return e;
+  }
 });
 
 const loadData = async () => {
