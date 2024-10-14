@@ -23,7 +23,7 @@ const errors = reactive({
   file: [] as string[],
   accountId: [] as string[],
 });
-const accountId = ref();
+const accountId = ref<number | null>(null);
 const formData = new FormData();
 
 const handleFileUpload = (file: File) => {
@@ -57,6 +57,11 @@ const component = markRaw(defineComponent({
 }));
 
 const handleImport = () => {
+  formData.delete('file');
+  accountId.value = null;
+  errors.file = [];
+  errors.accountId = [];
+
   modal.showModal({
     title: 'Импортировать транзакции',
     text: 'Выберите аккаунт и загрузите CSV файл.',

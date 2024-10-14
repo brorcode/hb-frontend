@@ -6,7 +6,7 @@ import { useApi } from '~/composables/useApi';
 export const transactionActions = (): TableAction[] => {
   const modal = useModalStore();
   const list = useListStore();
-  const tagId = ref();
+  const tagId = ref<number | null>(null);
   const errors = ref<string[]>([]);
 
   const { handleListAction } = useApi();
@@ -31,6 +31,9 @@ export const transactionActions = (): TableAction[] => {
   return [
     {
       action: (selectedItems: number[]) => {
+        tagId.value = null;
+        errors.value = [];
+
         modal.showModal({
           title: 'Добавить тег',
           text: 'Выберите тег, который необходимо добавить.',
