@@ -133,51 +133,10 @@
         @show-transactions="goToTransactionsByCategory($event)"
       />
     </div>
-
-    <!--    <div class="grid grid-cols-1 gap-4 md:gap-6 2xl:gap-7.5"> -->
-    <!--      <AppCard> -->
-    <!--        <h4 class="text-title-md font-bold text-black"> -->
-    <!--          Накопления -->
-    <!--        </h4> -->
-    <!--        <div -->
-    <!--          v-for="item in totalByMonths?.data" -->
-    <!--          :key="`totla_${item.id}`" -->
-    <!--          class="flex justify-between" -->
-    <!--        > -->
-    <!--          <div class="flex justify-between gap-1 w-7/12 text-sm font-medium"> -->
-    <!--            <span>{{ item.month }}</span> -->
-    <!--            <span -->
-    <!--              :class="[ -->
-    <!--                item.down ? 'text-red-600' : 'text-green-600', -->
-    <!--                'flex items-center gap-1 text-sm font-medium text-meta-3', -->
-    <!--              ]" -->
-    <!--            > -->
-    <!--              {{ item.percentage }}% -->
-    <!--              <ArrowDownIcon -->
-    <!--                v-if="item.down" -->
-    <!--                class="h-4 w-4" -->
-    <!--              /> -->
-    <!--              <ArrowUpIcon -->
-    <!--                v-else -->
-    <!--                class="h-4 w-4" -->
-    <!--              /> -->
-    <!--            </span> -->
-    <!--          </div> -->
-    <!--          <div class="text-sm font-medium text-meta-3"> -->
-    <!--            {{ toCurrency(item.total) }} -->
-    <!--          </div> -->
-
-    <!--          <div class="text-sm font-medium text-meta-3"> -->
-    <!--            {{ toCurrency(item.balance ?? 0) }} -->
-    <!--          </div> -->
-    <!--        </div> -->
-    <!--      </AppCard> -->
-    <!--    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-// import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/vue/20/solid';
 import Multiselect from '@vueform/multiselect';
 import { useApi } from '~/composables/useApi';
 import { toCurrency } from '~/utils/money';
@@ -222,26 +181,6 @@ const loadData = async () => {
 
   await loadCategories();
 };
-
-// const loadData = async () => {
-//   // Start all API calls concurrently
-//   const [balanceResponse, debitResponse, creditResponse, totalResponse] = await Promise.all([
-//     getData('/api/v1/dashboard/balance') as Promise<number>,
-//     getData('/api/v1/dashboard/debit-by-months', 'POST', { months: months.value }) as Promise<DashboardStats>,
-//     getData('/api/v1/dashboard/credit-by-months', 'POST', { months: months.value }) as Promise<DashboardStats>,
-//     getData('/api/v1/dashboard/total-by-months', 'POST', { months: months.value }) as Promise<DashboardStats>,
-//     loadCategories(),
-//   ]);
-//
-//   // Assign responses to values
-//   balance.value = balanceResponse;
-//   debitByMonths.value = debitResponse;
-//   creditByMonths.value = creditResponse;
-//   totalByMonths.value = totalResponse;
-//
-//   // Load categories after all previous calls are complete
-//   await loadCategories();
-// };
 
 const loadCategories = async (count = categoryCount.value) => {
   creditByCategories.value = await getData('/api/v1/dashboard/credit-by-categories', 'POST', { months: months.value, category_count: count }) as DashboardCategory[];
