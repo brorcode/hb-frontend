@@ -67,7 +67,9 @@ const handleImport = () => {
     text: 'Выберите аккаунт и загрузите CSV файл.',
     action: async () => {
       modal.pending = true;
-      const response = await handleRowsImport(`/api/v1/accounts/${accountId.value}/transactions/import`, formData).finally(() => modal.pending = false);
+      const response = await handleRowsImport(`/api/v1/accounts/${accountId.value}/transactions/import`, formData)
+        .finally(() => modal.pending = false)
+      ;
 
       const error = response as ApiResponseError;
       errors.accountId = error?.response?._data?.errors['account_id'] ?? [];

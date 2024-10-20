@@ -5,14 +5,14 @@
   >
     <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
       <div
-        v-for="notification in store.notifications"
-        v-show="notification.show"
-        :key="notification.id"
+        v-for="messages in store.messages"
+        v-show="messages.show"
+        :key="messages.id"
         class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
       >
         <div
           :class="[
-            notification.success ? 'bg-green-50' : 'bg-red-50',
+            messages.success ? 'bg-green-50' : 'bg-red-50',
             'pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5',
           ]"
         >
@@ -20,7 +20,7 @@
             <div class="flex items-start">
               <div class="flex-shrink-0">
                 <CheckCircleIcon
-                  v-if="notification.success"
+                  v-if="messages.success"
                   class="h-6 w-6 text-green-600"
                   aria-hidden="true"
                 />
@@ -33,31 +33,31 @@
               <div class="ml-3 w-0 flex-1 pt-0.5">
                 <p
                   :class="[
-                    notification.success ? 'text-green-800' : 'text-red-800',
+                    messages.success ? 'text-green-800' : 'text-red-800',
                     'text-sm font-medium',
                   ]"
                 >
-                  {{ notification.title }}
+                  {{ messages.title }}
                 </p>
                 <p
                   :class="[
-                    notification.success ? 'text-green-600' : 'text-red-600',
+                    messages.success ? 'text-green-600' : 'text-red-600',
                     'text-sm font-text-sm',
                   ]"
                 >
-                  {{ notification.message }}
+                  {{ messages.message }}
                 </p>
               </div>
               <div class="ml-4 flex flex-shrink-0">
                 <button
                   type="button"
                   :class="[
-                    notification.success
+                    messages.success
                       ? 'text-green-600 hover:text-green-800'
                       : 'text-red-600 hover:text-red-800',
                     'inline-flex rounded-md focus:outline-none',
                   ]"
-                  @click="store.removeNotification(notification.id)"
+                  @click="store.removeMessage(messages.id)"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon
@@ -77,6 +77,7 @@
 <script setup lang="ts">
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
 import { XMarkIcon } from '@heroicons/vue/24/solid';
+import { useFlashMessagesStore } from '~/stores/flashMessages';
 
-const store = useNotificationsStore();
+const store = useFlashMessagesStore();
 </script>

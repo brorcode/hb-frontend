@@ -1,9 +1,9 @@
 import type { FetchResponse } from 'ofetch';
 import { useFiltersStore } from '~/stores/filters';
-import { useNotificationsStore } from '~/stores/notifications';
 import { useCookie } from '#app';
 import { usePersistentState } from '~/composables/usePersistentState';
 import { UNAUTHENTICATED_STATUSES } from '~/constants/statusCodes';
+import { useFlashMessagesStore } from '~/stores/flashMessages';
 
 type ListDataRequestBody = {
   page: number;
@@ -14,7 +14,7 @@ type ListDataRequestBody = {
 
 export const useApi = () => {
   const config = useRuntimeConfig();
-  const notifications = useNotificationsStore();
+  const flashMessages = useFlashMessagesStore();
   const list = useListStore();
   const [, setUser] = usePersistentState<User>('user');
   const filters = useFiltersStore();
@@ -39,7 +39,7 @@ export const useApi = () => {
           // if successful response
           if (response.status >= 200 && response.status < 300) {
             if (response._data?.message) {
-              notifications.addNotification({
+              flashMessages.addMessage({
                 type: 'success',
                 message: response._data.message,
               });
@@ -47,7 +47,7 @@ export const useApi = () => {
           }
         },
         onResponseError: ({ response }: { response: FetchResponse<BaseResponse> }) => {
-          notifications.addNotification({
+          flashMessages.addMessage({
             message: response._data?.message,
           });
 

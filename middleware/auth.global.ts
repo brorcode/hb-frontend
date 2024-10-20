@@ -1,12 +1,12 @@
 import { useCookie } from '#app';
-import { useNotificationsStore } from '~/stores/notifications';
 import { usePersistentState } from '~/composables/usePersistentState';
 import { routePermissions } from '~/config/routePermissions';
+import { useFlashMessagesStore } from '~/stores/flashMessages';
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const [user] = usePersistentState<User>('user');
   const xsrf = useCookie('XSRF-TOKEN');
-  const notifications = useNotificationsStore();
+  const flashMessages = useFlashMessagesStore();
 
   const excludedRouteNames = [
     'index',
@@ -21,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   if (!user.value || !xsrf.value) {
-    notifications.addNotification({
+    flashMessages.addMessage({
       message: 'Ваша сессия истекла. Пожалуйста, войдите снова.',
     });
 

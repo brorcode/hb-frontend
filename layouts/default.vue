@@ -113,16 +113,8 @@
             >
           </form>
           <div class="flex items-center gap-x-4 lg:gap-x-6">
-            <button
-              type="button"
-              class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon
-                class="h-6 w-6"
-                aria-hidden="true"
-              />
-            </button>
+            <!-- Notifications dropdown -->
+            <AddNotifications />
 
             <!-- Separator -->
             <div
@@ -210,7 +202,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import AppSidebar from '~/components/AppSidebar.vue';
 import { usePersistentState } from '~/composables/usePersistentState';
