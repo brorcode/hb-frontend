@@ -5,7 +5,6 @@
     :form-init="form"
     :api-url="categoryApiUrl"
     path="/categories/child"
-    back-path="/categories"
   />
 </template>
 

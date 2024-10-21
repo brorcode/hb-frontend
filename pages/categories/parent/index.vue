@@ -1,12 +1,12 @@
 <template>
   <AppList
-    title="Категории"
+    title="Категории: Родительские"
     title-singular="Родительскую Категорию"
     path="/categories/parent"
-    :api-url="categoryApiUrl"
+    :api-url="categoryParentApiUrl"
     :columns="categoryColumns"
-    :filter-name="categoryFilterName"
-    :filters-component="CategoryFilters"
+    :filter-name="categoryParentFilterName"
+    :filters-component="CategoryParentFilters"
     :init-filters="categoryFiltersInit"
     :default-sort="{
       column: 'name',
@@ -17,10 +17,10 @@
 
 <script setup lang="ts">
 import {
-  categoryApiUrl,
   categoryColumns,
-  categoryFilterName,
   categoryFiltersInit,
+  categoryParentApiUrl,
+  categoryParentFilterName,
 } from '~/components/pages/categories/CategoryInit';
-import CategoryFilters from '~/components/pages/categories/CategoryFilters.vue';
+import CategoryParentFilters from '~/components/pages/categories/CategoryParentFilters.vue';
 </script>

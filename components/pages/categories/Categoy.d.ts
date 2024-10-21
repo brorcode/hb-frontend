@@ -6,7 +6,7 @@ type CategoryTransactionStats = {
 type Category = {
   id: number;
   name: string;
-  parent_category: RelationOption;
+  parent_category: RelationOption | null;
   transactions_debit: CategoryTransactionStats;
   transactions_credit: CategoryTransactionStats;
   transactions_transfer: CategoryTransactionStats;
@@ -26,6 +26,7 @@ type CategoryColumn = {
 type CategoryFilters = Filters<{
   id: number | null;
   name: string;
+  parent_categories: MultiSelect;
 }>;
 
 type CategoryFormFields = {

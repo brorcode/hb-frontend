@@ -1,8 +1,12 @@
 import { formatDate } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
+import AppRelationLink from '~/components/AppRelationLink.vue';
 
-const categoryFilterName = 'categoryFilter';
+const categoryParentFilterName = 'categoryParentFilter';
+const categoryChildFilterName = 'categoryChildFilter';
 const categoryApiUrl = '/api/v1/categories';
+const categoryParentApiUrl = '/api/v1/categories/parent';
+const categoryChildApiUrl = '/api/v1/categories/child';
 
 const categoryFiltersInit: CategoryFilters = {
   id: {
@@ -14,6 +18,11 @@ const categoryFiltersInit: CategoryFilters = {
     key: 'name',
     value: '',
     label: 'Название',
+  },
+  parent_categories: {
+    key: 'parent_categories',
+    value: [],
+    label: 'Родительские Категории',
   },
 };
 
@@ -38,6 +47,22 @@ const categoryColumns: CategoryColumn[] = [
   {
     field: 'name',
     header: 'Название',
+  },
+  {
+    field: 'parent_category',
+    header: 'Родительская Категория',
+    sortable: false,
+    body: (row: CategoryRow) => {
+      if (!row.parent_category) {
+        return '';
+      }
+
+      return h(AppRelationLink, {
+        item: row.parent_category,
+        routeName: 'categories-parent-id-mode',
+        url: `/categories/parent/${row.parent_category.id}/view`,
+      });
+    },
   },
   // {
   //   field: 'transactions_credit',
@@ -84,7 +109,10 @@ const categoryColumns: CategoryColumn[] = [
 
 export {
   categoryApiUrl,
-  categoryFilterName,
+  categoryParentApiUrl,
+  categoryChildApiUrl,
+  categoryParentFilterName,
+  categoryChildFilterName,
   categoryFormInit,
   categoryFiltersInit,
   categoryColumns,

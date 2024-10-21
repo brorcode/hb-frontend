@@ -6,7 +6,6 @@
       :form-init="categoryFormInit"
       :api-url="categoryApiUrl"
       path="/categories/child"
-      back-path="/categories"
       :has-relation="true"
       :relation-resource="{ key: 'category_id', resource: 'transactions' }"
     />

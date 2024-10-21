@@ -107,9 +107,15 @@ const navigation = [
   ),
   ...generateNavigationItems(
     Permission.CATEGORIES_VIEW,
-    '/categories/',
+    '/categories/parent',
     FolderIcon,
-    'Категории',
+    'Категории: Родительские',
+  ),
+  ...generateNavigationItems(
+    Permission.CATEGORIES_VIEW,
+    '/categories/child',
+    FolderIcon,
+    'Категории: Дочерние',
   ),
   ...generateNavigationItems(
     Permission.ACCOUNTS_VIEW,
