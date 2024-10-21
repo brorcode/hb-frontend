@@ -234,7 +234,9 @@ const handlePerPageChange = (newPerPage: number) => {
 const deleteItem = (id: number) => {
   modal.showModal({
     title: 'Удалить',
-    text: 'Вы уверены, что хотите продолжить?',
+    text: 'Вы уверены, что хотите продолжить? '
+    + 'Это действие нельзя будет отменить. '
+    + 'Все связанные данные с этим элементом будут удалены.',
     action: async () => {
       emit('deleteItem', id);
       modal.hideModal();
