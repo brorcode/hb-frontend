@@ -18,7 +18,6 @@
         mode="single"
         :placeholder="searchable ? 'Поиск...' : ''"
         :filter-results="false"
-        :min-chars="1"
         :resolve-on-load="true"
         :delay="300"
         :disabled="mode === pageMode.VIEW || disabled"
