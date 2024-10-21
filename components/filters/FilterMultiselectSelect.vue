@@ -14,7 +14,6 @@
         placeholder="Поиск..."
         :close-on-select="false"
         :filter-results="false"
-        :min-chars="1"
         :resolve-on-load="true"
         :delay="300"
         :searchable="true"
