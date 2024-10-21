@@ -15,6 +15,7 @@
       title-singular="Дочернюю Категорию"
       path="/categories/child"
       :api-url="categoryChildApiUrl"
+      :api-delete-url="categoryApiUrl"
       :columns="categoryColumns"
       filter-key="parent_categories"
       filter-name="categoryParentChildFilter"

@@ -4,6 +4,7 @@
     title-singular="Дочернюю Категорию"
     path="/categories/child"
     :api-url="categoryChildApiUrl"
+    :api-delete-url="categoryApiUrl"
     :columns="categoryColumns"
     :filter-name="categoryChildFilterName"
     :filters-component="CategoryChildFilters"
@@ -17,6 +18,7 @@
 
 <script setup lang="ts">
 import {
+  categoryApiUrl,
   categoryChildApiUrl,
   categoryChildFilterName,
   categoryColumns,

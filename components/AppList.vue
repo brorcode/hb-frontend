@@ -56,6 +56,7 @@ const props = defineProps<{
   titleSingular: string;
   path: string;
   apiUrl: string;
+  apiDeleteUrl?: string;
   columns: Column[];
   filterName: string;
   initFilters: Filters<unknown>;
@@ -100,7 +101,7 @@ const handlePerPageChange = (newPerPage: number) => {
 };
 
 const handleDelete = async (id: number) => {
-  await handleDeleteItem(props.apiUrl, id);
+  await handleDeleteItem(props.apiDeleteUrl ?? props.apiUrl, id);
 };
 
 const applyFilters = () => {

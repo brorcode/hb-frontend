@@ -4,6 +4,7 @@
     :title-singular="titleSingular"
     :path="path"
     :api-url="apiUrl"
+    :api-delete-url="apiDeleteUrl"
     :columns="columns"
     :filter-name="filterName"
     :init-filters="initFilters"
@@ -20,6 +21,7 @@ const props = defineProps<{
   titleSingular: string;
   path: string;
   apiUrl: string;
+  apiDeleteUrl?: string;
   columns: Column[];
   filterKey?: string;
   filterName: string;
