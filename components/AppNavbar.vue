@@ -98,12 +98,12 @@ const generateNavigationItems = (permission: Permission, href: string, icon: Com
 };
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Статистика', href: '/dashboard', icon: HomeIcon },
   ...generateNavigationItems(
     Permission.USERS_VIEW,
     '/users',
     UsersIcon,
-    'Users',
+    'Пользователи',
   ),
   ...generateNavigationItems(
     Permission.CATEGORIES_VIEW,

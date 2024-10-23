@@ -21,7 +21,13 @@
         :options="fetchItems"
         :loading="pending"
         @change="updateValue"
-      />
+      >
+        <template #nooptions>
+          <div class="multiselect-no-options">
+            Ничего не найдено
+          </div>
+        </template>
+      </Multiselect>
     </div>
   </div>
 </template>

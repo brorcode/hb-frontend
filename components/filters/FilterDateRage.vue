@@ -13,6 +13,9 @@
         :data-testid="`filter-${filterKey}`"
         format="dd-MM-yyyy"
         :range="true"
+        locale="ru-RU"
+        select-text="Выбрать"
+        cancel-text="Отмена"
         :enable-time-picker="false"
         @update:model-value="updateValue"
       />

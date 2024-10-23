@@ -28,7 +28,7 @@ const tagColumns: TagColumn[] = [
   },
   {
     field: 'name',
-    header: 'Name',
+    header: 'Название',
   },
   {
     field: 'amount',

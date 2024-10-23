@@ -27,7 +27,13 @@
         :loading="pending"
         :class="[errors.length ? 'multiselect-error' : '']"
         @change="updateValue"
-      />
+      >
+        <template #nooptions>
+          <div class="multiselect-no-options">
+            Ничего не найдено
+          </div>
+        </template>
+      </Multiselect>
       <p
         v-if="errors.length"
         class="mt-1 text-xs text-red-600"

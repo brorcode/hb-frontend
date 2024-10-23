@@ -16,6 +16,9 @@
         :enable-time-picker="enableTimePicker"
         :time-picker-inline="enableTimePicker"
         :disabled="mode === pageMode.VIEW"
+        locale="ru-RU"
+        select-text="Выбрать"
+        cancel-text="Отмена"
         :class="[errors.length ? 'datepicker-error' : '']"
         @update:model-value="updateValue"
       />
