@@ -16,7 +16,7 @@
       :api-url="dictionaryCategoriesParentApiUrl"
       :label="categoryFiltersInit.parent_categories.label"
       :filter-key="categoryFiltersInit.parent_categories.key"
-      :value="filters.getFilterValue(transactionFilterName, categoryFiltersInit.parent_categories.key) as typeof categoryFiltersInit.parent_categories.value"
+      :value="filters.getFilterValue(categoryChildFilterName, categoryFiltersInit.parent_categories.key) as typeof categoryFiltersInit.parent_categories.value"
       @update:model-value="handleUpdate(categoryFiltersInit.parent_categories.key, $event)"
     />
   </div>
@@ -28,7 +28,6 @@ import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { categoryChildFilterName, categoryFiltersInit } from '~/components/pages/categories/CategoryInit';
 import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
-import { transactionFilterName } from '~/components/pages/transactions/TransactionInit';
 import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
 
 const filters = useFiltersStore();
