@@ -57,7 +57,7 @@
               data: creditByMonths?.chart?.data ?? [],
             },
             {
-              name: 'Баланс',
+              name: 'Накопления',
               color: '#4F46E5',
               data: totalByMonths?.chart?.data ?? [],
             },

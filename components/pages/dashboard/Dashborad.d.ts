@@ -13,8 +13,8 @@ type DashboardStatItem = {
   id: number;
   month: string;
   total: number;
-  percentage: number;
-  down: boolean;
+  percentage?: number;
+  down?: boolean;
   balance?: number;
 };
 

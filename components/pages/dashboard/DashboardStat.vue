@@ -29,7 +29,7 @@
           <ArrowTopRightOnSquareIcon class="h-4 w-4 text-indigo-600" />
         </div>
         <span
-          v-if="item.percentage !== 0"
+          v-if="item.percentage && item.percentage !== 0"
           :class="[
             (item.down && itemKey === 'credit') ? 'text-green-600'
             : ((item.down || itemKey === 'credit') ? 'text-red-600'
