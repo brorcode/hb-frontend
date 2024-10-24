@@ -13,10 +13,10 @@
       @update:model-value="handleUpdate(accountFiltersInit.name.key, $event)"
     />
     <FilterCheckbox
-      :label="accountFiltersInit.is_archived.label"
-      :filter-key="accountFiltersInit.is_archived.key"
-      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.is_archived.key) as typeof accountFiltersInit.is_archived.value"
-      @update:model-value="handleUpdate(accountFiltersInit.is_archived.key, $event)"
+      :label="accountFiltersInit.show_archived.label"
+      :filter-key="accountFiltersInit.show_archived.key"
+      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.show_archived.key) as typeof accountFiltersInit.show_archived.value"
+      @update:model-value="handleUpdate(accountFiltersInit.show_archived.key, $event)"
     />
   </div>
 </template>

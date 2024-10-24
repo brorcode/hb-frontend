@@ -15,8 +15,8 @@ const accountFiltersInit: AccountFilters = {
     value: '',
     label: 'Название',
   },
-  is_archived: {
-    key: 'is_archived',
+  show_archived: {
+    key: 'show_archived',
     value: null,
     label: 'Показать архивные?',
   },

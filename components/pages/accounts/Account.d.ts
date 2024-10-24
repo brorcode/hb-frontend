@@ -23,7 +23,7 @@ type AccountColumn = {
 type AccountFilterFields = {
   id: number | null;
   name: string;
-  is_archived: boolean | null;
+  show_archived: boolean | null;
 };
 type AccountFilters = Filters<AccountFilterFields>;
 
