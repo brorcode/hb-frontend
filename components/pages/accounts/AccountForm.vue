@@ -8,6 +8,15 @@
       :mode="mode"
       @update:model-value="handleFieldUpdate(form.name.key, $event)"
     />
+
+    <FormCheckbox
+      :label="form.is_archived.label"
+      :field-key="form.is_archived.key"
+      :errors="form.is_archived.errors"
+      :value="form.is_archived.value"
+      :mode="mode"
+      @update:model-value="handleFieldUpdate(form.is_archived.key, $event)"
+    />
   </FormGrid>
 </template>
 

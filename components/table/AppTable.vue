@@ -95,7 +95,7 @@
           <tr v-if="!listData.length">
             <td :colspan="columns.length + (tableActions ? 2 : 1)">
               <div class="text-center p-4">
-                Nothing found
+                Ничего не найдено
               </div>
             </td>
           </tr>

@@ -15,10 +15,16 @@ const accountFiltersInit: AccountFilters = {
     value: '',
     label: 'Название',
   },
+  is_archived: {
+    key: 'is_archived',
+    value: null,
+    label: 'Показать архивные?',
+  },
 };
 
 const accountFormInit: AccountForm = {
   name: { key: 'name', value: '', label: 'Название', errors: [] },
+  is_archived: { key: 'is_archived', value: false, label: 'Архивный?', errors: [] },
 };
 
 const accountColumns: AccountColumn[] = [
@@ -35,6 +41,11 @@ const accountColumns: AccountColumn[] = [
     header: 'Баланс',
     sortable: false,
     body: (row: AccountRow) => toCurrency(row.amount),
+  },
+  {
+    field: 'is_archived',
+    header: 'Архивный',
+    body: (row: AccountRow) => row.is_archived ? 'Да' : 'Нет',
   },
   {
     field: 'created_at',

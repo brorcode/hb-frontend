@@ -12,6 +12,12 @@
       :value="filters.getFilterValue(accountFilterName, accountFiltersInit.name.key) as typeof accountFiltersInit.name.value"
       @update:model-value="handleUpdate(accountFiltersInit.name.key, $event)"
     />
+    <FilterCheckbox
+      :label="accountFiltersInit.is_archived.label"
+      :filter-key="accountFiltersInit.is_archived.key"
+      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.is_archived.key) as typeof accountFiltersInit.is_archived.value"
+      @update:model-value="handleUpdate(accountFiltersInit.is_archived.key, $event)"
+    />
   </div>
 </template>
 
@@ -19,6 +25,7 @@
 import FilterText from '~/components/filters/FilterText.vue';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { accountFilterName, accountFiltersInit } from '~/components/pages/accounts/AccountInit';
+import FilterCheckbox from '~/components/filters/FilterCheckbox.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(accountFilterName, accountFiltersInit);

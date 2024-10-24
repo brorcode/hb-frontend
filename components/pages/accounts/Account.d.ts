@@ -1,6 +1,7 @@
 type Account = {
   id: number;
   name: string;
+  is_archived: boolean;
   amount: number;
   created_at: string;
   updated_at: string;
@@ -22,10 +23,12 @@ type AccountColumn = {
 type AccountFilterFields = {
   id: number | null;
   name: string;
+  is_archived: boolean | null;
 };
 type AccountFilters = Filters<AccountFilterFields>;
 
 type AccountFormFields = {
   name: string;
+  is_archived: boolean;
 };
 type AccountForm = Form<AccountFormFields>;
