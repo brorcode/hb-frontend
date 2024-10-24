@@ -64,4 +64,24 @@ describe('FormMoney', () => {
     const input = component.find('input');
     expect(input.element.readOnly).toBeTruthy();
   });
+
+  it('can change non numeric value to null', async () => {
+    const component = await mountSuspended(FormMoney, {
+      props: {
+        label: 'Money label',
+        fieldKey: 'money',
+        value: null,
+        errors: [],
+      },
+    });
+
+    const input = component.find('input');
+    await input.setValue(undefined);
+    await input.trigger('blur');
+
+    expect(component.emitted('update:modelValue')).toBeTruthy();
+    expect((component.emitted('update:modelValue') as Array<[string]>)[0]).toEqual([
+      null,
+    ]);
+  });
 });
