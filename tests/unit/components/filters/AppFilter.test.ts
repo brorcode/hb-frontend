@@ -1,12 +1,9 @@
-import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import { useFiltersStore } from '~/stores/filters';
 
 const filterName = 'filterName';
-mockNuxtImport('goBack', () => {
-  return () => vi.fn();
-});
 
 describe('AppFilter', () => {
   beforeEach(() => {
