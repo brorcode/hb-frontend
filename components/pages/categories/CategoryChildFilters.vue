@@ -12,7 +12,7 @@
       :value="filters.getFilterValue(categoryChildFilterName, categoryFiltersInit.name.key) as typeof categoryFiltersInit.name.value"
       @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
     />
-    <FilterMultiselectSelect
+    <FilterMultiSelect
       :api-url="dictionaryCategoriesParentApiUrl"
       :label="categoryFiltersInit.parent_categories.label"
       :filter-key="categoryFiltersInit.parent_categories.key"
@@ -28,7 +28,7 @@ import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { categoryChildFilterName, categoryFiltersInit } from '~/components/pages/categories/CategoryInit';
 import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
-import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
+import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(categoryChildFilterName, categoryFiltersInit);

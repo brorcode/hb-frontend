@@ -43,7 +43,7 @@ const fetchItems = async () => {
   return items.value;
 };
 
-const updateValue = (value: MultiSelect[]) => {
+const updateValue = (value: InputSelect) => {
   emit('update:modelValue', value);
 };
 </script>

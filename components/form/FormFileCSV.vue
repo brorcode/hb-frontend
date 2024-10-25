@@ -8,7 +8,6 @@
       <span>Загрузить файл</span>
       <input
         :id="`form-${fieldKey}`"
-        :ref="fileInput"
         :data-testid="`form-${fieldKey}`"
         type="file"
         accept=".csv"
@@ -57,7 +56,6 @@ defineProps<{
 
 const emit = defineEmits(['update:modelValue']);
 const fileName = ref();
-const fileInput = ref();
 
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -69,8 +67,5 @@ const updateValue = (event: Event) => {
 const removeFile = () => {
   fileName.value = '';
   emit('update:modelValue', null);
-  if (fileInput.value) {
-    fileInput.value.value = '';
-  }
 };
 </script>

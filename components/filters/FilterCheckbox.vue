@@ -36,10 +36,10 @@ import { Switch } from '@headlessui/vue';
 const props = defineProps<{
   label: string;
   filterKey: string;
-  value: boolean | null;
+  value: true | null;
 }>();
 
-const isOn = ref<boolean>(props.value !== null);
+const isOn = ref<boolean>(props.value ?? false);
 
 watch(
   () => props.value,

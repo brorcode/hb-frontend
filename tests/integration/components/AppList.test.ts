@@ -72,7 +72,7 @@ describe('AppList', () => {
     expect(component.html()).toContain('ID: 1');
     expect(component.html()).toContain('Имя: test filter value');
 
-    const clearFiltersButton = component.find('button[data-testid="clear-filter-button"]');
+    const clearFiltersButton = component.find('button[data-testid="clear-filters-button"]');
     await clearFiltersButton.trigger('click');
 
     // Check if the event was emitted from the AppFilter component
@@ -154,7 +154,7 @@ describe('AppList', () => {
     expect(filters.preSavedFilters[userFilterName]).toBeUndefined();
     expect(filters.filters[userFilterName]).toBeUndefined();
 
-    const filtersButton = component.find('button[data-testid="filter-button"]');
+    const filtersButton = component.find('button[data-testid="show-filters-button"]');
     await filtersButton.trigger('click');
 
     const filterIdInput = screen.getByTestId('filter-id');
@@ -167,7 +167,7 @@ describe('AppList', () => {
     });
     expect(filters.getFilters(userFilterName)).toEqual({});
 
-    const applyFiltersButton = screen.getByTestId('apply-filter-button');
+    const applyFiltersButton = screen.getByTestId('apply-filters-button');
     // it should set filters
     await fireEvent.click(applyFiltersButton);
 

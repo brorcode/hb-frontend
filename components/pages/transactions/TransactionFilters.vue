@@ -20,28 +20,28 @@
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.amount.key) as typeof transactionFiltersInit.amount.value"
       @update:model-value="handleUpdate(transactionFiltersInit.amount.key, $event)"
     />
-    <FilterMultiselectSelect
+    <FilterMultiSelect
       :api-url="dictionaryCategoriesChildApiUrl"
       :label="transactionFiltersInit.categories.label"
       :filter-key="transactionFiltersInit.categories.key"
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.categories.key) as typeof transactionFiltersInit.categories.value"
       @update:model-value="handleUpdate(transactionFiltersInit.categories.key, $event)"
     />
-    <FilterMultiselectSelect
+    <FilterMultiSelect
       :api-url="dictionaryAccountsApiUrl"
       :label="transactionFiltersInit.accounts.label"
       :filter-key="transactionFiltersInit.accounts.key"
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.accounts.key) as typeof transactionFiltersInit.accounts.value"
       @update:model-value="handleUpdate(transactionFiltersInit.accounts.key, $event)"
     />
-    <FilterMultiselectSelect
+    <FilterMultiSelect
       :api-url="dictionaryTagsApiUrl"
       :label="transactionFiltersInit.tags.label"
       :filter-key="transactionFiltersInit.tags.key"
       :value="filters.getFilterValue(transactionFilterName, transactionFiltersInit.tags.key) as typeof transactionFiltersInit.tags.value"
       @update:model-value="handleUpdate(transactionFiltersInit.tags.key, $event)"
     />
-    <FilterMultiselectSelect
+    <FilterMultiSelect
       :api-url="dictionaryLoansApiUrl"
       :label="transactionFiltersInit.loans.label"
       :filter-key="transactionFiltersInit.loans.key"
@@ -73,7 +73,7 @@
 import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
-import FilterMultiselectSelect from '~/components/filters/FilterMultiselectSelect.vue';
+import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
 import {
   dictionaryAccountsApiUrl,
