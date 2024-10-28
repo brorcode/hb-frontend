@@ -43,11 +43,11 @@ describe('LoanInit', () => {
     const expectedColumns: LoanColumn[] = [
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'Название' },
-      { field: 'type', header: 'Тип' },
-      { field: 'amount', header: 'Сумма' },
-      { field: 'amount_left', header: 'Остаток' },
-      { field: 'created_at', header: 'Дата Долга' },
-      { field: 'deadline_on', header: 'Дата Возврата' },
+      { field: 'type', header: 'Тип', body: () => 'test type' },
+      { field: 'amount', header: 'Сумма', body: () => '1 234,56 ₽' },
+      { field: 'amount_left', header: 'Остаток', body: () => '333,33 ₽' },
+      { field: 'created_at', header: 'Дата Долга', body: () => '18-05-2021' },
+      { field: 'deadline_on', header: 'Дата Возврата', body: () => '18-05-2021' },
     ];
 
     expect(loanColumns.length).toBe(expectedColumns.length);
@@ -58,19 +58,22 @@ describe('LoanInit', () => {
       expect(actualColumn.field).toBe(expectedColumn.field);
       expect(actualColumn.header).toBe(expectedColumn.header);
 
-      if (expectedColumn.sortable !== undefined) {
+      if (actualColumn.sortable !== undefined) {
         expect(actualColumn.sortable).toBe(expectedColumn.sortable);
       }
 
-      if (expectedColumn.body) {
+      if (actualColumn.body) {
         const mockRow = {
-          type: 'Type Name',
+          type: {
+            id: 1,
+            name: 'test type',
+          },
           amount: 1234.56,
           amount_left: 333.33,
-          created_at: new Date(),
-          deadline_on: new Date(),
+          created_at: '2021-05-18T03:06:01.000000Z',
+          deadline_on: '2021-05-18T03:06:01.000000Z',
         };
-        expect(actualColumn.body(mockRow)).toBe(expectedColumn.body(mockRow));
+        expect(actualColumn.body(mockRow).replace(/\u00A0/g, ' ')).toBe(expectedColumn.body(mockRow));
       }
     });
   });

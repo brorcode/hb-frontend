@@ -35,9 +35,9 @@ describe('AccountInit', () => {
     const expectedColumns: AccountColumn[] = [
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'Название' },
-      { field: 'amount', header: 'Баланс', sortable: false },
-      { field: 'is_archived', header: 'Архивный' },
-      { field: 'created_at', header: 'Дата' },
+      { field: 'amount', header: 'Баланс', sortable: false, body: () => '1 234,56 ₽' },
+      { field: 'is_archived', header: 'Архивный', body: () => 'Нет' },
+      { field: 'created_at', header: 'Дата', body: () => '18-05-2021' },
     ];
 
     expect(accountColumns.length).toBe(expectedColumns.length);
@@ -48,13 +48,17 @@ describe('AccountInit', () => {
       expect(actualColumn.field).toBe(expectedColumn.field);
       expect(actualColumn.header).toBe(expectedColumn.header);
 
-      if (expectedColumn.sortable !== undefined) {
+      if (actualColumn.sortable !== undefined) {
         expect(actualColumn.sortable).toBe(expectedColumn.sortable);
       }
 
-      if (expectedColumn.body) {
-        const mockRow = { amount: 1234.56, is_archived: true, created_at: new Date() };
-        expect(actualColumn.body(mockRow)).toBe(expectedColumn.body(mockRow));
+      if (actualColumn.body) {
+        const mockRow = {
+          amount: 1234.56,
+          is_archived: false,
+          created_at: '2021-05-18T03:06:01.000000Z',
+        };
+        expect(actualColumn.body(mockRow).replace(/\u00A0/g, ' ')).toBe(expectedColumn.body(mockRow));
       }
     });
   });

@@ -36,9 +36,6 @@ const userColumns: UserColumn[] = [
   {
     field: 'email',
     header: 'Email',
-    body: (row: UserRow) => {
-      return row.email;
-    },
   },
   {
     field: 'created_at',
