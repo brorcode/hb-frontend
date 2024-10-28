@@ -42,7 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import FormText from '~/components/form/FormText.vue';
 import type { UpsertMode } from '~/utils/pageMode';
 import { dictionaryLoanTypesApiUrl } from '~/utils/dictionary';
