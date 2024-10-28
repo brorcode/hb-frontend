@@ -30,6 +30,7 @@
       @update:model-value="handleFieldUpdate(form.password.key, $event)"
     />
     <FormText
+      :mode="mode"
       :label="form.password_confirmation.label"
       :field-key="form.password_confirmation.key"
       :value="form.password_confirmation.value"
@@ -42,7 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import FormText from '~/components/form/FormText.vue';
 import type { UpsertMode } from '~/utils/pageMode';
 
