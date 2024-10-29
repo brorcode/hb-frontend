@@ -6,51 +6,15 @@ const transactionFilterName = 'transactionFilter';
 const transactionApiUrl = '/api/v1/transactions';
 
 const transactionFiltersInit: TransactionFilters = {
-  id: {
-    key: 'id',
-    value: null,
-    label: 'ID',
-  },
-  amount: {
-    key: 'amount',
-    value: null,
-    label: 'Сумма',
-  },
-  type: {
-    key: 'type',
-    value: null,
-    label: 'Тип',
-  },
-  categories: {
-    key: 'categories',
-    value: [],
-    label: 'Категории',
-  },
-  accounts: {
-    key: 'accounts',
-    value: [],
-    label: 'Аккаунты',
-  },
-  loans: {
-    key: 'loans',
-    value: [],
-    label: 'Долги',
-  },
-  tags: {
-    key: 'tags',
-    value: [],
-    label: 'Теги',
-  },
-  created_at_after: {
-    key: 'created_at_after',
-    value: null,
-    label: 'Дата после',
-  },
-  created_at_before: {
-    key: 'created_at_before',
-    value: null,
-    label: 'Дата до',
-  },
+  id: { key: 'id', value: null, label: 'ID' },
+  amount: { key: 'amount', value: null, label: 'Сумма' },
+  type: { key: 'type', value: null, label: 'Тип' },
+  categories: { key: 'categories', value: [], label: 'Категории' },
+  accounts: { key: 'accounts', value: [], label: 'Аккаунты' },
+  loans: { key: 'loans', value: [], label: 'Долги' },
+  tags: { key: 'tags', value: [], label: 'Теги' },
+  created_at_after: { key: 'created_at_after', value: null, label: 'Дата после' },
+  created_at_before: { key: 'created_at_before', value: null, label: 'Дата до' },
 };
 
 const transactionFormInit: TransactionForm = {
