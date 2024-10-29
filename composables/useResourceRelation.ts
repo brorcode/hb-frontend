@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
-import { deepCopy } from '~/utils/deepCopy';
 import { usePersistentState } from '~/composables/usePersistentState';
+import { deepCopy } from '~/utils/deepCopy';
 
 export type RelationResource = {
   key: string;

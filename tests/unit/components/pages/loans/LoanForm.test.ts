@@ -1,13 +1,13 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
-import LoanForm from '~/components/pages/loans/LoanForm.vue';
-import FormText from '~/components/form/FormText.vue';
-import { loanFormInit } from '~/components/pages/loans/LoanInit';
-import FormSelect from '~/components/form/FormSelect.vue';
-import { dictionaryLoanTypesApiUrl } from '~/utils/dictionary';
-import FormMoney from '~/components/form/FormMoney.vue';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormDateTime from '~/components/form/FormDateTime.vue';
+import FormMoney from '~/components/form/FormMoney.vue';
+import FormSelect from '~/components/form/FormSelect.vue';
+import FormText from '~/components/form/FormText.vue';
+import LoanForm from '~/components/pages/loans/LoanForm.vue';
+import { loanFormInit } from '~/components/pages/loans/LoanInit';
+import { dictionaryLoanTypesApiUrl } from '~/utils/dictionary';
 
 mockNuxtImport('useApi', () => {
   return () => ({

@@ -1,9 +1,9 @@
+import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { useFiltersStore } from '@/stores/filters';
-import { userFilterName, userFiltersInit } from '@/components/pages/users/UserInit';
 import UserFilters from '~/components/pages/users/UserFilters.vue';
+import { userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
+import { useFiltersStore } from '~/stores/filters';
 
 describe('UserFilters', () => {
   it('renders the filters correctly', async () => {

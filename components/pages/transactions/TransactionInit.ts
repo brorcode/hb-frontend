@@ -1,6 +1,6 @@
+import AppRelationLink from '~/components/AppRelationLink.vue';
 import { formatDate } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
-import AppRelationLink from '~/components/AppRelationLink.vue';
 
 const transactionFilterName = 'transactionFilter';
 const transactionApiUrl = '/api/v1/transactions';
@@ -147,10 +147,4 @@ const transactionColumns: TransactionColumn[] = [
   },
 ];
 
-export {
-  transactionApiUrl,
-  transactionFilterName,
-  transactionFormInit,
-  transactionFiltersInit,
-  transactionColumns,
-};
+export { transactionApiUrl, transactionColumns, transactionFilterName, transactionFiltersInit, transactionFormInit };

@@ -89,10 +89,10 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import FormSelect from '~/components/form/FormSelect.vue';
-import type { UpsertMode } from '~/utils/pageMode';
-import { dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
 import FormMoney from '~/components/form/FormMoney.vue';
+import FormSelect from '~/components/form/FormSelect.vue';
+import { dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
+import type { UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
   form: TransactionForm;

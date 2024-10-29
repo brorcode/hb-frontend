@@ -1,9 +1,9 @@
+import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { useFiltersStore } from '@/stores/filters';
 import LoanFilters from '~/components/pages/loans/LoanFilters.vue';
 import { loanFilterName, loanFiltersInit } from '~/components/pages/loans/LoanInit';
+import { useFiltersStore } from '~/stores/filters';
 
 describe('LoanFilters', () => {
   it('renders the filters correctly', async () => {

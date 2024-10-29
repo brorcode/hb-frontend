@@ -49,11 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue';
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid';
+import type { Component } from 'vue';
 import AppForm from '~/components/form/AppForm.vue';
-import type { UpsertMode } from '~/utils/pageMode';
 import { type RelationResource, useResourceRelation } from '~/composables/useResourceRelation';
+import type { UpsertMode } from '~/utils/pageMode';
 
 const props = defineProps<{
   title: string;

@@ -61,8 +61,8 @@
 </template>
 
 <script setup lang="ts">
-import { BellIcon } from '@heroicons/vue/24/outline';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { BellIcon } from '@heroicons/vue/24/outline';
 
 const list = useListStore();
 const { apiFetch } = useApi();

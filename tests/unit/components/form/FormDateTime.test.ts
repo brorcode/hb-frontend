@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
-import { pageMode } from '~/utils/pageMode';
 import FormDateTime from '~/components/form/FormDateTime.vue';
+import { pageMode } from '~/utils/pageMode';
 
 describe('FormDateTime', () => {
   it('can mount the component', async () => {

@@ -1,7 +1,7 @@
 import { SquaresPlusIcon, TrashIcon } from '@heroicons/vue/20/solid';
 import FormSelect from '~/components/form/FormSelect.vue';
-import { dictionaryTagsApiUrl } from '~/utils/dictionary';
 import { useApi } from '~/composables/useApi';
+import { dictionaryTagsApiUrl } from '~/utils/dictionary';
 
 export const transactionActions = (): TableAction[] => {
   const modal = useModalStore();

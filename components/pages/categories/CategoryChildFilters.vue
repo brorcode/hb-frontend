@@ -23,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import FilterText from '~/components/filters/FilterText.vue';
-import { useFiltersStore } from '~/stores/filters';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
-import { categoryChildFilterName, categoryFiltersInit } from '~/components/pages/categories/CategoryInit';
-import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
 import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
+import FilterText from '~/components/filters/FilterText.vue';
+import { categoryChildFilterName, categoryFiltersInit } from '~/components/pages/categories/CategoryInit';
+import { useFiltersStore } from '~/stores/filters';
+import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
 
 const filters = useFiltersStore();
 filters.initFilters(categoryChildFilterName, categoryFiltersInit);

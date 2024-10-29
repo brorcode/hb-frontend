@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { Line } from 'vue-chartjs';
 import {
   Chart as ChartJS,
   Title,
@@ -31,6 +30,7 @@ import {
   PointElement,
   LineElement,
 } from 'chart.js';
+import { Line } from 'vue-chartjs';
 
 ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 

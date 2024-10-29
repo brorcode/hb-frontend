@@ -1,9 +1,9 @@
+import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { useFiltersStore } from '@/stores/filters';
-import { tagFilterName, tagFiltersInit } from '@/components/pages/tags/TagInit';
 import TagFilters from '~/components/pages/tags/TagFilters.vue';
+import { tagFilterName, tagFiltersInit } from '~/components/pages/tags/TagInit';
+import { useFiltersStore } from '~/stores/filters';
 
 describe('TagFilters', () => {
   it('renders the filters correctly', async () => {

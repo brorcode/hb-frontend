@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
-import UserForm from '~/components/pages/users/UserForm.vue';
-import { userFormInit } from '@/components/pages/users/UserInit';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormText from '~/components/form/FormText.vue';
+import UserForm from '~/components/pages/users/UserForm.vue';
+import { userFormInit } from '~/components/pages/users/UserInit';
 
 let wrapper: VueWrapper;
 const form = userFormInit;

@@ -66,18 +66,18 @@
 </template>
 
 <script setup lang="ts">
-import { useFiltersStore } from '~/stores/filters';
-import FilterInteger from '~/components/filters/FilterInteger.vue';
-import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
-import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
 import FilterDate from '~/components/filters/FilterDate.vue';
+import FilterInteger from '~/components/filters/FilterInteger.vue';
+import FilterMoney from '~/components/filters/FilterMoney.vue';
+import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
+import FilterSelect from '~/components/filters/FilterSelect.vue';
+import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
+import { useFiltersStore } from '~/stores/filters';
 import {
   dictionaryAccountsApiUrl,
   dictionaryCategoriesChildApiUrl,
   dictionaryTransactionTypesApiUrl,
 } from '~/utils/dictionary';
-import FilterMoney from '~/components/filters/FilterMoney.vue';
-import FilterSelect from '~/components/filters/FilterSelect.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(transactionFilterName, transactionFiltersInit);

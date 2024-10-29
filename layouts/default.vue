@@ -185,7 +185,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import {
   Dialog,
   DialogPanel,
@@ -198,6 +197,7 @@ import {
 } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { ref } from 'vue';
 import AppSidebar from '~/components/AppSidebar.vue';
 import { usePersistentState } from '~/composables/usePersistentState';
 

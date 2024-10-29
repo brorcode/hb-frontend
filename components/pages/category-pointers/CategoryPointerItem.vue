@@ -76,10 +76,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import {
   TrashIcon,
 } from '@heroicons/vue/24/solid';
+import { defineProps } from 'vue';
 import FormText from '~/components/form/FormText.vue';
 
 defineProps<{

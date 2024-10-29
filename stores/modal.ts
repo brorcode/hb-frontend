@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import { CheckIcon } from '@heroicons/vue/24/outline';
+import { defineStore } from 'pinia';
 
 export type ModalType = 'info' | 'warning' | 'danger';
 

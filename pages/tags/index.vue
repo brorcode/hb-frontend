@@ -12,6 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { tagApiUrl, tagColumns, tagFilterName, tagFiltersInit } from '~/components/pages/tags/TagInit';
 import TagFilters from '~/components/pages/tags/TagFilters.vue';
+import { tagApiUrl, tagColumns, tagFilterName, tagFiltersInit } from '~/components/pages/tags/TagInit';
 </script>

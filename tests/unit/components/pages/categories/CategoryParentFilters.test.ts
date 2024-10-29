@@ -1,9 +1,9 @@
+import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
-import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import { useFiltersStore } from '@/stores/filters';
 import { categoryFiltersInit, categoryParentFilterName } from '~/components/pages/categories/CategoryInit';
 import CategoryParentFilters from '~/components/pages/categories/CategoryParentFilters.vue';
+import { useFiltersStore } from '~/stores/filters';
 
 mockNuxtImport('useApi', () => {
   return () => ({

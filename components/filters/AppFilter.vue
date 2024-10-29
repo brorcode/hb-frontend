@@ -156,9 +156,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
+import { ref } from 'vue';
 import { useFiltersStore } from '~/stores/filters';
 
 const props = defineProps<{

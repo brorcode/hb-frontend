@@ -138,14 +138,14 @@
 
 <script setup lang="ts">
 import Multiselect from '@vueform/multiselect';
-import { useApi } from '~/composables/useApi';
-import { toCurrency } from '~/utils/money';
-import DashboardStat from '~/components/pages/dashboard/DashboardStat.vue';
 import ChartLine from '~/components/charts/ChartLine.vue';
 import DashboardCategories from '~/components/pages/dashboard/DashboardCategories.vue';
-import { useFiltersStore } from '~/stores/filters';
+import DashboardStat from '~/components/pages/dashboard/DashboardStat.vue';
 import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
+import { useApi } from '~/composables/useApi';
+import { useFiltersStore } from '~/stores/filters';
 import { transactionType } from '~/utils/constants';
+import { toCurrency } from '~/utils/money';
 
 const transactionTypes = ref<RelationOption[]>([]);
 const months = ref<number>(12);

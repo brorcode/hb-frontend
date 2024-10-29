@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
-import TagForm from '~/components/pages/tags/TagForm.vue';
-import { tagFormInit } from '@/components/pages/tags/TagInit';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormText from '~/components/form/FormText.vue';
+import TagForm from '~/components/pages/tags/TagForm.vue';
+import { tagFormInit } from '~/components/pages/tags/TagInit';
 
 let wrapper: VueWrapper;
 const form = tagFormInit;

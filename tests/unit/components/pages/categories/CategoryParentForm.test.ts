@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormText from '~/components/form/FormText.vue';
 import { categoryFormInit } from '~/components/pages/categories/CategoryInit';
 import CategoryParentForm from '~/components/pages/categories/CategoryParentForm.vue';

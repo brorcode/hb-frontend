@@ -43,11 +43,11 @@
 </template>
 
 <script setup lang="ts">
-import { usePersistentState } from '~/composables/usePersistentState';
 import AppForm from '~/components/form/AppForm.vue';
-import { pageMode } from '~/utils/pageMode';
-import { userFormInit, userProfileApiUrl } from '~/components/pages/users/UserInit';
 import UserForm from '~/components/pages/users/UserForm.vue';
+import { userFormInit, userProfileApiUrl } from '~/components/pages/users/UserInit';
+import { usePersistentState } from '~/composables/usePersistentState';
+import { pageMode } from '~/utils/pageMode';
 
 const config = useRuntimeConfig();
 const [user, setUser] = usePersistentState<User>('user');

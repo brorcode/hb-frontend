@@ -43,13 +43,13 @@
 
 <script setup lang="ts">
 import type { Component } from 'vue';
+import AppCard from '~/components/AppCard.vue';
+import AppFilter from '~/components/filters/AppFilter.vue';
+import TransactionImport from '~/components/pages/transactions/TransactionImport.vue';
 import AppTable from '~/components/table/AppTable.vue';
 import { useApi } from '~/composables/useApi';
-import AppFilter from '~/components/filters/AppFilter.vue';
-import { defaultSorting } from '~/utils/constants';
-import AppCard from '~/components/AppCard.vue';
-import TransactionImport from '~/components/pages/transactions/TransactionImport.vue';
 import { useResourceRelation } from '~/composables/useResourceRelation';
+import { defaultSorting } from '~/utils/constants';
 
 const props = defineProps<{
   title: string;

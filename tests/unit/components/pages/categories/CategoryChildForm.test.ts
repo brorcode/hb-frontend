@@ -1,11 +1,11 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
-import FormText from '~/components/form/FormText.vue';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormSelect from '~/components/form/FormSelect.vue';
-import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
-import { categoryFormInit } from '~/components/pages/categories/CategoryInit';
+import FormText from '~/components/form/FormText.vue';
 import CategoryChildForm from '~/components/pages/categories/CategoryChildForm.vue';
+import { categoryFormInit } from '~/components/pages/categories/CategoryInit';
+import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
 
 mockNuxtImport('useApi', () => {
   return () => ({

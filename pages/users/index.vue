@@ -12,11 +12,11 @@
 </template>
 
 <script setup lang="ts">
+import UserFilters from '~/components/pages/users/UserFilters.vue';
 import {
   userApiUrl,
   userColumns,
   userFilterName,
   userFiltersInit,
 } from '~/components/pages/users/UserInit';
-import UserFilters from '~/components/pages/users/UserFilters.vue';
 </script>

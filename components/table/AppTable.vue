@@ -158,14 +158,14 @@
 </template>
 
 <script setup lang="ts">
-import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid';
+import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import { isVNode } from 'vue';
-import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
-import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
 import AppPagination from '~/components/table/AppPagination.vue';
-import { defaultSorting } from '~/utils/constants';
+import AppSkeletonTbody from '~/components/table/AppSkeletonTbody.vue';
+import AppSkeletonThead from '~/components/table/AppSkeletonThead.vue';
 import TableActions from '~/components/table/TableActions.vue';
+import { defaultSorting } from '~/utils/constants';
 
 const props = defineProps<{
   path: string;

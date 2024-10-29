@@ -43,4 +43,4 @@ const tagColumns: TagColumn[] = [
   },
 ];
 
-export { tagApiUrl, tagFilterName, tagFormInit, tagFiltersInit, tagColumns };
+export { tagApiUrl, tagColumns, tagFilterName, tagFiltersInit, tagFormInit };

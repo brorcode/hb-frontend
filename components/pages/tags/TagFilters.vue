@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import FilterText from '~/components/filters/FilterText.vue';
 import FilterInteger from '~/components/filters/FilterInteger.vue';
+import FilterText from '~/components/filters/FilterText.vue';
 import { tagFilterName, tagFiltersInit } from '~/components/pages/tags/TagInit';
 
 const filters = useFiltersStore();

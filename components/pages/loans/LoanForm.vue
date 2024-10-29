@@ -42,11 +42,11 @@
 </template>
 
 <script setup lang="ts">
-import FormText from '~/components/form/FormText.vue';
-import type { UpsertMode } from '~/utils/pageMode';
-import { dictionaryLoanTypesApiUrl } from '~/utils/dictionary';
-import FormSelect from '~/components/form/FormSelect.vue';
 import FormMoney from '~/components/form/FormMoney.vue';
+import FormSelect from '~/components/form/FormSelect.vue';
+import FormText from '~/components/form/FormText.vue';
+import { dictionaryLoanTypesApiUrl } from '~/utils/dictionary';
+import type { UpsertMode } from '~/utils/pageMode';
 
 defineProps<{
   form: LoanForm;

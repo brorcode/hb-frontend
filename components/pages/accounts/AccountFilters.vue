@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import FilterText from '~/components/filters/FilterText.vue';
-import FilterInteger from '~/components/filters/FilterInteger.vue';
-import { accountFilterName, accountFiltersInit } from '~/components/pages/accounts/AccountInit';
 import FilterCheckbox from '~/components/filters/FilterCheckbox.vue';
+import FilterInteger from '~/components/filters/FilterInteger.vue';
+import FilterText from '~/components/filters/FilterText.vue';
+import { accountFilterName, accountFiltersInit } from '~/components/pages/accounts/AccountInit';
 
 const filters = useFiltersStore();
 filters.initFilters(accountFilterName, accountFiltersInit);

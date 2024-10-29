@@ -13,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
+import { transactionActions } from '~/components/pages/transactions/TransactionActions';
+import TransactionFilters from '~/components/pages/transactions/TransactionFilters.vue';
 import {
   transactionApiUrl,
   transactionColumns,
   transactionFilterName,
   transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
-import TransactionFilters from '~/components/pages/transactions/TransactionFilters.vue';
-import { transactionActions } from '~/components/pages/transactions/TransactionActions';
 </script>

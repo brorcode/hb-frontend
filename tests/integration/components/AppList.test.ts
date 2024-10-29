@@ -1,11 +1,11 @@
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, expect, it, vi, afterEach } from 'vitest';
 import { fireEvent, screen } from '@testing-library/vue';
+import { describe, expect, it, vi, afterEach } from 'vitest';
 import AppList from '~/components/AppList.vue';
-import { useFiltersStore } from '~/stores/filters';
-import { userColumns, userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
-import UserFilters from '~/components/pages/users/UserFilters.vue';
 import AppFilter from '~/components/filters/AppFilter.vue';
+import UserFilters from '~/components/pages/users/UserFilters.vue';
+import { userColumns, userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
+import { useFiltersStore } from '~/stores/filters';
 
 mockNuxtImport('useApi', () => {
   return () => ({

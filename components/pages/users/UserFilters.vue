@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
+import FilterInteger from '~/components/filters/FilterInteger.vue';
 import FilterText from '~/components/filters/FilterText.vue';
 import { userFilterName, userFiltersInit } from '~/components/pages/users/UserInit';
 import { useFiltersStore } from '~/stores/filters';
-import FilterInteger from '~/components/filters/FilterInteger.vue';
 
 const filters = useFiltersStore();
 filters.initFilters(userFilterName, userFiltersInit);

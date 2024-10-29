@@ -1,8 +1,8 @@
 import type { FetchResponse } from 'ofetch';
-import { useFiltersStore } from '~/stores/filters';
 import { useCookie } from '#app';
 import { usePersistentState } from '~/composables/usePersistentState';
 import { UNAUTHENTICATED_STATUSES } from '~/constants/statusCodes';
+import { useFiltersStore } from '~/stores/filters';
 import { useFlashMessagesStore } from '~/stores/flashMessages';
 
 type ListDataRequestBody = {

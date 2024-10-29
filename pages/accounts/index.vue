@@ -16,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import AccountFilters from '~/components/pages/accounts/AccountFilters.vue';
 import {
   accountApiUrl,
   accountColumns,
   accountFilterName,
   accountFiltersInit,
 } from '~/components/pages/accounts/AccountInit';
-import AccountFilters from '~/components/pages/accounts/AccountFilters.vue';
 </script>

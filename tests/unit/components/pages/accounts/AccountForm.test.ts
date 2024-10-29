@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import type { VueWrapper } from '@vue/test-utils';
-import AccountForm from '~/components/pages/accounts/AccountForm.vue';
-import { accountFormInit } from '@/components/pages/accounts/AccountInit';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import FormCheckbox from '~/components/form/FormCheckbox.vue';
 import FormText from '~/components/form/FormText.vue';
-import { FormCheckbox } from '#components';
+import AccountForm from '~/components/pages/accounts/AccountForm.vue';
+import { accountFormInit } from '~/components/pages/accounts/AccountInit';
 
 let wrapper: VueWrapper;
 const form = accountFormInit;

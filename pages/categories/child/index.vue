@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import CategoryChildFilters from '~/components/pages/categories/CategoryChildFilters.vue';
 import {
   categoryApiUrl,
   categoryChildApiUrl,
@@ -24,5 +25,4 @@ import {
   categoryColumns,
   categoryFiltersInit,
 } from '~/components/pages/categories/CategoryInit';
-import CategoryChildFilters from '~/components/pages/categories/CategoryChildFilters.vue';
 </script>

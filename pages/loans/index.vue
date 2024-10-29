@@ -12,6 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { loanApiUrl, loanColumns, loanFilterName, loanFiltersInit } from '~/components/pages/loans/LoanInit';
 import LoanFilters from '~/components/pages/loans/LoanFilters.vue';
+import { loanApiUrl, loanColumns, loanFilterName, loanFiltersInit } from '~/components/pages/loans/LoanInit';
 </script>

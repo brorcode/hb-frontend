@@ -113,10 +113,10 @@
 </template>
 
 <script setup lang="ts">
-import { useApi } from '~/composables/useApi';
+import AppActionButton from '~/components/AppActionButton.vue';
 import { categoryPointerApiUrl } from '~/components/pages/category-pointers/CategoryPointerInit';
 import CategoryPointerItem from '~/components/pages/category-pointers/CategoryPointerItem.vue';
-import AppActionButton from '~/components/AppActionButton.vue';
+import { useApi } from '~/composables/useApi';
 
 const { pending, apiFetch } = useApi();
 const errors = ref<ResponseErrors | null>(null);

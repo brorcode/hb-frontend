@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import AppNavbar from '~/components/AppNavbar.vue';
 import AppLogo from '~/components/AppLogo.vue';
+import AppNavbar from '~/components/AppNavbar.vue';
 
 defineProps<{
   mobile?: boolean;

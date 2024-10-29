@@ -26,10 +26,10 @@
 <script setup lang="ts">
 import TagForm from '~/components/pages/tags/TagForm.vue';
 import { tagApiUrl, tagFormInit } from '~/components/pages/tags/TagInit';
+import { tagTransactionsRelationActions } from '~/components/pages/tags/TagTransactionsRelationActions';
 import {
   transactionApiUrl,
   transactionColumns,
   transactionFiltersInit,
 } from '~/components/pages/transactions/TransactionInit';
-import { tagTransactionsRelationActions } from '~/components/pages/tags/TagTransactionsRelationActions';
 </script>
