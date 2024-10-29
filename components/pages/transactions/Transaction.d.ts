@@ -19,7 +19,7 @@ type TransactionColumn = {
   field: keyof Transaction;
 } & Column;
 
-type TransactionFilters = Filters<{
+type TransactionFilterFields = {
   id: number | null;
   amount: number | null;
   type: RelationOption | null;
@@ -29,7 +29,9 @@ type TransactionFilters = Filters<{
   tags: MultiSelect;
   created_at_after: Date | null;
   created_at_before: Date | null;
-}>;
+};
+
+type TransactionFilters = Filters<TransactionFilterFields>;
 
 type TransactionFormFields = {
   amount: number | null;

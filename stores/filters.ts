@@ -50,12 +50,23 @@ export const useFiltersStore = defineStore('filters', {
     setFilterValue(filterName: string, key: string, value: InputValue) {
       this.filters[filterName][key].value = value;
     },
-    getFilterValue(filterName: string, key: string) {
+    getFilterValue<T = InputValue>(filterName: string, key: string): T | null {
       if (!this.filters[filterName]) {
         return null;
       }
 
-      return this.filters[filterName][key].value ?? null;
+      const value = this.filters[filterName][key].value as T;
+
+      return value ?? null;
+    },
+    getPreSavedFilterValue<T = InputValue>(filterName: string, key: string): T | null {
+      if (!this.preSavedFilters[filterName]) {
+        return null;
+      }
+
+      const value = this.preSavedFilters[filterName][key].value as T;
+
+      return value ?? null;
     },
     getFilters(filterName: string) {
       if (!this.filters[filterName]) {

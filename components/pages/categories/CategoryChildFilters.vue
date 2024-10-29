@@ -3,20 +3,20 @@
     <FilterInteger
       :label="categoryFiltersInit.id.label"
       :filter-key="categoryFiltersInit.id.key"
-      :value="filters.getFilterValue(categoryChildFilterName, categoryFiltersInit.id.key) as typeof categoryFiltersInit.name.value"
+      :value="filters.getFilterValue<CategoryFilterFileds['id']>(categoryChildFilterName, categoryFiltersInit.id.key)"
       @update:model-value="handleUpdate(categoryFiltersInit.id.key, $event)"
     />
     <FilterText
       :label="categoryFiltersInit.name.label"
       :filter-key="categoryFiltersInit.name.key"
-      :value="filters.getFilterValue(categoryChildFilterName, categoryFiltersInit.name.key) as typeof categoryFiltersInit.name.value"
+      :value="filters.getFilterValue<CategoryFilterFileds['name']>(categoryChildFilterName, categoryFiltersInit.name.key)"
       @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
     />
     <FilterMultiSelect
       :api-url="dictionaryCategoriesParentApiUrl"
       :label="categoryFiltersInit.parent_categories.label"
       :filter-key="categoryFiltersInit.parent_categories.key"
-      :value="filters.getFilterValue(categoryChildFilterName, categoryFiltersInit.parent_categories.key) as typeof categoryFiltersInit.parent_categories.value"
+      :value="filters.getFilterValue<CategoryFilterFileds['parent_categories']>(categoryChildFilterName, categoryFiltersInit.parent_categories.key)"
       @update:model-value="handleUpdate(categoryFiltersInit.parent_categories.key, $event)"
     />
   </div>

@@ -15,8 +15,8 @@
         locale="ru-RU"
         select-text="Выбрать"
         cancel-text="Отмена"
-        :min-date="minDate"
-        :max-date="maxDate"
+        :min-date="minDateValue"
+        :max-date="maxDateValue"
         :enable-time-picker="false"
         @update:model-value="updateValue"
       />
@@ -31,18 +31,35 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 const props = defineProps<{
   label: string;
   filterKey: string;
-  value?: Date;
-  minDate?: Date;
-  maxDate?: Date;
+  value?: Date | null;
+  minDate?: Date | null;
+  maxDate?: Date | null;
 }>();
 
 const emit = defineEmits(['update:modelValue']);
 
 const date = ref<Date>();
+const minDateValue = ref<Date>();
+const maxDateValue = ref<Date>();
 
 onMounted(() => {
-  date.value = props.value;
+  date.value = props.value || undefined;
+  minDateValue.value = props.minDate || undefined;
+  maxDateValue.value = props.maxDate || undefined;
 });
+
+watch(
+  () => props.minDate,
+  (newValue) => {
+    minDateValue.value = newValue || undefined;
+  },
+);
+watch(
+  () => props.maxDate,
+  (newValue) => {
+    maxDateValue.value = newValue || undefined;
+  },
+);
 
 const updateValue = (value?: Date) => {
   emit('update:modelValue', value);

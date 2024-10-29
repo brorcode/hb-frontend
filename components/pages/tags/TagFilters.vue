@@ -3,13 +3,13 @@
     <FilterInteger
       :label="tagFiltersInit.id.label"
       :filter-key="tagFiltersInit.id.key"
-      :value="filters.getFilterValue(tagFilterName, tagFiltersInit.id.key) as typeof tagFiltersInit.id.value"
+      :value="filters.getFilterValue<TagFilterFields['id']>(tagFilterName, tagFiltersInit.id.key)"
       @update:model-value="handleUpdate(tagFiltersInit.id.key, $event)"
     />
     <FilterText
       :label="tagFiltersInit.name.label"
       :filter-key="tagFiltersInit.name.key"
-      :value="filters.getFilterValue(tagFilterName, tagFiltersInit.name.key) as typeof tagFiltersInit.name.value"
+      :value="filters.getFilterValue<TagFilterFields['name']>(tagFilterName, tagFiltersInit.name.key)"
       @update:model-value="handleUpdate(tagFiltersInit.name.key, $event)"
     />
   </div>

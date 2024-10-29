@@ -3,13 +3,13 @@
     <FilterInteger
       :label="loanFiltersInit.id.label"
       :filter-key="loanFiltersInit.id.key"
-      :value="filters.getFilterValue(loanFilterName, loanFiltersInit.id.key) as typeof loanFiltersInit.id.value"
+      :value="filters.getFilterValue<LoanFilterFields['id']>(loanFilterName, loanFiltersInit.id.key)"
       @update:model-value="handleUpdate(loanFiltersInit.id.key, $event)"
     />
     <FilterText
       :label="loanFiltersInit.name.label"
       :filter-key="loanFiltersInit.name.key"
-      :value="filters.getFilterValue(loanFilterName, loanFiltersInit.name.key) as typeof loanFiltersInit.name.value"
+      :value="filters.getFilterValue<LoanFilterFields['name']>(loanFilterName, loanFiltersInit.name.key)"
       @update:model-value="handleUpdate(loanFiltersInit.name.key, $event)"
     />
   </div>

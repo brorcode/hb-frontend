@@ -3,19 +3,19 @@
     <FilterInteger
       :label="accountFiltersInit.id.label"
       :filter-key="accountFiltersInit.id.key"
-      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.id.key) as typeof accountFiltersInit.id.value"
+      :value="filters.getFilterValue<AccountFilterFields['id']>(accountFilterName, accountFiltersInit.id.key)"
       @update:model-value="handleUpdate(accountFiltersInit.id.key, $event)"
     />
     <FilterText
       :label="accountFiltersInit.name.label"
       :filter-key="accountFiltersInit.name.key"
-      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.name.key) as typeof accountFiltersInit.name.value"
+      :value="filters.getFilterValue<AccountFilterFields['name']>(accountFilterName, accountFiltersInit.name.key)"
       @update:model-value="handleUpdate(accountFiltersInit.name.key, $event)"
     />
     <FilterCheckbox
       :label="accountFiltersInit.show_archived.label"
       :filter-key="accountFiltersInit.show_archived.key"
-      :value="filters.getFilterValue(accountFilterName, accountFiltersInit.show_archived.key) as typeof accountFiltersInit.show_archived.value"
+      :value="filters.getFilterValue<AccountFilterFields['show_archived']>(accountFilterName, accountFiltersInit.name.key)"
       @update:model-value="handleUpdate(accountFiltersInit.show_archived.key, $event)"
     />
   </div>

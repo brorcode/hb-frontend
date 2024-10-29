@@ -16,10 +16,12 @@ type UserColumn = {
   field: keyof User;
 } & Column;
 
-type UserFilters = Filters<{
+type UserFilterFields = {
   id: number | null;
   name: string;
-}>;
+};
+
+type UserFilters = Filters<UserFilterFields>;
 
 type UserFormFields = {
   name: string;
