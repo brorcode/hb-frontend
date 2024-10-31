@@ -9,6 +9,7 @@
     >
       <MenuButton
         id="notifications"
+        data-testid="show-notifications-button"
         class="-m-1.5 flex items-center p-1.5"
         @click="readNotifications"
       >

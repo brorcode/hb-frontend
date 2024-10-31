@@ -1,7 +1,7 @@
-import { TrashIcon } from '@heroicons/vue/20/solid';
+import { SquaresPlusIcon, TrashIcon } from '@heroicons/vue/20/solid';
 import { mockNuxtImport } from '@nuxt/test-utils/runtime';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { tagTransactionsRelationActions } from '~/components/pages/tags/TagTransactionsRelationActions';
+import { transactionActions } from '~/components/pages/transactions/TransactionActions';
 import { useModalStore } from '~/stores/modal';
 
 const modalStorageShowModalSpy = vi.spyOn(useModalStore(), 'showModal');
@@ -35,29 +35,44 @@ mockNuxtImport('useApi', () => {
   return useApiMock;
 });
 
-describe('tagTransactionsRelationActions', () => {
+describe('transactionActions', () => {
   beforeEach(async () => {
     vi.clearAllMocks();
     listRefreshCalled = false;
   });
 
-  it('should show modal when action is triggered', () => {
-    const actions = tagTransactionsRelationActions();
+  it('should show modal when add tab action is triggered', () => {
+    const actions = transactionActions();
 
     // Trigger the action
     actions[0].action([1, 2]);
 
     expect(modalStorageShowModalSpy).toHaveBeenCalledWith(expect.objectContaining({
-      title: 'Открепить тег',
-      text: 'Вы собираетесь открепить тег от выбранных транзакций. Вы уверены, что хотите продолжить?',
-      actionText: 'Открепить',
-      type: 'warning',
+      title: 'Добавить тег',
+      text: 'Выберите тег, который необходимо добавить.',
+      actionText: 'Добавить',
+      icon: SquaresPlusIcon,
+      extraComponent: expect.anything(),
+    }));
+  });
+
+  it('should show modal when remove tab action is triggered', () => {
+    const actions = transactionActions();
+
+    // Trigger the action
+    actions[1].action([1, 2]);
+
+    expect(modalStorageShowModalSpy).toHaveBeenCalledWith(expect.objectContaining({
+      title: 'Удалить транзакции',
+      text: 'Выберите собираетесь удалить выбранные транзакции. Вы уверены, что хотите продолжить?',
+      actionText: 'Удалить',
+      type: 'danger',
       icon: TrashIcon,
     }));
   });
 
-  it('should call handleListAction and refresh list on successful detach', async () => {
-    const actions = tagTransactionsRelationActions();
+  it('should call handleListAction and refresh list on successful add tag action', async () => {
+    const actions = transactionActions();
     const modal = useModalStore();
 
     // Trigger the action
@@ -69,7 +84,20 @@ describe('tagTransactionsRelationActions', () => {
     expect(listRefreshCalled).toBeTruthy();
   });
 
-  it('should call handleListAction and does not refresh list on failed detach', async () => {
+  it('should call handleListAction and refresh list on successful remove tag action', async () => {
+    const actions = transactionActions();
+    const modal = useModalStore();
+
+    // Trigger the action
+    actions[1].action([1, 2]);
+
+    // Simulate modal action run
+    expect(listRefreshCalled).toBeFalsy();
+    await modal.action();
+    expect(listRefreshCalled).toBeTruthy();
+  });
+
+  it('should call handleListAction and does not refresh list on failed add tag action', async () => {
     useApiMock.mockImplementation(() => {
       return {
         handleListAction: () => Promise.resolve({
@@ -84,7 +112,7 @@ describe('tagTransactionsRelationActions', () => {
       };
     });
 
-    const actions = tagTransactionsRelationActions();
+    const actions = transactionActions();
     const modal = useModalStore();
 
     // Trigger the action

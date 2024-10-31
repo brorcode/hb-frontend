@@ -1,6 +1,6 @@
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import { fireEvent, screen } from '@testing-library/vue';
-import { describe, expect, it, vi, afterEach } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import AppList from '~/components/AppList.vue';
 import AppFilter from '~/components/filters/AppFilter.vue';
 import UserFilters from '~/components/pages/users/UserFilters.vue';
@@ -38,7 +38,7 @@ mockNuxtImport('useApi', () => {
   });
 });
 
-describe('AppList', () => {
+describe('AppList Integration Tests', () => {
   afterEach(() => {
     const filters = useFiltersStore();
     filters.$reset();

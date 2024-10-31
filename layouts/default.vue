@@ -114,7 +114,7 @@
           </form>
           <div class="flex items-center gap-x-4 lg:gap-x-6">
             <!-- Notifications dropdown -->
-            <AddNotifications />
+            <AppNotifications />
 
             <!-- Profile dropdown -->
             <Menu

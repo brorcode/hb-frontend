@@ -5,7 +5,7 @@
       <NuxtPage />
     </NuxtLayout>
 
-    <AddFlashMessage />
+    <AppFlashMessage />
     <AppModal />
   </div>
 </template>
