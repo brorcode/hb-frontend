@@ -74,7 +74,7 @@ const transactionColumns: TransactionColumn[] = [
       return h(AppRelationLink, {
         item: row.category,
         routeName: 'categories-child-id-mode',
-        url: `/categories/child/${row.category.id}/view`,
+        linkUrl: `/categories/child/${row.category.id}/view`,
       });
     },
   },
@@ -86,7 +86,7 @@ const transactionColumns: TransactionColumn[] = [
       return h(AppRelationLink, {
         item: row.account,
         routeName: 'accounts-id-mode',
-        url: `/accounts/${row.account.id}/view`,
+        linkUrl: `/accounts/${row.account.id}/view`,
       });
     },
   },
@@ -99,7 +99,7 @@ const transactionColumns: TransactionColumn[] = [
         h(AppRelationLink, {
           item: tag,
           routeName: 'tags-id-mode',
-          url: `/tags/${tag.id}/view`,
+          linkUrl: `/tags/${tag.id}/view`,
         }),
       ));
     },

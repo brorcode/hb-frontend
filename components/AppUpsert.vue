@@ -10,7 +10,7 @@
             />
           </button>
           <div v-if="!id">
-            Довавить {{ title }}
+            Добавить {{ title }}
           </div>
           <div v-else>
             {{ title }} ID: {{ id }}

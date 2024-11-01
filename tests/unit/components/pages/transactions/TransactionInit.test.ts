@@ -56,7 +56,7 @@ describe('TransactionInit', () => {
           return {
             item: { id: 10, name: 'test' },
             routeName: 'categories-child-id-mode',
-            url: '/categories/child/10/view',
+            linkUrl: '/categories/child/10/view',
           };
         },
       },
@@ -68,7 +68,7 @@ describe('TransactionInit', () => {
           return {
             item: { id: 10, name: 'test' },
             routeName: 'accounts-id-mode',
-            url: '/accounts/10/view',
+            linkUrl: '/accounts/10/view',
           };
         },
       },
@@ -128,7 +128,7 @@ describe('TransactionInit', () => {
             h(AppRelationLink, {
               item: tag,
               routeName: 'tags-id-mode',
-              url: `/tags/${tag.id}/view`,
+              linkUrl: `/tags/${tag.id}/view`,
             }),
           ));
           expect(actualColumn.body(mockRow)).toEqual(expectedTagsOutput);

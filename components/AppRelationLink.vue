@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     v-if="route.name !== routeName"
-    :to="url"
+    :to="linkUrl"
     class="flex space-x-1 items-center cursor-pointer"
   >
     <span class="hover:underline">{{ item.name }}</span>
@@ -18,7 +18,7 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid';
 defineProps<{
   item: RelationOption;
   routeName: string;
-  url: string;
+  linkUrl: string;
 }>();
 
 const route = useRoute();

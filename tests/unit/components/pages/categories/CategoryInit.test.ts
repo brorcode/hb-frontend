@@ -126,7 +126,7 @@ describe('CategoryInit', () => {
           expect(actualColumn.body(mockRow).props).toEqual({
             item: { id: 10, name: 'test' },
             routeName: 'categories-parent-id-mode',
-            url: '/categories/parent/10/view',
+            linkUrl: '/categories/parent/10/view',
           });
         }
         else {

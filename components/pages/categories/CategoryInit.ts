@@ -60,7 +60,7 @@ const categoryColumns: CategoryColumn[] = [
       return h(AppRelationLink, {
         item: row.parent_category,
         routeName: 'categories-parent-id-mode',
-        url: `/categories/parent/${row.parent_category.id}/view`,
+        linkUrl: `/categories/parent/${row.parent_category.id}/view`,
       });
     },
   },
@@ -107,13 +107,4 @@ const categoryColumns: CategoryColumn[] = [
   },
 ];
 
-export {
-  categoryApiUrl,
-  categoryParentApiUrl,
-  categoryChildApiUrl,
-  categoryParentFilterName,
-  categoryChildFilterName,
-  categoryFormInit,
-  categoryFiltersInit,
-  categoryColumns,
-};
+export { categoryApiUrl, categoryChildApiUrl, categoryChildFilterName, categoryColumns, categoryFiltersInit, categoryFormInit, categoryParentApiUrl, categoryParentFilterName };
