@@ -16,6 +16,7 @@
     >
       <div class="flex justify-between gap-1 w-[65%] text-sm font-medium">
         <div
+          data-testid="show-transactions-button"
           class="flex space-x-1 items-center cursor-pointer"
           @click="$emit('showTransactions', { id: item.id, name: item.title })"
         >

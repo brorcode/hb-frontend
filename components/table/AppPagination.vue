@@ -28,6 +28,7 @@
     <div class="flex flex-1 justify-end">
       <button
         v-if="hasNextPage"
+        data-testid="next-page-button"
         class="inline-flex items-center border-t-2 border-transparent pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         @click="changePage(currentPage + 1)"
       >

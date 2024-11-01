@@ -1,5 +1,5 @@
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import FormSelect from '~/components/form/FormSelect.vue';
 import { pageMode } from '~/utils/pageMode';
 
@@ -55,8 +55,8 @@ describe('FormSelect', () => {
       },
     });
 
-    const input = component.find('.multiselect');
-    await input.trigger('click');
+    const select = component.find('.multiselect');
+    await select.trigger('click');
     const selectOptions = component.findAll('.multiselect-option');
     await selectOptions.at(0)?.trigger('click');
 

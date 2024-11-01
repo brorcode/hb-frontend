@@ -56,7 +56,7 @@
 
           <button
             :disabled="pending"
-            data-testid="save-category-pointers-button"
+            data-testid="add-category-pointer-tag-button"
             class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click.prevent="addTag"
           >
@@ -64,7 +64,10 @@
           </button>
         </div>
 
-        <button class="flex justify-end">
+        <button
+          data-testid="remove-category-pointer-button"
+          class="flex justify-end"
+        >
           <TrashIcon
             class="text-red-600 h-5 w-5 cursor-pointer"
             @click.prevent="emit('removePointer')"
