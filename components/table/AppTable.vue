@@ -45,6 +45,7 @@
               class="px-3 py-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap"
             >
               <div
+                data-testid="table-column-soring-button"
                 :class="['group inline-flex', (column.sortable ?? true) ? 'cursor-pointer' : '']"
                 @click="handleSortingChange(column)"
               >
@@ -138,6 +139,7 @@
                   :to="`${path}/${row.id}/${pageMode.VIEW}`"
                 ><EyeIcon class="h-5 w-5" /></NuxtLink>
                 <TrashIcon
+                  data-testid="delete-item-button"
                   class="text-red-600 h-5 w-5 cursor-pointer"
                   @click="() => deleteItem(row.id)"
                 />
