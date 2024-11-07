@@ -116,7 +116,6 @@ const applySorting = (values: Sorting) => {
   refreshList();
 };
 
-
 const clearFilters = () => {
   currentPage.value = 1;
   filters.clearFilters(props.filterName, props.initFilters);
