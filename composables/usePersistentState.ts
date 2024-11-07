@@ -1,4 +1,3 @@
-import type { Ref } from 'vue';
 import { useState } from '#app';
 
 export const usePersistentState = <T>(
@@ -6,9 +5,18 @@ export const usePersistentState = <T>(
   initialValue?: T | null,
 ): [Ref<T | null>, (newValue: T | null) => void] => {
   const storedValue = localStorage.getItem(key);
-  const state = useState<T | null>(key, () =>
-    storedValue ? JSON.parse(storedValue) : initialValue,
-  );
+
+  const initialState = () => {
+    try {
+      return storedValue ? JSON.parse(storedValue) : initialValue;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    catch (error) {
+      return initialValue;
+    }
+  };
+
+  const state = useState<T | null>(key, initialState);
 
   const setState = (newValue: T | null) => {
     state.value = newValue;

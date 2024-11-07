@@ -6,7 +6,7 @@ describe('AppCard', () => {
   it('can render the component', async () => {
     const component = await mountSuspended(AppCard, {
       slots: {
-        default: '<div>Some slot content</div>',
+        default: () => '<div>Some slot content</div>',
       },
     });
 
