@@ -35,6 +35,7 @@
                 type="checkbox"
                 class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                 :checked="indeterminate || (listData.length > 0 && selectedRows.length === listData.length)"
+                data-testid="select-all-rows-button"
                 @change="handleAllRowsClick"
               >
             </th>
