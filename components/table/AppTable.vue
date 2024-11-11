@@ -8,7 +8,13 @@
           :selected-rows="selectedRows"
         />
       </div>
-      <div class="flex justify-end">
+      <div class="flex items-center justify-end">
+        <div
+          v-if="sum"
+          class="mr-3"
+        >
+          Тотал: {{ toCurrency(sum ?? 0) }}
+        </div>
         <NuxtLink
           :to="`${path}/create`"
           class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -179,6 +185,7 @@ const props = defineProps<{
   perPage: number;
   listData: Row[];
   meta?: ResponseMeta;
+  sum?: number;
   tableActions?: TableAction[];
   defaultSort?: Sorting;
 }>();

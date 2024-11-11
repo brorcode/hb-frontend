@@ -30,6 +30,7 @@
         :per-page="perPage"
         :list-data="items?.data ?? []"
         :meta="items?.meta"
+        :sum="items?.sum"
         :table-actions="tableActions"
         :default-sort="defaultSort"
         @page-change="handlePageChange"

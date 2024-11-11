@@ -123,14 +123,14 @@
         :data="debitByCategories ?? []"
         title="Категории Доходов"
         item-key="debit-categories"
-        @show-transactions="goToTransactionsByCategory($event)"
+        @show-transactions="goToTransactionsByCategory($event, { id: transactionType.DEBIT_TYPE_ID, name: 'Доход' })"
       />
 
       <DashboardCategories
         :data="creditByCategories ?? []"
         title="Категории Расходов"
         item-key="credit-categories"
-        @show-transactions="goToTransactionsByCategory($event)"
+        @show-transactions="goToTransactionsByCategory($event, { id: transactionType.CREDIT_TYPE_ID, name: 'Расход' })"
       />
     </div>
   </div>
@@ -190,7 +190,7 @@ const loadCategories = async (count = categoryCount.value) => {
 const goToTransactions = (date: string, transactionType: RelationOption | null) => {
   const [yearStr, monthStr] = date.split(' ');
   const year = parseInt(yearStr, 10);
-  const month = monthMap[monthStr.toLowerCase()]; // Convert to lower case for matching
+  const month = monthMap[monthStr.toLowerCase()];
 
   const startDate = new Date(year, month, 1);
   const endDate = new Date(year, month + 1, 0);
@@ -206,9 +206,10 @@ const goToTransactions = (date: string, transactionType: RelationOption | null) 
   navigateTo('/transactions');
 };
 
-const goToTransactionsByCategory = (filter: RelationOption) => {
+const goToTransactionsByCategory = (filter: RelationOption, transactionType: RelationOption) => {
   filters.clearFilters(transactionFilterName, transactionFiltersInit as Filters<unknown>);
   filters.addPreSavedFilter(transactionFilterName, 'categories', [filter]);
+  filters.addPreSavedFilter(transactionFilterName, 'type', transactionType);
   if (months.value) {
     filters.addPreSavedFilter(transactionFilterName, 'created_at_after', calculatePriorDate(months.value));
   }

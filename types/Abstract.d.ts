@@ -27,6 +27,7 @@ interface BaseResponse {
 
 interface BaseItemsResponse<T> extends BaseResponse {
   data?: T[];
+  sum?: number;
   meta?: ResponseMeta;
 }
 
