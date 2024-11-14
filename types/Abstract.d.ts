@@ -1,79 +1,100 @@
-type BaseRow = {
-  id: number;
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type ApiResponseError = {
+  response: {
+    status: number;
+    _data: {
+      message: string;
+      // todo errors we send not always??? it needs to check API responses to have one style for all
+      errors: Record<string, string[]>;
+    };
+  };
 };
 
-type Row<T = object> = BaseRow & T & { [key: string]: any };
-// type Row<T = object> = BaseRow & T;
+type Row<T = object> = T & { [key: string]: typeof T[keyof T] };
 
-interface ErrorDetails {
-  [key: string]: string[];
+type ResponseMeta = {
+  perPage: number;
+  currentPage: number;
+  hasNextPage: boolean;
+};
+
+type ResponseErrors = Record<string, string[]>;
+
+interface BaseResponse {
+  message?: string;
+  errors?: ResponseErrors;
 }
 
-type NotificationType = 'success' | 'error';
-
-interface Notification {
-  type: NotificationType;
-  title: string;
-  message: string;
+interface BaseItemsResponse<T> extends BaseResponse {
+  data?: T[];
+  sum?: number;
+  meta?: ResponseMeta;
 }
 
-interface ListData<T> {
-  items: T[];
-  isLastPage: boolean;
-}
-
-interface BaseItemsResponse<T> {
-  data?: ListData<T>;
-  error?: {
-    code: string;
-    message: string;
-    details?: ErrorDetails;
-  };
-  notification?: Notification;
-}
-
-// type BaseListResponse<T> = {
-//   data?: ListData<T>;
-//   error?: {
-//     code: string;
-//     message: string;
-//   };
-// };
-
-interface BaseItemResponse<T> {
-  data?: { item: T };
-  error?: {
-    code: string;
-    message: string;
-    details?: ErrorDetails;
-  };
-  notification?: Notification;
+interface BaseItemResponse<T> extends BaseResponse {
+  data?: T;
 }
 
 type Column = {
   field: string;
   header: string;
+  sortable?: boolean;
   body?: fn;
 };
 
-type Filter = {
-  key: string;
-  value: any;
+type MultiSelect = RelationOption[];
+type RelationOption = {
+  id: number;
+  name: string;
+};
+
+type Filter<T = Record<string, InputValue>, K extends keyof T = keyof T> = {
+  key: keyof T;
+  value: T[K];
   label: string;
 };
-
-type Filters<T = Record<string, any>> = {
-  // [P in keyof T]: Filter;
-  [P in keyof T]: Overwrite<Filter, { value: T[P] }>;
+type Filters<T = Record<string, InputValue>> = {
+  [K in keyof T]: Filter<T, K>;
 };
 
-type FormField = {
-  key: string;
-  value: any;
+type FormField<T = Record<string, InputValue>, K extends keyof T = keyof T> = {
+  key: keyof T;
+  value: T[K];
+  relation_key?: string;
+  relation_value?: RelationOption | null;
   label: string;
   errors: string[];
 };
-
-type Form<T = Record<string, any>> = {
-  [P in keyof T]: Overwrite<FormField, { value: T[P] }>;
+type Form<T = Record<string, InputValue>> = {
+  [K in keyof T]: FormField<T, K>;
 };
+
+type Sorting = {
+  column: string | null;
+  direction: 'ASC' | 'DESC' | null;
+};
+
+type TableAction = {
+  action: (selectedItems: number[]) => void;
+  icon: Component;
+  title: string;
+  type?: 'info' | 'warning' | 'danger';
+};
+
+type InputText = string;
+type InputNumber = number;
+type InputCheckbox = boolean;
+type InputDate = Date;
+type InputDateRange = [Date, Date];
+type InputSelect = RelationOption;
+type InputMultiSelect = RelationOption[];
+
+type InputValue =
+  InputText |
+  InputNumber |
+  InputCheckbox |
+  InputDate |
+  InputDateRange |
+  InputSelect |
+  InputMultiSelect |
+  null;

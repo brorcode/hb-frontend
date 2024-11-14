@@ -3,11 +3,15 @@ export const deepCopy = (obj: unknown): unknown => {
     return obj;
   }
 
-  const copy: { items?: unknown[]; [key: string]: unknown } = {};
+  if (obj instanceof Date) {
+    return new Date(obj.getTime());
+  }
 
   if (Array.isArray(obj)) {
-    copy.items = [];
+    return obj.map(item => deepCopy(item));
   }
+
+  const copy: { [key: string]: unknown } = {};
 
   for (const key in obj) {
     if (Object.hasOwnProperty.call(obj, key)) {

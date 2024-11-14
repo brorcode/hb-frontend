@@ -3,8 +3,31 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // apiSecret: '', // can be overridden by NUXT_API_SECRET environment variable
     public: {
-      apiUrl: process.env.API_URL
-    }
+      apiUrl: process.env.API_URL,
+      homeUrl: '/dashboard',
+      loginUrl: '/login',
+      perPage: 50,
+      apiRegisterUrl: 'api/v1/register',
+      apiForgotPasswordUrl: 'api/v1/forgot-password',
+      apiNewPasswordUrl: 'api/v1/forgot-password',
+      apiSendEmailToVerifyEmailUrl: 'api/v1/profile/email/verification',
+      apiLoginUrl: 'api/v1/login',
+      apiLogoutUrl: 'api/v1/logout',
+    },
+  },
+
+  typescript: {
+    typeCheck: true,
+  },
+
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: {
+        indent: 2,
+        semi: true,
+      },
+    },
   },
 
   devtools: { enabled: true },
@@ -13,10 +36,11 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {}
-    }
+      autoprefixer: {},
+    },
   },
 
   ssr: false,
-  modules: ['@nuxtjs/eslint-module', '@pinia/nuxt']
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxt/test-utils/module'],
+  compatibilityDate: '2024-08-09',
 });

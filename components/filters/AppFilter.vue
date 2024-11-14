@@ -1,6 +1,12 @@
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-100" @close="open = false">
+  <TransitionRoot
+    as="template"
+    :show="open"
+  >
+    <Dialog
+      class="relative z-50"
+      @close="open = false"
+    >
       <TransitionChild
         as="template"
         enter="ease-in-out duration-500"
@@ -30,9 +36,9 @@
                   <div class="h-0 flex-1 overflow-y-auto">
                     <div class="bg-indigo-700 px-4 py-6 sm:px-6">
                       <div class="flex items-center justify-between">
-                        <DialogTitle class="text-base font-semibold leading-6 text-white"
-                          >Filters</DialogTitle
-                        >
+                        <DialogTitle class="text-base font-semibold leading-6 text-white">
+                          Filters
+                        </DialogTitle>
                         <div class="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -41,17 +47,22 @@
                           >
                             <span class="absolute -inset-2.5" />
                             <span class="sr-only">Close panel</span>
-                            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                            <XMarkIcon
+                              class="h-6 w-6"
+                              aria-hidden="true"
+                            />
                           </button>
                         </div>
                       </div>
                       <div class="mt-1">
-                        <p class="text-sm text-indigo-300">Filter items</p>
+                        <p class="text-sm text-indigo-300">
+                          Filter items
+                        </p>
                       </div>
                     </div>
                     <div class="flex flex-1 flex-col justify-between">
                       <div class="divide-y divide-gray-200 px-4 sm:px-6">
-                        <form class="space-y-6 pb-5 pt-6">
+                        <form class="pb-5 pt-6">
                           <slot />
                         </form>
                       </div>
@@ -59,18 +70,20 @@
                   </div>
                   <div class="flex flex-shrink-0 justify-end px-4 py-4 space-x-3">
                     <button
+                      data-testid="close-filters-button"
                       type="button"
                       class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                       @click.prevent="clearPreSavedFilters"
                     >
-                      Cancel
+                      Закрыть
                     </button>
                     <button
+                      data-testid="apply-filters-button"
                       type="submit"
                       class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       @click.prevent="applyFilters"
                     >
-                      Save
+                      Применить
                     </button>
                   </div>
                 </form>
@@ -90,8 +103,9 @@
         :key="`badge-filter-${filter.key}`"
         class="inline-flex items-center px-2 py-1 mr-2 mb-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded"
       >
-        {{ filter.label }}: {{ filter.value }}
+        {{ displayFilter(filter) }}
         <button
+          :data-testid="`remove-filter-${filter.key}-button`"
           type="button"
           class="inline-flex items-center p-1 ms-2 text-sm text-indigo-400 bg-transparent rounded-sm hover:bg-indigo-200 hover:text-indigo-900"
           data-dismiss-target="#badge-dismiss-default"
@@ -120,19 +134,21 @@
     <div class="flex flex-1 justify-end h-fit">
       <div class="flex space-x-3">
         <button
+          data-testid="show-filters-button"
           type="button"
           class="rounded bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           @click="open = true"
         >
-          Filter
+          Фильтры
         </button>
 
         <button
+          data-testid="clear-filters-button"
           type="button"
           class="rounded bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           @click="() => emit('clear-filters')"
         >
-          Clear
+          Очистить
         </button>
       </div>
     </div>
@@ -140,9 +156,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
+import { ref } from 'vue';
 import { useFiltersStore } from '~/stores/filters';
 
 const props = defineProps<{
@@ -155,6 +171,38 @@ const filters = useFiltersStore();
 const emit = defineEmits(['apply-filters', 'clear-filters']);
 
 const open = ref(false);
+
+function displayFilter(filter: Filter) {
+  let value = '';
+
+  if (Array.isArray(filter.value) && filter.value.length > 0) {
+    value = filter.value
+      .map((item) => {
+        if (item instanceof Date) {
+          return formatDate(item);
+        }
+        // Multiselect has id and name
+        return item?.name ?? '???';
+      })
+      .join(', ');
+
+    return `${filter.label}: ${value}`;
+  }
+
+  if (filter.value instanceof Date) {
+    return `${filter.label}: ${formatDate(filter.value)}`;
+  }
+
+  if (filter.value === true) {
+    return `${filter.label}: Да`;
+  }
+
+  if (typeof filter.value === 'object' && filter.value !== null && 'name' in filter.value) {
+    return `${filter.label}: ${filter.value.name}`;
+  }
+
+  return `${filter.label}: ${filter.value}`;
+}
 
 const clearPreSavedFilters = async () => {
   filters.clearPreSavedFilters(props.filterName);

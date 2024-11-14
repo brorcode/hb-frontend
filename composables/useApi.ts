@@ -1,93 +1,153 @@
+import type { FetchResponse } from 'ofetch';
+import { useCookie } from '#app';
+import { usePersistentState } from '~/composables/usePersistentState';
+import { UNAUTHENTICATED_STATUSES } from '~/constants/statusCodes';
 import { useFiltersStore } from '~/stores/filters';
-import { useNotificationsStore } from '~/stores/notifications';
-import type { Ref } from 'vue';
+import { useFlashMessagesStore } from '~/stores/flashMessages';
 
-export const useApi = (url: string) => {
-  const notifications = useNotificationsStore();
+type ListDataRequestBody = {
+  page: number;
+  limit: number;
+  sorting?: Sorting;
+  filters?: { [p: string]: Filter<Record<string, InputValue>, string> };
+};
+
+export const useApi = () => {
+  const config = useRuntimeConfig();
+  const flashMessages = useFlashMessagesStore();
+  const list = useListStore();
+  const [, setUser] = usePersistentState<User>('user');
   const filters = useFiltersStore();
   const pending = ref(false);
   const items = ref<BaseItemsResponse<Row> | null>(null);
   const item = ref<BaseItemResponse<Row> | null>(null);
-  const limit = ref(10);
 
-  const fetchListData = async (currentPage: Ref<number>, filterName: string) => {
-    pending.value = false;
-    items.value = await $fetch<BaseItemsResponse<Row>>(url, {
-      method: 'POST',
-      body: {
-        page: currentPage.value,
-        limit: limit.value,
-        filters: filters.getFilters(filterName)
-      }
-    })
-      .catch((e) => {
-        notifications.addNotification(item.value?.notification);
-        return e.response?._data || null;
-      })
-      .finally(() => {
-        pending.value = false;
+  const apiFetch = async <T>(method: HttpMethod, endpoint: string, body?: Record<string, unknown> | FormData) => {
+    pending.value = true;
+
+    try {
+      return await $fetch<T>(endpoint, {
+        method,
+        body: body,
+        headers: {
+          'Accept': 'application/json',
+          'X-XSRF-TOKEN': useCookie('XSRF-TOKEN').value || '',
+        },
+        credentials: 'include',
+        baseURL: config.public.apiUrl,
+        onResponse: ({ response }: { response: FetchResponse<BaseResponse> }) => {
+          // if successful response
+          if (response.status >= 200 && response.status < 300) {
+            if (response._data?.message) {
+              flashMessages.addMessage({
+                type: 'success',
+                message: response._data.message,
+              });
+            }
+          }
+        },
+        onResponseError: ({ response }: { response: FetchResponse<BaseResponse> }) => {
+          flashMessages.addMessage({
+            message: response._data?.message,
+          });
+
+          if (UNAUTHENTICATED_STATUSES.has(response.status)) {
+            setUser(null);
+            navigateTo(config.public.loginUrl, { replace: true });
+          }
+
+          // @todo if not found???
+          // if (response.status === NOT_FOUND_STATUS) {
+          // showError({
+          //   statusCode: 404,
+          //   statusMessage: 'Page Not Found',
+          // });
+          // }
+        },
       });
+    }
+    finally {
+      pending.value = false;
+    }
   };
 
-  const fetchItem = async (id: number) => {
-    pending.value = true;
-    item.value = await $fetch<BaseItemResponse<Row>>(`${url}/${id}`, {
-      method: 'GET'
-    })
-      .catch((e) => {
-        notifications.addNotification(item.value?.notification);
-        return e.response?._data || null;
-      })
-      .finally(() => {
-        pending.value = false;
+  const fetchListData = async (
+    endpoint: string,
+    currentPage: number,
+    perPage: number,
+    filterName: string,
+    sorting?: Sorting,
+  ) => {
+    const body: ListDataRequestBody = {
+      page: currentPage,
+      limit: perPage,
+    };
+
+    if (sorting && sorting.column && sorting.direction) {
+      body.sorting = sorting;
+    }
+
+    const filtersData = filters.getFilters(filterName);
+    if (filtersData) {
+      body.filters = filtersData;
+    }
+
+    try {
+      items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body).finally(() => {
+        list.needResetSelectedRows(true);
+        list.needRefresh(false);
       });
+    }
+    catch (e) {
+      return e;
+    }
   };
 
-  const handleDeleteItem = async (id: number) => {
-    pending.value = true;
-    item.value = await $fetch<BaseItemResponse<Row>>(`${url}/${id}`, {
-      method: 'DELETE'
-    })
-      .catch((e) => {
-        return e.response?._data || null;
-      })
-      .finally(() => {
-        pending.value = false;
-      });
-
-    notifications.addNotification(item.value?.notification);
+  const fetchData = async (endpoint: string, body: Record<string, unknown>) => {
+    try {
+      items.value = await apiFetch<BaseItemsResponse<Row>>('POST', endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
   };
 
-  const handleCreateItem = async (body: { [p: string]: any }) => {
-    pending.value = true;
-    item.value = await $fetch<BaseItemResponse<Row>>(`${url}/create`, {
-      method: 'POST',
-      body: body
-    })
-      .catch((e) => {
-        return e.response?._data || null;
-      })
-      .finally(() => {
-        pending.value = false;
-      });
-
-    notifications.addNotification(item.value?.notification);
+  const getData = async (endpoint: string, method: HttpMethod = 'GET', body?: Record<string, unknown>) => {
+    try {
+      return await apiFetch<BaseItemResponse<Row>>(method, endpoint, body)
+        .then(({ data }) => data);
+    }
+    catch (e) {
+      return e;
+    }
   };
 
-  const handleUpdateItem = async (body: { [p: string]: any }, id: number) => {
-    pending.value = true;
-    item.value = await $fetch<BaseItemResponse<Row>>(`${url}/${id}`, {
-      method: 'POST',
-      body: body
-    })
-      .catch((e) => {
-        return e.response?._data || null;
-      })
-      .finally(() => {
-        pending.value = false;
-      });
+  const handleDeleteItem = async (endpoint: string, id: number) => {
+    try {
+      await apiFetch('DELETE', `${endpoint}/${id}`);
+      list.needRefresh(true);
+    }
+    catch (e) {
+      return e;
+    }
+  };
 
-    notifications.addNotification(item.value?.notification);
+  const handleListAction = async (endpoint: string, body: Record<string, unknown>, method: HttpMethod = 'POST') => {
+    try {
+      return await apiFetch(method, endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
+  };
+
+  const handleRowsImport = async (endpoint: string, body: FormData, method: HttpMethod = 'POST') => {
+    try {
+      return await apiFetch(method, endpoint, body);
+    }
+    catch (e) {
+      return e;
+    }
   };
 
   return {
@@ -95,9 +155,11 @@ export const useApi = (url: string) => {
     item,
     pending,
     fetchListData,
-    fetchItem,
-    handleCreateItem,
-    handleUpdateItem,
-    handleDeleteItem
+    fetchData,
+    handleDeleteItem,
+    apiFetch,
+    handleListAction,
+    handleRowsImport,
+    getData,
   };
 };
