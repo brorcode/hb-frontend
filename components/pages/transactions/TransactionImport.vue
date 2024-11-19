@@ -13,7 +13,6 @@ import { SquaresPlusIcon } from '@heroicons/vue/20/solid';
 import FormFileCSV from '~/components/form/FormFileCSV.vue';
 import FormSelect from '~/components/form/FormSelect.vue';
 import { useApi } from '~/composables/useApi';
-import { dictionaryAccountsApiUrl } from '~/utils/dictionary';
 
 const { handleRowsImport } = useApi();
 
@@ -40,7 +39,7 @@ const component = markRaw(defineComponent({
   setup() {
     return () => h('div', [
       h(FormSelect, {
-        'apiUrl': dictionaryAccountsApiUrl,
+        'apiUrl': dictionaryAccountsForImportApiUrl,
         'fieldKey': 'account_id',
         'errors': errors.accountId,
         'disabled': modal.pending,
