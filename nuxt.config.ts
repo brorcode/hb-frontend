@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxt/test-utils/module'],
+
+  ssr: false,
+
+  devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
     // apiSecret: '', // can be overridden by NUXT_API_SECRET environment variable
     public: {
@@ -15,9 +21,17 @@ export default defineNuxtConfig({
       apiLogoutUrl: 'api/v1/logout',
     },
   },
+  compatibilityDate: '2024-08-09',
 
   typescript: {
     typeCheck: true,
+  },
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
 
   eslint: {
@@ -29,18 +43,4 @@ export default defineNuxtConfig({
       },
     },
   },
-
-  devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
-
-  ssr: false,
-  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxt/test-utils/module'],
-  compatibilityDate: '2024-08-09',
 });
