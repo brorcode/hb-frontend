@@ -10,6 +10,7 @@ export enum Permission {
   TAGS_VIEW = 'tags view',
   LOANS_VIEW = 'loans view',
   CATEGORY_POINTERS_VIEW = 'category pointers view',
+  BUDGETS_VIEW = 'budgets view',
   // DASHBOARD_VIEW = 'dashboard view',
 }
 
@@ -39,6 +40,10 @@ export const routePermissions: RoutePermissions = {
   'loans-create': Permission.LOANS_VIEW,
 
   'category-pointers': Permission.CATEGORY_POINTERS_VIEW,
+
+  'budget-templates': Permission.BUDGETS_VIEW,
+  'budget-templates-id-mode': Permission.BUDGETS_VIEW,
+  'budget-templates-create': Permission.BUDGETS_VIEW,
 
   // 'dashboard': Permission.DASHBOARD_VIEW,
 };

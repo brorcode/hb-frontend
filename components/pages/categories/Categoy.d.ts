@@ -23,13 +23,13 @@ type CategoryColumn = {
   field: keyof Category;
 } & Column;
 
-type CategoryFilterFileds = {
+type CategoryFilterFields = {
   id: number | null;
   name: string;
   parent_categories: InputMultiSelect;
 };
 
-type CategoryFilters = Filters<CategoryFilterFileds>;
+type CategoryFilters = Filters<CategoryFilterFields>;
 
 type CategoryFormFields = {
   name: string;

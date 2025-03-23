@@ -3,13 +3,13 @@
     <FilterInteger
       :label="categoryFiltersInit.id.label"
       :filter-key="categoryFiltersInit.id.key"
-      :value="filters.getFilterValue<CategoryFilterFileds['id']>(categoryParentFilterName, categoryFiltersInit.id.key)"
+      :value="filters.getFilterValue<CategoryFilterFields['id']>(categoryParentFilterName, categoryFiltersInit.id.key)"
       @update:model-value="handleUpdate(categoryFiltersInit.id.key, $event)"
     />
     <FilterText
       :label="categoryFiltersInit.name.label"
       :filter-key="categoryFiltersInit.name.key"
-      :value="filters.getFilterValue<CategoryFilterFileds['name']>(categoryParentFilterName, categoryFiltersInit.name.key)"
+      :value="filters.getFilterValue<CategoryFilterFields['name']>(categoryParentFilterName, categoryFiltersInit.name.key)"
       @update:model-value="handleUpdate(categoryFiltersInit.name.key, $event)"
     />
   </div>

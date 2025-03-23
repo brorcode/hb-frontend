@@ -85,6 +85,7 @@ import {
   HomeIcon,
   TagIcon,
   UsersIcon,
+  CalculatorIcon,
 } from '@heroicons/vue/24/outline';
 import { Permission } from '~/config/routePermissions';
 
@@ -146,6 +147,12 @@ const navigation = [
     '/loans',
     TagIcon,
     'Долги',
+  ),
+  ...generateNavigationItems(
+    Permission.BUDGETS_VIEW,
+    '/budget-templates',
+    CalculatorIcon,
+    'Шаблоны Бюджетов',
   ),
 ];
 
