@@ -160,6 +160,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 import { useFiltersStore } from '~/stores/filters';
+import { formatMonthName } from '~/utils/date';
 
 const props = defineProps<{
   filterName: string;
@@ -174,6 +175,10 @@ const open = ref(false);
 
 function displayFilter(filter: Filter) {
   let value = '';
+
+  if (filter.value !== null && typeof filter.value === 'object' && 'month' in filter.value && 'year' in filter.value) {
+    return `${filter.label}: ${filter.value.year} ${formatMonthName(filter.value.month as number)}`;
+  }
 
   if (Array.isArray(filter.value) && filter.value.length > 0) {
     value = filter.value

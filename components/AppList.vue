@@ -33,6 +33,7 @@
         :sum="items?.sum"
         :table-actions="tableActions"
         :default-sort="defaultSort"
+        :editable="editable"
         @page-change="handlePageChange"
         @per-page-change="handlePerPageChange"
         @delete-item="handleDelete"
@@ -52,7 +53,7 @@ import { useApi } from '~/composables/useApi';
 import { useResourceRelation } from '~/composables/useResourceRelation';
 import { defaultSorting } from '~/utils/constants';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   title: string;
   titleSingular: string;
   path: string;
@@ -65,7 +66,10 @@ const props = defineProps<{
   tableActions?: TableAction[];
   isRelation?: boolean;
   defaultSort?: Sorting;
-}>();
+  editable?: boolean;
+}>(), {
+  editable: true,
+});
 
 const config = useRuntimeConfig();
 const filters = useFiltersStore();

@@ -17,7 +17,7 @@
           </div>
         </div>
         <div
-          v-if="mode === pageMode.VIEW"
+          v-if="mode === pageMode.VIEW && editable"
           class="justify-end"
         >
           <NuxtLink
@@ -55,7 +55,7 @@ import AppForm from '~/components/form/AppForm.vue';
 import { type RelationResource, useResourceRelation } from '~/composables/useResourceRelation';
 import type { UpsertMode } from '~/utils/pageMode';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   title: string;
   formComponent: Component;
   formInit: Form<unknown>;
@@ -64,11 +64,18 @@ const props = defineProps<{
   backPath?: string;
   hasRelation?: boolean;
   relationResource?: RelationResource;
-}>();
+  editable?: boolean;
+  idParamName?: string;
+}>(), {
+  editable: true,
+  idParamName: 'id',
+});
 
 const list = useListStore();
 const route = useRoute();
-const { id, mode } = route.params as { id?: string; mode?: UpsertMode };
+const id = route.params[props.idParamName as string] as string;
+const mode = route.params.mode as UpsertMode;
+
 const { initRelation, clearRelation } = useResourceRelation(props.formInit);
 
 const { form, pending, handleFieldUpdate, fetchItem, submit } = useForm(props.formInit);

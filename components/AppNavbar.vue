@@ -154,6 +154,12 @@ const navigation = [
     CalculatorIcon,
     'Шаблоны Бюджетов',
   ),
+  ...generateNavigationItems(
+    Permission.BUDGETS_VIEW,
+    '/budgets',
+    CalculatorIcon,
+    'Бюджеты',
+  ),
 ];
 
 const teams = [

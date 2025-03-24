@@ -2,16 +2,17 @@ import AppRelationLink from '~/components/AppRelationLink.vue';
 import { formatDate } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
 
-const budgetTemplateFilterName = 'budgetTemplateFilter';
-const budgetTemplateApiUrl = '/api/v1/budget-templates';
+const budgetItemFilterName = 'budgetItemFilter';
+const budgetItemApiUrl = '/api/v1/budget-items';
 
-const budgetTemplateFiltersInit: BudgetTemplateFilters = {
+const budgetItemFiltersInit: BudgetItemFilters = {
   id: { key: 'id', value: null, label: 'ID' },
   amount: { key: 'amount', value: null, label: 'Сумма' },
   categories: { key: 'categories', value: [], label: 'Категории' },
+  period_on: { key: 'period_on', value: null, label: 'Дата' },
 };
 
-const budgetTemplateFormInit: BudgetTemplateForm = {
+const budgetItemFormInit: BudgetItemForm = {
   amount: { key: 'amount', value: null, label: 'Сумма', errors: [] },
   category_id: {
     key: 'category_id',
@@ -21,18 +22,24 @@ const budgetTemplateFormInit: BudgetTemplateForm = {
     label: 'Категория',
     errors: [],
   },
+  period_on: { key: 'period_on', value: null, label: 'Дата', errors: [] },
 };
 
-const budgetTemplateColumns: BudgetTemplateColumn[] = [
+const budgetItemColumns: BudgetItemColumn[] = [
   {
     field: 'id',
     header: 'ID',
   },
   {
+    field: 'period_on_for_list',
+    header: 'Дата',
+    sortable: false,
+  },
+  {
     field: 'category',
     header: 'Категория',
     sortable: false,
-    body: (row: BudgetTemplateRow) => {
+    body: (row: BudgetItemRow) => {
       return h(AppRelationLink, {
         item: row.category,
         routeName: 'categories-parent-id-mode',
@@ -43,8 +50,8 @@ const budgetTemplateColumns: BudgetTemplateColumn[] = [
   {
     field: 'amount',
     header: 'Сумма',
-    body: (row: BudgetTemplateRow) => toCurrency(row.amount),
+    body: (row: BudgetItemRow) => toCurrency(row.amount),
   },
 ];
 
-export { budgetTemplateApiUrl, budgetTemplateFilterName, budgetTemplateFormInit, budgetTemplateFiltersInit, budgetTemplateColumns };
+export { budgetItemApiUrl, budgetItemFilterName, budgetItemFormInit, budgetItemFiltersInit, budgetItemColumns };

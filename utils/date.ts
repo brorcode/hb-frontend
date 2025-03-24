@@ -33,3 +33,7 @@ export const formatDate = (date: string | Date, withTime: boolean = false) => {
   // Format the date to the desired format
   return `${day}-${month}-${year}`;
 };
+
+export const formatMonthName = (monthNumber: number) => {
+  return Object.keys(monthMap).find(key => monthMap[key] === monthNumber);
+};

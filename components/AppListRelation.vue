@@ -10,6 +10,7 @@
     :init-filters="initFilters"
     :table-actions="tableActions"
     :is-relation="true"
+    :default-sort="defaultSort"
   />
 </template>
 
@@ -27,6 +28,8 @@ const props = defineProps<{
   filterName: string;
   initFilters: Filters<unknown>;
   tableActions?: TableAction[];
+  defaultSort?: Sorting;
+  isIdYearMonth?: boolean;
 }>();
 
 if (props.filterKey) {
@@ -35,6 +38,18 @@ if (props.filterKey) {
   const { id } = route.params as { id: string };
 
   filters.initFilters(props.filterName, props.initFilters);
-  filters.setFilterValue(props.filterName, props.filterKey, [{ id: parseInt(id), name: '' }]);
+
+  if (props.isIdYearMonth) {
+    const year = parseInt(id.substring(0, 4), 10);
+    const month = parseInt(id.substring(4), 10) - 1; // Subtract 1 because months are 0-indexed in JS
+    if (isNaN(year) || isNaN(month) || month < 0 || month > 11) {
+      throw new Error('Invalid date format');
+    }
+
+    filters.setFilterValue(props.filterName, props.filterKey, { year, month });
+  }
+  else {
+    filters.setFilterValue(props.filterName, props.filterKey, [{ id: parseInt(id), name: '' }]);
+  }
 }
 </script>

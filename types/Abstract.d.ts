@@ -86,6 +86,7 @@ type InputNumber = number;
 type InputCheckbox = boolean;
 type InputDate = Date;
 type InputDateRange = [Date, Date];
+type InputDateYearMonth = { month: number | string; year: number | string };
 type InputSelect = RelationOption;
 type InputMultiSelect = RelationOption[];
 
@@ -95,6 +96,7 @@ type InputValue =
   InputCheckbox |
   InputDate |
   InputDateRange |
+  InputDateYearMonth |
   InputSelect |
   InputMultiSelect |
   null;

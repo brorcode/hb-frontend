@@ -19,6 +19,7 @@
         locale="ru-RU"
         select-text="Выбрать"
         cancel-text="Отмена"
+        :month-picker="monthPicker"
         :class="[errors.length ? 'datepicker-error' : '']"
         @update:model-value="updateValue"
       />
@@ -39,12 +40,14 @@ import { pageMode, type UpsertMode } from '~/utils/pageMode';
 withDefaults(defineProps<{
   label: string;
   fieldKey: string;
-  value: Date | string | null;
+  value: Date | string | { month: number | string; year: number | string } | null;
   errors: string[];
   mode?: UpsertMode;
   enableTimePicker?: boolean;
+  monthPicker?: boolean;
 }>(), {
   enableTimePicker: true,
+  monthPicker: false,
 });
 
 const emit = defineEmits(['update:modelValue']);

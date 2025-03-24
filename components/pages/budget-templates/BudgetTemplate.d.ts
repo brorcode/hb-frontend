@@ -2,8 +2,6 @@ type BudgetTemplate = {
   id: number;
   category: RelationOption;
   amount: number;
-  created_at: string;
-  updated_at: string;
 };
 
 type BudgetTemplateGetResponse = BaseItemResponse<BudgetTemplate>;

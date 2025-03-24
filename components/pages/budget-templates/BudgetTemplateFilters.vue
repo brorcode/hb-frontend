@@ -13,7 +13,7 @@
       @update:model-value="handleUpdate(budgetTemplateFiltersInit.amount.key, $event)"
     />
     <FilterMultiSelect
-      :api-url="dictionaryCategoriesChildApiUrl"
+      :api-url="dictionaryCategoriesParentApiUrl"
       :label="budgetTemplateFiltersInit.categories.label"
       :filter-key="budgetTemplateFiltersInit.categories.key"
       :value="filters.getFilterValue<BudgetTemplateFilterFields['categories']>(budgetTemplateFilterName, budgetTemplateFiltersInit.categories.key)"
@@ -26,8 +26,11 @@
 import FilterInteger from '~/components/filters/FilterInteger.vue';
 import FilterMoney from '~/components/filters/FilterMoney.vue';
 import FilterMultiSelect from '~/components/filters/FilterMultiSelect.vue';
-import { budgetTemplateFilterName, budgetTemplateFiltersInit } from '~/components/pages/budget-templates/BudgetTemplateInit';
-import { dictionaryCategoriesChildApiUrl } from '~/utils/dictionary';
+import {
+  budgetTemplateFilterName,
+  budgetTemplateFiltersInit,
+} from '~/components/pages/budget-templates/BudgetTemplateInit';
+import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
 
 const filters = useFiltersStore();
 filters.initFilters(budgetTemplateFilterName, budgetTemplateFiltersInit);

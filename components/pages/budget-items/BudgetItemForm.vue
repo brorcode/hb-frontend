@@ -27,9 +27,16 @@ import FormSelect from '~/components/form/FormSelect.vue';
 import { dictionaryCategoriesParentApiUrl } from '~/utils/dictionary';
 import type { UpsertMode } from '~/utils/pageMode';
 
-defineProps<{
-  form: BudgetTemplateForm;
+const props = defineProps<{
+  form: BudgetItemForm;
   mode?: UpsertMode;
-  handleFieldUpdate: (key: keyof BudgetTemplateForm, value: InputValue) => void;
+  handleFieldUpdate: (key: keyof BudgetItemForm, value: InputValue) => void;
 }>();
+
+const route = useRoute();
+const { id } = route.params as { id: string };
+
+onMounted(() => {
+  props.handleFieldUpdate(props.form.period_on.key, parseInt(id));
+});
 </script>

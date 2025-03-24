@@ -13,6 +13,7 @@ describe('AppTable', () => {
         titleSingular: 'some singular title',
         loading: false,
         columns: userColumns,
+        editable: true,
         perPage: 10,
         listData: [],
         tableActions: [],
@@ -34,6 +35,7 @@ describe('AppTable', () => {
         titleSingular: 'some singular title',
         loading: true,
         columns: userColumns,
+        editable: true,
         perPage: 10,
         listData: [],
         tableActions: [],
@@ -53,6 +55,7 @@ describe('AppTable', () => {
         loading: false,
         columns: userColumns,
         perPage: 10,
+        editable: true,
         listData: [
           { id: 1, name: 'test1', email: 'some email1', created_at: '2023-08-08T09:47:05.000000Z' },
           { id: 2, name: 'test2', email: 'some email2', created_at: '2024-01-02T09:47:05.000000Z' },
@@ -79,6 +82,7 @@ describe('AppTable', () => {
         titleSingular: 'some singular title',
         loading: false,
         columns: userColumns,
+        editable: true,
         perPage: 10,
         listData: [
           { id: 1, name: 'test1', email: 'some email1', created_at: '2023-08-08T09:47:05.000000Z' },
@@ -102,6 +106,7 @@ describe('AppTable', () => {
         loading: false,
         columns: userColumns,
         perPage: 10,
+        editable: true,
         listData: [
           { id: 1, name: 'test1', email: 'some email1', created_at: '2023-08-08T09:47:05.000000Z' },
           { id: 2, name: 'test2', email: 'some email2', created_at: '2024-01-02T09:47:05.000000Z' },
@@ -123,6 +128,7 @@ describe('AppTable', () => {
         titleSingular: 'some singular title',
         loading: false,
         columns: userColumns,
+        editable: true,
         perPage: 10,
         listData: [
           { id: 1, name: 'test1', email: 'some email1', created_at: '2023-08-08T09:47:05.000000Z' },
@@ -144,6 +150,7 @@ describe('AppTable', () => {
         title: 'Some title',
         titleSingular: 'Some singular title',
         loading: false,
+        editable: true,
         columns: [
           {
             field: 'id',
@@ -212,6 +219,7 @@ describe('AppTable', () => {
         loading: false,
         columns: [{ field: 'id', header: 'ID' }],
         perPage: 10,
+        editable: true,
         listData: [{ id: 1 }, { id: 2 }],
         meta: { perPage: 10, currentPage: 1, hasNextPage: false },
       },
@@ -238,6 +246,7 @@ describe('AppTable', () => {
         loading: false,
         columns: [{ field: 'id', header: 'ID' }],
         perPage: 10,
+        editable: true,
         listData: [{ id: 1 }, { id: 2 }],
         meta: { perPage: 10, currentPage: 1, hasNextPage: false },
         tableActions: [

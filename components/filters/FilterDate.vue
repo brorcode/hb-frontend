@@ -18,6 +18,7 @@
         :min-date="minDateValue"
         :max-date="maxDateValue"
         :enable-time-picker="false"
+        :month-picker="monthPicker"
         @update:model-value="updateValue"
       />
     </div>
@@ -28,17 +29,20 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { ref } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   label: string;
   filterKey: string;
-  value?: Date | null;
+  value?: Date | { month: number | string; year: number | string } | null;
   minDate?: Date | null;
   maxDate?: Date | null;
-}>();
+  monthPicker?: boolean;
+}>(), {
+  monthPicker: false,
+});
 
 const emit = defineEmits(['update:modelValue']);
 
-const date = ref<Date>();
+const date = ref<Date | { month: number | string; year: number | string }>();
 const minDateValue = ref<Date>();
 const maxDateValue = ref<Date>();
 
