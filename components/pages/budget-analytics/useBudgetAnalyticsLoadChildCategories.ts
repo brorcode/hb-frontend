@@ -35,8 +35,10 @@ export const useBudgetAnalyticsLoadChildCategories = (periodOn: Ref<InputDateYea
 
         childData.value[id] = response as BudgetAnalyticsChildItem[];
       }
-      catch (error) {
+      catch (e) {
         childData.value[id] = [];
+
+        return e;
       }
       finally {
         loadingStates.value[id] = false;
