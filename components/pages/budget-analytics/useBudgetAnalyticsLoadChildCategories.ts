@@ -1,12 +1,23 @@
-import { reactive, ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useApi } from '~/composables/useApi';
 
-export const useBudgetAnalyticsLoadChildCategories = (periodOn: InputDateYearMonth) => {
+export const useBudgetAnalyticsLoadChildCategories = (periodOn: Ref<InputDateYearMonth>) => {
   const { getData } = useApi();
 
   const expandedRows = ref<Record<number, boolean>>({});
   const childData = ref<Record<number, BudgetAnalyticsChildItem[]>>({});
-  const loadingStates = reactive<Record<number, boolean>>({});
+  const loadingStates = ref<Record<number, boolean>>({});
+
+  const resetData = () => {
+    expandedRows.value = {};
+    childData.value = {};
+    loadingStates.value = {};
+  };
+
+  // Watch the periodOn ref directly
+  watch(periodOn, () => {
+    resetData();
+  }, { deep: true });
 
   const toggleExpand = async (id: number) => {
     // Toggle expanded state
@@ -14,11 +25,11 @@ export const useBudgetAnalyticsLoadChildCategories = (periodOn: InputDateYearMon
 
     // If expanding and no data loaded yet, fetch child data
     if (expandedRows.value[id] && !childData.value[id]) {
-      loadingStates[id] = true;
+      loadingStates.value[id] = true;
 
       try {
         const response = await getData('/api/v1/budget-analytics/monthly/categories/child', 'POST', {
-          period_on: periodOn,
+          period_on: periodOn.value,
           parent_category_id: id,
         });
 
@@ -28,7 +39,7 @@ export const useBudgetAnalyticsLoadChildCategories = (periodOn: InputDateYearMon
         childData.value[id] = [];
       }
       finally {
-        loadingStates[id] = false;
+        loadingStates.value[id] = false;
       }
     }
   };

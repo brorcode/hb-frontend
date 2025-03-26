@@ -77,5 +77,5 @@ const props = defineProps<{
   periodOn: InputDateYearMonth;
 }>();
 
-const { expandedRows, childData, loadingStates, toggleExpand } = useBudgetAnalyticsLoadChildCategories(props.periodOn);
+const { expandedRows, childData, loadingStates, toggleExpand } = useBudgetAnalyticsLoadChildCategories(toRef(props, 'periodOn'));
 </script>
