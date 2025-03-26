@@ -147,7 +147,6 @@
                   :to="`${path}/${row.id}/${pageMode.VIEW}`"
                 ><EyeIcon class="h-5 w-5" /></NuxtLink>
                 <TrashIcon
-                  v-if="row.deletable ?? true"
                   data-testid="delete-item-button"
                   class="text-red-600 h-5 w-5 cursor-pointer"
                   @click="() => deleteItem(row.id)"

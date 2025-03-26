@@ -3,7 +3,6 @@ type Budget = {
   period_on_for_list: string;
   period_on: string;
   total: number;
-  deletable: boolean;
 };
 
 type BudgetGetResponse = BaseItemResponse<Budget>;
