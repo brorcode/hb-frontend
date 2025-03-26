@@ -18,7 +18,7 @@ type BudgetItemFilterFields = {
   id: number | null;
   amount: number | null;
   categories: MultiSelect;
-  period_on: { month: number | string; year: number | string } | null;
+  period_on: InputDateYearMonth | null;
 };
 type BudgetItemFilters = Filters<BudgetItemFilterFields>;
 

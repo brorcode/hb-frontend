@@ -16,7 +16,7 @@ type BudgetColumn = {
 } & Column;
 
 type BudgetFilterFields = {
-  period_on: { month: number | string; year: number | string } | null;
+  period_on: InputDateYearMonth | null;
 };
 type BudgetFilters = Filters<BudgetFilterFields>;
 

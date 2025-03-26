@@ -194,6 +194,7 @@ const goToTransactions = (date: string, transactionType: RelationOption | null) 
 
   const startDate = new Date(year, month, 1);
   const endDate = new Date(year, month + 1, 0);
+  endDate.setHours(23, 59, 59, 0);
 
   filters.clearFilters(transactionFilterName, transactionFiltersInit as Filters<unknown>);
   filters.addPreSavedFilter(transactionFilterName, 'created_at_after', startDate);

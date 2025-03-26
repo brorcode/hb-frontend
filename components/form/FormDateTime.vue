@@ -40,7 +40,7 @@ import { pageMode, type UpsertMode } from '~/utils/pageMode';
 withDefaults(defineProps<{
   label: string;
   fieldKey: string;
-  value: Date | string | { month: number | string; year: number | string } | null;
+  value: Date | string | InputDateYearMonth | null;
   errors: string[];
   mode?: UpsertMode;
   enableTimePicker?: boolean;

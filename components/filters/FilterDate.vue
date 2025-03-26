@@ -32,7 +32,7 @@ import { ref } from 'vue';
 const props = withDefaults(defineProps<{
   label: string;
   filterKey: string;
-  value?: Date | { month: number | string; year: number | string } | null;
+  value?: Date | InputDateYearMonth | null;
   minDate?: Date | null;
   maxDate?: Date | null;
   monthPicker?: boolean;
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['update:modelValue']);
 
-const date = ref<Date | { month: number | string; year: number | string }>();
+const date = ref<Date | InputDateYearMonth>();
 const minDateValue = ref<Date>();
 const maxDateValue = ref<Date>();
 

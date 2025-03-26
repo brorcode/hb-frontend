@@ -160,6 +160,12 @@ const navigation = [
     CalculatorIcon,
     'Бюджеты',
   ),
+  ...generateNavigationItems(
+    Permission.BUDGETS_VIEW,
+    '/budget-analytics',
+    CalculatorIcon,
+    'Бюджеты аналитика',
+  ),
 ];
 
 const teams = [
