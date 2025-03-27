@@ -38,10 +38,24 @@
               :key="`child_item_${childItem.id}`"
             >
               <td class="text-xs font-medium">
-                {{ childItem.name }}
+                <div
+                  class="flex space-x-1 items-center cursor-pointer"
+                  @click="$emit('showTransactions', { id: childItem.id, name: childItem.name })"
+                >
+                  <span class="hover:underline">{{ childItem.name }}</span>
+                  <ArrowTopRightOnSquareIcon class="h-3 w-3 text-indigo-600" />
+                </div>
               </td>
               <td class="text-right text-xs font-medium text-meta-3">
-                {{ toCurrency(childItem.total_spent) }}
+                <div
+                  class="flex space-x-1 items-center cursor-pointer justify-end"
+                  @click="$emit('showChart', { category_id: childItem.id, is_child: true })"
+                >
+                  <span class="hover:underline">{{ toCurrency(childItem.total_spent) }}</span>
+                  <ChartBarIcon
+                    class="h-3 w-3 text-indigo-600"
+                  />
+                </div>
               </td>
             </tr>
           </tbody>
@@ -52,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { ArrowTopRightOnSquareIcon, ChartBarIcon } from '@heroicons/vue/24/solid';
 import { toCurrency } from '~/utils/money';
 
 defineProps<{
@@ -59,4 +74,6 @@ defineProps<{
   loading: boolean;
   childData: BudgetAnalyticsChildItem[];
 }>();
+
+defineEmits(['showChart', 'showTransactions']);
 </script>

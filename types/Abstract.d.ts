@@ -100,3 +100,14 @@ type InputValue =
   InputSelect |
   InputMultiSelect |
   null;
+
+type Chart = {
+  labels: string[];
+  data: number[];
+};
+
+type ChartData = {
+  name: string;
+  color: string;
+  data: number[];
+};

@@ -1,5 +1,4 @@
 import AppRelationLink from '~/components/AppRelationLink.vue';
-import { formatDate } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
 
 const budgetTemplateFilterName = 'budgetTemplateFilter';

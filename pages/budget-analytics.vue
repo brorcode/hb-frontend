@@ -36,26 +36,51 @@
         :data="monthlyBudget?.budget_planned ?? []"
         title="План"
         :period-on="periodOn"
+        @show-chart="showChart($event)"
+        @show-transactions="goToTransactionsByCategory($event)"
       />
 
       <BudgetAnalyticsNotPlannedTable
         :data="monthlyBudget?.budget_not_planned ?? []"
         title="Без плана"
         :period-on="periodOn"
+        @show-chart="showChart($event)"
+        @show-transactions="goToTransactionsByCategory($event)"
       />
+    </div>
+
+    <div
+      v-if="chart"
+      class="grid grid-cols-1 gap-4 md:gap-6 2xl:gap-7.5"
+    >
+      <AppCard>
+        <ChartLine
+          :labels="chart?.labels ?? []"
+          :data="chart?.data ?? []"
+        />
+      </AppCard>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker';
+import ChartLine from '~/components/charts/ChartLine.vue';
 import BudgetAnalyticsNotPlannedTable from '~/components/pages/budget-analytics/BudgetAnalyticsNotPlannedTable.vue';
 import BudgetAnalyticsPlannedTable from '~/components/pages/budget-analytics/BudgetAnalyticsPlannedTable.vue';
+import { transactionFilterName, transactionFiltersInit } from '~/components/pages/transactions/TransactionInit';
 import { useApi } from '~/composables/useApi';
+import { useFiltersStore } from '~/stores/filters';
+import { transactionType } from '~/utils/constants';
+import { subtractMonths } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
+
+const filters = useFiltersStore();
+filters.initFilters(transactionFilterName, transactionFiltersInit);
 
 const currentDate = new Date();
 const periodOn = ref<InputDateYearMonth>({ month: currentDate.getMonth(), year: currentDate.getFullYear() });
+const chart = ref<BudgetAnalyticsChart | null>(null);
 
 const { getData } = useApi();
 const monthlyBudget = ref<BudgetAnalytics | null>(null);
@@ -66,5 +91,20 @@ onMounted(async () => {
 
 const loadData = async () => {
   monthlyBudget.value = await getData('/api/v1/budget-analytics/monthly', 'POST', { period_on: periodOn.value }) as BudgetAnalytics;
+};
+
+const showChart = async (body: { category_id: number; is_child: boolean }) => {
+  chart.value = await getData('/api/v1/budget-analytics/category/chart', 'POST', body) as BudgetAnalyticsChart;
+};
+
+const goToTransactionsByCategory = (filter: RelationOption) => {
+  filters.clearFilters(transactionFilterName, transactionFiltersInit as Filters<unknown>);
+  filters.addPreSavedFilter(transactionFilterName, 'categories', [filter]);
+  filters.addPreSavedFilter(transactionFilterName, 'type', { id: transactionType.CREDIT_TYPE_ID, name: 'Расход' });
+  filters.addPreSavedFilter(transactionFilterName, 'created_at_after', subtractMonths(12));
+  filters.applyPreSavedFilters(transactionFilterName);
+
+  console.log(123);
+  navigateTo('/transactions');
 };
 </script>

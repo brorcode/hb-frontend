@@ -49,7 +49,15 @@
               </div>
             </td>
             <td class="text-right text-sm font-medium text-meta-3">
-              {{ toCurrency(item.total_spent) }}
+              <div
+                class="flex space-x-1 items-center cursor-pointer justify-end"
+                @click="$emit('showChart', { category_id: item.id, is_child: false })"
+              >
+                <span class="hover:underline">{{ toCurrency(item.total_spent) }}</span>
+                <ChartBarIcon
+                  class="h-4 w-4 text-indigo-600"
+                />
+              </div>
             </td>
           </tr>
 
@@ -58,6 +66,8 @@
             :item-id="item.id"
             :loading="loadingStates[item.id]"
             :child-data="childData[item.id] || []"
+            @show-chart="$emit('showChart', $event)"
+            @show-transactions="$emit('showTransactions', $event)"
           />
         </template>
       </tbody>
@@ -66,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
+import { ChartBarIcon, ChevronDownIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import BudgetAnalyticsChildCategories from '~/components/pages/budget-analytics/BudgetAnalyticsChildCategories.vue';
 import { useBudgetAnalyticsLoadChildCategories } from '~/components/pages/budget-analytics/useBudgetAnalyticsLoadChildCategories';
 import { toCurrency } from '~/utils/money';
@@ -76,6 +86,8 @@ const props = defineProps<{
   title: string;
   periodOn: InputDateYearMonth;
 }>();
+
+defineEmits(['showChart', 'showTransactions']);
 
 const { expandedRows, childData, loadingStates, toggleExpand } = useBudgetAnalyticsLoadChildCategories(toRef(props, 'periodOn'));
 </script>

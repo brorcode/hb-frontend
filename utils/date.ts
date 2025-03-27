@@ -37,3 +37,11 @@ export const formatDate = (date: string | Date, withTime: boolean = false) => {
 export const formatMonthName = (monthNumber: number) => {
   return Object.keys(monthMap).find(key => monthMap[key] === monthNumber);
 };
+
+export const subtractMonths = (count: number) => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - count);
+  date.setDate(1);
+
+  return date;
+};

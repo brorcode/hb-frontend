@@ -20,3 +20,8 @@ type BudgetAnalyticsChildItem = {
   name: string;
   total_spent: number;
 };
+
+type BudgetAnalyticsChart = {
+  labels: string[];
+  data: ChartData[];
+};

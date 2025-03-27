@@ -145,6 +145,7 @@ import { transactionFilterName, transactionFiltersInit } from '~/components/page
 import { useApi } from '~/composables/useApi';
 import { useFiltersStore } from '~/stores/filters';
 import { transactionType } from '~/utils/constants';
+import { subtractMonths } from '~/utils/date';
 import { toCurrency } from '~/utils/money';
 
 const transactionTypes = ref<RelationOption[]>([]);
@@ -212,18 +213,10 @@ const goToTransactionsByCategory = (filter: RelationOption, transactionType: Rel
   filters.addPreSavedFilter(transactionFilterName, 'categories', [filter]);
   filters.addPreSavedFilter(transactionFilterName, 'type', transactionType);
   if (months.value) {
-    filters.addPreSavedFilter(transactionFilterName, 'created_at_after', calculatePriorDate(months.value));
+    filters.addPreSavedFilter(transactionFilterName, 'created_at_after', subtractMonths(months.value));
   }
   filters.applyPreSavedFilters(transactionFilterName);
 
   navigateTo('/transactions');
-};
-
-const calculatePriorDate = (priorMonths: number) => {
-  const date = new Date();
-  date.setMonth(date.getMonth() - priorMonths);
-  date.setDate(1);
-
-  return date;
 };
 </script>
