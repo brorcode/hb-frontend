@@ -104,7 +104,6 @@ const goToTransactionsByCategory = (filter: RelationOption) => {
   filters.addPreSavedFilter(transactionFilterName, 'created_at_after', subtractMonths(12));
   filters.applyPreSavedFilters(transactionFilterName);
 
-  console.log(123);
   navigateTo('/transactions');
 };
 </script>
