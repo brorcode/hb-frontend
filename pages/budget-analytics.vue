@@ -33,7 +33,7 @@
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
       <BudgetAnalyticsPlannedTable
-        :data="monthlyBudget?.budget_planned ?? []"
+        :budget="monthlyBudget?.budget_planned ?? null"
         title="План"
         :period-on="periodOn"
         @show-chart="showChart($event)"
@@ -41,7 +41,7 @@
       />
 
       <BudgetAnalyticsNotPlannedTable
-        :data="monthlyBudget?.budget_not_planned ?? []"
+        :budget="monthlyBudget?.budget_not_planned ?? null"
         title="Без плана"
         :period-on="periodOn"
         @show-chart="showChart($event)"
@@ -83,14 +83,14 @@ const periodOn = ref<InputDateYearMonth>({ month: currentDate.getMonth(), year: 
 const chart = ref<BudgetAnalyticsChart | null>(null);
 
 const { getData } = useApi();
-const monthlyBudget = ref<BudgetAnalytics | null>(null);
+const monthlyBudget = ref<BudgetAnalyticsData>();
 
 onMounted(async () => {
   await loadData();
 });
 
 const loadData = async () => {
-  monthlyBudget.value = await getData('/api/v1/budget-analytics/monthly', 'POST', { period_on: periodOn.value }) as BudgetAnalytics;
+  monthlyBudget.value = await getData('/api/v1/budget-analytics/monthly', 'POST', { period_on: periodOn.value }) as BudgetAnalyticsData;
 };
 
 const showChart = async (body: { category_id: number; is_child: boolean }) => {

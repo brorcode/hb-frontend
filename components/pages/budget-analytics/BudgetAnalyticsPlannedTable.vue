@@ -1,11 +1,14 @@
 <template>
   <AppCard>
-    <h4 class="text-title-md mb-1 font-bold text-black">
+    <h4
+      v-if="budget?.data?.length === 0"
+      class="text-title-md mb-1 font-bold text-black"
+    >
       {{ title }}
     </h4>
 
     <div
-      v-if="data?.length === 0"
+      v-if="budget?.data?.length === 0"
       class="text-sm font-medium"
     >
       Нет данных за выбранный период
@@ -17,23 +20,45 @@
     >
       <thead>
         <tr>
-          <th class="text-left text-sm font-bold">
+          <th class="text-left text-title-md font-bold pb-1">
+            {{ title }}
+          </th>
+          <th class="text-right text-sm font-medium pb-1">
+            <div
+              v-if="budget?.execution_rate && budget?.execution_rate !== 0"
+              :class="[
+                budget?.execution_rate > 100 ? 'text-red-600' : 'text-green-600',
+                'flex items-center justify-end gap-1 text-sm font-medium text-meta-3',
+              ]"
+            >
+              {{ budget?.execution_rate }}%
+            </div>
+          </th>
+          <th class="text-right text-sm font-medium pb-1">
+            {{ toCurrency(budget?.total_budget ?? 0) }}
+          </th>
+          <th class="text-right text-sm font-medium pb-1">
+            {{ toCurrency(budget?.total_spent ?? 0) }}
+          </th>
+        </tr>
+        <tr>
+          <th class="text-left text-sm">
             Название
           </th>
-          <th class="text-right text-sm font-bold text-meta-3">
+          <th class="text-right text-sm">
             Исполнение
           </th>
-          <th class="text-right text-sm font-bold text-meta-3">
+          <th class="text-right text-sm">
             Запланировано
           </th>
-          <th class="text-right text-sm font-bold text-meta-3">
+          <th class="text-right text-sm">
             Реально
           </th>
         </tr>
       </thead>
       <tbody>
         <template
-          v-for="item in data"
+          v-for="item in budget?.data"
           :key="`planned_item_${item.id}`"
         >
           <tr>
@@ -103,7 +128,7 @@ import {
 import { toCurrency } from '~/utils/money';
 
 const props = defineProps<{
-  data: BudgetAnalyticsItem[] | null;
+  budget: BudgetAnalytics | null;
   title: string;
   periodOn: InputDateYearMonth;
 }>();

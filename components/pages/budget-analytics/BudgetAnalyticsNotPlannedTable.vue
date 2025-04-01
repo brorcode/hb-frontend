@@ -1,11 +1,14 @@
 <template>
   <AppCard>
-    <h4 class="text-title-md mb-1 font-bold text-black">
+    <h4
+      v-if="budget?.data?.length === 0"
+      class="text-title-md mb-1 font-bold text-black"
+    >
       {{ title }}
     </h4>
 
     <div
-      v-if="data?.length === 0"
+      v-if="budget?.data?.length === 0"
       class="text-sm font-medium"
     >
       Нет данных за выбранный период
@@ -17,6 +20,14 @@
     >
       <thead>
         <tr>
+          <th class="text-left text-title-md font-bold pb-1">
+            {{ title }}
+          </th>
+          <th class="text-right text-sm font-medium pb-1">
+            {{ toCurrency(budget?.total_spent ?? 0) }}
+          </th>
+        </tr>
+        <tr>
           <th class="text-left text-sm font-bold">
             Название
           </th>
@@ -27,7 +38,7 @@
       </thead>
       <tbody>
         <template
-          v-for="item in data"
+          v-for="item in budget?.data"
           :key="`not_planned_item__${item.id}`"
         >
           <tr>
@@ -82,7 +93,7 @@ import { useBudgetAnalyticsLoadChildCategories } from '~/components/pages/budget
 import { toCurrency } from '~/utils/money';
 
 const props = defineProps<{
-  data: BudgetAnalyticsItem[] | null;
+  budget: BudgetAnalytics | null;
   title: string;
   periodOn: InputDateYearMonth;
 }>();

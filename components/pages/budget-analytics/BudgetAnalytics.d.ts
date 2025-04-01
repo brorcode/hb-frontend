@@ -8,11 +8,19 @@ type BudgetAnalyticsItem = {
 };
 
 type BudgetAnalytics = {
+  data: BudgetAnalyticsItem[];
+  total_spent: number;
+  total_budget: number | null;
+  difference: number | null;
+  execution_rate: number | null;
+};
+
+type BudgetAnalyticsData = {
   period_on: string;
   total_budget: number;
   total_spent: number;
-  budget_planned: BudgetAnalyticsItem[];
-  budget_not_planned: BudgetAnalyticsItem[];
+  budget_planned: BudgetAnalytics;
+  budget_not_planned: BudgetAnalytics;
 };
 
 type BudgetAnalyticsChildItem = {
