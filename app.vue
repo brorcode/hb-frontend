@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title>Nuxt 3 - testing</Title>
+    <Title>HB</Title>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
